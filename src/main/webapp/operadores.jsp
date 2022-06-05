@@ -63,6 +63,7 @@
         <div class="row">
             <div class="col-lg-4 col-sm-6 mb-4">
                 <!-- Portfolio item 1-->
+
                 <div class="card flex-md-row mb-4 box-shadow h-md-250">
                     <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" id="checkboxNoLabel" value="" aria-label="..." style="width:30px; height:30px ">
                     <img class="card-img-left" src="assets/img/portfolio/user.png">
