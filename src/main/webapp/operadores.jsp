@@ -42,7 +42,7 @@
                                 <li><a class="dropdown-item" href="Directores.jsp">Directores</a></li>
                                 <li><a class="dropdown-item" href="Sedes.jsp">Sedes</a></li>
                                 <li><a class="dropdown-item" href="Clientes.jsp">Clientes</a></li>
-                                <li><a class="dropdown-item" href="operadores.jsp">Operadores</a></li>
+                                <li><a class="dropdown-item" href="operadores">Operadores</a></li>
                                 <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
                             </ul>
                         </li>
@@ -61,77 +61,19 @@
             </br>
         </div>
         <div class="row">
+            <%for(Operadores operadores1: operadores){%>
             <div class="col-lg-4 col-sm-6 mb-4">
                 <!-- Portfolio item 1-->
-                <% int i = 1;
-                    for(Operadores op : operadores){ %>
-                <h1><%=op.getNombre()%>></h1>
-                <% i++;
-                }%>
                 <div class="card flex-md-row mb-4 box-shadow h-md-250">
                     <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" id="checkboxNoLabel" value="" aria-label="..." style="width:30px; height:30px ">
                     <img class="card-img-left" src="assets/img/portfolio/user.png">
                     <div class="card-body d-flex flex-column align-items-start">
-                        <h3 ><a>Nombres Apellidos</a></h3>
-                        <p class="card-text mb-auto">correo@pucp.edu.pe</p>
+                        <h3><a><%=operadores1.getNombre()%></a></h3>
+                        <p class="card-text mb-auto"><%=operadores1.getCorreo()%></p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6 mb-4">
-                <!-- Portfolio item 2-->
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" id="checkboxNoLabel" value="" aria-label="..." style="width:30px; height:30px ">
-                    <img class="card-img-left" src="assets/img/portfolio/user.png">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <h3 ><a>Nombres Apellidos</a></h3>
-                        <p class="card-text mb-auto">correo@pucp.edu.pe</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-4">
-                <!-- Portfolio item 3-->
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" id="checkboxNoLabel" value="" aria-label="..." style="width:30px; height:30px ">
-                    <img class="card-img-left" src="assets/img/portfolio/user.png">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <h3 ><a>Nombres Apellidos</a></h3>
-                        <p class="card-text mb-auto">correo@pucp.edu.pe</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-                <!-- Portfolio item 4-->
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" id="checkboxNoLabel" value="" aria-label="..." style="width:30px; height:30px ">
-                    <img class="card-img-left" src="assets/img/portfolio/user.png">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <h3 ><a>Nombres Apellidos</a></h3>
-                        <p class="card-text mb-auto">correo@pucp.edu.pe</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-                <!-- Portfolio item 5-->
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" id="checkboxNoLabel" value="" aria-label="..." style="width:30px; height:30px ">
-                    <img class="card-img-left" src="assets/img/portfolio/user.png">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <h3 ><a>Nombres Apellidos</a></h3>
-                        <p class="card-text mb-auto">correo@pucp.edu.pe</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <!-- Portfolio item 6-->
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" id="checkboxNoLabel" value="" aria-label="..." style="width:30px; height:30px ">
-                    <img class="card-img-left" src="assets/img/portfolio/user.png">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <h3 ><a>Nombres Apellidos</a></h3>
-                        <p class="card-text mb-auto">correo@pucp.edu.pe</p>
-                    </div>
-                </div>
-            </div>
+            <%}%>
         </div>
     </div>
 

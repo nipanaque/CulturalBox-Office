@@ -20,7 +20,7 @@ public class OperadoresDao {
         ArrayList<Operadores> listaOperadores = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT CONCAT(u.nombre,' ',u.apellido) AS 'Operador', u.correo_pucp AS 'Correo' FROM usuario u WHERE u.idUsuario = 2 ")) {
+             ResultSet rs = stmt.executeQuery("SELECT CONCAT(u.nombre,' ',u.apellido) AS 'Operador', u.correo_pucp AS 'Correo' FROM usuario u WHERE u.idRoles = 2  ")) {
             while (rs.next()) {
                 String nombre = rs.getString(1);
                 String correo = rs.getString(2);
