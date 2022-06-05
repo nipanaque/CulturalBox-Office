@@ -132,6 +132,10 @@
             </div>
         </div>
     </div>
+
+
+
+    <!-- Contenedor de botones eliminar y agregar-->
     <div class = "container">
         <div class="row justify-content-end">
             <div class="col-2">
