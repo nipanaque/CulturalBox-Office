@@ -19,7 +19,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/CulturalBox-Office" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -76,7 +76,7 @@
       <option name="presentableId" value="Default" />
       <updated>1654392250630</updated>
       <workItem from="1654392252044" duration="581000" />
-      <workItem from="1654395148523" duration="1792000" />
+      <workItem from="1654395148523" duration="2413000" />
     </task>
     <servers />
   </component>
