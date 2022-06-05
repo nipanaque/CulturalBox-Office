@@ -1,11 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Nicolás
-  Date: 4/06/2022
-  Time: 20:27
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.culturalbox.Beans.Operadores" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Operadores>" scope="request" id="operadores"/>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -42,10 +38,11 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                <li><a class="dropdown-item" href="ActorDirector.html">Directores/Actores</a></li>
-                                <li><a class="dropdown-item" href="Sedes.html">Sedes</a></li>
-                                <li><a class="dropdown-item" href="Clientes.html">Clientes</a></li>
-                                <li><a class="dropdown-item" href="operadores.html">Operadores</a></li>
+                                <li><a class="dropdown-item" href="Actores.jsp">Actores</a></li>
+                                <li><a class="dropdown-item" href="Directores.jsp">Directores</a></li>
+                                <li><a class="dropdown-item" href="Sedes.jsp">Sedes</a></li>
+                                <li><a class="dropdown-item" href="Clientes.jsp">Clientes</a></li>
+                                <li><a class="dropdown-item" href="operadores.jsp">Operadores</a></li>
                                 <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
                             </ul>
                         </li>
