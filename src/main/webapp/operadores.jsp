@@ -38,7 +38,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                <li><a class="dropdown-item" href="Actores.jsp">Actores</a></li>
+                                <li><a class="dropdown-item" href="Actores">Actores</a></li>
                                 <li><a class="dropdown-item" href="Directores.jsp">Directores</a></li>
                                 <li><a class="dropdown-item" href="Sedes.jsp">Sedes</a></li>
                                 <li><a class="dropdown-item" href="Clientes.jsp">Clientes</a></li>
@@ -63,7 +63,11 @@
         <div class="row">
             <div class="col-lg-4 col-sm-6 mb-4">
                 <!-- Portfolio item 1-->
-
+                <% int i = 1;
+                    for(Operadores op : operadores){ %>
+                <h1><%=op.getNombre()%>></h1>
+                <% i++;
+                }%>
                 <div class="card flex-md-row mb-4 box-shadow h-md-250">
                     <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" id="checkboxNoLabel" value="" aria-label="..." style="width:30px; height:30px ">
                     <img class="card-img-left" src="assets/img/portfolio/user.png">

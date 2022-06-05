@@ -38,7 +38,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                <li><a class="dropdown-item" href="Actores.jsp">Actores</a></li>
+                                <li><a class="dropdown-item" href="Actores">Actores</a></li>
                                 <li><a class="dropdown-item" href="Directores.jsp">Directores</a></li>
                                 <li><a class="dropdown-item" href="Sedes.jsp">Sedes</a></li>
                                 <li><a class="dropdown-item" href="Clientes.jsp">Clientes</a></li>
