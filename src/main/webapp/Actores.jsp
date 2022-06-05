@@ -1,4 +1,8 @@
+<%@ page import="com.example.culturalbox.Beans.Actores" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="listaActores" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Actores>" />
+<%int contador=0;%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,6 +68,11 @@
 
     <!--Actores-->
     <div>
+
+        <% int i = 0;
+            for ( Actores actor : listaActores) {
+                if (i == 0){
+                    i = 1; %>
         <!--Columna 1-->
         <div class="container">
             <div class="row justify-content-evenly">
@@ -76,7 +85,7 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  value="" aria-label="..." style="width:30px; height:30px ">
-                                    <h6 class="card-title">Mike Shcell</h6>
+                                    <h6 class="card-title"><%=actor.getNombre() %></h6>
                                     <p class="card-text"> Obras actuales:
                                         <br/>
                                         Al fondo hay sitio
@@ -85,18 +94,22 @@
                                         <br/>
                                         <small class="text-muted" >calificacion por usuarios:</small>
                                         <br/>
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
-
+                                        <% contador=0;
+                                        for (int a = 1;a <= actor.getPuntaje();a++){%>
+                                            <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
+                                            <%contador++;%>
+                                        <%}%>
+                                        <%for(int b=0;contador<5;contador++ ){%>
+                                            <img src="assets/img/star.svg"  style="width:20px; height:20px" />
+                                        <%}%>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <%}else if (i == 1){%>
+                <% i = 0; %>
                 <div class="col-5">
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
@@ -106,7 +119,7 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  value="" aria-label="..." style="width:30px; height:30px ">
-                                    <h6 class="card-title">Gustabo Sánchez</h6>
+                                    <h6 class="card-title"><%=actor.getNombre() %></h6>
                                     <p class="card-text"> Obras actuales:
                                         <br/>
                                         El comienzo del fin
@@ -129,135 +142,10 @@
                 </div>
             </div>
         </div>
-        <!--Columna 2-->
-        <div class="container">
-            <div class="row justify-content-evenly">
-                <div class="col-5">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="assets/img/Directores/21.jpg" style="width:150px; height:200px" class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  value="" aria-label="..." style="width:30px; height:30px ">
-                                    <h6 class="card-title">Juana Águila</h6>
-                                    <p class="card-text"> Obras actuales:
-                                        <br/>
-                                        Teatro joven
-                                        <br/>
-                                        <br/>
-                                        <small class="text-muted" >calificacion por usuarios:</small>
-                                        <br/>
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-5">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="assets/img/Directores/22.jpg" style="width:180px; height:200px" class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  value="" aria-label="..." style="width:30px; height:30px ">
-                                    <h6 class="card-title">Andrea Terrones</h6>
-                                    <p class="card-text"> Obras actuales:
-                                        <br/>
-                                        Teatro Joven
-                                        <br/>
-
-                                        <br/>
-                                        <small class="text-muted" >calificacion por usuarios:</small>
-                                        <br/>
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
-
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Columna 3-->
-        <div class="container">
-            <div class="row justify-content-evenly">
-                <div class="col-5">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="assets/img/Directores/12.jpg" style="width:150px; height:200px" class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  value="" aria-label="..." style="width:30px; height:30px ">
-                                    <h6 class="card-title">Will Smith </h6>
-                                    <p class="card-text"> Obras actuales:
-                                        <br/>
-                                        La academia
-                                        <br/>
-                                        <br/>
-                                        <small class="text-muted">calificacion por usuarios:</small>
-                                        <br/>
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
-
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-5">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="assets/img/Directores/11.jpg" style="width:180px; height:200px" class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" id="checkboxNoLabel" value="" aria-label="..." style="width:30px; height:30px ">
-                                    <h6 class="card-title">Mr Increible Ramos </h6>
-                                    <p class="card-text"> Obras actuales:
-                                        <br/>
-                                        La familia
-                                        <br/>
-                                        Al fondo hay sitio
-                                        <br/>
-                                        <small class="text-muted">calificacion por usuarios:</small>
-                                        <br/>
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star.svg"  style="width:20px; height:20px" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <%}
+         }%>
 
 
-    </div>
 
     <!--Botones-->
     <div class="text-center">
