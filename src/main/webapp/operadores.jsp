@@ -38,10 +38,11 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                <li><a class="dropdown-item" href="ActorDirector.html">Directores/Actores</a></li>
-                                <li><a class="dropdown-item" href="Sedes.html">Sedes</a></li>
-                                <li><a class="dropdown-item" href="Clientes.html">Clientes</a></li>
-                                <li><a class="dropdown-item" href="operadores.html">Operadores</a></li>
+                                <li><a class="dropdown-item" href="Actores.jsp">Actores</a></li>
+                                <li><a class="dropdown-item" href="Directores.jsp">Directores</a></li>
+                                <li><a class="dropdown-item" href="Sedes.jsp">Sedes</a></li>
+                                <li><a class="dropdown-item" href="Clientes.jsp">Clientes</a></li>
+                                <li><a class="dropdown-item" href="operadores.jsp">Operadores</a></li>
                                 <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
                             </ul>
                         </li>
