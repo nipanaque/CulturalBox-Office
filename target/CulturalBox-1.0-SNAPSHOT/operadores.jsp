@@ -1,11 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Nicolás
-  Date: 4/06/2022
-  Time: 20:27
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.culturalbox.Beans.Operadores" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Operadores>" scope="request" id="operadores"/>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -132,6 +128,10 @@
             </div>
         </div>
     </div>
+
+
+
+    <!-- Contenedor de botones eliminar y agregar-->
     <div class = "container">
         <div class="row justify-content-end">
             <div class="col-2">
