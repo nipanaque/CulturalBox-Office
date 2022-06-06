@@ -40,9 +40,8 @@
                                 <li><a class="dropdown-item" href="#">Perfil</a></li>
                                 <li><a class="dropdown-item" href="Actores">Actores</a></li>
                                 <li><a class="dropdown-item" href="Directores.jsp">Directores</a></li>
-                                <li><a class="dropdown-item" href="Sedes.jsp">Sedes</a></li>
-                                <li><a class="dropdown-item" href="Clientes.jsp">Clientes</a></li>
-                                <li><a class="dropdown-item" href="operadores">Operadores</a></li>
+                                <li><a class="dropdown-item" href="Sedes">Sedes</a></li>
+                                <li><a class="dropdown-item" href="Clientes">Clientes</a></li>
                                 <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
                             </ul>
                         </li>
@@ -88,7 +87,7 @@
                 </button>
             </div>
             <div class="col-5">
-                <a href="AgregarOperador.html"><button type="button" class="btn btn-secondary">Agregar</button></a>
+                <a href="AgregarOperador.jsp"><button type="button" class="btn btn-secondary">Agregar</button></a>
             </div>
             <div class="col-1">
             </div>

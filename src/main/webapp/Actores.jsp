@@ -40,11 +40,10 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                <li><a class="dropdown-item" href="Actores.html">Actores</a></li>
-                                <li><a class="dropdown-item" href="Directores.html">Directores</a></li>
-                                <li><a class="dropdown-item" href="Sedes.html">Sedes</a></li>
-                                <li><a class="dropdown-item" href="Clientes.html">Clientes</a></li>
-                                <li><a class="dropdown-item" href="operadores.html">Operadores</a></li>
+                                <li><a class="dropdown-item" href="Directores.jsp">Directores</a></li>
+                                <li><a class="dropdown-item" href="Sedes">Sedes</a></li>
+                                <li><a class="dropdown-item" href="Clientes">Clientes</a></li>
+                                <li><a class="dropdown-item" href="operadores">Operadores</a></li>
                                 <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
                             </ul>
                         </li>
@@ -155,7 +154,7 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Eliminar
         </button>
-        <a href="AgregarActor.html"><button type="button" class="btn btn-secondary">Agregar</button></a>
+        <a href="AgregarActor.jsp"><button type="button" class="btn btn-secondary">Agregar</button></a>
     </div>
 
     <!-- Modal -->

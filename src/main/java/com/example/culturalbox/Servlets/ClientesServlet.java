@@ -7,7 +7,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "ClientesServlet", value = "/ClientesServlet")
+@WebServlet(name = "ClientesServlet", value = "/Clientes")
 public class ClientesServlet extends HttpServlet {
     @Override
         protected void doGet (HttpServletRequest request, HttpServletResponse response) throws
