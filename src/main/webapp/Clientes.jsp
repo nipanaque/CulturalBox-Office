@@ -1,11 +1,12 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Nicolás
-  Date: 5/06/2022
-  Time: 01:09
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.culturalbox.Beans.Clientes" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    ArrayList<Clientes> listaClientes =  (ArrayList<Clientes>) request.getAttribute("listaClientes");
+%>
+
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8" />
@@ -42,10 +43,10 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                <li><a class="dropdown-item" href="ActorDirector.html">Directores/Actores</a></li>
-                                <li><a class="dropdown-item" href="Sedes.html">Sedes</a></li>
-                                <li><a class="dropdown-item" href="Clientes.html">Clientes</a></li>
-                                <li><a class="dropdown-item" href="operadores.html">Operadores</a></li>
+                                <li><a class="dropdown-item" href="Actores">Actores</a></li>
+                                <li><a class="dropdown-item" href="Directores.jsp">Directores</a></li>
+                                <li><a class="dropdown-item" href="Sedes">Sedes</a></li>
+                                <li><a class="dropdown-item" href="operadores">Operadores</a></li>
                                 <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
                             </ul>
                         </li>
@@ -70,18 +71,20 @@
                 </div>
             </div>
             <div class="col-md-auto">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Filtro 1</option>
-                    <option value="1">Sede</option>
+                <select class="form-select" aria-label="Default select example" >
+
+                    <option selected value="sin filtro" >Sin Filtro </option>
+                    <option value="1" >Sede</option>
                     <option value="2">Funcion</option>
                 </select>
             </div>
             <div class="col-md-auto">
                 <select class="form-select" aria-label="Default select example">
-                    <option selected>Filtro 2</option>
-                    <option value="1">opcion 1</option>
-                    <option value="2">opcion 2</option>
-                    <option value="3">opcion 3</option>
+                    <option selected>----</option>
+                    <option selected>San Borja</option>
+                    <option value="1">San Miguel</option>
+                    <option selected>Doctor Strange</option>
+                    <option value="1">Transformers</option>
                 </select>
             </div>
             <div class="col-md-auto">
@@ -90,78 +93,20 @@
         </div>
         </br>
         <div class="row">
+            <%for(Clientes clientes: listaClientes){%>
             <div class="col-lg-4 col-sm-6 mb-4">
                 <!-- Portfolio item 1-->
                 <div class="card flex-md-row mb-4 box-shadow h-md-250">
                     <img class="card-img-left" src="assets/img/user.png">
                     <div class="card-body d-flex flex-column align-items-start">
-                        <h6 ><a>Jorge Salazar Villa</a></h6>
-                        <p3 class="card-text mb-auto">Función: Transformers</p3>
-                        <p3 class="card-text mb-auto">Sede: San Borja</p3>
-                        <p3 class="card-text mb-auto">Sala: 3</p3>
+                        <h6 ><a><%=clientes.getNombre()%></a></h6>
+                        <p3 class="card-text mb-auto">Función: <%=clientes.getFuncion()%></p3>
+                        <p3 class="card-text mb-auto">Sede: <%=clientes.getSede()%></p3>
+                        <p3 class="card-text mb-auto">Sala: <%=clientes.getSala()%></p3>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-6 mb-4">
-                <!-- Portfolio item 2-->
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <img class="card-img-left" src="assets/img/user.png">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <h6 ><a>Luis Rodríguez Estrada</a></h6>
-                        <p3 class="card-text mb-auto">Función: Dr Strange</p3>
-                        <p3 class="card-text mb-auto">Sede: San Miguel</p3>
-                        <p3 class="card-text mb-auto">Sala: 1</p3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-4">
-                <!-- Portfolio item 3-->
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <img class="card-img-left" src="assets/img/user.png">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <h6 ><a>Pedro Gonzáles Rivera</a></h6>
-                        <p3 class="card-text mb-auto">Función: Transformers</p3>
-                        <p3 class="card-text mb-auto">Sede: San Borja</p3>
-                        <p3 class="card-text mb-auto">Sala: 3</p3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-                <!-- Portfolio item 4-->
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <img class="card-img-left" src="assets/img/user.png">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <h6 ><a>Juan Álvarez Villa</a></h6>
-                        <p3 class="card-text mb-auto">Función: Dr Strange</p3>
-                        <p3 class="card-text mb-auto">Sede: San Miguel</p3>
-                        <p3 class="card-text mb-auto">Sala: 1</p3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-                <!-- Portfolio item 5-->
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <img class="card-img-left" src="assets/img/user.png">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <h6 ><a>Lucas Berrardo Arias</a></h6>
-                        <p3 class="card-text mb-auto">Función: Dr Strange</p3>
-                        <p3 class="card-text mb-auto">Sede: San Miguel</p3>
-                        <p3 class="card-text mb-auto">Sala: 1</p3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <!-- Portfolio item 6-->
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <img class="card-img-left" src="assets/img/user.png">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <h6 ><a>Jose Galvez Almeyda</a></h6>
-                        <p3 class="card-text mb-auto">Función: Transformers</p3>
-                        <p3 class="card-text mb-auto">Sede: San Borja</p3>
-                        <p3 class="card-text mb-auto">Sala: 3</p3>
-                    </div>
-                </div>
-            </div>
+            <%}%>
         </div>
     </div>
 
@@ -193,5 +138,6 @@
 <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
 </body>
 </html>
