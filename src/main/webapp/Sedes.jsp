@@ -1,5 +1,6 @@
+<%@ page import="com.example.culturalbox.Beans.Sedes" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<jsp:useBean id="listaSedes" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Sedes>" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,11 +69,11 @@
             <div class="card mx-auto " style="width: 18rem;">
                 <img src="assets/img/Sede1.jpg" class="card-img-top" alt="...">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Sede San Miguel</h5>
+                    <h5 class="card-title">Sede <%=listaSedes.get(0).getNombre()%></h5>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Ubicado en Av. San Cristobal 534</li>
-                        <li class="list-group-item">Aforo total: 560</li>
-                        <li class="list-group-item">Cantidad de salas: 6</li>
+                        <li class="list-group-item">Ubicado en <%=listaSedes.get(0).getUbicacion()%></li>
+                        <li class="list-group-item">Aforo total: <%=listaSedes.get(0).getAforo()%></li>
+                        <li class="list-group-item">Cantidad de salas: <%=listaSedes.get(0).getCantidadSalas()%></li>
                     </ul>
                     <a href="EditarSede.html" class="btn btn-primary">Editar</a>
                 </div>
@@ -83,11 +84,11 @@
                 <div class="card mx-auto" style="width: 18rem;">
                     <img src="assets/img/Sede2.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Sede San Borja</h5>
+                        <h5 class="card-title">Sede <%=listaSedes.get(1).getNombre()%></h5>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Ubicado en Av.Los Santos 1343</li>
-                            <li class="list-group-item">Aforo total: 660</li>
-                            <li class="list-group-item">Cantidad de salas: 8</li>
+                            <li class="list-group-item">Ubicado en <%=listaSedes.get(1).getUbicacion()%></li>
+                            <li class="list-group-item">Aforo total: <%=listaSedes.get(1).getAforo()%></li>
+                            <li class="list-group-item">Cantidad de salas: <%=listaSedes.get(1).getCantidadSalas()%></li>
                         </ul>
                         <a href="EditarSede.html" class="btn btn-primary">Editar</a>
                     </div>
