@@ -1,4 +1,7 @@
+<%@ page import="com.example.culturalbox.Beans.Directores" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="listaDirectores" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Directores>" />
+<%int contador=0;%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -65,6 +68,11 @@
     </div>
     <!--Directores-->
     <div>
+
+        <% int i = 0;
+            for ( Directores director : listaDirectores) {
+                if (i == 0){
+                    i = 1; %>
         <!--Columna 1-->
         <div class="container">
             <div class="row justify-content-evenly">
@@ -77,7 +85,7 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  value="" aria-label="..." style="width:30px; height:30px ">
-                                    <h6 class="card-title">Christiam Molan</h6>
+                                    <h6 class="card-title"><%=director.getNombre() %></h6>
                                     <p class="card-text"> Obras actuales:
                                         <br/>
                                         La academia
@@ -85,18 +93,22 @@
                                         <br/>
                                         <small class="text-muted" >calificacion por usuarios:</small>
                                         <br/>
+                                        <% contador=0;
+                                            for (int a = 1;a <= director.getPuntaje();a++){%>
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
-
+                                        <%contador++;%>
+                                        <%}%>
+                                        <%for(int b=0;contador<5;contador++ ){%>
+                                        <img src="assets/img/star.svg"  style="width:20px; height:20px" />
+                                        <%}%>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <%}else if (i == 1){%>
+                <% i = 0; %>
                 <div class="col-5">
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
@@ -106,156 +118,33 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  value="" aria-label="..." style="width:30px; height:30px ">
-                                    <h6 class="card-title">Guillermo Vacuno</h6>
+                                    <h6 class="card-title"><%=director.getNombre() %></h6>
                                     <p class="card-text"> Obras actuales:
                                         <br/>
                                         <br/>
                                         <br/>
                                         <small class="text-muted" >calificacion por usuarios:</small>
                                         <br/>
+                                        <% contador=0;
+                                            for (int a = 1;a <= director.getPuntaje();a++){%>
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-
+                                        <%contador++;%>
+                                        <%}%>
+                                        <%for(int b=0;contador<5;contador++ ){%>
+                                        <img src="assets/img/star.svg"  style="width:20px; height:20px" />
+                                        <%}%>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <%}else if (i == 1){%>
+                <% i = 0; %>
             </div>
         </div>
-        <!--Columna 2-->
-        <div class="container">
-            <div class="row justify-content-evenly">
-                <div class="col-5">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="assets/img/Directores/15.jpg" style="width:150px; height:200px" class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  value="" aria-label="..." style="width:30px; height:30px ">
-                                    <h6 class="card-title">Eduardo Gomez</h6>
-                                    <p class="card-text"> Obras actuales:
-                                        <br/>
-
-                                        <br/>
-                                        <br/>
-                                        <small class="text-muted" >calificacion por usuarios:</small>
-                                        <br/>
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star.svg"  style="width:20px; height:20px" />
-
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-5">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="assets/img/Directores/16.jpg" style="width:180px; height:200px" class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" value="" aria-label="..." style="width:30px; height:30px ">
-                                    <h6 class="card-title">Natilla Costilla</h6>
-                                    <p class="card-text"> Obras actuales:
-                                        <br/>
-                                        La reclamadora
-                                        </br>
-                                        La copias
-                                        <br/>
-
-                                        <small class="text-muted" >calificacion por usuarios:</small>
-                                        <br/>
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Columna 3-->
-        <div class="container">
-            <div class="row justify-content-evenly">
-                <div class="col-5">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="assets/img/Directores/17.jpg" style="width:150px; height:200px" class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  value="" aria-label="..." style="width:30px; height:30px ">
-                                    <h6 class="card-title">Cesar Guerrero </h6>
-                                    <p class="card-text"> Obras actuales:
-                                        <br/>
-                                        El comienzo del fin
-                                        <br/>
-                                        <br/>
-                                        <small class="text-muted">calificacion por usuarios:</small>
-                                        <br/>
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
-
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-5">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="assets/img/Directores/18.jpg" style="width:180px; height:200px" class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  value="" aria-label="..." style="width:30px; height:30px ">
-                                    <h6 class="card-title">Juliana Arias </h6>
-                                    <p class="card-text"> Obras actuales:
-                                        <br/>
-                                        Al fondo hay sitio
-                                        <br/>
-
-                                        <br/>
-                                        <small class="text-muted">calificacion por usuarios:</small>
-                                        <br/>
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star.svg"  style="width:20px; height:20px" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
+        <%}
+         }%>
 
     <!--Botones-->
     <div class="text-center">
