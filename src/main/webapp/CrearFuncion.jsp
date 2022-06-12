@@ -96,7 +96,7 @@
                         </br>
                         <div class="row align-items-stretch mb-5">
                             <div class="col-md-3">
-                                <a href="<%=request.getContextPath()%>/index_operadores.jsp" class="btn btn-primary btn-xl">Regresar</a>
+                                <a href="<%=request.getContextPath()%>/ListaFunciones" class="btn btn-primary btn-xl">Regresar</a>
                             </div>
                             <div class="col-md-3">
                             </div>

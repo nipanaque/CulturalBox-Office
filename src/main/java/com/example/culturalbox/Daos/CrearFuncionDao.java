@@ -89,7 +89,6 @@ public class CrearFuncionDao {
     }
 
     public void ingresarActores(int idFuncion,int idActor) {
-
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -119,11 +118,12 @@ public class CrearFuncionDao {
         ArrayList<CrearFuncion> listaFunciones = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select idFuncion, nombre from funcion;");){
+             ResultSet rs = stmt.executeQuery("select idFuncion, nombre, genero from funcion;");){
             while (rs.next()){
                 CrearFuncion crearFuncion_nombreid= new CrearFuncion();
                 crearFuncion_nombreid.setIdFuncion(rs.getInt(1));
                 crearFuncion_nombreid.setNombre(rs.getString(2));
+                crearFuncion_nombreid.setGenero(rs.getString(3));
                 listaFunciones.add(crearFuncion_nombreid);
             }
 
@@ -132,5 +132,55 @@ public class CrearFuncionDao {
         }
 
         return listaFunciones;
+    }
+
+    public CrearFuncion buscarPorId(String id) {
+        CrearFuncion crearFuncion = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "select idFuncion, nombre from funcion where idFuncion = ? ";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+
+                if (rs.next()) {
+                    crearFuncion = new CrearFuncion();
+                    crearFuncion.setIdFuncion(rs.getInt(1));
+                    crearFuncion.setNombre(rs.getString(2));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return crearFuncion;
+    }
+
+    public void funcion_has_actor(int idFuncion, int idActor) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "insert into funcion_has_actor (idFuncion,idActor) VALUES (?,?)";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setInt(1, idFuncion);
+            pstmt.setInt(2, idActor);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
