@@ -1,4 +1,7 @@
+<%@ page import="com.example.culturalbox.Beans.Aforo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="listaAforos" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Aforo>" />
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +75,7 @@
                         <label for="inputAforoSede" class="col-form-label">Aforo de la sede: </label>
                     </div>
                     <div class="col-auto">
-                        <input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value="660">
+                        <input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value="640">
                     </div>
                     <div class="col-auto">
                     </div>
@@ -87,38 +90,13 @@
                     </tr>
                     </thead>
                     <tbody>
+                        <% int i = 1;
+                            for (Aforo aforo : listaAforos) { %>
                     <tr>
-                        <td>1</td>
-                        <td><input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value="66"></td>
+                        <td><%= i%></td>
+                        <td><input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value=<%= aforo.getAforos()%> ></td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value="45"></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value="72"></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value="60"></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td><input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value="55"></td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td><input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value="80"></td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td><input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value="63"></td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td><input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value="80"></td>
-                    </tr>
+                        <% i++;}%>
                     </tbody>
                 </table>
 
