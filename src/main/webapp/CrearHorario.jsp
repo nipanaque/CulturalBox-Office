@@ -1,4 +1,11 @@
+<%@ page import="com.example.culturalbox.Beans.Sedes" %>
+<%@ page import="com.example.culturalbox.Beans.Mantenimiento" %>
+<%@ page import="com.example.culturalbox.Beans.CrearFuncion" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Sedes>" scope="request" id="listaSedes"/>
+<jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Mantenimiento>" scope="request" id="listaMantenimiento"/>
+<jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaFunciones"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -48,51 +55,62 @@
         <!-- Cuerpo-->
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
-                    <h2 class="section-heading text-uppercase">Crear Horarios</h2>
+                </br>
+                <h2 class="section-heading text-uppercase">Crear Horarios</h2>
 
-                <form class="row g-3 needs-validation" novalidate action="index.html" method="GET" enctype="multipart/form-data">
+                <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/CrearHorario?a=guardar">
                     <!--Columna 1-->
                     <div class="col-md-6">
                         <div class="form-group">
                             <!-- Name input-->
-                            <label for="validationCustom01" class="form-label">Nombre de la función *</label>
-                            <input class="form-control" id="nombre_funcion" type="text" value="Asu Mare"  disabled>
+                            <label for="funcion" class="form-label">Nombre de la función *</label>
+                            <select class="form-select" name="funcion" id="funcion" required>
+                                <%for(CrearFuncion listafuncion1 : listaFunciones){%>
+                                <optgroup label="<%=listafuncion1.getNombre()%>">
+                                    <option><%=listafuncion1.getIdFuncion()%></option>
+                                </optgroup>
+                                <%}%>
+                            </select>
                         </div>
                         </br>
                         <div class="form-group">
-                            <label for="validationCustom03" class="form-label">Sedes *</label>
-                            <select class="form-select" id="validationCustom03" required>
+                            <label for="sede" class="form-label">Sedes *</label>
+                            <select class="form-select" name="sede" id="sede" required>
                                 <option disabled>Seleccione sede</option>
-                                <option>San Miguel</option>
-                                <option>San Borja</option>
+                                <%int j=1;%>
+                                <%for(Sedes listasedes1 : listaSedes){%>
+                                <optgroup label="<%=listasedes1.getNombre()%>">
+                                    <option><%=j++%></option>
+                                </optgroup>
+                                <%}%>
                             </select>
                         </div>
                         </br>
                         <div class="form-group">
-                            <label for="validationCustom04" class="form-label">Salas *</label>
-                            <select class="form-select" id="validationCustom04" required>
+                            <%int i=1;%>
+                            <label for="sala" class="form-label">Salas *</label>
+                            <select class="form-select" name="sala" id="sala" required>
                                 <option disabled>Seleccione las salas</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                                <%while(i<=5){%>
+                                <option><%=i++%></option>
+                                <%}%>
                             </select>
                         </div>
                         </br>
                         <div class="form-group">
-                            <label for="validationCustom06" class="form-label">Stock *</label>
-                            <input class="form-control" placeholder="Ingrese el stock" type="number" min="0" max="25" step="1" id="validationCustom06" required>
+                            <label for="stock" class="form-label">Stock *</label>
+                            <input class="form-control" placeholder="Ingrese el stock" type="number" min="0" max="25" step="1" name="stock" id="stock" required>
                         </div>
                         </br>
                         <div class="form-group">
-                            <label for="validationCustom10" class="form-label">Precio de la entrada *</label>
-                            <input class="form-control" placeholder="Ingrese el precio de entrada" type="number" min="1.00" max="20.00" step="0.5" id="validationCustom09" required>
+                            <label for="costo" class="form-label">Precio de la entrada *</label>
+                            <input class="form-control" placeholder="Ingrese el precio de entrada" type="number" min="1.00" max="20.00" step="0.5" name="costo" id="costo" required>
                         </div>
                         </br>
                         </br>
                         <div class="row align-items-stretch mb-5">
                             <div class="col-md-3">
-                                <a href="nuevafuncion.html" class="btn btn-primary btn-xl">Regresar</a>
+                                <a href="index_operadores.jsp" class="btn btn-primary btn-xl">Regresar</a>
                             </div>
                             <div class="col-md-3">
                             </div>
@@ -107,28 +125,37 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="validationCustom08" class="form-label">Fecha de la función *</label>
-                            <input type="date" class="form-control" id="validationCustom08" required>
+                            <label for="dia" class="form-label">Fecha de la función *</label>
+                            <input type="date" class="form-control" name="dia" id="dia" required>
                         </div>
                         </br>
                         <div class="form-group">
-                            <label for="validationCustom09" class="form-label">Hora de la función *</label>
-                            <input type="time" class="form-control" name="hora" min="15:00" max="21:00" step="1800" id="validationCustom09" required >
+                            <label for="tiempo_inicio" class="form-label">Hora de la función *</label>
+                            <input type="time" class="form-control" min="15:00" max="21:00" step="1800" name="tiempo_inicio" id="tiempo_inicio" required >
+                        </div>
+                        </br>
+                        <div class="form-group">
+                            <label for="vigencia" class="form-label">Vigencia *</label>
+                            <select class="form-select" name="vigencia" id="vigencia" >
+                                <option disabled>Seleccione Vigencia</option>
+                                <option>1</option>
+                                <option>0</option>
+                            </select>
                         </div>
                         </br>
                         <div class="form-group form-group-textarea mb-md-0">
-                            <label for="validationCustom13" class="form-label">Añadir lista de mantenimiento *</label>
+                            <label for="mantenimiento" class="form-label">Añadir lista de mantenimiento *</label>
                             <!-- Message input-->
-                            <textarea class="form-control" type="text" placeholder="Lista de mantenimiento" id="validationCustom12" required></textarea>
+                            <textarea class="form-control" type="text" placeholder="Lista de mantenimiento" id="mantenimiento" ></textarea>
                         </div>
                         </br>
                         <div class="form-group">
                             <label for="validationCustom14" class="form-label">Lista de Mantenimiento anteriores *</label>
-                            <select class="form-select" id="validationCustom14" required>
-                                <option disabled>Seleccionar</option>
-                                <option>Jorge Espejo</option>
-                                <option>Claudio Pizarro</option>
-                                <option>Edison Flores</option>
+                            <select class="form-select" id="validationCustom14" >
+                                <option disabled>Seleccione Personal</option>
+                                <%for(Mantenimiento listaMantenimiento1 : listaMantenimiento){%>
+                                <option><%=listaMantenimiento1.getNombre()%></option>
+                                <%}%>
                             </select>
                         </div>
                     </div>

@@ -1,4 +1,8 @@
+<%@ page import="com.example.culturalbox.Beans.CrearFuncion" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaActores"/>
+<jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaDirectores"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -48,21 +52,23 @@
         <!-- Cuerpo-->
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
+                    </br>
                     <h2 class="section-heading text-uppercase">Crear Función</h2>
 
-                <form class="row g-3 needs-validation" novalidate action="horario.html" method="GET" enctype="multipart/form-data">
+
+                    <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/CrearFuncion?a=guardar">
                     <!--Columna 1-->
                     <div class="col-md-6">
                         <div class="form-group">
                             <!-- Name input-->
-                            <label for="validationCustom01" class="form-label">Nombre de la Funcion *</label>
-                            <input type="text" class="form-control" placeholder="Ingrese nombre de la función" id="validationCustom01" required>
+                            <label for="nombre_function" class="form-label">Nombre de la Funcion *</label>
+                            <input type="text" class="form-control" placeholder="Ingrese nombre de la función" name="nombre_function" id="nombre_function" required>
                         </div>
                         </br>
                         <div class="form-group">
                             <!-- Name input-->
-                            <label for="validationCustom02" class="form-label">Género *</label>
-                            <select class="form-select" id="validationCustom02" required>
+                            <label for="genero_funcion" class="form-label">Género *</label>
+                            <select class="form-select" name="genero_funcion" id="genero_funcion" required>
                                 <option disabled>Seleccionar género</option>
                                 <option>Terror</option>
                                 <option>Suspenso</option>
@@ -73,13 +79,13 @@
                         </br>
                         <div class="form-group">
                             <!-- Name input-->
-                            <label for="validationCustom03" class="form-label">Duración (minutos) *</label>
-                            <input class="form-control" placeholder="Ingrese la duración en minutos" type="number" min="0" max="180" step="1" id="validationCustom03" required>
+                            <label for="duracion_funcion" class="form-label">Duración (minutos) *</label>
+                            <input class="form-control" placeholder="Ingrese la duración en minutos" type="number" min="0" max="180" step="1" name="duracion_funcion" id="duracion_funcion" required>
                         </div>
                         </br>
                         <div class="form-group">
-                            <label for="validationCustom05" class="form-label">Restricción de edad *</label>
-                            <select class="form-select" id="validationCustom05" required>
+                            <label for="restriccion" class="form-label">Restricción de edad *</label>
+                            <select class="form-select" name="restriccion" id="restriccion" required>
                                 <option disabled>Ingrese restricción</option>
                                 <option>+18</option>
                                 <option>Apto para todos</option>
@@ -90,14 +96,12 @@
                         </br>
                         <div class="row align-items-stretch mb-5">
                             <div class="col-md-3">
-                                <a href="index.html" class="btn btn-primary btn-xl">Regresar</a>
+                                <a href="<%=request.getContextPath()%>/index_operadores.jsp" class="btn btn-primary btn-xl">Regresar</a>
                             </div>
                             <div class="col-md-3">
                             </div>
                             <div class="col-md-3">
-                                <button type="submit" class="btn btn-primary btn-xl" >
-                                    Crear
-                                </button>
+                                <button type="submit" class="btn btn-primary btn-xl" >Crear </button>
                             </div>
                             <div class="col-md-3">
                             </div>
@@ -105,29 +109,31 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="validationCustom11" class="form-label">Añadir director *</label>
-                            <select class="form-select" id="validationCustom11" required>
+                            <label for="director_funcion" class="form-label">Añadir director *</label>
+                            <select class="form-select" name="director_funcion" id="director_funcion" required>
                                 <option disabled>Seleccionar</option>
-                                <option>Michael Bay</option>
-                                <option>Guillermo Del Toro</option>
+                                <%for(CrearFuncion listaDirectores1 : listaDirectores){%>
+                                <optgroup label="<%=listaDirectores1.getNombres_directores()%>" >
+                                    <option><%=listaDirectores1.getId_directores()%></option>
+                                </optgroup>
+                                <%}%>
                             </select>
                         </div>
                         </br>
                         <div class="form-group">
                             <label for="validationCustom12" class="form-label">Añadir actores *</label>
-                            <select class="form-select" id="validationCustom12" required>
+                            <select class="form-select" id="validationCustom12" multiple size="2" required>
                                 <option disabled>Seleccionar</option>
-                                <option>Chespiritio</option>
-                                <option>La Roca</option>
-                                <option>Ben Affleck</option>
-                                <option>Cachín</option>
+                                <%for(CrearFuncion listaActores1 : listaActores){%>
+                                <option><%=listaActores1.getNombres_Actores()%></option>
+                                <%}%>
                             </select>
                         </div>
                         </br>
                         <div class="form-group form-group-textarea mb-md-0">
                             <!-- Message input-->
-                            <label for="validationCustom07" class="form-label">Descripción de la función *</label>
-                            <textarea class="form-control" type="text" placeholder="Descripción de la función" id="validationCustom07" required></textarea>
+                            <label for="descripcion" class="form-label">Descripción de la función *</label>
+                            <textarea class="form-control" type="text" placeholder="Descripción de la función" name="descripcion" id="descripcion" required></textarea>
                         </div>
                         </br>
                         <div class="form-group">
@@ -135,7 +141,7 @@
                             <input type="file" class="btn btn-primary" name="banner" style="background-color:grey; border-color:grey" id="banner" required>
                         </div>
                     </div>
-                </form>
+                    </form>
             </div>
 
 

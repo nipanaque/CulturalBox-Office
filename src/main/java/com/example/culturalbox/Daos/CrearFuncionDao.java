@@ -22,10 +22,11 @@ public class CrearFuncionDao {
         ArrayList<CrearFuncion> listaActores = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select concat(nombre,\" \", apellido) as Actor from actor;");){
+             ResultSet rs = stmt.executeQuery("select concat(nombre,\" \", apellido) as 'Actor', idActor from actor;");){
             while (rs.next()){
                 CrearFuncion crearFuncion_actor = new CrearFuncion();
                 crearFuncion_actor.setNombres_Actores(rs.getString(1));
+                crearFuncion_actor.setId_actores(rs.getInt(2));
                 listaActores.add(crearFuncion_actor);
             }
 
@@ -45,10 +46,11 @@ public class CrearFuncionDao {
         ArrayList<CrearFuncion> listaDirectores = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select concat(nombre,\" \", apellido) as Director from director;");){
+             ResultSet rs = stmt.executeQuery("select concat(nombre,\" \", apellido) as Director, idDirector from director");){
             while (rs.next()){
                 CrearFuncion crearFuncion_director= new CrearFuncion();
                 crearFuncion_director.setNombres_directores(rs.getString(1));
+                crearFuncion_director.setId_directores(rs.getInt(2));
                 listaDirectores.add(crearFuncion_director);
             }
 
@@ -57,5 +59,78 @@ public class CrearFuncionDao {
         }
 
         return listaDirectores;
+    }
+
+    public void crearFuncion(String nombre,String genero,int duracion,String restriccion,String descripcion, int idDirector) {
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "insert into funcion (nombre,genero,duracion,restriccion,descripcion,idDirector)  VALUES (?,?,?,?,?,?)";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, nombre);
+            pstmt.setString(2, genero);
+            pstmt.setInt(3, duracion);
+            pstmt.setString(4, restriccion);
+            pstmt.setString(5, descripcion);
+            pstmt.setInt(6, idDirector);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void ingresarActores(int idFuncion,int idActor) {
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "insert into funcion_has_actor (idFuncion,idActor)  VALUES (?,?)";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setInt(1, idFuncion);
+            pstmt.setInt(2, idActor);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<CrearFuncion> obtenerFunciones(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        ArrayList<CrearFuncion> listaFunciones = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select idFuncion, nombre from funcion;");){
+            while (rs.next()){
+                CrearFuncion crearFuncion_nombreid= new CrearFuncion();
+                crearFuncion_nombreid.setIdFuncion(rs.getInt(1));
+                crearFuncion_nombreid.setNombre(rs.getString(2));
+                listaFunciones.add(crearFuncion_nombreid);
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaFunciones;
     }
 }

@@ -55,7 +55,9 @@
         <div class="col-md-6">
           <div class="masthead-subheading">Bienvenido a la pantalla del operador.</div>
         </div>
-        <div class="text-center"><a href="nuevafuncion.html"><button class="btn btn-primary btn-xl" type="submit">Crear funciones</button></a></div>
+        <div class="text-center"><a href="CrearFuncion"><button class="btn btn-primary btn-xl" type="submit">Crear funciones</button></a></div>
+        </br>
+        <div class="text-center"><a href="CrearHorario"><button class="btn btn-primary btn-xl" type="submit">Crear horarios</button></a></div>
       </div>
     </header>
 
