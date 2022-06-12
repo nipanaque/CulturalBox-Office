@@ -15,6 +15,7 @@ public class HistorialDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+
         }
         ArrayList<Historial> listaHistorial = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url, user, pass);

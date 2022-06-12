@@ -85,6 +85,7 @@
                             <input class="form-control" type="email" value="<%=listaPerfil.get(1).getCorreo_pucp()%>" data-sb-validations="required,email" data-sb-can-submit="no" disabled>
                         </div>
                         </br>
+
                     </div>
                     <div class="col-md-6">
                         <p class="mb-0">Fecha de nacimiento</p>

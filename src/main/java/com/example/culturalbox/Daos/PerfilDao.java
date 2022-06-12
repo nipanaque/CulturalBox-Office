@@ -29,6 +29,7 @@ public class PerfilDao {
                 listaPerfil.add(perfil);
             }
 
+
         } catch (SQLException e) {
             System.out.println("No se pudo realizar la busqueda");
         }

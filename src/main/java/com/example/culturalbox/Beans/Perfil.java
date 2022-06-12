@@ -17,6 +17,7 @@ public class Perfil {
         this.numtelefono = numtelefono;
     }
 
+
     public Perfil() {
 
     }

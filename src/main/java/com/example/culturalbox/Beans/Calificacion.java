@@ -5,6 +5,7 @@ public class Calificacion {
     private String nombreDirector;
     private String nombreActor;
 
+
     public Calificacion(String nombreFuncion, String nombreDirector, String nombreActor) {
         this.nombreFuncion = nombreFuncion;
         this.nombreDirector = nombreDirector;

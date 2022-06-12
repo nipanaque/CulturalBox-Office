@@ -11,6 +11,7 @@ public class Historial {
         this.num_ticket = num_ticket;
     }
 
+
     public Historial() {
 
     }
