@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>MENU USUARIO</title>
+        <title>salas</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -16,158 +16,140 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <style>
+            .div-3 {
+                background-color: #58d0ca;
+            }
+        </style>
     </head>
     <body id="page-top">
         <!-- Navigation-->
-        <nav class=" navbar navbar-expand-lg  navbar-dark bg-dark fixed-top" id="mainNav">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="assets/img/pucp_logo1.jpeg" alt="..." /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars ms-1"></i>
-                </button>
+                <a class="navbar-brand" href="index.html"><img src="assets/img/pucp_logo1.jpeg" alt="..." /></a>
+
                 <div class="collapse navbar-collapse " id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Admin1234
+                                        operador@pucp.edu.pe
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                         <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                        <li><a class="dropdown-item" href="Directores">Directores</a></li>
-                                        <li><a class="dropdown-item" href="Actores">Actores</a></li>
-                                        <li><a class="dropdown-item" href="Sedes">Sedes</a></li>
-                                        <li><a class="dropdown-item" href="Clientes">Clientes</a></li>
-                                        <li><a class="dropdown-item" href="operadores">Operadores</a></li>
-                                        <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+                                        <li><a class="dropdown-item" href="estadisticasgeneral.html">Estadisticas</a></li>
+                                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </div>
                     </ul>
                 </div>
+
             </div>
         </nav>
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container">
-                <div class="masthead-heading text-uppercase">Cultural Box Office PUCP</div>
-                <div class="masthead-subheading">Cultural Box-Office es una plataforma donde podrás comprar de manera fácil y rápida tus tickets de tus funciones favoritas.</div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="#portfolio">Ver Funciones</a>
-            </div>
-        </header>
 
         <!-- Portfolio Grid-->
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase" href = "#funciones">FUNCIONES</h2>
-                    <h3 class="section-subheading text-muted">Los espectáculos más esperados</h3>
+                    </br>
+                    <h2 class="section-heading text-uppercase">Salas disponibles</h2>
+                    <form class="row g-3">
+                        <div class="col-auto">
+                            <label for="staticEmail2" class="visually-hidden">Email</label>
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Ingrese fecha y sede:">
+                        </div>
+                        <div class="col-auto">
+                            <label for="inputPassword2" class="visually-hidden">Password</label>
+                            <input type="date" class="form-control" id="inputPassword2" placeholder="Ingrese fecha">
+                        </div>
+                        <div class="col-auto">
+                            <select class="form-select" id="validationCustom04" required>
+                                <option>Seleccionar sede</option>
+                                <option>Sede San Miguel</option>
+                                <option>Sede San Borja</option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Funcion 1-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                <br/>
+                <!-- Page Features-->
+                <div class="row gx-lg-5">
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <h2 class="div-3">Sala 1</h2>
+                                <div class="col-md-3">
+                                    <div class="text-center"><button class="btn btn-success btn-xl" type="submit">Download_txt_S1</button></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/funcion2.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">EL COMIENZO DEL FIN: GRUPO Y</div>
-                                <button type="button" class="btn btn-light">Stock: 50</button>
-                                <div></div>
-                                <button type="button" class="btn btn-danger" >Añadir al carrito</button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 2-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <h2 class="div-3">Sala 2</h2>
+                                <div class="col-md-3">
+                                    <div class="text-center"><button class="btn btn-success btn-xl" type="submit">Download_txt_S2</button></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/funcion1.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">COFFE CONCERT: Andrés Cruz</div>
-                                <button type="button" class="btn btn-light">Stock: 100</button>
-                                <div></div>
-                                <button type="button" class="btn btn-danger" >Añadir al carrito</button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Funcion 3-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <h2 class="div-3">Sala 3</h2>
+                                <div class="col-md-3">
+                                    <div class="text-center"><button class="btn btn-success btn-xl" type="submit">Download_txt_S3</button></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/funcion3.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">TEATRO JOVEN</div>
-                                </br>
-                                <button type="button" class="btn btn-light">Stock: 50</button>
-                                <div></div>
-                                <button type="button" class="btn btn-danger" >Añadir al carrito</button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 4-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <h2 class="div-3">Sala 4</h2>
+                                <div class="col-md-3">
+                                    <div class="text-center"><button class="btn btn-success btn-xl" type="submit">Download_txt_S4</button></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/funcion5.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">ZEN 20 AÑOS</div>
-                                <button type="button" class="btn btn-light">Stock: 150</button>
-                                <div></div>
-                                <button type="button" class="btn btn-danger" >Añadir al carrito</button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-                        <!-- Portfolio item 5-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <h2 class="div-3">Sala 5</h2>
+                                <div class="col-md-3">
+                                    <div class="text-center"><button class="btn btn-success btn-xl" type="submit">Download_txt_S5</button></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/funcion4.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">SOUTHWEST</div>
-                                <button type="button" class="btn btn-light">Stock: 50</button>
-                                <div></div>
-                                <button type="button" class="btn btn-danger" >Añadir al carrito</button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <!-- Portfolio item 6-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card bg-light border-0 h-100">
+                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+                                <h2 class="div-3">Sala 6</h2>
+                                <div class="col-md-3">
+                                    <div class="text-center"><button class="btn btn-success btn-xl" type="submit">Download_txt_S6</button></div>
                                 </div>
-                                <img class="img-fluid" src="assets/img/portfolio/funcion6.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">CORO DE NIÑOS</div>
-                                <button type="button" class="btn btn-light">Stock: 50</button>
-                                <div></div>
-                                <button type="button" class="btn btn-danger" >Añadir al carrito</button>
                             </div>
+                        </div>
+                    </div>
+                    <!-- Return button-->
+                    <div class="row align-items-stretch mb-5">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
+                            <a href="index.html"><button class="btn btn-primary btn-xl" type="submit">Regresar</button></a>
                         </div>
                     </div>
                 </div>

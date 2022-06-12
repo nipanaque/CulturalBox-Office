@@ -1,22 +1,20 @@
 package com.example.culturalbox.Servlets;
 
-import com.example.culturalbox.Daos.EditarSedeDao;
+import com.example.culturalbox.Daos.DirectoresDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "EditarSedeServlet", value = "/EditarSede")
-public class EditarSedeServlet extends HttpServlet {
+@WebServlet(name = "Directores", value = "/Directores")
+public class DirectoresServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        EditarSedeDao editarSedeDao = new EditarSedeDao();
-        request.setAttribute("listaAforos", editarSedeDao.obtenerAforo());
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("EditarSede.jsp");
+        DirectoresDao directoresDao = new DirectoresDao();
+        request.setAttribute("listaDirectores",directoresDao.obtenerDirectores());
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("Directores.jsp");
         requestDispatcher.forward(request,response);
-
-
     }
 
     @Override

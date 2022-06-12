@@ -1,8 +1,6 @@
 <%@ page import="com.example.culturalbox.Beans.Aforo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaAforos" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Aforo>" />
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,11 +39,11 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                <li><a class="dropdown-item" href="Actores.html">Actores</a></li>
-                                <li><a class="dropdown-item" href="Directores.html">Directores</a></li>
-                                <li><a class="dropdown-item" href="Sedes.html">Sedes</a></li>
-                                <li><a class="dropdown-item" href="Clientes.html">Clientes</a></li>
-                                <li><a class="dropdown-item" href="operadores.html">Operadores</a></li>
+                                <li><a class="dropdown-item" href="Actores">Actores</a></li>
+                                <li><a class="dropdown-item" href="Directores">Directores</a></li>
+                                <li><a class="dropdown-item" href="Sedes">Sedes</a></li>
+                                <li><a class="dropdown-item" href="Clientes">Clientes</a></li>
+                                <li><a class="dropdown-item" href="operadores">Operadores</a></li>
                                 <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
                             </ul>
                         </li>
@@ -75,7 +73,7 @@
                         <label for="inputAforoSede" class="col-form-label">Aforo de la sede: </label>
                     </div>
                     <div class="col-auto">
-                        <input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value="640">
+                        <input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value="660">
                     </div>
                     <div class="col-auto">
                     </div>
@@ -92,10 +90,10 @@
                     <tbody>
                         <% int i = 1;
                             for (Aforo aforo : listaAforos) { %>
-                    <tr>
-                        <td><%= i%></td>
-                        <td><input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value=<%= aforo.getAforos()%> ></td>
-                    </tr>
+                        <tr>
+                            <td><%= i%></td>
+                            <td><input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value=<%= aforo.getAforos()%> ></td>
+                        </tr>
                         <% i++;}%>
                     </tbody>
                 </table>

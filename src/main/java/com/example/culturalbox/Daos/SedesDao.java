@@ -33,5 +33,31 @@ public class SedesDao {
             System.out.println("No se pudo realizar la busqueda");
         }
         return listaSedes;
+
+    }
+
+    public ArrayList<Sedes> obtenerSedeCantidad() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Sedes> listaSedes_Cantidad = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT nombre, count(A.idSala ) AS \"Cantidad Salas\" FROM sede S, sala A where S.idSede = \n" +
+                     "A.idSede GROUP BY S.idSede")) {
+            while (rs.next()) {
+                Sedes sede = new Sedes();
+                sede.setNombre(rs.getString(1));
+                sede.setCantidadSalas(rs.getInt(2));
+                listaSedes_Cantidad.add(sede);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("No se pudo realizar la busqueda");
+        }
+        return listaSedes_Cantidad;
+
     }
 }
