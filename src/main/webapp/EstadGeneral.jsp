@@ -1,4 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="inicio" scope="request" type="java.lang.String" class="java.lang.String" />
+<jsp:useBean id="fecha" scope="request" type="java.lang.String" class="java.lang.String" />
+
+
+<jsp:useBean id="listaEstadistica" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Estadistica>" class="java.util.ArrayList" />
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -61,28 +66,31 @@
         </br>
         <section class="page-section bg-light" id="portafolio">
             <div class="container">
-                    <h2 class="section-heading text-uppercase">Estadísticas generales</h2>
-                <!-- Ingrese fecha-->
-                <form class="row g-3">
+                <h2 class="section-heading text-uppercase">Estadísticas generales</h2>
+
+
+                <!--Formulario para mes y año-->
+                <form method="post" class="row g-3" action="<%=request.getContextPath()%>/EstadisticaServlet?a=buscar">
                     <div class="col-auto">
-                        <label for="staticEmail2" class="visually-hidden">Email</label>
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Ingrese mes y año:">
+                        <p>Ingrese mes y año: </p>
                     </div>
                     <div class="col-auto">
-                        <label for="inputPassword2" class="visually-hidden">Password</label>
-                        <input type="month" class="form-control" id="inputPassword2" placeholder="Ingrese fecha">
+                        <input type="month" class="form-control" name="fecha" id="fecha">
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary mb-3">Buscar</button>
                     </div>
                 </form>
+
+
                 </br>
 
-
-
+                <% if(inicio.equals("vacio")){ %>
+                <h5>Seleccione mes y año para el cual desea estadísticas generales, o busque de forma específica funciones, actores o directores con las opciones de abajo</h5>
+                <% }else{ %>
                 <!-- Page cuadros primera parte -->
                 <div class="row">
-
+                    <h5>La fecha escogida fue: <%=fecha%></h5>
                     <!-- Cuadro 1.1 -->
                     <div class="col-sm-4">
                         <div class="card border-success mb-3" style="max-width: 400px;">
@@ -93,7 +101,7 @@
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h4 class="card-title">Función mejor calificada</h4>
-                                        <p class = "fs-5">Avengers Endgame</p>
+                                        <p class = "fs-5"> <%=listaEstadistica.get(0).getNomFunMejorCalif()%> </p>
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
@@ -208,6 +216,7 @@
                     </div>
 
                 </div>
+                <% } %>
 
                 </br>
 
