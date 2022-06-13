@@ -18,13 +18,11 @@ public class CrearHorarioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         SedesDao sedesDao = new SedesDao();
-        MantenimientoDao mantenimientoDao = new MantenimientoDao();
         CrearFuncionDao crearFuncionDao = new CrearFuncionDao();
 
         switch (action) {
             case "listar" -> {
                 request.setAttribute("listaSedes",sedesDao.obtenerSedeCantidad());
-                request.setAttribute("listaMantenimiento",mantenimientoDao.obtenerMantenimiento());
                 request.setAttribute("listaFunciones",crearFuncionDao.obtenerFunciones());
                 RequestDispatcher view =request.getRequestDispatcher("CrearHorario.jsp");
                 view.forward(request,response);
@@ -38,7 +36,6 @@ public class CrearHorarioServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         SedesDao sedesDao = new SedesDao();
-        MantenimientoDao mantenimientoDao = new MantenimientoDao();
         HorariosDao horariosDao = new HorariosDao();
 
         switch (action){
@@ -62,7 +59,7 @@ public class CrearHorarioServlet extends HttpServlet {
 
                     horariosDao.crearHorario(vigencia, costo, dia, tiempo_inicio, stock, idSala,idSede,idFuncion);
 
-                    response.sendRedirect(request.getContextPath() + "/index_operadores.jsp");
+                    response.sendRedirect(request.getContextPath() + "/ListaHorarios");
 
                 } catch (NumberFormatException e) {
                     System.out.println("error al parsear");

@@ -66,9 +66,10 @@
     </div>
 
     <!--Actores-->
+    <form method="POST" action="<%=request.getContextPath()%>/Actores?a=borrar">
     <div>
-
         <% int i = 0;
+           int x=1;
             for ( Actores actor : listaActores) {
                 if (i == 0){
                     i = 1; %>
@@ -83,14 +84,20 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  value="" aria-label="..." style="width:30px; height:30px ">
+                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" name="actor<%=x%>" value="<%=actor.getId()%>" aria-label="..." style="width:30px; height:30px ">
                                     <h6 class="card-title"><%=actor.getNombre() %></h6>
                                     <p class="card-text"> Obras actuales:
                                         <br/>
-                                        Al fondo hay sitio
+                                        <%for(String obra : actor.getObras()){%>
+                                        <%if(obra!=null){%>
+                                        <%=obra%>
+                                        <%}%>
                                         <br/>
+                                        <%}%>
+                                        <%if(actor.getObras().size()<2){%>
+                                        <br/>
+                                        <%}%>
 
-                                        <br/>
                                         <small class="text-muted" >calificacion por usuarios:</small>
                                         <br/>
                                         <% contador=0;
@@ -107,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <%}else if (i == 1){%>
+                <%x++;}else if (i == 1){%>
                 <% i = 0; %>
                 <div class="col-5">
                     <div class="card mb-3" style="max-width: 540px;">
@@ -117,22 +124,32 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  value="" aria-label="..." style="width:30px; height:30px ">
+                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  name="actor<%=x%>" value="<%=actor.getId()%>" aria-label="..." style="width:30px; height:30px ">
                                     <h6 class="card-title"><%=actor.getNombre() %></h6>
                                     <p class="card-text"> Obras actuales:
                                         <br/>
-                                        El comienzo del fin
+                                        <%for(String obra : actor.getObras()){%>
+                                        <%if(obra!=null){%>
+                                        <%=obra%>
+                                        <%}%>
+                                        <br/>
+                                        <%}%>
+                                        <%if(actor.getObras().size()<2){%>
+                                        <br/>
+                                        <%}%>
                                         <br/>
 
                                         <br/>
                                         <small class="text-muted" >calificacion por usuarios:</small>
                                         <br/>
+                                        <% contador=0;
+                                            for (int a = 1;a <= actor.getPuntaje();a++){%>
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
-
+                                        <%contador++;%>
+                                        <%}%>
+                                        <%for(int b=0;contador<5;contador++ ){%>
+                                        <img src="assets/img/star.svg"  style="width:20px; height:20px" />
+                                        <%}%>
                                     </p>
                                 </div>
                             </div>
@@ -141,9 +158,9 @@
                 </div>
             </div>
         </div>
-        <%}
+        <%x++;}
          }%>
-
+            <input type="hidden" name="cantActores" value="<%=listaActores.size()%>" />
 
 
     <!--Botones-->
@@ -170,11 +187,12 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Eliminar</button>
+                    <button type="submit" class="btn btn-primary">Eliminar</button>
                 </div>
             </div>
         </div>
     </div>
+    </form>
 
 </section>
 <!-- Bootstrap core JS-->

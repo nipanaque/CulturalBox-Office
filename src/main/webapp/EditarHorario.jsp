@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="idHorario" scope="request" type="com.example.culturalbox.Beans.Horarios" />
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -51,89 +52,70 @@
                     </br>
                     <h2 class="section-heading text-uppercase">Editar Función</h2>
 
-                <form class="row g-3 needs-validation" novalidate action="index.jsp">
+                <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/IndexOpServlet?a=actualizar">
                     <!--Columna 1-->
                     <div class="col-md-5">
                         <div class="form-group">
-                            <!-- Name input-->
-                            <label for="validationCustom01" class="form-label">Nombre de la función *</label>
-                            <input class="form-control" id="nombre_funcion" type="text" value="Asu Mare"  disabled>
+                            <label for="nombre_funcion" class="form-label">Nombre Función *</label>
+                            <input class="form-control" id="nombre_funcion" type="text" value="<%=idHorario.getNombre_funcion()%>"  disabled>
                         </div>
                         </br>
                         <div class="form-group">
                             <!-- Name input-->
-                            <label for="validationCustom02" class="form-label">Género *</label>
-                            <input class="form-control" id="nombre_funcion" type="text" value="Comedia"  disabled>
+                            <label for="genero_funcion" class="form-label">Género *</label>
+                            <input class="form-control" id="genero_funcion" type="text" value="<%=idHorario.getGenero_funcion()%>"  disabled>
                         </div>
                         </br>
                         <div class="form-group">
                             <!-- Name input-->
-                            <label for="validationCustom03" class="form-label">Duración *</label>
-                            <input class="form-control" id="nombre_funcion" type="text" value="120"  disabled>
+                            <label for="idhora" class="form-label">Id del Horario *</label>
+                            <input class="form-control" id="idhora" type="text" value="<%=idHorario.getIdHorario()%>"  disabled>
                         </div>
                         </br>
                         <div class="form-group">
-                            <label for="validationCustom04" class="form-label">Sala *</label>
-                            <input class="form-control" id="nombre_funcion" type="text" value="2"  disabled>
+                            <label for="Sede" class="form-label">Sede *</label>
+                            <input class="form-control" id="Sede" type="text" value="<%=idHorario.getNombre_sede()%>"  disabled>
                         </div>
                         </br>
                         <div class="form-group">
-                            <label for="validationCustom05" class="form-label">Restricción de edad *</label>
-                            <input class="form-control" id="nombre_funcion" type="text" value="Apto para todos"  disabled>
-                        </div>
-                        </br>
-                        <div class="form-group">
-                            <label for="validationCustom06" class="form-label">Aforo *</label>
-                            <input class="form-control" id="nombre_funcion" type="text" value="20"  disabled>
+                            <label for="SalaSede" class="form-label">Sala en la Sede *</label>
+                            <input class="form-control" id="SalaSede" type="text" value="<%=idHorario.getSalaSede()%>"  disabled>
                         </div>
                         </br>
                         </br>
-                        <button type="submit" class="btn btn-primary btn-xl" >
-                            Editar
-                        </button>
+                        <div class="row align-items-stretch mb-5">
+                            <div class="col-md-3">
+                                <a href="IndexOpServlet"><button type="button" class="btn btn-secondary btn-xl">Regresar</button></a>
+                            </div>
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-primary btn-xl" >
+                                    Editar
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label for="validationCustom08" class="form-label">Fecha de la función *</label>
-                            <input type="date" class="form-control" id="validationCustom08" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="validationCustom09" class="form-label">Hora de la función *</label>
-                            <input type="time" class="form-control" name="hora" min="15:00" max="21:00" step="1800" id="validationCustom09" required >
+                            <label for="Aforo" class="form-label">Aforo *</label>
+                            <input class="form-control" id="Aforo" type="text" value="<%=idHorario.getHorario_aforo()%>"  disabled>
                         </div>
                         </br>
                         <div class="form-group">
-                            <label for="validationCustom10" class="form-label">Precio de la entrada *</label>
-                            <input class="form-control" placeholder="Ingrese el precio de entrada" type="number" min="1.00" max="20.00" step="0.5" id="validationCustom09" required>
+                            <label for="dia" class="form-label">Fecha de la función *</label>
+                            <input type="date" class="form-control" name="dia" id="dia" required>
                         </div>
                         </br>
                         <div class="form-group">
-                            <label for="validationCustom11" class="form-label">Director *</label>
-                            <!-- Name input-->
-                            <input class="form-control" id="nombre_funcion" type="text" value="Cachin"  disabled>
+                            <label for="tiempo_inicio" class="form-label">Hora de la función *</label>
+                            <input type="time" class="form-control" min="15:00" max="21:00" step="1800" name="tiempo_inicio" id="tiempo_inicio" required >
                         </div>
                         </br>
                         <div class="form-group">
-                            <label for="validationCustom12" class="form-label">Lista de actores *</label>
-                            <select class="form-control" id="validationCustom12">
-                                <option>Actores</option>
-                                <option disabled>Chespiritio</option>
-                                <option disabled>La Roca</option>
-                                <option disabled>Ben Affleck</option>
-                                <option disabled>Cachín</option>
-                            </select>
+                            <label for="costo" class="form-label">Precio de la entrada *</label>
+                            <input class="form-control" placeholder="Ingrese el precio de entrada" type="number" min="1.00" max="20.00" step="0.5" name="costo" id="costo" required>
                         </div>
-                        </br>
-                        <div class="form-group form-group-textarea mb-md-0">
-                            <label for="validationCustom13" class="form-label">Lista de mantenimiento *</label>
-                            <select class="form-control" id="validationCustom13">
-                                <option>Mantenimiento</option>
-                                <option disabled>Jaimito</option>
-                                <option disabled>Rodri</option>
-                                <option disabled>Pepe</option>
-                            </select>
-                        </div>
-                        </br>
                     </div>
                 </form>
             </div>
