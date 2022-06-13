@@ -14,6 +14,33 @@ public class Horarios {
     private String nombre_sede;
     private int SalaSede;
     private String nombre_funcion;
+    private String descripcion_funcion;
+    private String genero_funcion;
+    private int horario_aforo;
+
+    public int getHorario_aforo() {
+        return horario_aforo;
+    }
+
+    public void setHorario_aforo(int horario_aforo) {
+        this.horario_aforo = horario_aforo;
+    }
+
+    public String getGenero_funcion() {
+        return genero_funcion;
+    }
+
+    public void setGenero_funcion(String genero_funcion) {
+        this.genero_funcion = genero_funcion;
+    }
+
+    public String getDescripcion_funcion() {
+        return descripcion_funcion;
+    }
+
+    public void setDescripcion_funcion(String descripcion_funcion) {
+        this.descripcion_funcion = descripcion_funcion;
+    }
 
     public void setIdHorario(int idHorario) {
         this.idHorario = idHorario;

@@ -50,7 +50,7 @@
                 </br>
                 <div class="d-flex my-3">
                     <h2 class="section-heading text-uppercase">Lista de Horarios</h2>
-                    <a href="<%=request.getContextPath()%>/CrearHorario" class="btn btn-secondary ms-auto">Crear Horario</a>
+                    <a href="<%=request.getContextPath()%>/CrearHorario" class="btn btn-secondary btn-xl ms-auto">Crear Horario</a>
                 </div>
                 <table class="table">
                     <thead>
@@ -88,7 +88,7 @@
                     </tbody>
                 </table>
                 </br>
-                <a href="<%=request.getContextPath()%>/index_operadores.jsp"><button type="button" class="btn btn-secondary">Regresar</button></a>
+                <a href="<%=request.getContextPath()%>/IndexOpServlet"><button type="button" class="btn btn-secondary">Regresar</button></a>
             </div>
         </section>
     </body>
