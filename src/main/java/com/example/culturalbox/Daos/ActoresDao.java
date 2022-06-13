@@ -12,6 +12,9 @@ public class ActoresDao {
     private static String url = "jdbc:mysql://localhost:3306/cultura_box_pucp";
 
     public ArrayList<Actores> obtenerActores(){
+
+        String sql="SELECT A.idActor, F.nombre FROM actor A LEFT JOIN funcion_has_actor B ON A.idActor = B.idActor LEFT JOIN funcion F ON B.idFuncion = F.idFuncion where A.idActor = ?";
+
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e){
@@ -25,11 +28,28 @@ public class ActoresDao {
                                                 "GROUP BY A.idActor\n");){
              while (rs.next()){
                  Actores actor = new Actores();
+                 String id = rs.getString(1);
                  actor.setId(rs.getString(1));
                  actor.setNombre(rs.getString(2));
                  actor.setPuntaje(rs.getInt(4));
+
+                 try (Connection conn2 = DriverManager.getConnection(url, user, pass);
+                      PreparedStatement pstmt = conn2.prepareStatement(sql);){
+
+                     pstmt.setString(1,id);
+                     try (ResultSet rs2 = pstmt.executeQuery();) {
+                         while(rs2.next()){
+                             String obra = rs2.getString(2);
+                             actor.getObras().add(obra);
+                         }
+                     }
+                 }
                  listaActores.add(actor);
              }
+
+        //**Segundo
+
+
 
         }catch (SQLException e) {
             throw new RuntimeException(e);
@@ -37,6 +57,14 @@ public class ActoresDao {
 
         return listaActores;
     }
+
+
+
+
+
+
+
+
 
     public void crearActor(String nombre, String apellido){
         try {

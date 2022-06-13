@@ -88,10 +88,16 @@
                                     <h6 class="card-title"><%=actor.getNombre() %></h6>
                                     <p class="card-text"> Obras actuales:
                                         <br/>
-                                        Al fondo hay sitio
+                                        <%for(String obra : actor.getObras()){%>
+                                        <%if(obra!=null){%>
+                                        <%=obra%>
+                                        <%}%>
                                         <br/>
+                                        <%}%>
+                                        <%if(actor.getObras().size()<2){%>
+                                        <br/>
+                                        <%}%>
 
-                                        <br/>
                                         <small class="text-muted" >calificacion por usuarios:</small>
                                         <br/>
                                         <% contador=0;
@@ -122,7 +128,15 @@
                                     <h6 class="card-title"><%=actor.getNombre() %></h6>
                                     <p class="card-text"> Obras actuales:
                                         <br/>
-                                        El comienzo del fin
+                                        <%for(String obra : actor.getObras()){%>
+                                        <%if(obra!=null){%>
+                                        <%=obra%>
+                                        <%}%>
+                                        <br/>
+                                        <%}%>
+                                        <%if(actor.getObras().size()<2){%>
+                                        <br/>
+                                        <%}%>
                                         <br/>
 
                                         <br/>

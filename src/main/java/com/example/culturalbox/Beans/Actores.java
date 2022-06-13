@@ -1,9 +1,12 @@
 package com.example.culturalbox.Beans;
 
+import java.util.ArrayList;
+
 public class Actores {
     private String nombre;
     private String id;
     private int puntaje;
+    private ArrayList<String> obras = new ArrayList<>();
 
     public String getNombre() {
         return nombre;
@@ -26,5 +29,13 @@ public class Actores {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public ArrayList<String> getObras() {
+        return obras;
+    }
+
+    public void setObras(ArrayList<String> obras) {
+        this.obras = obras;
     }
 }
