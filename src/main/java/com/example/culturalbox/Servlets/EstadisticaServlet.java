@@ -27,19 +27,10 @@ public class EstadisticaServlet extends HttpServlet {
                 requestDispatcher.forward(request,response);
             }
             case "irAcDir" -> {
+                request.setAttribute("listaActores",estad.listarActores());
+                request.setAttribute("listaDirectores",estad.listarDirectores());
+
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("BuscarActorDirector.jsp");
-                requestDispatcher.forward(request,response);
-            }
-            case "regreEstadGen" -> {
-                request.setAttribute("inicio","vacio");
-
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadGeneral.jsp");
-                requestDispatcher.forward(request,response);
-            }
-            case "regresaEspeci" -> {
-                request.setAttribute("listaFunciones",estad.listarFunciones());
-
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadEspFunciones.jsp");
                 requestDispatcher.forward(request,response);
             }
         }
@@ -67,6 +58,22 @@ public class EstadisticaServlet extends HttpServlet {
                 request.setAttribute("listaEspeci",estad.estadEspeciTwo(genero,nomFuncion,fecha,hora));
 
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadFuncion.jsp");
+                requestDispatcher.forward(request,response);
+            }
+            case "buscarActor" -> {
+                String nombreActor = request.getParameter("nombreActor");
+                String[] actor = nombreActor.split("-");
+                request.setAttribute("actor",estad.buscarActorTwo(actor[0],actor[1]));
+
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadActor.jsp");
+                requestDispatcher.forward(request,response);
+            }
+            case "buscarDirector" -> {
+                String nombreDirector = request.getParameter("nombreDirector");
+                String[] director = nombreDirector.split("-");
+                request.setAttribute("director",estad.buscarDirectorTwo(director[0],director[1]));
+
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadDirector.jsp");
                 requestDispatcher.forward(request,response);
             }
         }

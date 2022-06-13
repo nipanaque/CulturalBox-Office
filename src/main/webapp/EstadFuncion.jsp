@@ -190,7 +190,7 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-3">
-                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=regresaEspeci"><button class="btn btn-primary btn-xl">Regresar</button></a>
+                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=irFunciones"><button class="btn btn-primary btn-xl">Regresar</button></a>
                     </div>
                 </div>
             </div>

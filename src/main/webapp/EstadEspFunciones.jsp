@@ -118,7 +118,7 @@
                         <a><button class="btn btn-primary btn-xl" type="submit" form="form1">Buscar</button></a>
                     </div>
                     <div class="col-md-3">
-                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=regreEstadGen"><button class="btn btn-primary btn-xl">Regresar</button></a>
+                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=inicio"><button class="btn btn-primary btn-xl">Regresar</button></a>
                     </div>
                 </div>
             </div>
