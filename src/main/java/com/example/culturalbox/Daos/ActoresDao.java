@@ -59,13 +59,6 @@ public class ActoresDao {
     }
 
 
-
-
-
-
-
-
-
     public void crearActor(String nombre, String apellido){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

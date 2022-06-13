@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +63,7 @@
         </div>
     </div>
 
-    <form class="row g-3 needs-validation" novalidate action="Directores.html">
+    <form class="row g-3 needs-validation" novalidate action="<%=request.getContextPath()%>/Directores?a=agregar" method="POST">
         <div class="row justify-content-center">
             <!--Columna 1-->
             <div class="col-4">
@@ -79,11 +80,11 @@
                 <div class="mb-3">
                     </br>
                     <label for="validationCustom01" class="form-label">Nombre *</label>
-                    <input type="text" class="form-control" id="validationCustom01"  required>
+                    <input type="text" class="form-control" name="nombreA" id="validationCustom01"  required>
                 </div>
                 <div class="mb-3">
                     <label for="validationCustom02" class="form-label">Apellido *</label>
-                    <input type="text" class="form-control" id="validationCustom02"  required>
+                    <input type="text" class="form-control" name="apellidoA" id="validationCustom02"  required>
                 </div>
             </div>
             <!-- Boton-->

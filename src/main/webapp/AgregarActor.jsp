@@ -89,7 +89,7 @@
             <!-- Boton-->
             <div class="text-center">
                 </br>
-                <a href="Actores.html" class="btn btn-primary">Regresar</a>
+                <a href="Actores" class="btn btn-primary">Regresar</a>
                 <button type="submit" class="btn btn-secondary" >
                     Agregar
                 </button>
