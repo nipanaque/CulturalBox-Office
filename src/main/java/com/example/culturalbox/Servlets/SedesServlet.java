@@ -59,26 +59,7 @@ public class SedesServlet extends HttpServlet {
         SedesDao sedesDao = new SedesDao();
 
         switch (action) {
-            case "guardar" -> {
-                String jobId = request.getParameter("jobId");
-                String jobTitle = request.getParameter("jobTitle");
-                String minSalaryStr = request.getParameter("minSalary");
-                String maxSalaryStr = request.getParameter("maxSalary");
 
-                try {
-                    int minSalary = Integer.parseInt(minSalaryStr);
-                    int maxSalary = Integer.parseInt(maxSalaryStr);
-
-
-                    response.sendRedirect(request.getContextPath() + "/JobServlet");
-
-                } catch (NumberFormatException e) {
-                    System.out.println("error al parsear");
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("jobs/nuevo.jsp");
-                    requestDispatcher.forward(request, response);
-                }
-
-            }
             case "actualizar" -> {
                 ArrayList<Aforo> listaAforosSalas = leerAforosRequest(request);
                 Sedes sede = new Sedes();

@@ -51,7 +51,7 @@
                 </br>
                 <div class="d-flex my-3">
                     <h2 class="section-heading text-uppercase">Lista de Funciones</h2>
-                    <a href="<%=request.getContextPath()%>/CrearFuncion" class="btn btn-secondary ms-auto">Crear Funciones</a>
+                    <a href="<%=request.getContextPath()%>/CrearFuncion" class="btn btn-secondary btn-xl ms-auto">Crear Funciones</a>
                 </div>
                 </br>
                 <table class="table">
@@ -79,7 +79,7 @@
                         } %>
                     </tbody>
                 </table>
-                <a href="<%=request.getContextPath()%>/index_operadores.jsp"><button type="button" class="btn btn-secondary">Regresar</button></a>
+                <a href="<%=request.getContextPath()%>/IndexOpServlet"><button type="button" class="btn btn-secondary">Regresar</button></a>
             </div>
         </section>
 
