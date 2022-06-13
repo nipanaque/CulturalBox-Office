@@ -22,11 +22,24 @@ public class EstadisticaServlet extends HttpServlet {
             }
             case "irFunciones" -> {
                 request.setAttribute("listaFunciones",estad.listarFunciones());
+
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadEspFunciones.jsp");
                 requestDispatcher.forward(request,response);
             }
             case "irAcDir" -> {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("BuscarActorDirector.jsp");
+                requestDispatcher.forward(request,response);
+            }
+            case "regreEstadGen" -> {
+                request.setAttribute("inicio","vacio");
+
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadGeneral.jsp");
+                requestDispatcher.forward(request,response);
+            }
+            case "regresaEspeci" -> {
+                request.setAttribute("listaFunciones",estad.listarFunciones());
+
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadEspFunciones.jsp");
                 requestDispatcher.forward(request,response);
             }
         }
@@ -51,10 +64,6 @@ public class EstadisticaServlet extends HttpServlet {
                 String nomFuncion = request.getParameter("nomFuncion");
                 String fecha = request.getParameter("fecha");
                 String hora = request.getParameter("hora");
-                request.setAttribute("genero",genero);
-                request.setAttribute("nomFuncion",nomFuncion);
-                request.setAttribute("fecha",fecha);
-                request.setAttribute("hora",hora);
                 request.setAttribute("listaEspeci",estad.estadEspeciTwo(genero,nomFuncion,fecha,hora));
 
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadFuncion.jsp");

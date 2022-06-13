@@ -115,10 +115,10 @@
                     </div>
                     <div class="col-md-3">
                         <!--Este es un boton externo al formulario, pero vinculado con el form="form1" ya que el id del formulario es tambien "form1"-->
-                        <a href="estad_funcion.html"><button class="btn btn-primary btn-xl" type="submit" form="form1">Buscar</button></a>
+                        <a><button class="btn btn-primary btn-xl" type="submit" form="form1">Buscar</button></a>
                     </div>
                     <div class="col-md-3">
-                        <a href="estadisticasgeneral.html"><button class="btn btn-primary btn-xl">Regresar</button></a>
+                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=regreEstadGen"><button class="btn btn-primary btn-xl">Regresar</button></a>
                     </div>
                 </div>
             </div>

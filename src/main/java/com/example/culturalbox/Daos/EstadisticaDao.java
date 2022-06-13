@@ -314,11 +314,11 @@ public class EstadisticaDao {
                 "from funcion f\n" +
                 "    inner join funcion_has_actor fh on (f.idFuncion = fh.idFuncion)\n" +
                 "    inner join actor a on (fh.idActor = a.idActor)\n" +
-                " where lower(f.nombre) = ?";
+                " where lower(f.nombre) like ?";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
-            pstmt.setString(1,nomFuncion);
+            pstmt.setString(1,"%" + nomFuncion + "%");
             try(ResultSet rs = pstmt.executeQuery();){
                 while (rs.next()){
                     Estadistica estadistica = new Estadistica();

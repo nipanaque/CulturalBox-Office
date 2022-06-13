@@ -1,8 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="genero" scope="request" type="java.lang.String"/>
-<jsp:useBean id="nomFuncion" scope="request" type="java.lang.String"/>
-<jsp:useBean id="fecha" scope="request" type="java.lang.String"/>
-<jsp:useBean id="hora" scope="request" type="java.lang.String"/>
 <jsp:useBean id="listaEspeci" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Estadistica>" />
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -59,20 +55,7 @@
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
                 </br>
-                <h2 class="section-heading text-uppercase">Coffe concert: Andrés Cruz</h2>
-                <h6> <%=genero%> </h6>
-                <h6> <%=nomFuncion%> </h6>
-                <h6> <%=fecha%> </h6>
-                <h6> <%=hora%> </h6>
-                <h6> <%=listaEspeci.get(0).getNombre()%> </h6>
-                <h6> <%=listaEspeci.get(0).getPuntaje()%> </h6>
-                <h6> <%=listaEspeci.get(0).getAsistencia()%> </h6>
-                <h6> <%=listaEspeci.get(0).getHora()%> </h6>
-                <h6> <%=listaEspeci.get(0).getFecha()%> </h6>
-                <h6> <%=listaEspeci.get(0).getGenero()%> </h6>
-                <h6> <%=listaEspeci.get(0).getMaxMonto()%> </h6>
-                <h6> <%=listaEspeci.get(0).getRecaudado()%> </h6>
-                <h6> <%=listaEspeci.get(0).getDirector()%> </h6>
+                <h2 class="section-heading text-uppercase"><%=listaEspeci.get(0).getNombre()%></h2>
                 </br>
                 <!-- Page Features-->
 
@@ -89,8 +72,8 @@
                                 <div class="col-md-7">
                                     <div class="card-body">
                                         <h4 class="card-title">Fecha y hora</h4>
-                                        <p class = "fs-4">23/05/22</p>
-                                        <p class = "fs-4">08:33 pm</p>
+                                        <p class = "fs-4"><%=listaEspeci.get(0).getFecha()%></p>
+                                        <p class = "fs-4"><%=listaEspeci.get(0).getHora()%></p>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +90,7 @@
                                 <div class="col-md-7">
                                     <div class="card-body">
                                         <h3 class="card-title">Género de la función</h3>
-                                        <p class = "fs-4">Acción</p>
+                                        <p class = "fs-4"><%=listaEspeci.get(0).getGenero()%></p>
                                     </div>
                                 </div>
                             </div>
@@ -123,14 +106,18 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h4 class="card-title">Asistencia: 75%</h4>
+                                        <h4 class="card-title">Asistencia: <%=listaEspeci.get(0).getAsistencia()%>%</h4>
                                         </br>
                                         <h4 class="card-title">Calificación:</h4>
+                                        <% double puntaje = listaEspeci.get(0).getPuntaje();
+                                            double parteDecimal = puntaje % 1;
+                                            double parteEntera = puntaje - parteDecimal;
+                                            for(int i=0;i<parteEntera;i++){ %>
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
+                                        <% }
+                                            if (parteDecimal >= 0.5){ %>
                                         <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +141,7 @@
                                 <div class="col-md-7">
                                     <div class="card-body">
                                         <h4 class="card-title">Director</h4>
-                                        <p class = "fs-5">Roberto Gomez Bolaños</p>
+                                        <p class = "fs-5"> <%=listaEspeci.get(0).getDirector()%> </p>
                                     </div>
                                 </div>
                             </div>
@@ -171,8 +158,8 @@
                                 <div class="col-md-7">
                                     <div class="card-body">
                                         <h4 class="card-title">Monto recaudado</h4>
-                                        <p class = "fs-5">Obtenido (S/.): 500</p>
-                                        <p class = "fs-5">Máximo (S/.): 800</p>
+                                        <p class = "fs-5">Obtenido (S/.): <%=listaEspeci.get(0).getRecaudado()%></p>
+                                        <p class = "fs-5">Máximo (S/.): <%=listaEspeci.get(0).getMaxMonto()%></p>
                                     </div>
                                 </div>
                             </div>
@@ -184,15 +171,12 @@
                         <div class="card border-success mb-3" style="max-width: 400px;">
                             <div class="card-body">
                                 <h4 class="card-title">Actores</h4>
-                                <p class="mb-0">- Andress Wiesse Zuasnabar</p>
-                                <p class="mb-0">- Pedro Suarez Vertiz</p>
-                                <p class="mb-0">- Juan Vertiz Soliz</p>
-                                <p class="mb-0">- Salomon Castillo Grith</p>
-                                <p class="mb-0">- Soho Minho Masuchita Kito</p>
+                                <% for(int i = 1; i<listaEspeci.size();i++){ %>
+                                <p class="mb-0">- <%=listaEspeci.get(i).getNombre()%></p>
+                                <% } %>
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 </br>
@@ -206,7 +190,7 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-3">
-                        <a href="estadisticasespecificas_funciones.html"><button class="btn btn-primary btn-xl" type="submit">Regresar</button></a>
+                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=regresaEspeci"><button class="btn btn-primary btn-xl">Regresar</button></a>
                     </div>
                 </div>
             </div>
