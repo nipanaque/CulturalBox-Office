@@ -11,8 +11,8 @@ public class SalaReporteDao {
     private static String pass = "root";
     private static String url = "jdbc:mysql://localhost:3306/cultura_box_pucp";
 
-    public SalaReporte reporteFechaSede(String Fecha, String idSede){
-        SalaReporte salas = new SalaReporte();
+    public ArrayList<SalaReporte> reporteFechaSede(String Fecha, String idSede){
+        ArrayList<SalaReporte> listasalas = new ArrayList<>();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -26,13 +26,16 @@ public class SalaReporteDao {
             pstmt.setString(2,idSede);
 
             try(ResultSet rs = pstmt.executeQuery();){
-                rs.next();
-                salas.setSalaSede(rs.getInt(1));
+                while (rs.next()) {
+                    SalaReporte salaReporte = new SalaReporte();
+                    salaReporte.setSalaSede(rs.getInt(1));
+                    listasalas.add(salaReporte);
+                }
             }
         } catch (SQLException e) {
             System.out.println("No se pudo realizar la busqueda");
         }
-        return salas;
+        return listasalas;
     }
 
 }
