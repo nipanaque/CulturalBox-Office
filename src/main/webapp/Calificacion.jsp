@@ -43,7 +43,7 @@
             </div>
         </nav>
         <section class="page-section bg-light" id="portfolio">
-            <div class="container">
+            <div   class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase"><%=listaCalificacion.get(1).getNombreFuncion()%></h2>
                     <h3 class="section-subheading text-muted"></h3>
@@ -77,21 +77,35 @@
                             <h4>Número de estrellas: </h4>
                         </div>
                         <div style="text-align: center">
-                            <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="1estrelladirector"></div>
-                            <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="2estrelladirector"></div>
-                            <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="3estrelladirector"></div>
-                            <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="4estrelladirector"></div>
-                            <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="5estrelladirector"></div>
+                            <div class="fa fa-star" onclick="calificarDirector(this)" style="cursor: pointer;" id="1estrelladirector"></div>
+                            <div class="fa fa-star" onclick="calificarDirector(this)" style="cursor: pointer;" id="2estrelladirector"></div>
+                            <div class="fa fa-star" onclick="calificarDirector(this)" style="cursor: pointer;" id="3estrelladirector"></div>
+                            <div class="fa fa-star" onclick="calificarDirector(this)" style="cursor: pointer;" id="4estrelladirector"></div>
+                            <div class="fa fa-star" onclick="calificarDirector(this)" style="cursor: pointer;" id="5estrelladirector"></div>
                         </div>
                         <br><br><br>
                         <%  i = 1;
                             for (Calificacion calificacion : listaCalificacion) { %>
                         <div style="text-align: center">
-                            <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="1estrellaActor1"></div>
-                            <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="2estrellaActor1"></div>
-                            <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="3estrellaActor1"></div>
-                            <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="4estrellaActor1"></div>
-                            <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer;" id="5estrellaActor1"></div>
+                            <% if(i==1){%>
+                            <div class="fa fa-star" onclick="calificarActor1(this)" style="cursor: pointer;" id="1estrellaActor1"></div>
+                            <div class="fa fa-star" onclick="calificarActor1(this)" style="cursor: pointer;" id="2estrellaActor1"></div>
+                            <div class="fa fa-star" onclick="calificarActor1(this)" style="cursor: pointer;" id="3estrellaActor1"></div>
+                            <div class="fa fa-star" onclick="calificarActor1(this)" style="cursor: pointer;" id="4estrellaActor1"></div>
+                            <div class="fa fa-star" onclick="calificarActor1(this)" style="cursor: pointer;" id="5estrellaActor1"></div>
+                            <% }else if(i==2){%>
+                            <div class="fa fa-star" onclick="calificarActor2(this)" style="cursor: pointer;" id="1estrellaActor2"></div>
+                            <div class="fa fa-star" onclick="calificarActor2(this)" style="cursor: pointer;" id="2estrellaActor2"></div>
+                            <div class="fa fa-star" onclick="calificarActor2(this)" style="cursor: pointer;" id="3estrellaActor2"></div>
+                            <div class="fa fa-star" onclick="calificarActor2(this)" style="cursor: pointer;" id="4estrellaActor2"></div>
+                            <div class="fa fa-star" onclick="calificarActor2(this)" style="cursor: pointer;" id="5estrellaActor2"></div>
+                            <% }else if(i==3){%>
+                            <div class="fa fa-star" onclick="calificarActor3(this)" style="cursor: pointer;" id="1estrellaActor3"></div>
+                            <div class="fa fa-star" onclick="calificarActor3(this)" style="cursor: pointer;" id="2estrellaActor3"></div>
+                            <div class="fa fa-star" onclick="calificarActor3(this)" style="cursor: pointer;" id="3estrellaActor3"></div>
+                            <div class="fa fa-star" onclick="calificarActor3(this)" style="cursor: pointer;" id="4estrellaActor3"></div>
+                            <div class="fa fa-star" onclick="calificarActor3(this)" style="cursor: pointer;" id="5estrellaActor3"></div>
+                            <% }%>
                         </div>
                         <br>
                         <% i++;}%>
@@ -99,15 +113,15 @@
                 </div>
                 <div style="text-align: center">
                     <h1>Número de estrellas para la función:</h1>
-                    <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; font-size: 3rem;" id="1estrella"></div>
-                    <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; font-size: 3rem;" id="2estrella"></div>
-                    <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; font-size: 3rem;" id="3estrella"></div>
-                    <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; font-size: 3rem;" id="4estrella"></div>
-                    <div class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; font-size: 3rem;" id="5estrella"></div>
+                    <div class="fa fa-star fa-3x" onclick="calificar(this)" style="cursor: pointer;" id="1estrella"></div>
+                    <div class="fa fa-star fa-3x" onclick="calificar(this)" style="cursor: pointer;" id="2estrella"></div>
+                    <div class="fa fa-star fa-3x" onclick="calificar(this)" style="cursor: pointer;" id="3estrella"></div>
+                    <div class="fa fa-star fa-3x" onclick="calificar(this)" style="cursor: pointer;" id="4estrella"></div>
+                    <div class="fa fa-star fa-3x" onclick="calificar(this)" style="cursor: pointer;" id="5estrella"></div>
                 </div>
                 <br><br>
                 <div style="text-align: center">
-                    <a href="historialdeFunciones.html"><button class="btn btn-lg btn-dark" type="submit">Guardar</button></a>
+                    <a href="<%=request.getContextPath()%>/HistorialServlet"><button class="btn btn-lg btn-dark" type="submit">Guardar</button></a>
                 </div>
 
             </div>
@@ -140,7 +154,7 @@
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
     <script>
-        var contador;
+        var contador =-1;
         function calificar(item){
             console.log(item);
             contador=item.id[0]
@@ -152,6 +166,71 @@
                     document.getElementById((i+1)+nombre).style.color="black"
                 }
             }
+        }
+        var contadorActor1=-1;
+        var contadorActor2=-1;
+        var contadorActor3;
+        var contadorActor4;
+        var contadorActor5;
+
+        var contadorDirector=-1;
+        function calificarDirector(item){
+            console.log(item);
+            contadorDirector=item.id[0]
+            let nombre = item.id.substring(1);
+            for (let i=0;i<5;i++){
+                if (i<contadorDirector){
+                    document.getElementById((i+1)+nombre).style.color="orange"
+                }else{
+                    document.getElementById((i+1)+nombre).style.color="black"
+                }
+            }
+        }
+        function calificarActor1(item){
+            console.log(item);
+            contadorActor1=item.id[0]
+            let nombre = item.id.substring(1);
+            for (let i=0;i<5;i++){
+                if (i<contadorActor1){
+                    document.getElementById((i+1)+nombre).style.color="orange"
+                }else{
+                    document.getElementById((i+1)+nombre).style.color="black"
+                }
+            }
+        }
+        function calificarActor2(item){
+            console.log(item);
+            contadorActor2=item.id[0]
+            let nombre = item.id.substring(1);
+            for (let i=0;i<5;i++){
+                if (i<contadorActor2){
+                    document.getElementById((i+1)+nombre).style.color="orange"
+                }else{
+                    document.getElementById((i+1)+nombre).style.color="black"
+                }
+            }
+        }
+        function calificarActor3(item){
+            console.log(item);
+            contadorActor3=item.id[0]
+            let nombre = item.id.substring(1);
+            for (let i=0;i<5;i++){
+                if (i<contadorActor3){
+                    document.getElementById((i+1)+nombre).style.color="orange"
+                }else{
+                    document.getElementById((i+1)+nombre).style.color="black"
+                }
+            }
+        }
+        function SaveDB(){
+            $.ajax({
+                url: "Calificacion.jsp",
+                method: "POST",
+                data: {contador,contadorDirector,contadorActor1,contadorActor2,contadorActor3},
+                success:function (data){
+
+                }
+            })
         }
     </script>
 </html>
