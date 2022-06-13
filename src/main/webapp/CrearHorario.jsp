@@ -100,11 +100,6 @@
                             <input class="form-control" placeholder="Ingrese el stock" type="number" min="0" max="25" step="1" name="stock" id="stock" required>
                         </div>
                         </br>
-                        <div class="form-group">
-                            <label for="costo" class="form-label">Precio de la entrada *</label>
-                            <input class="form-control" placeholder="Ingrese el precio de entrada" type="number" min="1.00" max="20.00" step="0.5" name="costo" id="costo" required>
-                        </div>
-                        </br>
                         </br>
                         <div class="row align-items-stretch mb-5">
                             <div class="col-md-3">
@@ -141,12 +136,10 @@
                             </select>
                         </div>
                         </br>
-                        <div class="form-group form-group-textarea mb-md-0">
-                            <label for="mantenimiento" class="form-label">Añadir lista de mantenimiento *</label>
-                            <!-- Message input-->
-                            <textarea class="form-control" type="text" placeholder="Lista de mantenimiento" id="mantenimiento" ></textarea>
+                        <div class="form-group">
+                            <label for="costo" class="form-label">Precio de la entrada *</label>
+                            <input class="form-control" placeholder="Ingrese el precio de entrada" type="number" min="1.00" max="20.00" step="0.5" name="costo" id="costo" required>
                         </div>
-                        </br>
                     </div>
                 </form>
             </div>

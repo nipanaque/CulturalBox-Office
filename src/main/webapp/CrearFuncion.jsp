@@ -120,16 +120,6 @@
                             </select>
                         </div>
                         </br>
-                        <div class="form-group">
-                            <label for="validationCustom12" class="form-label">Añadir actores *</label>
-                            <select class="form-select" id="validationCustom12" multiple size="2" required>
-                                <option disabled>Seleccionar</option>
-                                <%for(CrearFuncion listaActores1 : listaActores){%>
-                                <option><%=listaActores1.getNombres_Actores()%></option>
-                                <%}%>
-                            </select>
-                        </div>
-                        </br>
                         <div class="form-group form-group-textarea mb-md-0">
                             <!-- Message input-->
                             <label for="descripcion" class="form-label">Descripción de la función *</label>
