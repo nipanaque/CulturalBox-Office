@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="actor" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Estadistica>"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -54,8 +55,8 @@
         <!-- Portfolio Grid-->
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
-                    </br>
-                    <h2 class="section-heading text-uppercase">Will Cris Smith Rock</h2>
+                </br>
+                <h2 class="section-heading text-uppercase"><%=actor.get(0).getNombre()%></h2>
                 <br/>
                 <!-- Page Features-->
                 <div class="row gx-lg-5">
@@ -69,14 +70,18 @@
                                     <div class="card-body">
                                         <h3 class="card-title">Calificación de actor</h3>
                                         <p class = "fs-5">Resultados en base a los usuarios:</p>
+                                        <% double puntaje = actor.get(0).getPuntaje();
+                                            double parteDecimal = puntaje % 1;
+                                            double parteEntera = puntaje - parteDecimal;
+                                            for(int i=0;i<parteEntera;i++){ %>
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
+                                        <% }
+                                            if (parteDecimal >= 0.5){ %>
                                         <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                        <% } %>
                                         <br/>
                                         <br/>
-                                        <p class = "fs-5">N° estrellas enteras: 5</p>
+                                        <p class = "fs-5">N° estrellas enteras: <%=Math.round(puntaje)%> </p>
                                     </div>
                                 </div>
                             </div>
@@ -91,10 +96,9 @@
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h3 class="card-title">Participación en funciones</h3>
-                                        <p class="mb-0">El chapulin colorado</p>
-                                        <p class="mb-0">Lo que la vida se llevo</p>
-                                        <p class="mb-0">Los invincibles 4</p>
-                                        <p class="mb-0">Avengers Endgame: El regreso de Nemo</p>
+                                        <% for(int i = 1; i<actor.size();i++){ %>
+                                        <p class="mb-0">- <%=actor.get(i).getNombre()%></p>
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
@@ -119,7 +123,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="text-center">
-                                <a href="search.html"><button class="btn btn-primary btn-xl" type="submit">Regresar</button></a>
+                                <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=irAcDir"><button class="btn btn-primary btn-xl">Regresar</button></a>
                             </div>
                         </div>
                     </div>

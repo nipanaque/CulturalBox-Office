@@ -66,9 +66,10 @@
         </div>
     </div>
     <!--Directores-->
+    <form method="POST" action="<%=request.getContextPath()%>/Directores?a=borrar">
     <div>
-
         <% int i = 0;
+           int x=1;
             for ( Directores director : listaDirectores) {
                 if (i == 0){
                     i = 1; %>
@@ -83,13 +84,20 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  value="" aria-label="..." style="width:30px; height:30px ">
+                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" name="director<%=x%>" value="<%=director.getId()%>"  value="" aria-label="..." style="width:30px; height:30px ">
                                     <h6 class="card-title"><%=director.getNombre() %></h6>
                                     <p class="card-text"> Obras actuales:
                                         <br/>
-                                        La academia
+                                        <%for(String obra : director.getObras()){%>
+                                        <%if(obra!=null){%>
+                                        <%=obra%>
+                                        <%}%>
                                         <br/>
+                                        <%}%>
+                                        <%if(director.getObras().size()<2){%>
                                         <br/>
+                                        <%}%>
+
                                         <small class="text-muted" >calificacion por usuarios:</small>
                                         <br/>
                                         <% contador=0;
@@ -106,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <%}else if (i == 1){%>
+                <%x++;}else if (i == 1){%>
                 <% i = 0; %>
                 <div class="col-5">
                     <div class="card mb-3" style="max-width: 540px;">
@@ -116,12 +124,20 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox"  value="" aria-label="..." style="width:30px; height:30px ">
+                                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" name="director<%=x%>" value="<%=director.getId()%>" value="" aria-label="..." style="width:30px; height:30px ">
                                     <h6 class="card-title"><%=director.getNombre() %></h6>
                                     <p class="card-text"> Obras actuales:
                                         <br/>
+                                        <%for(String obra : director.getObras()){%>
+                                        <%if(obra!=null){%>
+                                        <%=obra%>
+                                        <%}%>
                                         <br/>
+                                        <%}%>
+                                        <%if(director.getObras().size()<2){%>
                                         <br/>
+                                        <%}%>
+
                                         <small class="text-muted" >calificacion por usuarios:</small>
                                         <br/>
                                         <% contador=0;
@@ -138,12 +154,11 @@
                         </div>
                     </div>
                 </div>
-                <%}else if (i == 1){%>
-                <% i = 0; %>
             </div>
         </div>
-        <%}
+        <%x++;}
          }%>
+            <input type="hidden" name="cantDirectores" value="<%=listaDirectores.size()%>" />
 
     <!--Botones-->
     <div class="text-center">
@@ -169,12 +184,14 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Eliminar</button>
+                    <button type="submit" class="btn btn-primary">Eliminar</button>
                 </div>
             </div>
         </div>
     </div>
 
+    </div>
+    </form>
 </section>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

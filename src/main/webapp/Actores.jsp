@@ -86,7 +86,7 @@
                                 <div class="card-body">
                                     <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" name="actor<%=x%>" value="<%=actor.getId()%>" aria-label="..." style="width:30px; height:30px ">
                                     <h6 class="card-title"><%=actor.getNombre() %></h6>
-                                    <p class="card-text"> Obras actuales:
+                                    <p class="card-text">Obras actuales:
                                         <br/>
                                         <%for(String obra : actor.getObras()){%>
                                         <%if(obra!=null){%>
@@ -137,9 +137,7 @@
                                         <%if(actor.getObras().size()<2){%>
                                         <br/>
                                         <%}%>
-                                        <br/>
 
-                                        <br/>
                                         <small class="text-muted" >calificacion por usuarios:</small>
                                         <br/>
                                         <% contador=0;
@@ -168,7 +166,7 @@
         </br>
         </br>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Eliminar
         </button>
         <a href="AgregarActor.jsp"><button type="button" class="btn btn-secondary">Agregar</button></a>

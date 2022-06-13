@@ -24,6 +24,7 @@ public class CalificacionDao {
                      "where f.idDirector = d.idDirector\n" +
                      "AND f.idFuncion = fa.idFuncion\n" +
                      "AND fa.idActor = a.idActor\n" +
+                     "HAVING f.idFuncion = '1'\n" +
                      "order by idFuncion;")) {
             while (rs.next()) {
                 Calificacion calificacion = new Calificacion();
@@ -38,4 +39,5 @@ public class CalificacionDao {
         }
         return listaCalificacion;
     }
+    
 }

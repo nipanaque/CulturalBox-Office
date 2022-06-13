@@ -1,4 +1,7 @@
+<%@ page import="com.example.culturalbox.Beans.Estadistica" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="listaActores" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Estadistica>" />
+<jsp:useBean id="listaDirectores" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Estadistica>" />
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -61,18 +64,22 @@
                     <h3 class="section-subheading text-muted">Seleccionar a partir de las siguientes listas y buscar</h3>
                 <!-- Page Features-->
                 <div class="row gx-lg-5">
+
+
                     <div class="col-lg-6 col-xxl-4 mb-5">
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                                 <h2 class="div-3">Actor</h2>
-                                <select class="form-select" id="validationCustom04" required>
-                                    <option>Seleccionar actor</option>
-                                    <option>Andress Wiesse Zuasnabar</option>
-                                    <option>Pedro Suarez Vertiz</option>
-                                    <option>Juan Vertiz Soliz</option>
-                                    <option>Salomon Castillo Grith</option>
-                                    <option>Soho Minho Masuchita Kito</option>
-                                </select>
+                                <form method="post" id="form1" action="<%=request.getContextPath()%>/EstadisticaServlet?a=buscarActor">
+                                    <select class="form-select" id="buscarActor" name="nombreActor" required>
+                                        <option selected>Seleccionar actor</option>
+                                        <% for(Estadistica est : listaActores){
+                                            String[] separo = est.getNombre().split(" ");
+                                            String actor = separo[0]+"-"+separo[1];%>
+                                        <option value=<%=actor%>> <%=est.getNombre()%> </option>
+                                        <% } %>
+                                    </select>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -82,24 +89,29 @@
                                 <h1 class="div-3"></h1>
                                 <div class="col-md-3">
                                     <div class="text-center">
-                                        <a href="estad_actor.html"><button class="btn btn-success btn-xl" type="submit">Buscar_Actor</button></a>
+                                        <a><button class="btn btn-success btn-xl" type="submit" form="form1">Buscar_Actor</button></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+
                     <div class="col-lg-6 col-xxl-4 mb-5">
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
                                 <h2 class="div-3">Director</h2>
-                                <select class="form-select" id="validationCustom04" required>
-                                    <option>Seleccionar director</option>
-                                    <option>Goerge Lucas Fontonasi</option>
-                                    <option>Julio Ramo Ribeyro</option>
-                                    <option>Son Goku Dakota Blert</option>
-                                    <option>Elon George Musk Zino</option>
-                                    <option>Bill Jimmy Gates Newtron</option>
-                                </select>
+                                <form method="post" id="form2" action="<%=request.getContextPath()%>/EstadisticaServlet?a=buscarDirector">
+                                    <select class="form-select" id="buscarDirector" name="nombreDirector" required>
+                                        <option selected>Seleccionar director</option>
+                                        <% for(Estadistica est : listaDirectores){
+                                            String[] separo2 = est.getNombre().split(" ");
+                                            String director = separo2[0]+"-"+separo2[1];%>
+                                        <option value=<%=director%>> <%=est.getNombre()%> </option>
+                                        <% } %>
+                                    </select>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -109,7 +121,7 @@
                                 <h1 class="div-3"></h1>
                                 <div class="col-md-3">
                                     <div class="text-center">
-                                        <a href="estad_director.html"><button class="btn btn-success btn-xl" type="submit">Buscar_Director</button></a>
+                                        <a><button class="btn btn-success btn-xl" type="submit" form="form2">Buscar_Director</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +136,7 @@
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-3">
-                            <a href="estadisticasgeneral.html"><button class="btn btn-primary btn-xl" type="submit">Regresar</button></a>
+                            <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=inicio"><button class="btn btn-primary btn-xl" type="submit">Regresar</button></a>
                         </div>
                     </div>
                 </div>
