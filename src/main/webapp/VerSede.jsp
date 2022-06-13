@@ -114,8 +114,10 @@
                 </div>
 
                 </br>
-                <p class="card-text"><small class="text-muted">Ultima modificacion hace <% if(sede.getUltimaActualizacion()==null){%>
+                <p class="card-text"><small class="text-muted">Ultima modificacion hace <% if(sede.getUltimaActualizacion().equals("0")){%>
                     menos de un día
+                    <%}else if(sede.getUltimaActualizacion().equals("1")){%>
+                    <%=(sede.getUltimaActualizacion())%> dia
                     <%}else{%>
                     <%=(sede.getUltimaActualizacion())%> dias
                     <%}%>
