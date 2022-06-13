@@ -1,4 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="genero" scope="request" type="java.lang.String"/>
+<jsp:useBean id="nomFuncion" scope="request" type="java.lang.String"/>
+<jsp:useBean id="fecha" scope="request" type="java.lang.String"/>
+<jsp:useBean id="hora" scope="request" type="java.lang.String"/>
+<jsp:useBean id="listaEspeci" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Estadistica>" />
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
     <head>
@@ -53,9 +58,22 @@
         <!-- Portfolio Grid-->
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
-                    </br>
-                    <h2 class="section-heading text-uppercase">Coffe concert: Andrés Cruz</h2>
-                    </br>
+                </br>
+                <h2 class="section-heading text-uppercase">Coffe concert: Andrés Cruz</h2>
+                <h6> <%=genero%> </h6>
+                <h6> <%=nomFuncion%> </h6>
+                <h6> <%=fecha%> </h6>
+                <h6> <%=hora%> </h6>
+                <h6> <%=listaEspeci.get(0).getNombre()%> </h6>
+                <h6> <%=listaEspeci.get(0).getPuntaje()%> </h6>
+                <h6> <%=listaEspeci.get(0).getAsistencia()%> </h6>
+                <h6> <%=listaEspeci.get(0).getHora()%> </h6>
+                <h6> <%=listaEspeci.get(0).getFecha()%> </h6>
+                <h6> <%=listaEspeci.get(0).getGenero()%> </h6>
+                <h6> <%=listaEspeci.get(0).getMaxMonto()%> </h6>
+                <h6> <%=listaEspeci.get(0).getRecaudado()%> </h6>
+                <h6> <%=listaEspeci.get(0).getDirector()%> </h6>
+                </br>
                 <!-- Page Features-->
 
                 <!-- Page cuadros primera parte -->

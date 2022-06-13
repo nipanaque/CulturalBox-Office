@@ -237,10 +237,10 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-3">
-                        <a href="estadisticasespecificas_funciones.html"><button class="btn btn-primary btn-xl" type="submit">Buscar Funciones</button></a>
+                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=irFunciones"><button class="btn btn-primary btn-xl" type="submit">Buscar Funciones</button></a>
                     </div>
                     <div class="col-md-3">
-                        <a href="search.html"><button class="btn btn-primary btn-xl" type="submit">Buscar Actores/Directores</button></a>
+                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=irAcDir"><button class="btn btn-primary btn-xl" type="submit">Buscar Actores/Directores</button></a>
                     </div>
                 </div>
             </div>

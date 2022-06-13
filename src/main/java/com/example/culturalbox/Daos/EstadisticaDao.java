@@ -225,4 +225,110 @@ public class EstadisticaDao {
         }
         return estadistica;
     }
+
+
+
+
+    public ArrayList<Estadistica> listarFunciones(){
+        ArrayList<Estadistica> listaFunciones = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try (Connection connection = DriverManager.getConnection(url,user,pass);
+             Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery("select nombre from funcion");){
+
+            while (rs.next()){
+                Estadistica estad = new Estadistica();
+                estad.setNombre(rs.getString(1));
+                listaFunciones.add(estad);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaFunciones;
+    }
+
+    public Estadistica estadEspeciOne(String genero, String nomFuncion, String fecha, String hora) {
+        Estadistica estadistica = new Estadistica();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sql = "select f.nombre, dia, tiempo_inicio, genero, round(sum(puntaje)/count(puntaje),1) as `punt_prom`,\n" +
+                "\tround((count(h.idhorario)/stock)*100,2) as `asistencia %`, count(u.idUsuario)*costo as `monto recaudado S/`,\n" +
+                "    stock*costo as `max monto S/`, concat(d.nombre,' ',d.apellido) as `director`\n" +
+                "from usuario u\n" +
+                "\tinner join compra c on (u.idUsuario = c.idUsuario)\n" +
+                "    inner join horario h on (c.idHorario = h.idHorario)\n" +
+                "    inner join funcion f on (h.idFuncion = f.idFuncion)\n" +
+                "    inner join puntaje_funcion pf on (f.idFuncion = pf.idFuncion)\n" +
+                "    inner join director d on (f.idDirector = d.idDirector)\n" +
+                "where dia = ? and lower(genero) = ? and lower(f.nombre) like ?\n" +
+                "\tand tiempo_inicio = ?;";
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setString(1,fecha);
+            pstmt.setString(2,genero);
+            pstmt.setString(3,"%" + nomFuncion + "%");
+            pstmt.setString(4,hora + ":00");
+            try(ResultSet rs = pstmt.executeQuery();){
+                rs.next();
+                estadistica.setNombre(rs.getString(1));
+                estadistica.setFecha(rs.getString(2));
+                estadistica.setHora(rs.getString(3));
+                estadistica.setGenero(rs.getString(4));
+                estadistica.setPuntaje(rs.getDouble(5));
+                estadistica.setAsistencia(rs.getDouble(6));
+                estadistica.setRecaudado(rs.getDouble(7));
+                estadistica.setMaxMonto(rs.getDouble(8));
+                estadistica.setDirector(rs.getString(9));
+            }
+        } catch (SQLException e) {
+            System.out.println("No se pudo realizar la busqueda");
+        }
+        return estadistica;
+    }
+
+    public ArrayList<Estadistica> estadEspeciTwo(String genero, String nomFuncion, String fecha, String hora) {
+        ArrayList<Estadistica> listaEspeci = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        listaEspeci.add(estadEspeciOne(genero,nomFuncion,fecha,hora));
+
+        String sql = "select concat(a.nombre,' ',a.apellido) as `actores`\n" +
+                "from funcion f\n" +
+                "    inner join funcion_has_actor fh on (f.idFuncion = fh.idFuncion)\n" +
+                "    inner join actor a on (fh.idActor = a.idActor)\n" +
+                " where lower(f.nombre) = ?";
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setString(1,nomFuncion);
+            try(ResultSet rs = pstmt.executeQuery();){
+                while (rs.next()){
+                    Estadistica estadistica = new Estadistica();
+                    estadistica.setNombre(rs.getString(1));
+                    listaEspeci.add(estadistica);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("No se pudo realizar la busqueda");
+        }
+        return listaEspeci;
+    }
 }

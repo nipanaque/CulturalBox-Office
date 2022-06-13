@@ -1,4 +1,6 @@
+<%@ page import="com.example.culturalbox.Beans.Estadistica" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="listaFunciones" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Estadistica>" />
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -56,46 +58,46 @@
                         <div class="row">
                             <div class="col-sm-7">
 
-
-                                <div class="row align-items-stretch mb-5">
-                                    <div class="col-md-11">
-                                        <p class="mb-0"> Género</p>
-                                        <div class="form-group">
-                                            <!-- Name input-->
-                                            <select class="form-select" id="validationCustom03" required>
-                                                <option>Seleccionar género</option>
-                                                <option>Terror</option>
-                                                <option>Suspenso</option>
-                                                <option>Comedia</option>
-                                                <option>Drama</option>
-                                            </select>
-                                        </div>
-                                        </br>
-                                        <p class="mb-0"> Nombre de la función</p>
-                                        <div class="form-group">
-                                            <!-- Name input-->
-                                            <select class="form-select" id="validationCustom04" required>
-                                                <option>Seleccionar nombre de función</option>
-                                                <option>Coffe Concert - Andrez Cruz</option>
-                                                <option>Avengers Endgame</option>
-                                                <option>Opera en sinfonía</option>
-                                            </select>
-                                        </div>
-                                        </br>
-                                        <p class="mb-0"> Fecha</p>
-                                        <div class="form-group">
-                                            <!-- Email address input-->
-                                            <label for="inputPassword2" class="visually-hidden">Password</label>
-                                            <input type="date" class="form-control" id="inputPassword2" placeholder="Ingrese fecha">
-                                        </div>
-                                        </br>
-                                        <p class="mb-0"> Hora</p>
-                                        <div class="form-group">
-                                            <label for="inputPassword3" class="visually-hidden">Password</label>
-                                            <input type="time" class="form-control" id="inputPassword3" placeholder="Ingrese fecha" name="hora" min="18:00" max="21:00" step="3600" />
+                                <form method="post" id="form1" action="<%=request.getContextPath()%>/EstadisticaServlet?a=buscarEspeciFun">
+                                    <div class="row align-items-stretch mb-5">
+                                        <div class="col-md-11">
+                                            <p class="mb-0"> Género</p>
+                                            <div class="form-group">
+                                                <!--Lista fija-->
+                                                <select class="form-select" id="genero" name="genero" required>
+                                                    <option selected>Seleccionar género</option>
+                                                    <option value="Terror">Terror</option>
+                                                    <option value="Suspenso">Suspenso</option>
+                                                    <option value="Comedia">Comedia</option>
+                                                    <option value="Drama">Drama</option>
+                                                </select>
+                                            </div>
+                                            </br>
+                                            <p class="mb-0"> Nombre de la función</p>
+                                            <div class="form-group">
+                                                <!--Lista variable-->
+                                                <select class="form-select" id="nomFuncion" name="nomFuncion" required>
+                                                    <option selected>Seleccionar nombre</option>
+                                                    <% for(Estadistica est : listaFunciones){ %>
+                                                    <option value=<%=est.getNombre()%>> <%=est.getNombre()%> </option>
+                                                    <% } %>
+                                                </select>
+                                            </div>
+                                            </br>
+                                            <p class="mb-0"> Fecha</p>
+                                            <div class="form-group">
+                                                <!-- date input-->
+                                                <input type="date" class="form-control" id="fecha" name="fecha">
+                                            </div>
+                                            </br>
+                                            <p class="mb-0"> Hora</p>
+                                            <div class="form-group">
+                                                <input type="time" class="form-control" id="hora" name="hora" min="09:00" max="24:00"/>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
+
                             </div>
 
 
@@ -112,10 +114,11 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-3">
-                        <a href="estad_funcion.html"><button class="btn btn-primary btn-xl" type="submit">Continuar</button></a>
+                        <!--Este es un boton externo al formulario, pero vinculado con el form="form1" ya que el id del formulario es tambien "form1"-->
+                        <a href="estad_funcion.html"><button class="btn btn-primary btn-xl" type="submit" form="form1">Buscar</button></a>
                     </div>
                     <div class="col-md-3">
-                        <a href="estadisticasgeneral.html"><button class="btn btn-primary btn-xl" type="submit">Regresar</button></a>
+                        <a href="estadisticasgeneral.html"><button class="btn btn-primary btn-xl">Regresar</button></a>
                     </div>
                 </div>
             </div>
