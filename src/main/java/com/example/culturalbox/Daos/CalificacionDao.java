@@ -39,30 +39,5 @@ public class CalificacionDao {
         }
         return listaCalificacion;
     }
-    public void crearFuncion(int puntajeFuncion,int puntajeDirector, int puntajeActor) {
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String sql = "insert into funcion (nombre,genero,duracion,restriccion,descripcion,idDirector)  VALUES (?,?,?,?,?,?)";
-
-        try (Connection connection = DriverManager.getConnection(url, user, pass);
-             PreparedStatement pstmt = connection.prepareStatement(sql);) {
-
-            pstmt.setString(1, nombre);
-            pstmt.setString(2, genero);
-            pstmt.setInt(3, duracion);
-            pstmt.setString(4, restriccion);
-            pstmt.setString(5, descripcion);
-            pstmt.setInt(6, idDirector);
-            pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
+    
 }
