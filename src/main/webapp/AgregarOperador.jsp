@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <form class="row g-3 needs-validation" novalidate action="Directores.html">
+    <form class="row g-3 needs-validation" novalidate action="operadores.jsp">
         <div class="row justify-content-center">
             <!--Columna 1-->
             <div class="col-4">
@@ -103,7 +103,7 @@
             <!-- Boton-->
             <div class="text-center">
                 </br>
-                <a href="operadores.html" class="btn btn-primary">Regresar</a>
+                <a href="operadores.jsp" class="btn btn-primary">Regresar</a>
                 <button type="submit" class="btn btn-secondary" >
                     Agregar
                 </button>

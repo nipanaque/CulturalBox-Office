@@ -24,5 +24,45 @@ public class OperadoresServlet extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
+
+        String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
+        OperadoresDao operadoresDao = new OperadoresDao();
+
+        switch (action) {
+            case "agregar" -> {
+                String nombre = request.getParameter("nombreA").toLowerCase();
+                String apellido = request.getParameter("apellidoA").toLowerCase();
+                String correo_pucp = request.getParameter("correo_pupcA").toLowerCase();
+                String contrasenha = request.getParameter("contrasenha").toLowerCase();
+
+                String nombreFormato = primeraMayus(nombre);
+                String apellidoFormato = primeraMayus(apellido);
+
+                operadoresDao.crearOperador(nombreFormato, apellidoFormato, correo_pucp, contrasenha);
+                response.sendRedirect(request.getContextPath() + "/Operadores");
+            }
+
+            //case "borrar" -> {
+            //    String cantActoresStr = request.getParameter("cantActores");
+            //    int cantActoresint = Integer.parseInt(cantActoresStr);
+            //    for(int i =1;i <= cantActoresint; i++){
+            //        String parametro = "actor"+i;
+            //        String aStr = request.getParameter(parametro);
+            //        actoresDao.borrarActor(aStr);
+            //    }
+            //    response.sendRedirect(request.getContextPath() + "/Actores");
+            //}
+
+        }
+
     }
+
+    public String primeraMayus(String nombre) {
+        char[] arr = nombre.toCharArray();
+        arr[0] = Character.toUpperCase(arr[0]);
+        return new String(arr);
+    }
+
 }
