@@ -57,7 +57,7 @@
         </div>
         <div class="text-center"><a href="ListaFunciones"><button class="btn btn-primary btn-xl" type="submit">Lista de funciones</button></a></div>
         </br>
-        <div class="text-center"><a href="CrearHorario"><button class="btn btn-primary btn-xl" type="submit">Lista de horarios</button></a></div>
+        <div class="text-center"><a href="ListaHorarios"><button class="btn btn-primary btn-xl" type="submit">Lista de horarios</button></a></div>
       </div>
     </header>
 

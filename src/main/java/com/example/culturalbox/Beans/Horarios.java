@@ -1,6 +1,7 @@
 package com.example.culturalbox.Beans;
 
 public class Horarios {
+    private int idHorario;
     private int vigencia;
     private float costo;
     private String dia;
@@ -9,6 +10,42 @@ public class Horarios {
     private int idSala;
     private int idSede;
     private int idFuncion;
+
+    private String nombre_sede;
+    private int SalaSede;
+    private String nombre_funcion;
+
+    public void setIdHorario(int idHorario) {
+        this.idHorario = idHorario;
+    }
+
+    public int getIdHorario() {
+        return idHorario;
+    }
+
+    public String getNombre_sede() {
+        return nombre_sede;
+    }
+
+    public void setNombre_sede(String nombre_sede) {
+        this.nombre_sede = nombre_sede;
+    }
+
+    public int getSalaSede() {
+        return SalaSede;
+    }
+
+    public void setSalaSede(int salaSede) {
+        SalaSede = salaSede;
+    }
+
+    public String getNombre_funcion() {
+        return nombre_funcion;
+    }
+
+    public void setNombre_funcion(String nombre_funcion) {
+        this.nombre_funcion = nombre_funcion;
+    }
 
     public int getVigencia() {
         return vigencia;
