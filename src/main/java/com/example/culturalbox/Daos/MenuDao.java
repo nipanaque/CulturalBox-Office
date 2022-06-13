@@ -79,4 +79,32 @@ public class MenuDao {
         return listaHorarios;
     }
 
+    public void crearCompra1(int idCompra, int idHorario, int idUsuario) {
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/hr";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "INSERT INTO compra (idCompra,Qr,idHorario,idUsuario,num_tickets) VALUES (?,NULL,?,?,0)";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setInt(1, idCompra);
+            pstmt.setInt(2, idHorario);
+            pstmt.setInt(3, idUsuario);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }

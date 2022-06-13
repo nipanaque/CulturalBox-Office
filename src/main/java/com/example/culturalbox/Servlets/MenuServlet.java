@@ -40,5 +40,21 @@ public class MenuServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
+        MenuDao menuDao = new MenuDao();
+
+        int contCompras = 0;
+
+        switch (action) {
+            case "crearCompra1" -> {
+                int idCompra = contCompras;
+                int idHorario = Integer.parseInt(request.getParameter("idHorario"));
+                int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                menuDao.crearCompra1(idCompra, idHorario, idUsuario);
+                response.sendRedirect(request.getContextPath() + "/MenuServlet");
+
+            }
+
+        }
     }
 }
