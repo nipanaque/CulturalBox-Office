@@ -1,6 +1,7 @@
-<%@ page import="com.example.culturalbox.Beans.Sedes" %>
+<%@ page import="com.example.culturalbox.Beans.Aforo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="listaSedes" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Sedes>" />
+<jsp:useBean id="sede" scope="request" type="com.example.culturalbox.Beans.Sedes" />
+<jsp:useBean id="listaAforos" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Aforo>" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,49 +60,69 @@
     <div class="container">
         <div class="text-center">
             </br>
-            <h2 class="section-heading text-uppercase">Sedes</h2>
-            <h3 class="section-subheading text-muted">Sedes Disponibles</h3>
+            <h2 class="section-heading text-uppercase">Sede <%=sede.getNombre()%></h2>
+            <h3 class="section-subheading text-muted"></h3>
         </div>
-    </div>
 
-    <div class="row justify-content-center">
-        <div class="col-4">
-            <div class="card mx-auto " style="width: 18rem;">
-                <img src="assets/img/Sede1.jpg" class="card-img-top" alt="...">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Sede <%=listaSedes.get(0).getNombre()%></h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Ubicado en <%=listaSedes.get(0).getUbicacion()%></li>
-                        <li class="list-group-item">Aforo total: <%=listaSedes.get(0).getAforo()%></li>
-                        <li class="list-group-item">Cantidad de salas: <%=listaSedes.get(0).getCantidadSalas()%></li>
-                    </ul>
-                    <a href="<%=request.getContextPath()%>/Sedes?s=ver&id=1" class="btn btn-primary">Ver</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="text-center">
-                <div class="card mx-auto" style="width: 18rem;">
-                    <img src="assets/img/Sede2.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Sede <%=listaSedes.get(1).getNombre()%></h5>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Ubicado en <%=listaSedes.get(1).getUbicacion()%></li>
-                            <li class="list-group-item">Aforo total: <%=listaSedes.get(1).getAforo()%></li>
-                            <li class="list-group-item">Cantidad de salas: <%=listaSedes.get(1).getCantidadSalas()%></li>
-                        </ul>
-                        <a href="<%=request.getContextPath()%>/Sedes?s=ver&id=2" class="btn btn-primary">Ver</a>
+        <div class="card mb-3">
+            <div class="card-body">
+                <!-- Columnas-->
+                <div class="row justify-content-between">
+                    <div class="col-4">
+                        <h4 class="card-title">Datos:</h4>
+                        <p class="card-text">Ubicado en: <%=sede.getUbicacion()%></p>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <p  class="card-text">Aforo de la sede: <%=sede.getAforo()%></p>
+                            </div>
+                            </br>
+                            </br>
+                            </br>
+                        </div>
+                        <table class="table" style="width:500px">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col" style="width:250px">Sala </th>
+                                <th scope="col">Aforo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% int i = 1;
+                                for (Aforo aforo : listaAforos) { %>
+                            <tr>
+                                <td><%= i%></td>
+                                <td><%= aforo.getAforos()%></td>
+                            </tr>
+                            <% i++;}%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Tabla de salas-->
+                    <div class="col-4">
+                        </br>
+                        </br>
+                        </br>
+                        </br>
+                        <img src="assets/img/Sede2.jpg" class="rounded float-end" width="640" height="450" alt="...">
                     </div>
                 </div>
-            </div>
 
+                <div class="text-center">
+                    <br>
+                    <a href="Sedes" class="btn btn-primary">Regresar</a>
+                    <a href="<%=request.getContextPath()%>/Sedes?s=editar&id=<%=sede.getId()%>" class="btn btn-secondary">Editar</a>
+                </div>
+
+                </br>
+                <p class="card-text"><small class="text-muted">Ultima modificacion hace <% if(sede.getUltimaActualizacion()==null){%>
+                    menos de un día
+                    <%}else{%>
+                    <%=(sede.getUltimaActualizacion())%> dias
+                    <%}%>
+                    </small></p>
+            </div>
         </div>
     </div>
-
-
-
-
-
 
 
 </section>
@@ -139,3 +160,4 @@
 
 </body>
 </html>
+

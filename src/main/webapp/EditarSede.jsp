@@ -1,5 +1,6 @@
 <%@ page import="com.example.culturalbox.Beans.Aforo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="sede" scope="request" type="com.example.culturalbox.Beans.Sedes" />
 <jsp:useBean id="listaAforos" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Aforo>" />
 <!DOCTYPE html>
 <html lang="en">
@@ -59,59 +60,75 @@
     <div class="container">
         <div class="text-center">
             </br>
-            <h2 class="section-heading text-uppercase">Sede San Borja</h2>
+            <h2 class="section-heading text-uppercase">Sede <%=sede.getNombre()%></h2>
             <h3 class="section-subheading text-muted"></h3>
         </div>
 
         <div class="card mb-3">
-            <img src="assets/img/Sede2.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Datos</h5>
-                <p class="card-text">Ubicado en Av.Los Santos 134</p>
-                <div class="row g-3 align-items-center">
-                    <div class="col-auto">
-                        <label for="inputAforoSede" class="col-form-label">Aforo de la sede: </label>
+                <form method="POST" action="<%=request.getContextPath()%>/Sedes?s=actualizar">
+                    <!-- Columnas-->
+                    <div class="row justify-content-between">
+                        <div class="col-4">
+                            <h4 class="card-title">Datos:</h4>
+                            <p class="card-text">Ubicado en: <%=sede.getUbicacion()%></p>
+                            <div class="row g-3 align-items-center">
+                                <div class="col-auto">
+                                    <label for="AforoSede" class="col-form-label">Aforo de la sede: </label>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="hidden" name="SedeId" value="<%=sede.getId()%>" />
+                                    <input type="number" id="AforoSede" class="form-control" aria-describedby="passwordHelpInline" name="AforoSede" value="<%=sede.getAforo()%>">
+                                    <input type="hidden" name="CantidadSalas" value="<%=listaAforos.size()%>" />
+                                </div>
+                                </br>
+                                </br>
+                                </br>
+                            </div>
+                            <table class="table" style="width:500px">
+                                <thead class="table-dark">
+                                <tr>
+                                    <th scope="col" style="width:250px">Sala </th>
+                                    <th scope="col">Aforo</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <% int i = 1;
+                                    for (Aforo aforo : listaAforos) { %>
+                                <tr>
+                                    <td><%= i%></td>
+                                    <td><input type="number" id="AforoSala<%=i%>" name="AforoSala<%=i%>" class="form-control" aria-describedby="passwordHelpInline" value=<%= aforo.getAforos()%> ></td>
+                                </tr>
+                                <% i++;}%>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Tabla de salas-->
+                        <div class="col-4">
+                            </br>
+                            </br>
+                            </br>
+                            </br>
+                            <img src="assets/img/Sede2.jpg" class="rounded float-end" width="640" height="450" alt="...">
+                        </div>
                     </div>
-                    <div class="col-auto">
-                        <input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value="660">
-                    </div>
-                    <div class="col-auto">
-                    </div>
-                </div>
-                <!-- Tabla de salas-->
-                </br>
-                <table class="table mx-auto" style="width:500px">
-                    <thead class="table-dark">
-                    <tr>
-                        <th scope="col" style="width:250px">Sala </th>
-                        <th scope="col">Aforo</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <% int i = 1;
-                            for (Aforo aforo : listaAforos) { %>
-                        <tr>
-                            <td><%= i%></td>
-                            <td><input type="number" id="inputAforoSede" class="form-control" aria-describedby="passwordHelpInline" value=<%= aforo.getAforos()%> ></td>
-                        </tr>
-                        <% i++;}%>
-                    </tbody>
-                </table>
 
-                <div class="text-center">
-                    <a href="Sedes.html" class="btn btn-primary">Regresar</a>
-                    <a href="Sedes.html" class="btn btn-secondary">Guardar</a>
-                </div>
-
+                    <div class="text-center">
+                        <br>
+                        <a href=<%=request.getContextPath()%>/Sedes?s=editar&id" class="btn btn-primary">Regresar</a>
+                        <button type="submit" class="btn btn-secondary">Actualizar</button>
+                    </div>
+                </form>
                 </br>
-                <p class="card-text"><small class="text-muted">Ultima modificacion hace 2 días</small></p>
+                <p class="card-text"><small class="text-muted">Ultima modificacion hace <% if(sede.getUltimaActualizacion()==null){%>
+                    menos de un día
+                    <%}else{%>
+                    <%=(sede.getUltimaActualizacion())%> dias
+                    <%}%>
+                </small></p>
             </div>
         </div>
-
-
-
-
-
+    </div>
 
 
 </section>
@@ -149,3 +166,4 @@
 
 </body>
 </html>
+
