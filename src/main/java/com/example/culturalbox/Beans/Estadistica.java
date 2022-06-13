@@ -1,30 +1,29 @@
 package com.example.culturalbox.Beans;
 
 public class Estadistica {
-    private String nomFunMejorCalif;
-    private double puntFunPromMejorCalif;
+    private String nombre;
+    private double puntaje;
 
     public Estadistica() {
     }
 
-    public Estadistica(String nomFunMejorCalif, double puntFunPromMejorCalif) {
-        this.nomFunMejorCalif = nomFunMejorCalif;
-        this.puntFunPromMejorCalif = puntFunPromMejorCalif;
+    public Estadistica(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getNomFunMejorCalif() {
-        return nomFunMejorCalif;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNomFunMejorCalif(String nomFunMejorCalif) {
-        this.nomFunMejorCalif = nomFunMejorCalif;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public double getPuntFunPromMejorCalif() {
-        return puntFunPromMejorCalif;
+    public double getPuntaje() {
+        return puntaje;
     }
 
-    public void setPuntFunPromMejorCalif(double puntFunPromMejorCalif) {
-        this.puntFunPromMejorCalif = puntFunPromMejorCalif;
+    public void setPuntaje(double puntaje) {
+        this.puntaje = puntaje;
     }
 }

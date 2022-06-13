@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="inicio" scope="request" type="java.lang.String" class="java.lang.String" />
 <jsp:useBean id="fecha" scope="request" type="java.lang.String" class="java.lang.String" />
-
-
 <jsp:useBean id="listaEstadistica" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Estadistica>" class="java.util.ArrayList" />
 <html lang="en">
     <head>
@@ -101,12 +99,16 @@
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h4 class="card-title">Función mejor calificada</h4>
-                                        <p class = "fs-5"> <%=listaEstadistica.get(0).getNomFunMejorCalif()%> </p>
+                                        <p class = "fs-5"> <%=listaEstadistica.get(0).getNombre()%> </p>
+                                        <% double puntaje = listaEstadistica.get(0).getPuntaje();
+                                           double parteDecimal = puntaje % 1;
+                                           double parteEntera = puntaje - parteDecimal;
+                                           for(int i=0;i<parteEntera;i++){ %>
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
+                                        <% }
+                                           if (parteDecimal >= 0.5){ %>
                                         <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +125,7 @@
                                 <div class="col-md-7">
                                     <div class="card-body">
                                         <h4 class="card-title">Función más vista</h4>
-                                        <p class = "fs-5">Beauty and the beast: musical</p>
+                                        <p class = "fs-5"><%=listaEstadistica.get(1).getNombre()%></p>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +142,7 @@
                                 <div class="col-md-7">
                                     <div class="card-body">
                                         <h4 class="card-title">Función menos vista</h4>
-                                        <p class = "fs-5">Alicia en el país de las maravillas</p>
+                                        <p class = "fs-5"><%=listaEstadistica.get(2).getNombre()%></p>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +166,7 @@
                                 <div class="col-md-7">
                                     <div class="card-body">
                                         <h4 class="card-title">Género mas popular</h4>
-                                        <p class = "fs-5">Comedia</p>
+                                        <p class = "fs-5"><%=listaEstadistica.get(3).getNombre()%></p>
                                     </div>
                                 </div>
                             </div>
@@ -180,13 +182,17 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h4 class="card-title">Actor mejor calificada</h4>
-                                        <p class = "fs-5">Steve Jhonson</p>
+                                        <h4 class="card-title">Actor mejor calificado</h4>
+                                        <p class = "fs-5"><%=listaEstadistica.get(4).getNombre()%></p>
+                                        <% double puntaje2 = listaEstadistica.get(4).getPuntaje();
+                                            double parteDecimal2 = puntaje2 % 1;
+                                            double parteEntera2 = puntaje2 - parteDecimal2;
+                                            for(int i=0;i<parteEntera2;i++){ %>
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
+                                        <% }
+                                            if (puntaje2 >= (parteEntera2+0.5)){ %>
                                         <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
@@ -202,13 +208,17 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h4 class="card-title">Director mejor calificada</h4>
-                                        <p class = "fs-5">Jame Fox</p>
+                                        <h4 class="card-title">Director mejor calificado</h4>
+                                        <p class = "fs-5"><%=listaEstadistica.get(5).getNombre()%></p>
+                                        <% double puntaje3 = listaEstadistica.get(5).getPuntaje();
+                                            double parteDecimal3 = puntaje3 % 1;
+                                            double parteEntera3 = puntaje3 - parteDecimal3;
+                                            for(int i=0;i<parteEntera3;i++){ %>
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
+                                        <% }
+                                            if (parteDecimal3 >= 0.5){ %>
                                         <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
