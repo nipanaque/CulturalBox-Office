@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="inicio" scope="request" type="java.lang.String" class="java.lang.String" />
+<jsp:useBean id="fecha" scope="request" type="java.lang.String" class="java.lang.String" />
+<jsp:useBean id="listaEstadistica" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Estadistica>" class="java.util.ArrayList" />
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -61,28 +64,31 @@
         </br>
         <section class="page-section bg-light" id="portafolio">
             <div class="container">
-                    <h2 class="section-heading text-uppercase">Estadísticas generales</h2>
-                <!-- Ingrese fecha-->
-                <form class="row g-3">
+                <h2 class="section-heading text-uppercase">Estadísticas generales</h2>
+
+
+                <!--Formulario para mes y año-->
+                <form method="post" class="row g-3" action="<%=request.getContextPath()%>/EstadisticaServlet?a=buscar">
                     <div class="col-auto">
-                        <label for="staticEmail2" class="visually-hidden">Email</label>
-                        <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Ingrese mes y año:">
+                        <p>Ingrese mes y año: </p>
                     </div>
                     <div class="col-auto">
-                        <label for="inputPassword2" class="visually-hidden">Password</label>
-                        <input type="month" class="form-control" id="inputPassword2" placeholder="Ingrese fecha">
+                        <input type="month" class="form-control" name="fecha" id="fecha">
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary mb-3">Buscar</button>
                     </div>
                 </form>
+
+
                 </br>
 
-
-
+                <% if(inicio.equals("vacio")){ %>
+                <h5>Seleccione mes y año para el cual desea estadísticas generales, o busque de forma específica funciones, actores o directores con las opciones de abajo</h5>
+                <% }else{ %>
                 <!-- Page cuadros primera parte -->
                 <div class="row">
-
+                    <h5>La fecha escogida fue: <%=fecha%></h5>
                     <!-- Cuadro 1.1 -->
                     <div class="col-sm-4">
                         <div class="card border-success mb-3" style="max-width: 400px;">
@@ -93,12 +99,16 @@
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h4 class="card-title">Función mejor calificada</h4>
-                                        <p class = "fs-5">Avengers Endgame</p>
+                                        <p class = "fs-5"> <%=listaEstadistica.get(0).getNombre()%> </p>
+                                        <% double puntaje = listaEstadistica.get(0).getPuntaje();
+                                           double parteDecimal = puntaje % 1;
+                                           double parteEntera = puntaje - parteDecimal;
+                                           for(int i=0;i<parteEntera;i++){ %>
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
+                                        <% }
+                                           if (parteDecimal >= 0.5){ %>
                                         <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +125,7 @@
                                 <div class="col-md-7">
                                     <div class="card-body">
                                         <h4 class="card-title">Función más vista</h4>
-                                        <p class = "fs-5">Beauty and the beast: musical</p>
+                                        <p class = "fs-5"><%=listaEstadistica.get(1).getNombre()%></p>
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +142,7 @@
                                 <div class="col-md-7">
                                     <div class="card-body">
                                         <h4 class="card-title">Función menos vista</h4>
-                                        <p class = "fs-5">Alicia en el país de las maravillas</p>
+                                        <p class = "fs-5"><%=listaEstadistica.get(2).getNombre()%></p>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +166,7 @@
                                 <div class="col-md-7">
                                     <div class="card-body">
                                         <h4 class="card-title">Género mas popular</h4>
-                                        <p class = "fs-5">Comedia</p>
+                                        <p class = "fs-5"><%=listaEstadistica.get(3).getNombre()%></p>
                                     </div>
                                 </div>
                             </div>
@@ -172,13 +182,17 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h4 class="card-title">Actor mejor calificada</h4>
-                                        <p class = "fs-5">Steve Jhonson</p>
+                                        <h4 class="card-title">Actor mejor calificado</h4>
+                                        <p class = "fs-5"><%=listaEstadistica.get(4).getNombre()%></p>
+                                        <% double puntaje2 = listaEstadistica.get(4).getPuntaje();
+                                            double parteDecimal2 = puntaje2 % 1;
+                                            double parteEntera2 = puntaje2 - parteDecimal2;
+                                            for(int i=0;i<parteEntera2;i++){ %>
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
+                                        <% }
+                                            if (puntaje2 >= (parteEntera2+0.5)){ %>
                                         <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
@@ -194,13 +208,17 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h4 class="card-title">Director mejor calificada</h4>
-                                        <p class = "fs-5">Jame Fox</p>
+                                        <h4 class="card-title">Director mejor calificado</h4>
+                                        <p class = "fs-5"><%=listaEstadistica.get(5).getNombre()%></p>
+                                        <% double puntaje3 = listaEstadistica.get(5).getPuntaje();
+                                            double parteDecimal3 = puntaje3 % 1;
+                                            double parteEntera3 = puntaje3 - parteDecimal3;
+                                            for(int i=0;i<parteEntera3;i++){ %>
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
+                                        <% }
+                                            if (parteDecimal3 >= 0.5){ %>
                                         <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
@@ -208,6 +226,7 @@
                     </div>
 
                 </div>
+                <% } %>
 
                 </br>
 
@@ -218,10 +237,10 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-3">
-                        <a href="estadisticasespecificas_funciones.html"><button class="btn btn-primary btn-xl" type="submit">Buscar Funciones</button></a>
+                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=irFunciones"><button class="btn btn-primary btn-xl" type="submit">Buscar Funciones</button></a>
                     </div>
                     <div class="col-md-3">
-                        <a href="search.html"><button class="btn btn-primary btn-xl" type="submit">Buscar Actores/Directores</button></a>
+                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=irAcDir"><button class="btn btn-primary btn-xl" type="submit">Buscar Actores/Directores</button></a>
                     </div>
                 </div>
             </div>

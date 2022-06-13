@@ -66,59 +66,53 @@
 
         <div class="card mb-3">
             <div class="card-body">
-                <form method="POST" action="<%=request.getContextPath()%>/Sedes?s=actualizar">
-                    <!-- Columnas-->
-                    <div class="row justify-content-between">
-                        <div class="col-4">
-                            <h4 class="card-title">Datos:</h4>
-                            <p class="card-text">Ubicado en: <%=sede.getUbicacion()%></p>
-                            <div class="row g-3 align-items-center">
-                                <div class="col-auto">
-                                    <label for="AforoSede" class="col-form-label">Aforo de la sede: </label>
-                                </div>
-                                <div class="col-auto">
-                                    <input type="hidden" name="SedeId" value="<%=sede.getId()%>" />
-                                    <input type="number" id="AforoSede" class="form-control" aria-describedby="passwordHelpInline" name="AforoSede" value="<%=sede.getAforo()%>">
-                                    <input type="hidden" name="CantidadSalas" value="<%=listaAforos.size()%>" />
-                                </div>
-                                </br>
-                                </br>
-                                </br>
+                <!-- Columnas-->
+                <div class="row justify-content-between">
+                    <div class="col-4">
+                        <h4 class="card-title">Datos:</h4>
+                        <p class="card-text">Ubicado en: <%=sede.getUbicacion()%></p>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <p  class="card-text">Aforo de la sede: <%=sede.getAforo()%></p>
                             </div>
-                            <table class="table" style="width:500px">
-                                <thead class="table-dark">
-                                <tr>
-                                    <th scope="col" style="width:250px">Sala </th>
-                                    <th scope="col">Aforo</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <% int i = 1;
-                                    for (Aforo aforo : listaAforos) { %>
-                                <tr>
-                                    <td><%= i%></td>
-                                    <td><input type="number" id="AforoSala<%=i%>" name="AforoSala<%=i%>" class="form-control" aria-describedby="passwordHelpInline" value=<%= aforo.getAforos()%> ></td>
-                                </tr>
-                                <% i++;}%>
-                                </tbody>
-                            </table>
+                            </br>
+                            </br>
+                            </br>
                         </div>
-                        <!-- Tabla de salas-->
-                        <div class="col-4">
-                            </br>
-                            </br>
-                            </br>
-                            </br>
-                            <img src="assets/img/Sede2.jpg" class="rounded float-end" width="640" height="450" alt="...">
-                        </div>
+                        <table class="table" style="width:500px">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col" style="width:250px">Sala </th>
+                                <th scope="col">Aforo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% int i = 1;
+                                for (Aforo aforo : listaAforos) { %>
+                            <tr>
+                                <td><%= i%></td>
+                                <td><%= aforo.getAforos()%></td>
+                            </tr>
+                            <% i++;}%>
+                            </tbody>
+                        </table>
                     </div>
+                    <!-- Tabla de salas-->
+                    <div class="col-4">
+                        </br>
+                        </br>
+                        </br>
+                        </br>
+                        <img src="assets/img/Sede2.jpg" class="rounded float-end" width="640" height="450" alt="...">
+                    </div>
+                </div>
 
-                    <div class="text-center">
-                        <br>
-                        <a href=<%=request.getContextPath()%>/Sedes?s=ver&id=<%=sede.getId()%>" class="btn btn-primary">Regresar</a>
-                        <button type="submit" class="btn btn-secondary">Actualizar</button>
-                    </div>
-                </form>
+                <div class="text-center">
+                    <br>
+                    <a href="Sedes" class="btn btn-primary">Regresar</a>
+                    <a href="<%=request.getContextPath()%>/Sedes?s=editar&id=<%=sede.getId()%>" class="btn btn-secondary">Editar</a>
+                </div>
+
                 </br>
                 <p class="card-text"><small class="text-muted">Ultima modificacion hace <% if(sede.getUltimaActualizacion().equals("0")){%>
                     menos de un día
@@ -127,7 +121,7 @@
                     <%}else{%>
                     <%=(sede.getUltimaActualizacion())%> dias
                     <%}%>
-                </small></p>
+                    </small></p>
             </div>
         </div>
     </div>

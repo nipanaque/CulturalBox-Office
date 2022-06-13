@@ -1,10 +1,8 @@
 <%@ page import="com.example.culturalbox.Beans.Sedes" %>
-<%@ page import="com.example.culturalbox.Beans.Mantenimiento" %>
 <%@ page import="com.example.culturalbox.Beans.CrearFuncion" %>
 <%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Sedes>" scope="request" id="listaSedes"/>
-<jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Mantenimiento>" scope="request" id="listaMantenimiento"/>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaFunciones"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -149,15 +147,6 @@
                             <textarea class="form-control" type="text" placeholder="Lista de mantenimiento" id="mantenimiento" ></textarea>
                         </div>
                         </br>
-                        <div class="form-group">
-                            <label for="validationCustom14" class="form-label">Lista de Mantenimiento anteriores *</label>
-                            <select class="form-select" id="validationCustom14" >
-                                <option disabled>Seleccione Personal</option>
-                                <%for(Mantenimiento listaMantenimiento1 : listaMantenimiento){%>
-                                <option><%=listaMantenimiento1.getNombre()%></option>
-                                <%}%>
-                            </select>
-                        </div>
                     </div>
                 </form>
             </div>

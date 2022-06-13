@@ -20,8 +20,8 @@ public class EditarSedeDao {
         ArrayList<Aforo> listaAforos = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT A.idSala, A.aforo  FROM sede S, sala A \n" +
-                     "where S.idSede = A.idSede \n" +
+             ResultSet rs = stmt.executeQuery("SELECT A.idSala, A.aforo  FROM sede S, sala A" +
+                     "where S.idSede = A.idSede" +
                      "\tAND S.idSede =1\n")) {
             while (rs.next()) {
                 Aforo aforo = new Aforo();

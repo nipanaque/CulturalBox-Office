@@ -41,7 +41,6 @@
                                 <li><a class="dropdown-item" href="#">Perfil</a></li>
                                 <li><a class="dropdown-item" href="Actores">Actores</a></li>
                                 <li><a class="dropdown-item" href="Directores">Directores</a></li>
-                                <li><a class="dropdown-item" href="Sedes">Sedes</a></li>
                                 <li><a class="dropdown-item" href="Clientes">Clientes</a></li>
                                 <li><a class="dropdown-item" href="operadores">Operadores</a></li>
                                 <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
@@ -75,7 +74,7 @@
                         <li class="list-group-item">Aforo total: <%=listaSedes.get(0).getAforo()%></li>
                         <li class="list-group-item">Cantidad de salas: <%=listaSedes.get(0).getCantidadSalas()%></li>
                     </ul>
-                    <a href="EditarSede" class="btn btn-primary">Editar</a>
+                    <a href="<%=request.getContextPath()%>/Sedes?s=ver&id=1" class="btn btn-primary">Ver</a>
                 </div>
             </div>
         </div>
@@ -90,7 +89,7 @@
                             <li class="list-group-item">Aforo total: <%=listaSedes.get(1).getAforo()%></li>
                             <li class="list-group-item">Cantidad de salas: <%=listaSedes.get(1).getCantidadSalas()%></li>
                         </ul>
-                        <a href="EditarSede" class="btn btn-primary">Editar</a>
+                        <a href="<%=request.getContextPath()%>/Sedes?s=ver&id=2" class="btn btn-primary">Ver</a>
                     </div>
                 </div>
             </div>
