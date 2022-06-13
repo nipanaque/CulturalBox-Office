@@ -3,6 +3,7 @@ package com.example.culturalbox.Beans;
 import java.util.ArrayList;
 
 public class Sedes {
+    private String id;
     private String nombre;
     private int aforo;
     private String ubicacion;
@@ -56,5 +57,13 @@ public class Sedes {
 
     public void setListaforos(ArrayList<Integer> listaforos) {
         this.listaforos = listaforos;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
