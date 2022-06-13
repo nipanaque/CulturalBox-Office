@@ -2,7 +2,6 @@ package com.example.culturalbox.Servlets;
 
 import com.example.culturalbox.Beans.*;
 import com.example.culturalbox.Daos.CrearFuncionDao;
-import com.example.culturalbox.Daos.MantenimientoDao;
 import com.example.culturalbox.Daos.OperadoresDao;
 import com.example.culturalbox.Daos.SedesDao;
 
@@ -30,7 +29,6 @@ public class CrearFuncionServlet extends HttpServlet {
 
                 RequestDispatcher view =request.getRequestDispatcher("CrearFuncion.jsp");
                 view.forward(request,response);
-
             }
         }
 
@@ -59,7 +57,7 @@ public class CrearFuncionServlet extends HttpServlet {
 
                     crearFuncionDao.crearFuncion(nombre, genero, duracion, restriccion, descripcion, idDirector);
 
-                    response.sendRedirect(request.getContextPath() + "/CrearHorario");
+                    response.sendRedirect(request.getContextPath() + "/ListaFunciones");
 
                 } catch (NumberFormatException e) {
                     System.out.println("error al parsear");

@@ -1,9 +1,11 @@
 package com.example.culturalbox.Daos;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import com.example.culturalbox.Beans.CrearFuncion;
+import com.example.culturalbox.Beans.Horarios;
+import com.example.culturalbox.Beans.Mantenimiento;
+
+import java.sql.*;
+import java.util.ArrayList;
 
 public class HorariosDao {
 
@@ -37,6 +39,112 @@ public class HorariosDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
+
+    public ArrayList<Horarios> obtenerHorarios(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        ArrayList<Horarios> listaHorarios = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT idHorario, s.nombre, h.idSala ,sal.SalaSede, dia, tiempo_inicio, f.nombre\n" +
+                     "FROM horario h, sede s, sala sal, funcion f \n" +
+                     "where h.idSede=s.idSede and\n" +
+                     "\t  h.idSala=sal.idSala and\n" +
+                     "      h.idFuncion=f.idFuncion;");){
+            while (rs.next()){
+                Horarios horarios= new Horarios();
+                horarios.setIdHorario(rs.getInt(1));
+                horarios.setNombre_sede(rs.getString(2));
+                horarios.setIdSala(rs.getInt(3));
+                horarios.setSalaSede(rs.getInt(4));
+                horarios.setDia(rs.getString(5));
+                horarios.setTiempo_inicio(rs.getString(6));
+                horarios.setNombre_funcion(rs.getString(7));
+                listaHorarios.add(horarios);
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaHorarios;
+    }
+
+    public void horario_has_mantenimiento(int idHorario, int idMantenimiento) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String sql = "insert into horario_has_mantenimiento (idHorario, idMantenimiento) VALUES (?,?)";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+            pstmt.setInt(1, idHorario);
+            pstmt.setInt(2, idMantenimiento);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Mantenimiento> obtenerMantenimiento() {
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        ArrayList<Mantenimiento> listaMantenimiento = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select * from mantenimiento;");){
+            while (rs.next()){
+                Mantenimiento mantenimiento= new Mantenimiento();
+                mantenimiento.setIdMantenimiento(rs.getInt(1));
+                mantenimiento.setNombre(rs.getString(2));
+                mantenimiento.setApellido(rs.getString(3));
+                listaMantenimiento.add(mantenimiento);
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaMantenimiento;
+    }
+
+    public Horarios buscarPorId(String id) {
+        Horarios horarios = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "select idHorario, idSala from horario where idHorario = ? ";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+
+                if (rs.next()) {
+                    horarios = new Horarios();
+                    horarios.setIdHorario(rs.getInt(1));
+                    horarios.setIdSala(rs.getInt(2));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return horarios;
+    }
+
 }

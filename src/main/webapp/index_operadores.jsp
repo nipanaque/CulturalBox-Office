@@ -33,7 +33,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                     <li><a class="dropdown-item" href="#">Perfil</a></li>
-                    <li><a class="dropdown-item" href="estadisticasgeneral.html">Estadisticas</a></li>
+                    <li><a class="dropdown-item" href="<%=request.getContextPath()%>/EstadisticaServlet">Estadisticas</a></li>
                     <li><a class="dropdown-item" href="salas.html">Salas</a></li>
                     <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
                   </ul>
@@ -55,9 +55,9 @@
         <div class="col-md-6">
           <div class="masthead-subheading">Bienvenido a la pantalla del operador.</div>
         </div>
-        <div class="text-center"><a href="CrearFuncion"><button class="btn btn-primary btn-xl" type="submit">Crear funciones</button></a></div>
+        <div class="text-center"><a href="ListaFunciones"><button class="btn btn-primary btn-xl" type="submit">Lista de funciones</button></a></div>
         </br>
-        <div class="text-center"><a href="CrearHorario"><button class="btn btn-primary btn-xl" type="submit">Crear horarios</button></a></div>
+        <div class="text-center"><a href="ListaHorarios"><button class="btn btn-primary btn-xl" type="submit">Lista de horarios</button></a></div>
       </div>
     </header>
 
