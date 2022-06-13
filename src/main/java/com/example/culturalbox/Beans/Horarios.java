@@ -9,6 +9,15 @@ public class Horarios {
     private int idSala;
     private int idSede;
     private int idFuncion;
+    private int duracion;
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
 
     public int getVigencia() {
         return vigencia;
