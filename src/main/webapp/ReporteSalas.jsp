@@ -1,4 +1,9 @@
+<%@ page import="com.example.culturalbox.Beans.SalaReporte" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="inicio" scope="request" type="java.lang.String" class="java.lang.String" />
+<jsp:useBean id="fecha" scope="request" type="java.lang.String" class="java.lang.String" />
+<jsp:useBean id="sede" scope="request" type="java.lang.String" class="java.lang.String" />
+<jsp:useBean id="listaSalas" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.SalaReporte>" class="java.util.ArrayList" />
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>salas</title>
+        <title>Reporte de salas</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -56,20 +61,20 @@
                 <div class="text-center">
                     </br>
                     <h2 class="section-heading text-uppercase">Salas disponibles</h2>
-                    <form class="row g-3">
+                    <form method="post" class="row g-3" action="<%=request.getContextPath()%>/ReporteSalasServlet?a=buscar">
                         <div class="col-auto">
-                            <label for="staticEmail2" class="visually-hidden">Email</label>
-                            <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Ingrese fecha y sede:">
+                            <label for="fecha" class="visually-hidden">Password</label>
+                            <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Ingrese fecha">
                         </div>
                         <div class="col-auto">
-                            <label for="inputPassword2" class="visually-hidden">Password</label>
-                            <input type="date" class="form-control" id="inputPassword2" placeholder="Ingrese fecha">
-                        </div>
-                        <div class="col-auto">
-                            <select class="form-select" id="validationCustom04" required>
-                                <option>Seleccionar sede</option>
-                                <option>Sede San Miguel</option>
-                                <option>Sede San Borja</option>
+                            <select class="form-select" name="sede" id="sede" required>
+                                <option disabled>Seleccionar sede</option>
+                                <optgroup label="Sede San Miguel" >
+                                    <option>1</option>
+                                </optgroup>
+                                <optgroup label="Sede San Borja" >
+                                    <option>2</option>
+                                </optgroup>
                             </select>
                         </div>
                         <div class="col-auto">
@@ -79,67 +84,22 @@
                 </div>
                 <br/>
                 <!-- Page Features-->
+                <% if(inicio.equals("vacio")){ %>
+                <h5>Seleccione la fecha y sede para visualizar el reporte de salas</h5>
+                <% }else{ %>
                 <div class="row gx-lg-5">
+                    <%for(SalaReporte listasalas: listaSalas){%>
                     <div class="col-lg-6 col-xxl-4 mb-5">
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <h2 class="div-3">Sala 1</h2>
+                                <h2 class="div-3">Sala <%=listasalas.getSalaSede()%></h2>
                                 <div class="col-md-3">
-                                    <div class="text-center"><button class="btn btn-success btn-xl" type="submit">Download_txt_S1</button></div>
+                                    <div class="text-center"><button class="btn btn-success btn-xl" type="button">Download_txt_S1</button></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <h2 class="div-3">Sala 2</h2>
-                                <div class="col-md-3">
-                                    <div class="text-center"><button class="btn btn-success btn-xl" type="submit">Download_txt_S2</button></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <h2 class="div-3">Sala 3</h2>
-                                <div class="col-md-3">
-                                    <div class="text-center"><button class="btn btn-success btn-xl" type="submit">Download_txt_S3</button></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <h2 class="div-3">Sala 4</h2>
-                                <div class="col-md-3">
-                                    <div class="text-center"><button class="btn btn-success btn-xl" type="submit">Download_txt_S4</button></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <h2 class="div-3">Sala 5</h2>
-                                <div class="col-md-3">
-                                    <div class="text-center"><button class="btn btn-success btn-xl" type="submit">Download_txt_S5</button></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <h2 class="div-3">Sala 6</h2>
-                                <div class="col-md-3">
-                                    <div class="text-center"><button class="btn btn-success btn-xl" type="submit">Download_txt_S6</button></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <%}%>
                     <!-- Return button-->
                     <div class="row align-items-stretch mb-5">
                         <div class="col-md-3">
@@ -149,10 +109,11 @@
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-3">
-                            <a href="index.html"><button class="btn btn-primary btn-xl" type="submit">Regresar</button></a>
+                            <a href="IndexOpServlet"><button class="btn btn-primary btn-xl" type="submit">Regresar</button></a>
                         </div>
                     </div>
                 </div>
+                <%}%>
             </div>
         </section>
 

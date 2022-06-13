@@ -126,7 +126,7 @@
                                         <td>El comienzo del fin: Grupo Y</td>
                                         <td>Lima</td>
                                         <td>
-                                            <a href="calificarFunciones.html"><button class="btn btn-dark btn-md" type="submit">Calificar</button></a>
+                                            <a  href="<%=request.getContextPath()%>/CalificacionServlet?a=crear"><button class="btn btn-dark btn-md" type="submit">Calificar</button></a>
                                         </td>
                                     </tr>
                                     <tr>

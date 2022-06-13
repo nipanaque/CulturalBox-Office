@@ -18,6 +18,11 @@ public class Estadistica {
         this.nombre = nombre;
     }
 
+    public Estadistica(String nombre, double puntaje) {
+        this.nombre = nombre;
+        this.puntaje = puntaje;
+    }
+
     public Estadistica(String nombre, double puntaje, String fecha, String genero, String hora, double asistencia, double recaudado, double maxMonto, String director) {
         this.nombre = nombre;
         this.puntaje = puntaje;

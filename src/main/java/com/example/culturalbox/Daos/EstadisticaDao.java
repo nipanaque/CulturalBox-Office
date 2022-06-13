@@ -314,11 +314,11 @@ public class EstadisticaDao {
                 "from funcion f\n" +
                 "    inner join funcion_has_actor fh on (f.idFuncion = fh.idFuncion)\n" +
                 "    inner join actor a on (fh.idActor = a.idActor)\n" +
-                " where lower(f.nombre) = ?";
+                " where lower(f.nombre) like ?";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
-            pstmt.setString(1,nomFuncion);
+            pstmt.setString(1,"%" + nomFuncion + "%");
             try(ResultSet rs = pstmt.executeQuery();){
                 while (rs.next()){
                     Estadistica estadistica = new Estadistica();
@@ -331,4 +331,177 @@ public class EstadisticaDao {
         }
         return listaEspeci;
     }
+
+
+
+    public ArrayList<Estadistica> listarActores(){
+        ArrayList<Estadistica> listaActores = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try (Connection connection = DriverManager.getConnection(url,user,pass);
+             Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery("select concat(nombre,' ',apellido) from actor");){
+
+            while (rs.next()){
+                Estadistica estad = new Estadistica();
+                estad.setNombre(rs.getString(1));
+                listaActores.add(estad);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaActores;
+    }
+
+    public ArrayList<Estadistica> listarDirectores(){
+        ArrayList<Estadistica> listaDirectores = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try (Connection connection = DriverManager.getConnection(url,user,pass);
+             Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery("select concat(nombre,' ',apellido) from director");){
+
+            while (rs.next()){
+                Estadistica estad = new Estadistica();
+                estad.setNombre(rs.getString(1));
+                listaDirectores.add(estad);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaDirectores;
+    }
+
+    public Estadistica buscarActorOne(String nombre, String apellido) {
+        Estadistica estadistica = new Estadistica();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sql = "select concat(nombre,' ',apellido) as `actor`, round(sum(puntaje)/count(puntaje),1) as `punt_prom`,fotografia\n" +
+                "from actor a\n" +
+                "    inner join puntaje_actor pa on (a.idActor = pa.idActor)\n" +
+                "where lower(nombre) = ? and lower(apellido) = ?\n" +
+                "group by nombre;";
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setString(1,nombre);
+            pstmt.setString(2,apellido);
+            try(ResultSet rs = pstmt.executeQuery();){
+                rs.next();
+                estadistica.setNombre(rs.getString(1));
+                estadistica.setPuntaje(rs.getDouble(2));
+            }
+        } catch (SQLException e) {
+            System.out.println("No se pudo realizar la busqueda");
+        }
+        return estadistica;
+    }
+
+    public ArrayList<Estadistica> buscarActorTwo(String nombre, String apellido) {
+        ArrayList<Estadistica> listaActoresTwo = new ArrayList<>();
+        listaActoresTwo.add(buscarActorOne(nombre,apellido));
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sql = "select f.nombre from funcion f\n" +
+                "    inner join funcion_has_actor fh on (f.idFuncion = fh.idFuncion)\n" +
+                "    inner join actor a on (fh.idActor = a.idActor)\n" +
+                "where lower(a.nombre) = ? and lower(a.apellido) = ?";
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setString(1,nombre);
+            pstmt.setString(2,apellido);
+            try(ResultSet rs = pstmt.executeQuery();){
+                while (rs.next()){
+                    Estadistica estadistica = new Estadistica();
+                    estadistica.setNombre(rs.getString(1));
+                    listaActoresTwo.add(estadistica);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("No se pudo realizar la busqueda");
+        }
+        return listaActoresTwo;
+    }
+
+    public Estadistica buscarDirectorOne(String nombre, String apellido) {
+        Estadistica estadistica = new Estadistica();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sql = "select concat(nombre,' ',apellido) as 'Nombre', round(sum(p.puntaje)/count(p.puntaje),1) as 'puntaje', fotografia\n" +
+                "from director d, puntaje_director p\n" +
+                "where d.idDirector = p.idDirector and lower(nombre) = ? and lower(apellido) = ?;";
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setString(1,nombre);
+            pstmt.setString(2,apellido);
+            try(ResultSet rs = pstmt.executeQuery();){
+                rs.next();
+                estadistica.setNombre(rs.getString(1));
+                estadistica.setPuntaje(rs.getDouble(2));
+            }
+        } catch (SQLException e) {
+            System.out.println("No se pudo realizar la busqueda");
+        }
+        return estadistica;
+    }
+
+    public ArrayList<Estadistica> buscarDirectorTwo(String nombre, String apellido) {
+        ArrayList<Estadistica> listaDirectoresTwo = new ArrayList<>();
+        listaDirectoresTwo.add(buscarDirectorOne(nombre,apellido));
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sql = "select f.nombre as 'Funciones dirigidas' from director d, funcion f\n" +
+                "where d.idDirector = f.idDirector and lower(d.nombre) = ? and lower(d.apellido) = ?;";
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setString(1,nombre);
+            pstmt.setString(2,apellido);
+            try(ResultSet rs = pstmt.executeQuery();){
+                while (rs.next()){
+                    Estadistica estadistica = new Estadistica();
+                    estadistica.setNombre(rs.getString(1));
+                    listaDirectoresTwo.add(estadistica);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("No se pudo realizar la busqueda");
+        }
+        return listaDirectoresTwo;
+    }
+
 }
