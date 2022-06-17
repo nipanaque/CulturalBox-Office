@@ -24,7 +24,7 @@
         <!-- Navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="index.html"><img src="assets/img/pucp_logo1.jpeg" alt="..." /></a>
+                <a class="navbar-brand" href="index.html"><img src="assets/img/pucp_logo.jpeg" alt="..." style="height: 40px;width: 120px;"/></a>
                 <div class="collapse navbar-collapse " id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
