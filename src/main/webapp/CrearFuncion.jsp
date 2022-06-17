@@ -56,7 +56,7 @@
                     <h2 class="section-heading text-uppercase">Crear Función</h2>
 
 
-                    <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/CrearFuncion?a=guardar">
+                    <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/CrearFuncion?a=guardar" enctype="multipart/form-data">
                     <!--Columna 1-->
                     <div class="col-md-6">
                         <div class="form-group">
@@ -110,13 +110,10 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="director_funcion" class="form-label">Añadir director *</label>
-                            <select class="form-select" name="director_funcion" id="director_funcion" required>
-                                <option disabled>Seleccionar</option>
-                                <%for(CrearFuncion listaDirectores1 : listaDirectores){%>
-                                <optgroup label="<%=listaDirectores1.getNombres_directores()%>" >
-                                    <option><%=listaDirectores1.getId_directores()%></option>
-                                </optgroup>
-                                <%}%>
+                            <select name="director_funcion" id="director_funcion" class="form-select" required>
+                                <% for(CrearFuncion listaDirectores1: listaDirectores) { %>
+                                <option value="<%=listaDirectores1.getId_directores()%>"><%=listaDirectores1.getNombres_directores()%></option>
+                                <% } %>
                             </select>
                         </div>
                         </br>

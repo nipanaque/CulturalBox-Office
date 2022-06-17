@@ -4,6 +4,7 @@ import com.example.culturalbox.Beans.Actores;
 import com.example.culturalbox.Beans.CrearFuncion;
 import com.example.culturalbox.Beans.Directores;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -61,7 +62,7 @@ public class CrearFuncionDao {
         return listaDirectores;
     }
 
-    public void crearFuncion(String nombre,String genero,int duracion,String restriccion,String descripcion, int idDirector) {
+    public void crearFuncion(String nombre,String genero,int duracion,String restriccion,String descripcion, int idDirector, InputStream banner) {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -69,7 +70,7 @@ public class CrearFuncionDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "insert into funcion (nombre,genero,duracion,restriccion,descripcion,idDirector)  VALUES (?,?,?,?,?,?)";
+        String sql = "insert into funcion (nombre,genero,duracion,restriccion,banner,descripcion,idDirector)  VALUES (?,?,?,?,?,?,?)";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -78,8 +79,9 @@ public class CrearFuncionDao {
             pstmt.setString(2, genero);
             pstmt.setInt(3, duracion);
             pstmt.setString(4, restriccion);
-            pstmt.setString(5, descripcion);
-            pstmt.setInt(6, idDirector);
+            pstmt.setBlob(5,banner);
+            pstmt.setString(6, descripcion);
+            pstmt.setInt(7, idDirector);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

@@ -8,9 +8,14 @@ import com.example.culturalbox.Daos.SedesDao;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import javax.servlet.annotation.MultipartConfig;
+import javax.swing.text.BadLocationException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.util.ArrayList;
 
+@MultipartConfig
 @WebServlet(name = "CrearFuncionServlet", value = "/CrearFuncion")
 public class CrearFuncionServlet extends HttpServlet {
     @Override
@@ -50,12 +55,14 @@ public class CrearFuncionServlet extends HttpServlet {
                 String restriccion = request.getParameter("restriccion");
                 String descripcion = request.getParameter("descripcion");
                 String intDirectorStr = request.getParameter("director_funcion");
+                Part bannerStr = request.getPart("banner");
 
                 try {
                     int duracion = Integer.parseInt(duracionStr);
                     int idDirector = Integer.parseInt(intDirectorStr);
+                    InputStream banner = bannerStr.getInputStream();
 
-                    crearFuncionDao.crearFuncion(nombre, genero, duracion, restriccion, descripcion, idDirector);
+                    crearFuncionDao.crearFuncion(nombre, genero, duracion, restriccion, descripcion, idDirector,banner);
 
                     response.sendRedirect(request.getContextPath() + "/ListaFunciones");
 

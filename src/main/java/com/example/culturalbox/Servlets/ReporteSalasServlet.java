@@ -2,6 +2,7 @@ package com.example.culturalbox.Servlets;
 
 import com.example.culturalbox.Daos.EstadisticaDao;
 import com.example.culturalbox.Daos.SalaReporteDao;
+import com.example.culturalbox.Daos.SedesDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -14,8 +15,10 @@ public class ReporteSalasServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("a") == null? "inicio" : request.getParameter("a");
         SalaReporteDao salas = new SalaReporteDao();
+        SedesDao sedesDao = new SedesDao();
         switch (action){
             case "inicio" -> {
+                request.setAttribute("listaSedes",sedesDao.obtenerSedes());
                 request.setAttribute("inicio","vacio");
 
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("ReporteSalas.jsp");

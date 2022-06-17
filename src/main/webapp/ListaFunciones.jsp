@@ -57,7 +57,6 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Función</th>
                             <th>Género</th>
                         </tr>
@@ -66,8 +65,6 @@
                         <%
                             for (CrearFuncion listaFunciones1 : listaFunciones) { %>
                         <tr>
-                            <td><%=listaFunciones1.getIdFuncion() %>
-                            </td>
                             <td><%=listaFunciones1.getNombre() %>
                             </td>
                             <td><%=listaFunciones1.getGenero() %>

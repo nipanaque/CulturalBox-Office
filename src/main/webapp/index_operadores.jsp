@@ -37,7 +37,7 @@
                   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                     <li><a class="dropdown-item" href="#">Perfil</a></li>
                     <li><a class="dropdown-item" href="<%=request.getContextPath()%>/EstadisticaServlet">Estadisticas</a></li>
-                    <li><a class="dropdown-item" href="salas.html">Salas</a></li>
+                    <li><a class="dropdown-item" href="ReporteSalasServlet">Salas</a></li>
                     <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
                   </ul>
                 </li>

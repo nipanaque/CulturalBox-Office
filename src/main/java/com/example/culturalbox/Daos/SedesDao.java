@@ -25,6 +25,7 @@ public class SedesDao {
                      "A.idSede GROUP BY S.idSede")) {
             while (rs.next()) {
                 Sedes sede = new Sedes();
+                sede.setId(rs.getString(1));
                 sede.setNombre(rs.getString(2));
                 sede.setAforo(rs.getInt(4));
                 sede.setUbicacion(rs.getString(6));

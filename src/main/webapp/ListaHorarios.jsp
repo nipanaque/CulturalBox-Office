@@ -50,14 +50,12 @@
                 </br>
                 <div class="d-flex my-3">
                     <h2 class="section-heading text-uppercase">Lista de Horarios</h2>
-                    <a href="<%=request.getContextPath()%>/CrearHorario" class="btn btn-secondary btn-xl ms-auto">Crear Horario</a>
+                    <a href="<%=request.getContextPath()%>/CrearHorario" class="btn btn-primary btn-xl ms-auto">Crear Horario</a>
                 </div>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Id Horario</th>
                             <th>Sede</th>
-                            <th>Id Sala</th>
                             <th>Sala Sede</th>
                             <th>Día</th>
                             <th>Hora inicio</th>
@@ -67,11 +65,7 @@
                     <tbody>
                         <%for(Horarios listahorarios1: listahorarios){%>
                         <tr>
-                            <td><%=listahorarios1.getIdHorario() %>
-                            </td>
                             <td><%=listahorarios1.getNombre_sede() %>
-                            </td>
-                            <td><%=listahorarios1.getIdSala() %>
                             </td>
                             <td><%=listahorarios1.getSalaSede() %>
                             </td>

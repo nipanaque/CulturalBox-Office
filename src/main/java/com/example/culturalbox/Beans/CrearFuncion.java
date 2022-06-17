@@ -1,5 +1,8 @@
 package com.example.culturalbox.Beans;
 
+import java.io.InputStream;
+import java.sql.Blob;
+
 public class CrearFuncion {
     private String Nombres_directores;
     private String Nombres_Actores;
@@ -14,6 +17,15 @@ public class CrearFuncion {
     private String restriccion;
     private String descripcion;
     private int idDirector;
+    private InputStream banner;
+
+    public InputStream getBanner() {
+        return banner;
+    }
+
+    public void setBanner(InputStream banner) {
+        this.banner = banner;
+    }
 
     public int getIdFuncion() {
         return idFuncion;

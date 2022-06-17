@@ -1,4 +1,6 @@
 <%@ page import="com.example.culturalbox.Beans.SalaReporte" %>
+<%@ page import="com.example.culturalbox.Beans.Sedes" %>
+<jsp:useBean id="listaSedes" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Sedes>" class="java.util.ArrayList" />
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="inicio" scope="request" type="java.lang.String" class="java.lang.String" />
 <jsp:useBean id="fecha" scope="request" type="java.lang.String" class="java.lang.String" />
@@ -67,14 +69,10 @@
                             <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Ingrese fecha">
                         </div>
                         <div class="col-auto">
-                            <select class="form-select" name="sede" id="sede" required>
-                                <option disabled>Seleccionar sede</option>
-                                <optgroup label="Sede San Miguel" >
-                                    <option>1</option>
-                                </optgroup>
-                                <optgroup label="Sede San Borja" >
-                                    <option>2</option>
-                                </optgroup>
+                            <select name="sede" id="sede" class="form-select">
+                                <% for(Sedes listasedes1: listaSedes) { %>
+                                <option value="<%=listasedes1.getId()%>"><%=listasedes1.getNombre()%></option>
+                                <% } %>
                             </select>
                         </div>
                         <div class="col-auto">
