@@ -22,7 +22,7 @@ public class CrearHorarioServlet extends HttpServlet {
 
         switch (action) {
             case "listar" -> {
-                request.setAttribute("listaSedes",sedesDao.obtenerSedeCantidad());
+                request.setAttribute("listaSedes",sedesDao.obtenerSedes());
                 request.setAttribute("listaFunciones",crearFuncionDao.obtenerFunciones());
                 RequestDispatcher view =request.getRequestDispatcher("CrearHorario.jsp");
                 view.forward(request,response);

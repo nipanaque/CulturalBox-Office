@@ -63,11 +63,9 @@
                             <!-- Name input-->
                             <label for="funcion" class="form-label">Nombre de la función *</label>
                             <select class="form-select" name="funcion" id="funcion" required>
-                                <%for(CrearFuncion listafuncion1 : listaFunciones){%>
-                                <optgroup label="<%=listafuncion1.getNombre()%>">
-                                    <option><%=listafuncion1.getIdFuncion()%></option>
-                                </optgroup>
-                                <%}%>
+                                <% for(CrearFuncion listafuncion1 : listaFunciones){ %>
+                                <option value="<%=listafuncion1.getIdFuncion()%>"><%=listafuncion1.getNombre()%></option>
+                                <% } %>
                             </select>
                         </div>
                         </br>
@@ -75,12 +73,9 @@
                             <label for="sede" class="form-label">Sedes *</label>
                             <select class="form-select" name="sede" id="sede" required>
                                 <option disabled>Seleccione sede</option>
-                                <%int j=1;%>
-                                <%for(Sedes listasedes1 : listaSedes){%>
-                                <optgroup label="<%=listasedes1.getNombre()%>">
-                                    <option><%=j++%></option>
-                                </optgroup>
-                                <%}%>
+                                <% for(Sedes listasedes1 : listaSedes) { %>
+                                <option value="<%=listasedes1.getId()%>"><%=listasedes1.getNombre()%></option>
+                                <% } %>
                             </select>
                         </div>
                         </br>
@@ -128,12 +123,7 @@
                         </div>
                         </br>
                         <div class="form-group">
-                            <label for="vigencia" class="form-label">Vigencia *</label>
-                            <select class="form-select" name="vigencia" id="vigencia" >
-                                <option disabled>Seleccione Vigencia</option>
-                                <option>1</option>
-                                <option>0</option>
-                            </select>
+                            <input type="hidden" name="vigencia" id="vigencia" value="1" />
                         </div>
                         </br>
                         <div class="form-group">
