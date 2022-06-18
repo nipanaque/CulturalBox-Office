@@ -32,6 +32,17 @@ public class ListaHorariosServlet extends HttpServlet {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("ListaMantenimiento.jsp");
                 requestDispatcher.forward(request, response);
             }
+            case "editar" ->{
+                String id = request.getParameter("id");
+                Horarios horario = horariosDao.buscarPorIdActHorario(id);
+                if (horario != null) {
+                    request.setAttribute("idHorario", horario);
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("EditarHorario.jsp");
+                    requestDispatcher.forward(request, response);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/ListaHorarios");
+                }
+            }
         }
     }
 
@@ -56,6 +67,25 @@ public class ListaHorariosServlet extends HttpServlet {
                 horarios.crear_mant(Integer.parseInt(idMant),Nombre,Apellido);
                 response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=agregarmant&id="+id);
             }
+            case "actualizar" -> {
+                Horarios horario = leerParametrosRequest(request);
+                horarios.actualizarHorario(horario);
+                response.sendRedirect(request.getContextPath() + "/ListaHorarios");
+            }
         }
+    }
+
+    public Horarios leerParametrosRequest(HttpServletRequest request) {
+        String id = request.getParameter("idhora");
+        String dia = request.getParameter("dia");
+        String tiempo_inicio = request.getParameter("tiempo_inicio");
+        String costoStr = request.getParameter("costo");
+
+        Horarios horario = new Horarios();
+        horario.setIdHorario(Integer.parseInt(id));
+        horario.setDia(dia);
+        horario.setTiempo_inicio(tiempo_inicio);
+        horario.setCosto(Float.parseFloat(costoStr));
+        return horario;
     }
 }

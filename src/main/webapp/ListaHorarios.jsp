@@ -77,6 +77,8 @@
                             </td>
                             <td><a href="<%=request.getContextPath()%>/ListaHorarios?a=agregarmant&id=<%=listahorarios1.getIdHorario()%>"
                                    class="btn btn-primary">Agregar Mantenimiento</a></td>
+                            <td><a href="<%=request.getContextPath()%>/ListaHorarios?a=editar&id=<%=listahorarios1.getIdHorario()%>"><button
+                                    type="button" class="btn btn-danger">Editar</button> </a></td>
                         </tr>
                         <%}%>
                     </tbody>
