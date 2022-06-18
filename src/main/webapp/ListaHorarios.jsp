@@ -64,6 +64,7 @@
                     </thead>
                     <tbody>
                         <%for(Horarios listahorarios1: listahorarios){%>
+                        <%if(listahorarios1.getVigencia()==1){%>
                         <tr>
                             <td><%=listahorarios1.getNombre_sede() %>
                             </td>
@@ -76,10 +77,13 @@
                             <td><%=listahorarios1.getNombre_funcion() %>
                             </td>
                             <td><a href="<%=request.getContextPath()%>/ListaHorarios?a=agregarmant&id=<%=listahorarios1.getIdHorario()%>"
-                                   class="btn btn-primary">Agregar Mantenimiento</a></td>
+                                   class="btn btn-success" style="background-color:#002265; border-color:#002265; color:white">Agregar Mantenimiento</a></td>
                             <td><a href="<%=request.getContextPath()%>/ListaHorarios?a=editar&id=<%=listahorarios1.getIdHorario()%>"><button
-                                    type="button" class="btn btn-danger">Editar</button> </a></td>
+                                    type="button" class="btn btn-success" style="background-color:#002265; border-color:#002265; color:white">Editar</button> </a></td>
+                            <td><a href="<%=request.getContextPath()%>/ListaHorarios?a=borrar&id=<%=listahorarios1.getIdHorario()%>"><button
+                                    type="button" class="btn btn-danger" >X</button> </a></td>
                         </tr>
+                        <%}%>
                         <%}%>
                     </tbody>
                 </table>

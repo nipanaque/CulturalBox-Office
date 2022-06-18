@@ -43,6 +43,11 @@ public class ListaHorariosServlet extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/ListaHorarios");
                 }
             }
+            case "borrar" -> {
+                String id = request.getParameter("id");
+                horariosDao.eliminarHorario(id);
+                response.sendRedirect(request.getContextPath() + "/ListaHorarios");
+            }
         }
     }
 

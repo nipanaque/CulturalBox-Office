@@ -52,7 +52,7 @@
                     </br>
                     <h2 class="section-heading text-uppercase">Editar Función</h2>
 
-                <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/IndexOpServlet?a=actualizar">
+                <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/ListaHorarios?a=actualizar">
                     <!--Columna 1-->
                     <div class="col-md-5">
                         <div class="form-group">
@@ -70,6 +70,7 @@
                             <!-- Name input-->
                             <label for="idhora" class="form-label">Id del Horario *</label>
                             <input class="form-control" id="idhora" type="text" value="<%=idHorario.getIdHorario()%>"  disabled>
+                            <input type="hidden" name="idhora" value="<%=idHorario.getIdHorario()%>" />
                         </div>
                         </br>
                         <div class="form-group">
@@ -85,7 +86,7 @@
                         </br>
                         <div class="row align-items-stretch mb-5">
                             <div class="col-md-3">
-                                <a href="IndexOpServlet"><button type="button" class="btn btn-secondary btn-xl">Regresar</button></a>
+                                <a href="ListaHorarios"><button type="button" class="btn btn-secondary btn-xl">Regresar</button></a>
                             </div>
                             <div class="col-md-3">
                             </div>

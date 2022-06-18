@@ -50,11 +50,11 @@ public class HorariosDao {
         ArrayList<Horarios> listaHorarios = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT idHorario, s.nombre, h.idSala ,sal.SalaSede, dia, tiempo_inicio, f.nombre\n" +
-                     "FROM horario h, sede s, sala sal, funcion f \n" +
-                     "where h.idSede=s.idSede and\n" +
-                     "\t  h.idSala=sal.idSala and\n" +
-                     "      h.idFuncion=f.idFuncion;");){
+             ResultSet rs = stmt.executeQuery("SELECT idHorario, s.nombre, h.idSala ,sal.SalaSede, dia, tiempo_inicio, vigencia, f.nombre\n" +
+                     "                     FROM horario h, sede s, sala sal, funcion f\n" +
+                     "                     where h.idSede=s.idSede and\n" +
+                     "                       h.idSala=sal.idSala and\n" +
+                     "                           h.idFuncion=f.idFuncion;");){
             while (rs.next()){
                 Horarios horarios= new Horarios();
                 horarios.setIdHorario(rs.getInt(1));
@@ -63,7 +63,8 @@ public class HorariosDao {
                 horarios.setSalaSede(rs.getInt(4));
                 horarios.setDia(rs.getString(5));
                 horarios.setTiempo_inicio(rs.getString(6));
-                horarios.setNombre_funcion(rs.getString(7));
+                horarios.setVigencia(rs.getInt(7));
+                horarios.setNombre_funcion(rs.getString(8));
                 listaHorarios.add(horarios);
             }
 
@@ -223,6 +224,30 @@ public class HorariosDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void eliminarHorario(String id) {
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "UPDATE horario SET vigencia = ? WHERE (idHorario = ?);";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setInt(1, 0);
+            pstmt.setInt(2, Integer.parseInt(id));
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public Horarios buscarPorIdActHorario(String id) {

@@ -1,7 +1,5 @@
-<%@ page import="com.example.culturalbox.Beans.Horarios" %>
 <%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Horarios>" scope="request" id="listaHorarios"/>
 <!DOCTYPE html>
 <html lang="en">
   <head>
