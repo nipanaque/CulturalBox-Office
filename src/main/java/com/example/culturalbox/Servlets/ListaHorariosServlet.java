@@ -48,6 +48,14 @@ public class ListaHorariosServlet extends HttpServlet {
                 horarios.horario_has_mantenimiento(Integer.parseInt(idFuncion),Integer.parseInt(idActor));
                 response.sendRedirect(request.getContextPath() + "/ListaHorarios");
             }
+            case "crearmant" -> {
+                String id = request.getParameter("id");
+                String idMant = request.getParameter("idMant");
+                String Nombre = request.getParameter("Nombre");
+                String Apellido = request.getParameter("Apellido");
+                horarios.crear_mant(Integer.parseInt(idMant),Nombre,Apellido);
+                response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=agregarmant&id="+id);
+            }
         }
     }
 }

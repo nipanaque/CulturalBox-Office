@@ -117,6 +117,25 @@ public class HorariosDao {
         return listaMantenimiento;
     }
 
+    public void crear_mant(int idMantenimiento, String Nombre, String Apellido) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String sql = "INSERT INTO mantenimiento (idMantenimiento, nombre, apellido) VALUES (?,?,?)";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+            pstmt.setInt(1, idMantenimiento);
+            pstmt.setString(2,Nombre);
+            pstmt.setString(3, Apellido);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public Horarios buscarPorId(String id) {
         Horarios horarios = null;
         try {

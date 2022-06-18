@@ -48,40 +48,74 @@
         </nav>
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
-                <form method="POST" action="<%=request.getContextPath()%>/ListaHorarios?a=guardarmant">
+                </br>
+                <h2 class="section-heading text-uppercase">Listar y crear Mantenimiento</h2>
+
                 <div class="row align-items-stretch mb-5">
                     <div class="col-md-6">
-                        </br>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Apellido</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%for(Mantenimiento listaMantenimiento1: listaMantenimiento){%>
-                                <tr>
-                                    <td><%=listaMantenimiento1.getIdMantenimiento()%></td>
-                                    <td><%=listaMantenimiento1.getNombre()%></td>
-                                    <td><%=listaMantenimiento1.getApellido()%></td>
-                                    <td><input name="idMantenimiento" id="idMantenimiento" multiple  type="checkbox"  value="<%=listaMantenimiento1.getIdMantenimiento()%>" aria-label="..." style="width:30px; height:30px "></td>
-                                    <td><input type="hidden" name="idHorario" id="idHorario" value="<%=idHorario.getIdHorario()%>" /></td>
-                                </tr>
-                                <%}%>
-                            </tbody>
-                        </table>
+                        <form method="POST" action="<%=request.getContextPath()%>/ListaHorarios?a=guardarmant">
+                            </br>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Id</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellido</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%for(Mantenimiento listaMantenimiento1: listaMantenimiento){%>
+                                    <tr>
+                                        <td><%=listaMantenimiento1.getIdMantenimiento()%></td>
+                                        <td><%=listaMantenimiento1.getNombre()%></td>
+                                        <td><%=listaMantenimiento1.getApellido()%></td>
+                                        <td><input name="idMantenimiento" id="idMantenimiento" multiple  type="checkbox"  value="<%=listaMantenimiento1.getIdMantenimiento()%>" aria-label="..." style="width:30px; height:30px "></td>
+                                        <td><input type="hidden" name="idHorario" id="idHorario" value="<%=idHorario.getIdHorario()%>" /></td>
+                                    </tr>
+                                    <%}%>
+                                </tbody>
+                            </table>
+                            </br>
+                            <div class="row align-items-stretch mb-5">
+                                <div class="col-md-2">
+                                    <a href="ListaHorarios"><button type="button" class="btn btn-secondary ">Regresar</button></a>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Agregar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
+
                     <div class="col-md-6">
+                        <form method="POST" action="<%=request.getContextPath()%>/ListaHorarios?a=crearmant&id=<%=idHorario.getIdHorario()%>">
+                            </br>
+                            <div class="form-group">
+                                <label for="idMant" class="form-label">ID *</label>
+                                <input class="form-control" placeholder="Ingrese el ID" type="number" min="0" max="50" step="1" name="idMant" id="idMant" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Nombre" class="form-label">Nombre *</label>
+                                <input class="form-control" placeholder="Ingrese el nombre" type="text" name="Nombre" id="Nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Apellido" class="form-label">Apellido *</label>
+                                <input class="form-control" placeholder="Ingrese el apellido" type="text" name="Apellido" id="Apellido" required>
+                            </div>
+                            </br>
+                            <div class="row align-items-stretch mb-5">
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Agregar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
+
                 </div>
-                    </br>
-                    <a href="ListaHorarios"><button type="button" class="btn btn-secondary ">Regresar</button></a>
-                    <button type="submit" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Agregar
-                    </button>
-                </form>
             </div>
         </section>
     </body>
