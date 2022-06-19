@@ -11,6 +11,24 @@ public class Horarios {
     private int idSede;
     private int idFuncion;
     private int duracion;
+    private int tickets_vendidos;
+    private float recaudacion;
+
+    public float getRecaudacion() {
+        return recaudacion;
+    }
+
+    public void setRecaudacion(float recaudacion) {
+        this.recaudacion = recaudacion;
+    }
+
+    public int getTickets_vendidos() {
+        return tickets_vendidos;
+    }
+
+    public void setTickets_vendidos(int tickets_vendidos) {
+        this.tickets_vendidos = tickets_vendidos;
+    }
 
     public int getDuracion() {
         return duracion;

@@ -33,6 +33,11 @@ public class ListarFuncionesServlet extends HttpServlet {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("AgregarActores.jsp");
                 requestDispatcher.forward(request, response);
             }
+            case "borrar" -> {
+                String id = request.getParameter("id");
+                crearFuncionDao.eliminarFuncion(id);
+                response.sendRedirect(request.getContextPath() + "/ListaFunciones");
+            }
         }
     }
 

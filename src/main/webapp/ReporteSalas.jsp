@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Reporte de salas</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -73,6 +74,8 @@
                                 <% for(Sedes listasedes1: listaSedes) { %>
                                 <option value="<%=listasedes1.getId()%>"><%=listasedes1.getNombre()%></option>
                                 <% } %>
+                                <option value="1">San Miguel</option>
+                                <option value="2">San Borja</option>
                             </select>
                         </div>
                         <div class="col-auto">
@@ -84,19 +87,36 @@
                 <!-- Page Features-->
                 <% if(inicio.equals("vacio")){ %>
                 <h5>Seleccione la fecha y sede para visualizar el reporte de salas</h5>
+                <div class="row align-items-stretch mb-5">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                        <a href="index_operadores.jsp"><button class="btn btn-secondary btn-xl" type="submit">Regresar</button></a>
+                    </div>
+                </div>
                 <% }else{ %>
                 <div class="row gx-lg-5">
+                    <%int i=0;%>
                     <%for(SalaReporte listasalas: listaSalas){%>
                     <div class="col-lg-6 col-xxl-4 mb-5">
                         <div class="card bg-light border-0 h-100">
                             <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <h2 class="div-3">Sala <%=listasalas.getSalaSede()%></h2>
+                                <h2 class="div-3" style="background-color:#DAAB00; border-color:#DAAB00; color:white">Sala <%=listasalas.getSalaSede()%></h2>
+                                <%i++;%>
                                 <div class="col-md-3">
-                                    <div class="text-center"><button class="btn btn-success btn-xl" type="button">Download_txt_S1</button></div>
+                                    <div class="text-center"><a class="btn btn-success " href="<%=request.getContextPath()%>/ReporteSalasServlet?a=descargar&idSede=<%=listasalas.getIdSede()%>&idSala=<%=listasalas.getIdSala()%>&dia<%=listasalas.getDia()%>">
+                                        Download_S<%=listasalas.getSalaSede()%></a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <%}%>
+                    <%if(i==0){%>
+                    <h5>La fecha o sede seleccionada no tiene reportes</h5>
                     <%}%>
                     <!-- Return button-->
                     <div class="row align-items-stretch mb-5">
@@ -107,7 +127,7 @@
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-3">
-                            <a href="IndexOpServlet"><button class="btn btn-primary btn-xl" type="submit">Regresar</button></a>
+                            <a href="index_operadores.jsp"><button class="btn btn-secondary btn-xl" type="submit">Regresar</button></a>
                         </div>
                     </div>
                 </div>
