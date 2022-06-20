@@ -1,6 +1,9 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.culturalbox.Beans.Clientes" %>
-
+<%@ page import="com.example.culturalbox.Beans.Sedes" %>
+<%@ page import="com.example.culturalbox.Beans.CrearFuncion" %>
+<jsp:useBean id="listaSedes" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Sedes>" />
+<jsp:useBean id="listaFunciones" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" />
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
@@ -28,7 +31,7 @@
 <!-- Navigation-->
 <nav class=" navbar navbar-expand-lg  navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="#page-top"><img src="assets/img/pucp_logo1.jpeg" alt="..." /></a>
+        <a class="navbar-brand" href="#page-top"><img src="assets/pucp.png" alt="..." /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars ms-1"></i>
@@ -64,33 +67,39 @@
             <h2 class="section-heading text-uppercase">Clientes</h2>
             </br>
         </div>
+        <form action="<%=request.getContextPath()%>/Clientes?a=filtrar" method="POST">
         <div class="row  align-items-center">
             <div class="col-md-auto">
                 <div class="text-left">
-                    <h5>Filtrar por:</h5>
+                    <h5>Filtrar por sede:</h5>
                 </div>
             </div>
             <div class="col-md-auto">
-                <select class="form-select" aria-label="Default select example" >
+                <select class="form-select" aria-label="Default select example" name="sede" >
 
-                    <option selected value="sin filtro" >Sin Filtro </option>
-                    <option value="1" >Sede</option>
-                    <option value="2">Funcion</option>
+                    <option selected value="0" > --- </option>
+                    <%for (Sedes sedes : listaSedes){%>
+                    <option value="<%=sedes.getId()%>"><%=sedes.getNombre()%> </option>
+                    <%}%>
                 </select>
             </div>
             <div class="col-md-auto">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>----</option>
-                    <option selected>San Borja</option>
-                    <option value="1">San Miguel</option>
-                    <option selected>Doctor Strange</option>
-                    <option value="1">Transformers</option>
-                </select>
+                <div class="text-left">
+                    <h5>funcion:</h5>
+                </div>
             </div>
             <div class="col-md-auto">
-                <h1 class="btn btn-primary" href="#" role="button">Filtrar</h1>
+                <select class="form-select" aria-label="Default select example" name="funcion">
+                    <option selected value="0" >----</option>
+                    <%for (CrearFuncion funcion : listaFunciones){%>
+                    <option value="<%=funcion.getIdFuncion()%>"><%=funcion.getNombre()%></option>
+                    <%}%>
+                </select>
+            </div>
+                <button type="submit" class="btn btn-warning col-md-auto">Filtrar</button>
             </div>
         </div>
+        </form>
         </br>
         <div class="row">
             <%for(Clientes clientes: listaClientes){%>
@@ -138,6 +147,8 @@
 <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+
 
 </body>
 </html>
