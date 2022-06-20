@@ -20,11 +20,12 @@ public class OperadoresDao {
         ArrayList<Operadores> listaOperadores = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT CONCAT(u.nombre,' ',u.apellido) AS 'Operador', u.correo_pucp AS 'Correo' FROM usuario u WHERE u.idRoles = 2  ")) {
+             ResultSet rs = stmt.executeQuery("SELECT u.nombre,u.apellido, u.correo_pucp AS 'Correo' FROM usuario u WHERE u.idRoles = 2  ")) {
             while (rs.next()) {
                 String nombre = rs.getString(1);
-                String correo = rs.getString(2);
-                listaOperadores.add(new Operadores(nombre,correo));
+                String apellido = rs.getString(2);
+                String correo = rs.getString(3);
+                listaOperadores.add(new Operadores(nombre,apellido,correo));
             }
 
         } catch (SQLException e) {
@@ -32,6 +33,7 @@ public class OperadoresDao {
         }
         return listaOperadores;
     }
+
     public void crearOperador(String nombre, String apellido,String correo_pucp, String contrasenha){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -49,6 +51,7 @@ public class OperadoresDao {
             pstmt.setString(3, correo_pucp);
             pstmt.setString(4, contrasenha);
             pstmt.executeUpdate();
+            System.out.println("aquie estoy");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
