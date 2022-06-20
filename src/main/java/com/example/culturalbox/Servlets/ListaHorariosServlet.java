@@ -27,10 +27,14 @@ public class ListaHorariosServlet extends HttpServlet {
             case "agregarmant"->{
                 String id = request.getParameter("id");
                 Horarios idHorario = horariosDao.buscarPorId(id);
-                request.setAttribute("idHorario",idHorario);
-                request.setAttribute("listaMantenimiento",horariosDao.obtenerMantenimiento());
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("ListaMantenimiento.jsp");
-                requestDispatcher.forward(request, response);
+                if (idHorario != null) {
+                    request.setAttribute("idHorario",idHorario);
+                    request.setAttribute("listaMantenimiento",horariosDao.obtenerMantenimiento());
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("ListaMantenimiento.jsp");
+                    requestDispatcher.forward(request, response);
+                }else{
+                    response.sendRedirect(request.getContextPath() + "/ListaHorarios");
+                }
             }
             case "editar" ->{
                 String id = request.getParameter("id");
