@@ -12,7 +12,7 @@ public class Estadistica {
     private double recaudado;
     private double maxMonto;
     private String director;
-    private InputStream foto;
+    private int idfotoEstadFuncion;
     private int id;
 
     public Estadistica() {
@@ -27,7 +27,7 @@ public class Estadistica {
         this.puntaje = puntaje;
     }
 
-    public Estadistica(String nombre, double puntaje, String fecha, String genero, String hora, double asistencia, double recaudado, double maxMonto, String director, InputStream foto, int id) {
+    public Estadistica(String nombre, double puntaje, String fecha, String genero, String hora, double asistencia, double recaudado, double maxMonto, String director, int idfotoEstadFuncion, int id) {
         this.nombre = nombre;
         this.puntaje = puntaje;
         this.fecha = fecha;
@@ -37,8 +37,16 @@ public class Estadistica {
         this.recaudado = recaudado;
         this.maxMonto = maxMonto;
         this.director = director;
-        this.foto = foto;
+        this.idfotoEstadFuncion = idfotoEstadFuncion;
         this.id = id;
+    }
+
+    public int getIdfotoEstadFuncion() {
+        return idfotoEstadFuncion;
+    }
+
+    public void setIdfotoEstadFuncion(int idfotoEstadFuncion) {
+        this.idfotoEstadFuncion = idfotoEstadFuncion;
     }
 
     public int getId() {
@@ -47,14 +55,6 @@ public class Estadistica {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public InputStream getFoto() {
-        return foto;
-    }
-
-    public void setFoto(InputStream foto) {
-        this.foto = foto;
     }
 
     public String getNombre() {
@@ -129,3 +129,4 @@ public class Estadistica {
         this.director = director;
     }
 }
+
