@@ -16,11 +16,21 @@ import java.util.ArrayList;
 public class OperadoresServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
+
+        String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         OperadoresDao operadoresDao = new OperadoresDao();
-        ArrayList<Operadores> listaOperadores = operadoresDao.obtenerOperadores();
-        request.setAttribute("operadores",listaOperadores);
-        RequestDispatcher view =request.getRequestDispatcher("operadores.jsp");
-        view.forward(request,response);
+
+        switch (action) {
+            case "listar" -> {
+                ArrayList<Operadores> listaOperadores = operadoresDao.obtenerOperadores();
+                request.setAttribute("operadores",listaOperadores);
+                RequestDispatcher view =request.getRequestDispatcher("operadores.jsp");
+                view.forward(request,response);
+            }
+        }
+
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,16 +42,16 @@ public class OperadoresServlet extends HttpServlet {
 
         switch (action) {
             case "agregar" -> {
-                String nombre = request.getParameter("nombreA").toLowerCase();
-                String apellido = request.getParameter("apellidoA").toLowerCase();
-                String correo_pucp = request.getParameter("correo_pupcA").toLowerCase();
+                String nombre = request.getParameter("nombre").toLowerCase();
+                String apellido = request.getParameter("apellido").toLowerCase();
+                String correo_pucp = request.getParameter("correo").toLowerCase();
                 String contrasenha = request.getParameter("contrasenha").toLowerCase();
 
                 String nombreFormato = primeraMayus(nombre);
                 String apellidoFormato = primeraMayus(apellido);
 
                 operadoresDao.crearOperador(nombreFormato, apellidoFormato, correo_pucp, contrasenha);
-                response.sendRedirect(request.getContextPath() + "/Operadores");
+                response.sendRedirect(request.getContextPath() + "/operadores");
             }
 
             //case "borrar" -> {

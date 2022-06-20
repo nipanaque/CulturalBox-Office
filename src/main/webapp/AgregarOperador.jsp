@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <form class="row g-3 needs-validation" novalidate action="operadores.jsp">
+    <form class="row g-3 needs-validation" novalidate action="<%=request.getContextPath()%>/operadores?a=agregar" method="POST">
         <div class="row justify-content-center">
             <!--Columna 1-->
             <div class="col-4">
@@ -81,19 +81,19 @@
                 <div class="mb-3">
                     </br>
                     <label for="validationCustom01" class="form-label">Nombre *</label>
-                    <input type="text" class="form-control" id="validationCustom01"  required>
+                    <input type="text" class="form-control" id="validationCustom01" name="nombre" required>
                 </div>
                 <div class="mb-3">
                     <label for="validationCustom02" class="form-label">Apellido *</label>
-                    <input type="text" class="form-control" id="validationCustom02"  required>
+                    <input type="text" class="form-control" id="validationCustom02" name="apellido"  required>
                 </div>
                 <div class="mb-3">
                     <label for="validationCustom01" class="form-label">Correo *</label>
-                    <input type="text" class="form-control" id="validationCustom03"  required>
+                    <input type="text" class="form-control" id="validationCustom03" name="correo"  required>
                 </div>
                 <div class="mb-3">
                     <label for="validationCustom01" class="form-label">Contraseña *</label>
-                    <input type="password" class="form-control" id="validationCustom04"  required>
+                    <input type="password" class="form-control" id="validationCustom04" name="contrasenha" required>
                 </div>
                 <div class="mb-3">
                     <label for="validationCustom01" class="form-label">Confirmar contraseña *</label>
