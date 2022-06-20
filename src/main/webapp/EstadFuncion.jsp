@@ -117,6 +117,13 @@
                                         <% }
                                             if (parteDecimal >= 0.5){ %>
                                         <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                        <% for(int i=0;i<5-(parteEntera+1);i++){%>
+                                        <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
+                                        <% } %>
+                                        <% }else { %>
+                                        <% for(int i=0;i<5-(parteEntera);i++){%>
+                                        <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
+                                        <% } %>
                                         <% } %>
                                     </div>
                                 </div>
@@ -136,7 +143,7 @@
                         <div class="card border-success mb-3" style="max-width: 400px;">
                             <div class="row g-0">
                                 <div class="col-md-5">
-                                    <img src="assets/img/james.png" style="width:145px; height:185px" alt="...">
+                                    <img src="<%=request.getContextPath()%>/ImgEstadServlet?a=Directores&id=<%=listaEspeci.get(0).getId()%>" style="width:145px; height:185px" alt="...">
                                 </div>
                                 <div class="col-md-7">
                                     <div class="card-body">
@@ -190,7 +197,7 @@
                     <div class="col-md-3">
                     </div>
                     <div class="col-md-3">
-                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=irFunciones"><button class="btn btn-primary btn-xl">Regresar</button></a>
+                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=irFunciones"><button class="btn btn-secondary btn-xl">Regresar</button></a>
                     </div>
                 </div>
             </div>

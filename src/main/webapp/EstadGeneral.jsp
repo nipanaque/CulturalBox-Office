@@ -17,6 +17,7 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <style>
@@ -73,7 +74,10 @@
                         <p>Ingrese mes y año: </p>
                     </div>
                     <div class="col-auto">
-                        <input type="month" class="form-control" name="fecha" id="fecha">
+                        <input type="month" class="form-control" name="fecha" id="fecha" required>
+                        <div class="invalid-feedback">
+                            In this case is not necessary 'cause type is "month"
+                        </div>
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary mb-3">Buscar</button>
@@ -85,7 +89,7 @@
 
                 <% if(inicio.equals("vacio")){ %>
                 <h5>Seleccione mes y año para el cual desea estadísticas generales, o busque de forma específica funciones, actores o directores con las opciones de abajo</h5>
-                <% }else{ %>
+                <% }else if (listaEstadistica.get(0).getNombre() != null){ %>
                 <!-- Page cuadros primera parte -->
                 <div class="row">
                     <h5>La fecha escogida fue: <%=fecha%></h5>
@@ -94,7 +98,7 @@
                         <div class="card border-success mb-3" style="max-width: 400px;">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="assets/img/steve.png" style="width:128px; height:185px" alt="...">
+                                    <img src="<%=request.getContextPath()%>/ImgEstadServlet?a=Funciones&id=<%=listaEstadistica.get(0).getId()%>" style="width:128px; height:185px" alt="...">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -108,6 +112,13 @@
                                         <% }
                                            if (parteDecimal >= 0.5){ %>
                                         <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                        <% for(int i=0;i<5-(parteEntera+1);i++){%>
+                                        <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
+                                        <% } %>
+                                        <% }else { %>
+                                        <% for(int i=0;i<5-(parteEntera);i++){%>
+                                        <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
+                                        <% } %>
                                         <% } %>
                                     </div>
                                 </div>
@@ -120,7 +131,7 @@
                         <div class="card border-success mb-3" style="max-width: 400px;">
                             <div class="row g-0">
                                 <div class="col-md-5">
-                                    <img src="assets/img/beauty.png" style="width:145px; height:185px" alt="...">
+                                    <img src="<%=request.getContextPath()%>/ImgEstadServlet?a=Funciones&id=<%=listaEstadistica.get(1).getId()%>" style="width:145px; height:185px" alt="...">
                                 </div>
                                 <div class="col-md-7">
                                     <div class="card-body">
@@ -137,7 +148,7 @@
                         <div class="card border-success mb-3" style="max-width: 400px;">
                             <div class="row g-0">
                                 <div class="col-md-5">
-                                    <img src="assets/img/alicia.png" style="width:145px; height:185px" alt="...">
+                                    <img src="<%=request.getContextPath()%>/ImgEstadServlet?a=Funciones&id=<%=listaEstadistica.get(2).getId()%>" style="width:145px; height:185px" alt="...">
                                 </div>
                                 <div class="col-md-7">
                                     <div class="card-body">
@@ -178,7 +189,7 @@
                         <div class="card border-success mb-3" style="max-width: 400px;">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="assets/img/roca.png" style="width:128px; height:185px" alt="...">
+                                    <img src="<%=request.getContextPath()%>/ImgEstadServlet?a=Actores&id=<%=listaEstadistica.get(4).getId()%>" style="width:128px; height:185px" alt="...">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -190,8 +201,15 @@
                                             for(int i=0;i<parteEntera2;i++){ %>
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
                                         <% }
-                                            if (puntaje2 >= (parteEntera2+0.5)){ %>
+                                            if (parteDecimal2 >= 0.5){ %>
                                         <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                        <% for(int i=0;i<5-(parteEntera2+1);i++){%>
+                                        <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
+                                        <% } %>
+                                        <% }else { %>
+                                        <% for(int i=0;i<5-(parteEntera2);i++){%>
+                                        <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
+                                        <% } %>
                                         <% } %>
                                     </div>
                                 </div>
@@ -204,7 +222,7 @@
                         <div class="card border-success mb-3" style="max-width: 400px;">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="assets/img/james.png" style="width:128px; height:185px" alt="...">
+                                    <img src="<%=request.getContextPath()%>/ImgEstadServlet?a=Directores&id=<%=listaEstadistica.get(5).getId()%>" style="width:128px; height:185px" alt="...">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -218,6 +236,13 @@
                                         <% }
                                             if (parteDecimal3 >= 0.5){ %>
                                         <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                        <% for(int i=0;i<5-(parteEntera3+1);i++){%>
+                                        <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
+                                        <% } %>
+                                        <% }else { %>
+                                        <% for(int i=0;i<5-(parteEntera3);i++){%>
+                                        <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
+                                        <% } %>
                                         <% } %>
                                     </div>
                                 </div>
@@ -226,6 +251,9 @@
                     </div>
 
                 </div>
+                <% }else { %>
+                <h5>La fecha escogida fue: <%=fecha%></h5>
+                <h5>No se encontró resultados</h5>
                 <% } %>
 
                 </br>

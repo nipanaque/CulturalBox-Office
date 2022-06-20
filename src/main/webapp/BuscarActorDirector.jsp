@@ -1,7 +1,8 @@
 <%@ page import="com.example.culturalbox.Beans.Estadistica" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="listaActores" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Estadistica>" />
-<jsp:useBean id="listaDirectores" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Estadistica>" />
+<jsp:useBean id="actor" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Estadistica>" class="java.util.ArrayList"/>
+<jsp:useBean id="director" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Estadistica>" class="java.util.ArrayList"/>
+<jsp:useBean id="tipo" scope="request" type="java.lang.String" class="java.lang.String"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -60,84 +61,182 @@
         <!-- Portfolio Grid-->
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
-                    <h2 class="section-heading text-uppercase">Buscar: Actores / Directores</h2>
-                    <h3 class="section-subheading text-muted">Seleccionar a partir de las siguientes listas y buscar</h3>
+                <h2 class="section-heading text-uppercase">Buscar: Actores / Directores</h2>
+
+                <!--Formulario para busqueda actores y directores-->
+                <form method="post" class="row g-3" action="<%=request.getContextPath()%>/EstadisticaServlet?a=buscarAcDir">
+                    <div class="col-auto">
+                        <p>Ingrese actor o director: </p>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre y apellido" required>
+                    </div>
+                    <div class="col-auto">
+                        <!--Lista fija-->
+                        <select class="form-select" id="genero" name="tipo" required>
+                            <option selected disabled value="">Seleccionar</option>
+                            <option value="Actor">Actor</option>
+                            <option value="Director">Director</option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+                    </div>
+                </form>
+
+                <%if(tipo.equals("Actor") && actor.get(0).getNombre()!=null){%>
+                </br>
+                <h2 class="section-heading text-uppercase"><%=actor.get(0).getNombre()%></h2>
+                <br/>
                 <!-- Page Features-->
                 <div class="row gx-lg-5">
-
-
                     <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <h2 class="div-3">Actor</h2>
-                                <form method="post" id="form1" action="<%=request.getContextPath()%>/EstadisticaServlet?a=buscarActor">
-                                    <select class="form-select" id="buscarActor" name="nombreActor" required>
-                                        <option selected>Seleccionar actor</option>
-                                        <% for(Estadistica est : listaActores){
-                                            String[] separo = est.getNombre().split(" ");
-                                            String actor = separo[0]+"-"+separo[1];%>
-                                        <option value=<%=actor%>> <%=est.getNombre()%> </option>
+                        <div class="card border-success mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="assets/img/califica.png" style="width:180px; height:200px" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Calificación de actor</h3>
+                                        <p class = "fs-5">Resultados en base a los usuarios:</p>
+                                        <% double puntaje = actor.get(0).getPuntaje();
+                                            double parteDecimal = puntaje % 1;
+                                            double parteEntera = puntaje - parteDecimal;
+                                            for(int i=0;i<parteEntera;i++){ %>
+                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
+                                        <% }
+                                            if (parteDecimal >= 0.5){ %>
+                                        <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                        <% for(int i=0;i<5-(parteEntera+1);i++){%>
+                                        <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
                                         <% } %>
-                                    </select>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <h1 class="div-3"></h1>
-                                <div class="col-md-3">
-                                    <div class="text-center">
-                                        <a><button class="btn btn-success btn-xl" type="submit" form="form1">Buscar_Actor</button></a>
+                                        <% }else { %>
+                                        <% for(int i=0;i<5-(parteEntera);i++){%>
+                                        <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
+                                        <% } %>
+                                        <% } %>
+                                        <br/>
+                                        <br/>
+                                        <p class = "fs-5">N° estrellas enteras: <%=Math.round(puntaje)%> </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
                     <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <h2 class="div-3">Director</h2>
-                                <form method="post" id="form2" action="<%=request.getContextPath()%>/EstadisticaServlet?a=buscarDirector">
-                                    <select class="form-select" id="buscarDirector" name="nombreDirector" required>
-                                        <option selected>Seleccionar director</option>
-                                        <% for(Estadistica est : listaDirectores){
-                                            String[] separo2 = est.getNombre().split(" ");
-                                            String director = separo2[0]+"-"+separo2[1];%>
-                                        <option value=<%=director%>> <%=est.getNombre()%> </option>
+                        <div class="card border-success mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="assets/img/funciones.png" style="width:180px; height:200px" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Participación en funciones</h3>
+                                        <% for(int i = 1; i<actor.size();i++){ %>
+                                        <p class="mb-0">- <%=actor.get(i).getNombre()%></p>
                                         <% } %>
-                                    </select>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xxl-4 mb-5">
-                        <div class="card bg-light border-0 h-100">
-                            <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
-                                <h1 class="div-3"></h1>
-                                <div class="col-md-3">
-                                    <div class="text-center">
-                                        <a><button class="btn btn-success btn-xl" type="submit" form="form2">Buscar_Director</button></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card border-success mb-3" style="max-width: 540px;">
+                            <div class="card-body">
+                                <h3 class="card-title">Fotografía de actor/actriz</h3>
+                                <img src="<%=request.getContextPath()%>/ImgEstadServlet?a=Actores&id=<%=actor.get(0).getId()%>" style="width:310px" alt="...">
+                                <p class="card-text"><small class="text-muted">Imagen referencial</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <%}else if(tipo.equals("Director") && director.get(0).getNombre()!=null){%>
+
+                </br>
+                <h2 class="section-heading text-uppercase"> <%=director.get(0).getNombre()%> </h2>
+                <br/>
+                <!-- Page Features-->
+                <div class="row gx-lg-5">
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card border-success mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="assets/img/califica.png" style="width:180px; height:200px" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Calificación director</h3>
+                                        <p class = "fs-5">Resultados en base a los usuarios:</p>
+                                        <% double puntaje = director.get(0).getPuntaje();
+                                            double parteDecimal = puntaje % 1;
+                                            double parteEntera = puntaje - parteDecimal;
+                                            for(int i=0;i<parteEntera;i++){ %>
+                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
+                                        <% }
+                                            if (parteDecimal >= 0.5){ %>
+                                        <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                        <% for(int i=0;i<5-(parteEntera+1);i++){%>
+                                        <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
+                                        <% } %>
+                                        <% }else { %>
+                                        <% for(int i=0;i<5-(parteEntera);i++){%>
+                                        <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
+                                        <% } %>
+                                        <% } %>
+                                        <br/>
+                                        <br/>
+                                        <p class = "fs-5">N° estrellas enteras: <%=Math.round(puntaje)%> </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card border-success mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="assets/img/funciones.png" style="width:180px; height:200px" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Funciones dirigidas</h3>
+                                        <% for(int i = 1; i<director.size();i++){ %>
+                                        <p class="mb-0">- <%=director.get(i).getNombre()%></p>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xxl-4 mb-5">
+                        <div class="card border-success mb-3" style="max-width: 540px;">
+                            <div class="card-body">
+                                <h3 class="card-title">Fotografía de director(a)</h3>
+                                <img src="<%=request.getContextPath()%>/ImgEstadServlet?a=Directores&id=<%=director.get(0).getId()%>" style="width:310px" alt="...">
+                                <p class="card-text"><small class="text-muted">Imagen referencial</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <%}else if ((director.isEmpty() || actor.isEmpty()) && (tipo.equals("Actor") || tipo.equals("Director"))){%>
+                <h5>No se encontró resultados</h5>
+                <%}else{%>
+                <%}%>
+
+
                     <!-- Return button-->
-                    <div class="row align-items-stretch mb-5">
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-3">
-                            <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=inicio"><button class="btn btn-primary btn-xl" type="submit">Regresar</button></a>
-                        </div>
+                <div class="row align-items-stretch mb-5">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=inicio"><button class="btn btn-secondary btn-xl" type="submit">Regresar</button></a>
                     </div>
                 </div>
             </div>

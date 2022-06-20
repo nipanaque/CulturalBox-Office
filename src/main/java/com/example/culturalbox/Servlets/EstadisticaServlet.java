@@ -27,9 +27,6 @@ public class EstadisticaServlet extends HttpServlet {
                 requestDispatcher.forward(request,response);
             }
             case "irAcDir" -> {
-                request.setAttribute("listaActores",estad.listarActores());
-                request.setAttribute("listaDirectores",estad.listarDirectores());
-
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("BuscarActorDirector.jsp");
                 requestDispatcher.forward(request,response);
             }
@@ -55,25 +52,29 @@ public class EstadisticaServlet extends HttpServlet {
                 String nomFuncion = request.getParameter("nomFuncion");
                 String fecha = request.getParameter("fecha");
                 String hora = request.getParameter("hora");
-                request.setAttribute("listaEspeci",estad.estadEspeciTwo(genero,nomFuncion,fecha,hora));
 
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadFuncion.jsp");
-                requestDispatcher.forward(request,response);
+                if(estad.estadEspeciTwo(genero,nomFuncion,fecha,hora).get(0).getNombre() != null){
+                    request.setAttribute("listaEspeci",estad.estadEspeciTwo(genero,nomFuncion,fecha,hora));
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadFuncion.jsp");
+                    requestDispatcher.forward(request,response);
+                }else{
+                    request.setAttribute("respuesta","noExiste");
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadEspFunciones.jsp");
+                    requestDispatcher.forward(request,response);
+                }
             }
-            case "buscarActor" -> {
-                String nombreActor = request.getParameter("nombreActor");
-                String[] actor = nombreActor.split("-");
-                request.setAttribute("actor",estad.buscarActorTwo(actor[0],actor[1]));
+            case "buscarAcDir" -> {
+                String tipo = request.getParameter("tipo");
+                String nombre = request.getParameter("nombre");
+                String[] name = nombre.split(" ");
+                if (tipo.equals("Actor")){
+                    request.setAttribute("actor",estad.buscarActorTwo(name[0],name[1]));
+                }else{
+                    request.setAttribute("director",estad.buscarDirectorTwo(name[0],name[1]));
+                }
+                request.setAttribute("tipo",tipo);
 
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadActor.jsp");
-                requestDispatcher.forward(request,response);
-            }
-            case "buscarDirector" -> {
-                String nombreDirector = request.getParameter("nombreDirector");
-                String[] director = nombreDirector.split("-");
-                request.setAttribute("director",estad.buscarDirectorTwo(director[0],director[1]));
-
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadDirector.jsp");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("BuscarActorDirector.jsp");
                 requestDispatcher.forward(request,response);
             }
         }

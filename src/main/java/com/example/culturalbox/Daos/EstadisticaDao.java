@@ -2,6 +2,9 @@ package com.example.culturalbox.Daos;
 
 import com.example.culturalbox.Beans.Estadistica;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -40,7 +43,7 @@ public class EstadisticaDao {
             e.printStackTrace();
         }
 
-        String sql = "select nombre, round(sum(puntaje)/count(puntaje),8) as `punt_prom`\n" +
+        String sql = "select nombre, round(sum(puntaje)/count(puntaje),8) as `punt_prom`, f.idFuncion\n" +
                 "from horario h\n" +
                 "\tinner join funcion f on (h.idFuncion = f.idFuncion)\n" +
                 "    inner join puntaje_funcion pf on (f.idFuncion = pf.idFuncion)\n" +
@@ -56,6 +59,7 @@ public class EstadisticaDao {
                 rs.next();  //Para saltarme el null
                 estadistica.setNombre(rs.getString(1));
                 estadistica.setPuntaje(rs.getDouble(2));
+                estadistica.setId(rs.getInt(3));
             }
         } catch (SQLException e) {
             System.out.println("No se pudo realizar la busqueda");
@@ -72,7 +76,7 @@ public class EstadisticaDao {
             e.printStackTrace();
         }
 
-        String sql = "select f.nombre, stock, idCompra, h.idHorario, round((count(h.idhorario)/stock)*100,8) as `asistencia %` \n" +
+        String sql = "select f.nombre, stock, idCompra, h.idHorario, round((count(h.idhorario)/stock)*100,8) as `asistencia %`, f.idFuncion \n" +
                 "from usuario u\n" +
                 "\tinner join compra c on (u.idUsuario = c.idUsuario)\n" +
                 "    inner join horario h on (c.idHorario = h.idHorario)\n" +
@@ -88,6 +92,7 @@ public class EstadisticaDao {
             try(ResultSet rs = pstmt.executeQuery();){
                 rs.next();  //Para saltarme el null
                 estadistica.setNombre(rs.getString(1));
+                estadistica.setId(rs.getInt(6));
             }
         } catch (SQLException e) {
             System.out.println("No se pudo realizar la busqueda");
@@ -104,7 +109,7 @@ public class EstadisticaDao {
             e.printStackTrace();
         }
 
-        String sql = "select f.nombre, stock, idCompra, h.idHorario, round((count(h.idhorario)/stock)*100,2) as `asistencia %` \n" +
+        String sql = "select f.nombre, stock, idCompra, h.idHorario, round((count(h.idhorario)/stock)*100,2) as `asistencia %`, f.idFuncion \n" +
                 "from usuario u\n" +
                 "\tinner join compra c on (u.idUsuario = c.idUsuario)\n" +
                 "    inner join horario h on (c.idHorario = h.idHorario)\n" +
@@ -120,6 +125,7 @@ public class EstadisticaDao {
             try(ResultSet rs = pstmt.executeQuery();){
                 rs.next();  //Para saltarme el null
                 estadistica.setNombre(rs.getString(1));
+                estadistica.setId(rs.getInt(6));
             }
         } catch (SQLException e) {
             System.out.println("No se pudo realizar la busqueda");
@@ -168,7 +174,7 @@ public class EstadisticaDao {
             e.printStackTrace();
         }
 
-        String sql = "select concat(a.nombre,' ',a.apellido) as `actor`, round(sum(puntaje)/count(puntaje),8) as `punt_prom`\n" +
+        String sql = "select concat(a.nombre,' ',a.apellido) as `actor`, round(sum(puntaje)/count(puntaje),8) as `punt_prom`, a.idActor\n" +
                 "from horario h\n" +
                 "\tinner join funcion f on (h.idFuncion = f.idFuncion)\n" +
                 "    inner join funcion_has_actor fh on (f.idFuncion = fh.idFuncion)\n" +
@@ -186,6 +192,7 @@ public class EstadisticaDao {
                 rs.next();  //Para saltarme el null
                 estadistica.setNombre(rs.getString(1));
                 estadistica.setPuntaje(rs.getDouble(2));
+                estadistica.setId(rs.getInt(3));
             }
         } catch (SQLException e) {
             System.out.println("No se pudo realizar la busqueda");
@@ -202,7 +209,7 @@ public class EstadisticaDao {
             e.printStackTrace();
         }
 
-        String sql = "select concat(d.nombre,' ',d.apellido) as `direc`, round(sum(puntaje)/count(puntaje),1) as `punt_prom`\n" +
+        String sql = "select concat(d.nombre,' ',d.apellido) as `direc`, round(sum(puntaje)/count(puntaje),1) as `punt_prom`, d.idDirector\n" +
                 "from horario h\n" +
                 "\tinner join funcion f on (h.idFuncion = f.idFuncion)  \n" +
                 "    inner join director d on (f.idDirector = d.idDirector)\n" +
@@ -219,6 +226,7 @@ public class EstadisticaDao {
                 rs.next();  //Para saltarme el null
                 estadistica.setNombre(rs.getString(1));
                 estadistica.setPuntaje(rs.getDouble(2));
+                estadistica.setId(rs.getInt(3));
             }
         } catch (SQLException e) {
             System.out.println("No se pudo realizar la busqueda");
@@ -265,7 +273,7 @@ public class EstadisticaDao {
 
         String sql = "select f.nombre, dia, tiempo_inicio, genero, round(sum(puntaje)/count(puntaje),1) as `punt_prom`,\n" +
                 "\tround((count(h.idhorario)/stock)*100,2) as `asistencia %`, count(u.idUsuario)*costo as `monto recaudado S/`,\n" +
-                "    stock*costo as `max monto S/`, concat(d.nombre,' ',d.apellido) as `director`\n" +
+                "    stock*costo as `max monto S/`, concat(d.nombre,' ',d.apellido) as `director`, d.idDirector\n" +
                 "from usuario u\n" +
                 "\tinner join compra c on (u.idUsuario = c.idUsuario)\n" +
                 "    inner join horario h on (c.idHorario = h.idHorario)\n" +
@@ -292,6 +300,7 @@ public class EstadisticaDao {
                 estadistica.setRecaudado(rs.getDouble(7));
                 estadistica.setMaxMonto(rs.getDouble(8));
                 estadistica.setDirector(rs.getString(9));
+                estadistica.setId(rs.getInt(10));
             }
         } catch (SQLException e) {
             System.out.println("No se pudo realizar la busqueda");
@@ -334,55 +343,6 @@ public class EstadisticaDao {
 
 
 
-    public ArrayList<Estadistica> listarActores(){
-        ArrayList<Estadistica> listaActores = new ArrayList<>();
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        try (Connection connection = DriverManager.getConnection(url,user,pass);
-             Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("select concat(nombre,' ',apellido) from actor");){
-
-            while (rs.next()){
-                Estadistica estad = new Estadistica();
-                estad.setNombre(rs.getString(1));
-                listaActores.add(estad);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return listaActores;
-    }
-
-    public ArrayList<Estadistica> listarDirectores(){
-        ArrayList<Estadistica> listaDirectores = new ArrayList<>();
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        try (Connection connection = DriverManager.getConnection(url,user,pass);
-             Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("select concat(nombre,' ',apellido) from director");){
-
-            while (rs.next()){
-                Estadistica estad = new Estadistica();
-                estad.setNombre(rs.getString(1));
-                listaDirectores.add(estad);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return listaDirectores;
-    }
 
     public Estadistica buscarActorOne(String nombre, String apellido) {
         Estadistica estadistica = new Estadistica();
@@ -393,20 +353,21 @@ public class EstadisticaDao {
             e.printStackTrace();
         }
 
-        String sql = "select concat(nombre,' ',apellido) as `actor`, round(sum(puntaje)/count(puntaje),1) as `punt_prom`,fotografia\n" +
+        String sql = "select concat(nombre,' ',apellido) as `actor`, round(sum(puntaje)/count(puntaje),1) as `punt_prom`,fotografia, a.idActor\n" +
                 "from actor a\n" +
                 "    inner join puntaje_actor pa on (a.idActor = pa.idActor)\n" +
-                "where lower(nombre) = ? and lower(apellido) = ?\n" +
+                "where lower(nombre) like ? and lower(apellido) like ?\n" +
                 "group by nombre;";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
-            pstmt.setString(1,nombre);
-            pstmt.setString(2,apellido);
+            pstmt.setString(1,"%" + nombre + "%");
+            pstmt.setString(2,"%" + apellido + "%");
             try(ResultSet rs = pstmt.executeQuery();){
                 rs.next();
                 estadistica.setNombre(rs.getString(1));
                 estadistica.setPuntaje(rs.getDouble(2));
+                estadistica.setId(rs.getInt(4));
             }
         } catch (SQLException e) {
             System.out.println("No se pudo realizar la busqueda");
@@ -427,12 +388,12 @@ public class EstadisticaDao {
         String sql = "select f.nombre from funcion f\n" +
                 "    inner join funcion_has_actor fh on (f.idFuncion = fh.idFuncion)\n" +
                 "    inner join actor a on (fh.idActor = a.idActor)\n" +
-                "where lower(a.nombre) = ? and lower(a.apellido) = ?";
+                "where lower(a.nombre) like ? and lower(a.apellido) like ?";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
-            pstmt.setString(1,nombre);
-            pstmt.setString(2,apellido);
+            pstmt.setString(1,"%" + nombre + "%");
+            pstmt.setString(2,"%" + apellido + "%");
             try(ResultSet rs = pstmt.executeQuery();){
                 while (rs.next()){
                     Estadistica estadistica = new Estadistica();
@@ -455,18 +416,19 @@ public class EstadisticaDao {
             e.printStackTrace();
         }
 
-        String sql = "select concat(nombre,' ',apellido) as 'Nombre', round(sum(p.puntaje)/count(p.puntaje),1) as 'puntaje', fotografia\n" +
+        String sql = "select concat(nombre,' ',apellido) as 'Nombre', round(sum(p.puntaje)/count(p.puntaje),1) as 'puntaje', fotografia, d.idDirector\n" +
                 "from director d, puntaje_director p\n" +
-                "where d.idDirector = p.idDirector and lower(nombre) = ? and lower(apellido) = ?;";
+                "where d.idDirector = p.idDirector and lower(nombre) like ? and lower(apellido) like ?;";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
-            pstmt.setString(1,nombre);
-            pstmt.setString(2,apellido);
+            pstmt.setString(1,"%" + nombre + "%");
+            pstmt.setString(2,"%" + apellido + "%");
             try(ResultSet rs = pstmt.executeQuery();){
                 rs.next();
                 estadistica.setNombre(rs.getString(1));
                 estadistica.setPuntaje(rs.getDouble(2));
+                estadistica.setId(rs.getInt(4));
             }
         } catch (SQLException e) {
             System.out.println("No se pudo realizar la busqueda");
@@ -485,12 +447,12 @@ public class EstadisticaDao {
         }
 
         String sql = "select f.nombre as 'Funciones dirigidas' from director d, funcion f\n" +
-                "where d.idDirector = f.idDirector and lower(d.nombre) = ? and lower(d.apellido) = ?;";
+                "where d.idDirector = f.idDirector and lower(d.nombre) like ? and lower(d.apellido) like ?;";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
-            pstmt.setString(1,nombre);
-            pstmt.setString(2,apellido);
+            pstmt.setString(1,"%" + nombre + "%");
+            pstmt.setString(2,"%" + apellido + "%");
             try(ResultSet rs = pstmt.executeQuery();){
                 while (rs.next()){
                     Estadistica estadistica = new Estadistica();

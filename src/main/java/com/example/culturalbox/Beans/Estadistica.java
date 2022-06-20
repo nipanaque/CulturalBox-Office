@@ -1,5 +1,7 @@
 package com.example.culturalbox.Beans;
 
+import java.io.InputStream;
+
 public class Estadistica {
     private String nombre;
     private double puntaje;
@@ -10,6 +12,8 @@ public class Estadistica {
     private double recaudado;
     private double maxMonto;
     private String director;
+    private InputStream foto;
+    private int id;
 
     public Estadistica() {
     }
@@ -23,7 +27,7 @@ public class Estadistica {
         this.puntaje = puntaje;
     }
 
-    public Estadistica(String nombre, double puntaje, String fecha, String genero, String hora, double asistencia, double recaudado, double maxMonto, String director) {
+    public Estadistica(String nombre, double puntaje, String fecha, String genero, String hora, double asistencia, double recaudado, double maxMonto, String director, InputStream foto, int id) {
         this.nombre = nombre;
         this.puntaje = puntaje;
         this.fecha = fecha;
@@ -33,6 +37,24 @@ public class Estadistica {
         this.recaudado = recaudado;
         this.maxMonto = maxMonto;
         this.director = director;
+        this.foto = foto;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public InputStream getFoto() {
+        return foto;
+    }
+
+    public void setFoto(InputStream foto) {
+        this.foto = foto;
     }
 
     public String getNombre() {

@@ -1,6 +1,6 @@
 <%@ page import="com.example.culturalbox.Beans.Estadistica" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="listaFunciones" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Estadistica>" />
+<jsp:useBean id="respuesta" scope="request" type="java.lang.String" class="java.lang.String" />
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -65,7 +65,7 @@
                                             <div class="form-group">
                                                 <!--Lista fija-->
                                                 <select class="form-select" id="genero" name="genero" required>
-                                                    <option selected>Seleccionar género</option>
+                                                    <option selected disabled value="">Seleccionar género</option>
                                                     <option value="Terror">Terror</option>
                                                     <option value="Suspenso">Suspenso</option>
                                                     <option value="Comedia">Comedia</option>
@@ -76,23 +76,18 @@
                                             <p class="mb-0"> Nombre de la función</p>
                                             <div class="form-group">
                                                 <!--Lista variable-->
-                                                <select class="form-select" id="nomFuncion" name="nomFuncion" required>
-                                                    <option selected>Seleccionar nombre</option>
-                                                    <% for(Estadistica est : listaFunciones){ %>
-                                                    <option value=<%=est.getNombre()%>> <%=est.getNombre()%> </option>
-                                                    <% } %>
-                                                </select>
+                                                <input type="text" class="form-control" name="nomFuncion" id="nomFuncion" placeholder="Ingrese Nombre" required>
                                             </div>
                                             </br>
                                             <p class="mb-0"> Fecha</p>
                                             <div class="form-group">
                                                 <!-- date input-->
-                                                <input type="date" class="form-control" id="fecha" name="fecha">
+                                                <input type="date" class="form-control" id="fecha" name="fecha" required>
                                             </div>
                                             </br>
                                             <p class="mb-0"> Hora</p>
                                             <div class="form-group">
-                                                <input type="time" class="form-control" id="hora" name="hora" min="09:00" max="24:00"/>
+                                                <input type="time" class="form-control" id="hora" name="hora" min="09:00" max="24:00" required>
                                             </div>
                                         </div>
                                     </div>
@@ -108,6 +103,10 @@
                     </div>
                 </div>
 
+                <%if(respuesta.equals("noExiste")){%>
+                <h6>No se encontró resultados</h6>
+                <%}%>
+
                 <div class="row align-items-stretch mb-5">
                     <div class="col-md-3">
                     </div>
@@ -118,7 +117,7 @@
                         <a><button class="btn btn-primary btn-xl" type="submit" form="form1">Buscar</button></a>
                     </div>
                     <div class="col-md-3">
-                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=inicio"><button class="btn btn-primary btn-xl">Regresar</button></a>
+                        <a href="<%=request.getContextPath()%>/EstadisticaServlet?a=inicio"><button class="btn btn-secondary btn-xl">Regresar</button></a>
                     </div>
                 </div>
             </div>
