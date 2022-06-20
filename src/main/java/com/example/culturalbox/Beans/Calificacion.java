@@ -7,6 +7,9 @@ public class Calificacion {
     private int puntajeFuncion;
     private int puntajeDirector;
     private int puntajeActor;
+    private int idFuncion;
+    private int idDirector;
+    private int idActor;
 
     public Calificacion(String nombreFuncion, String nombreDirector, String nombreActor, int puntajeFuncion, int puntajeDirector, int puntajeActor) {
         this.nombreFuncion = nombreFuncion;
@@ -16,6 +19,7 @@ public class Calificacion {
         this.puntajeDirector = puntajeDirector;
         this.puntajeActor = puntajeActor;
     }
+
 
     public Calificacion() {
 
@@ -67,5 +71,29 @@ public class Calificacion {
 
     public void setPuntajeActor(int puntajeActor) {
         this.puntajeActor = puntajeActor;
+    }
+
+    public int getIdFuncion() {
+        return idFuncion;
+    }
+
+    public void setIdFuncion(int idFuncion) {
+        this.idFuncion = idFuncion;
+    }
+
+    public int getIdDirector() {
+        return idDirector;
+    }
+
+    public void setIdDirector(int idDirector) {
+        this.idDirector = idDirector;
+    }
+
+    public int getIdActor() {
+        return idActor;
+    }
+
+    public void setIdActor(int idActor) {
+        this.idActor = idActor;
     }
 }
