@@ -36,11 +36,12 @@ public class HistorialServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         HistorialDao historialDao = new HistorialDao();
-        String puntajeFuncion = request.getParameter("contador");
-        String puntajeDirector = request.getParameter("contadorDirector");
-        String puntajeActor1 = request.getParameter("contadorActor1");
-        String puntajeActor2= request.getParameter("contadorActor2");
-        String puntajeActor3= request.getParameter("contadorActor3");
+        if(action.equals("cancelar")){
+            int idCompra = Integer.parseInt(request.getParameter("idCompra"));
+            historialDao.cancelar(idCompra);
+            response.sendRedirect(request.getContextPath()+"/HistorialServlet");
+
+        }
 
     }
 }

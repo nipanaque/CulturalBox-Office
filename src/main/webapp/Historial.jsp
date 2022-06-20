@@ -27,7 +27,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="usuario_logeado.html"><img src="assets/img/pucp_logo.jpeg" alt="..." style="height: 40px;width: 120px;"/></a>
+                <a class="navbar-brand" href="usuario_logeado.html"><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;border-radius: 3px;"/></a>
 
                 <div class="collapse navbar-collapse " id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
@@ -38,7 +38,7 @@
                                        style="position: absolute; left: calc(-150px/2 - 40px); top: calc(25px/2 - 10px);">
                                         <img src="assets/img/carrito.png" style="width: 90px"  class="rounded float-start" alt="...">
                                     </a>
-                                    <a href="usuario_logeado.html"><button class="btn btn-dark btn-sm" type="submit">Volver al menu</button></a>
+                                    <a href="usuario_logeado.html"><button class="btn btn-secondary btn-sm" type="submit">Volver al menu</button></a>
                                 </li>
                             </ul>
                         </div>
@@ -47,7 +47,7 @@
 
             </div>
         </nav>
-        <section class="page-section bg-light" id="portfolio">
+        <section class="page-section bg-light" id="portfolio" style="margin-top: 4%">
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Historial de funciones</h2>
@@ -74,13 +74,17 @@
                                     <%  int i = 1;
                                         for (Historial historial : funcionesvigentes) {%>
                                     <tr>
+
                                         <td scope="row"><%= i%></td>
                                         <td colspan="2"><%= historial.getNombre_funcion()%></td>
                                         <td><%= historial.getNombre_sede()%></td>
                                         <td colspan="2" scope="col"><%= historial.getNum_ticket()%></td>
 
                                         <td>
-                                            <a href="#"><button class="btn btn-dark btn-md" type="submit">Cancelar</button></a>
+                                            <form method="POST" action="<%=request.getContextPath()%>/HistorialServlet?a=cancelar">
+                                            <input style="display: none" name="idCompra" value="<%=historial.getIdCompra()%>">
+                                            <button class="btn btn-dark btn-md" type="submit">Cancelar</button>
+                                            </form>
                                         </td>
                                     </tr>
                                     <% i++;}%>

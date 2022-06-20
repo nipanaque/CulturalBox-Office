@@ -4,6 +4,15 @@ public class Historial {
     private String nombre_funcion;
     private String nombre_sede;
     private int num_ticket;
+    private int idCompra;
+
+    public int getIdCompra() {
+        return idCompra;
+    }
+
+    public void setIdCompra(int idCompra) {
+        this.idCompra = idCompra;
+    }
 
     public Historial(String nombre_funcion, String nombre_sede, int num_ticket) {
         this.nombre_funcion = nombre_funcion;
