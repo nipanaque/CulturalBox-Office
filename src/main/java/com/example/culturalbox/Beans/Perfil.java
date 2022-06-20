@@ -1,25 +1,35 @@
 package com.example.culturalbox.Beans;
 
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Blob;
+
 public class Perfil {
+    private String nombre_completo;
     private int dni;
     private int codigo_pucp;
     private String correo_pucp;
     private String fecha_nacimiento;
     private String direccion;
     private int numtelefono;
+    private InputStream foto;
 
-    public Perfil(int dni, int codigo_pucp, String correo_pucp, String fecha_nacimiento, String direccion, int numtelefono) {
-        this.dni = dni;
-        this.codigo_pucp = codigo_pucp;
-        this.correo_pucp = correo_pucp;
-        this.fecha_nacimiento = fecha_nacimiento;
-        this.direccion = direccion;
-        this.numtelefono = numtelefono;
+    public String getNombre_completo() {
+        return nombre_completo;
     }
 
+    public void setNombre_completo(String nombre_completo) {
+        this.nombre_completo = nombre_completo;
+    }
 
-    public Perfil() {
+    public InputStream getFoto() {
+        return foto;
+    }
 
+    public void setFoto(InputStream foto) {
+        this.foto = foto;
     }
 
     public int getDni() {

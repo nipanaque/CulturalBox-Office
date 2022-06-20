@@ -1,4 +1,6 @@
 <%@ page import="com.example.culturalbox.Beans.Perfil" %>
+<%@ page import="com.example.culturalbox.Servlets.PerfilServlet" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaPerfil" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Perfil>" />
 <!DOCTYPE html>
@@ -19,19 +21,20 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+
     </head>
     <body>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="usuario_logeado.html"><img src="assets/img/pucp_logo.jpeg" alt="..." style="height: 40px;width: 120px;"/></a>
+                <a class="navbar-brand" href="#"><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;border-radius: 3px;"/></a>
 
                 <div class="collapse navbar-collapse " id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a href="usuario_logeado.html"><button class="btn btn-dark btn-sm" type="submit">Volver al menu</button></a>
+                                    <a href=""><button class="btn btn-secondary" type="submit">Volver al menu</button></a>
                                 </li>
                             </ul>
                         </div>
@@ -40,81 +43,85 @@
 
             </div>
         </nav>
-        <section class="page-section bg-light" id="portfolio">
+        <form method="POST" action="<%=request.getContextPath()%>/PerfilServlet"enctype="multipart/form-data">
+        <section class="page-section bg-light" id="portfolio" style="margin-top: 4%;">
             <div class="container">
-                <div class="text-center">
+                <div class="text-center" style="margin-bottom: -6%;">
                     <h2 class="section-heading text-uppercase">Mi perfil</h2>
                     <h3 class="section-subheading text-muted"></h3>
                 </div>
-                <img src="assets/objeto.jfif" style="width: 100px" class="rounded float-end" alt="...">
-                <div class="cuadrado">
-                    <img src="assets/img/logo.png" style="width: 100px"  class="rounded float-start" alt="...">
 
-                    <div class="btn">
+
+                <img src="assets/img/objeto.jfif" style="width: 100px;margin-top: 3%" class="rounded float-end" alt="...">
+
+
+                <div class="cuadrado" style="margin-left: -6%">
+                    <img src="<%=request.getContextPath()%>/PerfImagenServlet" style="width: 230px;height: 150px;margin-left: 3%" class="rounded float-start" alt="...">
+
+                    <div class="btn" style="margin-bottom: -8%">
                         <a  href="javascript:explorar();" >
-                            <div style="position: relative; left: -55px; top: 70px;">
-                                <img src="assets/img/camara.png" style="width: 40px"  class="rounded float-start" alt="..." title="subir imagen">
-                                <input type="file" name="f_subir" id="f_subir" style="display: none;">
+                            <div class="form-group"style="position: relative; left: -55px; top: 70px;">
+                                <img src="assets/img/camara.png" style="width: 50px;height: 4%;"  class="rounded float-start" alt="..." title="subir imagen"id="m">
+                                <input type="file" name="f_subir" id="f_subir" style="display:none;" >
                             </div>
+                        </a>
                     </div>
                 </div>
-                </a>
+                </div>
                 <br>
                 <br>
                 <br>
                 <br>
                 <br>
-                <div class="row align-items-stretch mb-5">
+                <div class="row align-items-stretch mb-5 " style="margin-top: 2%;width: 1400px;margin-left: 4%">
                     <div class="col-md-6">
                         <p class="mb-0"> DNI</p>
-                        <!-- <h6 style="color: red;">Nombre de la función</h6>-->
                         <div class="form-group">
                             <!-- Name input-->
-                            <input class="form-control" id="nombre_funcion" type="text" value="<%=listaPerfil.get(1).getDni()%>"  disabled>
-
-                            <div class="invalid-feedback" data-sb-feedback="nombre_funcion:required">Un nombre es requerido.</div>
+                            <input class="form-control" id="nombre_funcion" type="text" value="<%=listaPerfil.get(0).getDni()%>"  disabled>
                         </div>
                         </br>
                         <p class="mb-0"> Código PUCP</p>
                         <div class="form-group">
-                            <input class="form-control" type="text" value="<%=listaPerfil.get(1).getCodigo_pucp()%>" disabled >
+                            <input class="form-control" type="text" value="<%=listaPerfil.get(0).getCodigo_pucp()%>" disabled >
                         </div>
                         </br>
                         <p class="mb-0"> Correo</p>
                         <div class="form-group">
-                            <input class="form-control" type="email" value="<%=listaPerfil.get(1).getCorreo_pucp()%>" data-sb-validations="required,email" data-sb-can-submit="no" disabled>
+                            <input class="form-control" type="email" value="<%=listaPerfil.get(0).getCorreo_pucp()%>" data-sb-validations="required,email" data-sb-can-submit="no" disabled>
                         </div>
                         </br>
 
                     </div>
+
                     <div class="col-md-6">
+
                         <p class="mb-0">Fecha de nacimiento</p>
                         <div class="form-group">
-                            <label for="inputPassword2" class="visually-hidden">Password</label>
-                            <input type="date" class="form-control" id="inputPassword2" placeholder="Ingrese fecha">
+                            <input name="nacimiento" type="date" class="form-control" id="inputPassword2" value="<%=listaPerfil.get(0).getFecha_nacimiento()%>">
                         </div>
-
                         </br>
                         <p class="mb-0">Dirección</p>
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="Ingrese dirección" >
+                            <input name ="direccion" class="form-control" type="text" value="<%=listaPerfil.get(0).getDireccion()%>" >
                         </div>
                         <br>
                         <p class="mb-0">Número de teléfono</p>
                         <div class="form-group">
-                            <input class="form-control" type="tel" placeholder="Ingrese numero de teléfono" >
+                            <input maxlength="9" minlength="9" pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"name="telefono" class="form-control" type="tel"value="<%=listaPerfil.get(0).getNumtelefono()%>" >
                         </div>
+
                     </div>
-                </div>
 
 
-                <div style="text-align: center">
-                    <a href="#"><button class="btn btn-dark" type="submit">Actualizar mis datos</button></a>
+                <div style="text-align: center;margin-top: 1%;">
+                    <button class ="btn btn-primary btn-l" type="submit">Actualizar mis datos</button>
                 </div>
+
 
             </div>
         </section>
-
+        </form>
 
         <footer class="footer py-4">
             <div class="container">
