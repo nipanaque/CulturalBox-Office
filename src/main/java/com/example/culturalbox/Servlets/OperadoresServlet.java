@@ -54,16 +54,16 @@ public class OperadoresServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/operadores");
             }
 
-            //case "borrar" -> {
-            //    String cantActoresStr = request.getParameter("cantActores");
-            //    int cantActoresint = Integer.parseInt(cantActoresStr);
-            //    for(int i =1;i <= cantActoresint; i++){
-            //        String parametro = "actor"+i;
-            //        String aStr = request.getParameter(parametro);
-            //        actoresDao.borrarActor(aStr);
-            //    }
-            //    response.sendRedirect(request.getContextPath() + "/Actores");
-            //}
+            case "borrar" -> {
+                String cantOperadoresStr = request.getParameter("cantOperadores");
+                int cantOpeint = Integer.parseInt(cantOperadoresStr);
+                for(int i =1;i <= cantOpeint; i++){
+                    String parametro = "operador"+i;
+                    String aStr = request.getParameter(parametro);
+                    operadoresDao.borrarOperador(aStr);
+                }
+                response.sendRedirect(request.getContextPath() + "/operadores");
+            }
 
         }
 

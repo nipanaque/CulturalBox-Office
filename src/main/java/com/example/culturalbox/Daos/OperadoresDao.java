@@ -20,12 +20,13 @@ public class OperadoresDao {
         ArrayList<Operadores> listaOperadores = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT u.nombre,u.apellido, u.correo_pucp AS 'Correo' FROM usuario u WHERE u.idRoles = 2  ")) {
+             ResultSet rs = stmt.executeQuery("SELECT u.nombre,u.apellido, u.correo_pucp, u.idUsuario FROM usuario u WHERE u.idRoles = 2  ")) {
             while (rs.next()) {
                 String nombre = rs.getString(1);
                 String apellido = rs.getString(2);
                 String correo = rs.getString(3);
-                listaOperadores.add(new Operadores(nombre,apellido,correo));
+                String id = rs.getString(4);
+                listaOperadores.add(new Operadores(nombre,apellido,correo,id));
             }
 
         } catch (SQLException e) {
@@ -57,4 +58,25 @@ public class OperadoresDao {
             throw new RuntimeException(e);
         }
     }
+
+    public void borrarOperador(String operadorId){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "DELETE FROM usuario u WHERE u.idUsuario = ? AND u.idRoles = 2;";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, operadorId);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
