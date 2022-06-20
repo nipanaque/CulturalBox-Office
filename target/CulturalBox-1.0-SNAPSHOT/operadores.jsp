@@ -51,8 +51,11 @@
         </div>
     </div>
 </nav>
+
+
 <!-- Portfolio Grid-->
 <section class="page-section bg-light" id="portfolio">
+    <form method="POST" action="<%=request.getContextPath()%>/operadores?a=borrar">
     <div class="container">
         <div class="text-center">
             </br>
@@ -60,25 +63,31 @@
             </br>
         </div>
         <div class="row">
-            <%for(Operadores operadores1: operadores){%>
+            <%int x=1;
+                for(Operadores operadores1: operadores){%>
             <div class="col-lg-4 col-sm-6 mb-4">
                 <!-- Portfolio item 1-->
                 <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" id="checkboxNoLabel" value="" aria-label="..." style="width:30px; height:30px ">
+                    <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" id="checkboxNoLabel" name="operador<%=x%>" value="<%=operadores1.getId()%>" value="" aria-label="..." style="width:30px; height:30px ">
                     <img class="card-img-left" src="assets/img/portfolio/user.png">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <h3><a><%=operadores1.getNombre()%></a></h3>
-                        <p class="card-text mb-auto"><%=operadores1.getCorreo()%></p>
+                    <div class="card-body">
+                        <h5><a><%=operadores1.getNombre()%></a></h5>
+                        <h5><a><%=operadores1.getApellido()%></a></h5>
+                        <p class="card-text"><%=operadores1.getCorreo()%></p>
                     </div>
                 </div>
             </div>
-            <%}%>
+            <%x++;}%>
+            <input type="hidden" name="cantOperadores" value="<%=operadores.size()%>" />
+
         </div>
     </div>
 
 
 
     <!-- Contenedor de botones eliminar y agregar-->
+
+
     <div class = "container">
         <div class="row justify-content-end">
             <div class="col-2">
@@ -93,7 +102,7 @@
             </div>
         </div>
     </div>
-</section>
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -108,13 +117,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Eliminar</button>
+                <button type="submit" class="btn btn-primary">Eliminar</button>
             </div>
         </div>
     </div>
 </div>
-
-
+</form>
+</section>
 
 <!-- Footer-->
 <footer class="footer py-4">

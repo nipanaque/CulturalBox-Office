@@ -273,7 +273,7 @@ public class EstadisticaDao {
 
         String sql = "select f.nombre, dia, tiempo_inicio, genero, round(sum(puntaje)/count(puntaje),1) as `punt_prom`,\n" +
                 "\tround((count(h.idhorario)/stock)*100,2) as `asistencia %`, count(u.idUsuario)*costo as `monto recaudado S/`,\n" +
-                "    stock*costo as `max monto S/`, concat(d.nombre,' ',d.apellido) as `director`, d.idDirector\n" +
+                "    stock*costo as `max monto S/`, concat(d.nombre,' ',d.apellido) as `director`, d.idDirector, f.idFuncion\n" +
                 "from usuario u\n" +
                 "\tinner join compra c on (u.idUsuario = c.idUsuario)\n" +
                 "    inner join horario h on (c.idHorario = h.idHorario)\n" +
@@ -301,6 +301,7 @@ public class EstadisticaDao {
                 estadistica.setMaxMonto(rs.getDouble(8));
                 estadistica.setDirector(rs.getString(9));
                 estadistica.setId(rs.getInt(10));
+                estadistica.setIdfotoEstadFuncion(rs.getInt(11));
             }
         } catch (SQLException e) {
             System.out.println("No se pudo realizar la busqueda");

@@ -12,8 +12,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     ArrayList<Menu> listaMenu =  (ArrayList<Menu>) request.getAttribute("listaMenu");
-    ArrayList<Horarios> listaHorarios =  (ArrayList<Horarios>) request.getAttribute("listaHorario");
-
+    ArrayList<ArrayList<Horarios>> listaListasHorarios = (ArrayList<ArrayList<Horarios>>) request.getAttribute("listaListasHorarios");
+    int contCompras = (int) request.getAttribute("contCompras");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,19 +45,19 @@
             <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="compra.html">
+                        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/MenuServlet?a=listarCompras&idUsuario=1">
                             <img src="assets/img/carrito.png" style="width: 90px;margin-right:6px;margin-top:8px;"  class="rounded float-start" alt="...">
                             <span class="badge rounded-pill bg-danger"style="margin-left:-6px;">
-                                         5
+                                         <%=contCompras%>
                                          <span class="visually-hidden">unread messages</span>
                                          </span>
-                        </li>
+                        </a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" style="margin-right:12px;"href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 DiegoZ@gmail.com
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="miperfil2.html">Perfil</a></li>
+                                <li><a class="dropdown-item" href="<%=request.getContextPath()%>/Perfil.jsp">Perfil</a></li>
                                 <li><a class="dropdown-item" href="historialdeFunciones.html">Historial de Funciones</a></li>
                                 <li><a class="dropdown-item" href="usuario_menu.html">Cerrar Sesión</a></li>
                             </ul>
@@ -81,7 +81,7 @@
 <section class="page-section bg-light" id="portfolio">
     <div class="container">
         <div class="text-center">
-            <h2 class="section-heading text-uppercase" href = "#funciones">FUNCIONES</h2>
+            <h2 class="section-heading text-uppercase" href="<%=request.getContextPath()%>/MenuServlet" href = "#funciones">FUNCIONES</h2>
             <h3 class="section-subheading text-muted">Los espectáculos más esperados</h3>
         </div>
         <div class="row">
@@ -94,13 +94,13 @@
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid1" src="assets/img/portfolio/funcion2.jpg" alt="..." />
+                        <img class="img-fluid1" src="assets/img/portfolio/funcion1.jpg" alt="..." />
                     </a>
                     <div class="portfolio-caption">
                         <div class="portfolio-caption-heading"><%=menu.getNombre_funcion()%></div>
 
                         <div></div>
-                        <div data-bs-toggle="modal" href="#portfolioModal<%=i%>" style ="margin-top:5%;">
+                        <div data-bs-toggle="modal" href="#Modal<%=i%>" style ="margin-top:5%;">
                             <button href="<%=request.getContextPath()%>/MenuServlet?a=verHorarios&nombre=<%=menu.getNombre_funcion()%>"
                                     type="button" class="btn btn-danger">Añadir al carrito</button>
                         </div>
@@ -111,21 +111,8 @@
             } %>
         </div>
     </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
-</section>
 
+</section>
 <!-- Footer-->
 <footer class="footer py-4">
     <div class="container">
@@ -147,47 +134,8 @@
 
 <!-- Portfolio item 1 modal popup-->
 <% int j = 1;
-    for (Menu menu : listaMenu) { %>
-<div class="portfolio-modal modal fade" id="portfolioModal<%=j%>" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
-            <div class="container" >
-                <div class="row justify-content-center" >
-                    <div class="col-lg-8" style="padding: 0;">
-                        <div class="modal-body" style="padding: 0;">
-                            <!-- Project details-->
-                            <h2 class="text-uppercase" style="font-size: 28px;"><%=menu.getNombre_funcion()%></h2>
-                            <p class="item-intro text-muted"><%=menu.getDirector()%></p>
-                            <img class="img-fluid d-block mx-auto" src="assets/img/laRoca.jpg" alt="..." />
-                            <p style="color: black;font-size:14px;"><%=menu.getDescripcion()%></p>
-                            <ul class="list-inline">
-
-                                <li>
-                                    <strong>Categoría:</strong>
-                                    <%=menu.getGenero()%>
-                                </li>
-                                <li>
-                                    <strong>Restricción de edad:</strong>
-                                    <%=menu.getRestriccion()%>
-                                </li >
-
-                            </ul>
-
-                            <button class="btn btn-warning btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                <i class="fas fa-xmark me-1"></i>
-                                Regresar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="portfolio-modal modal fade" id="portfolioModal<%=j%>" tabindex="-1" role="dialog" aria-hidden="true">
+    for (ArrayList<Horarios> listaHorarios:listaListasHorarios) { %>
+<div class="portfolio-modal modal fade" id="Modal<%=j%>" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" style="height:330px;">
             <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
@@ -201,10 +149,10 @@
                                 <% int r = 1;
                                     for (Horarios horarios : listaHorarios) { %>
                                 <li style="margin-top:4%;">
-                                    <a class="btn btn-outline-dark" href="compra.html">
-                                        <strong>Horario <%=j%>: </strong>
-                                        <%=horarios.getTiempo_inicio()%>
-                                        Duración: <%=horarios.getDuracion()%>
+                                    <a class="btn btn-outline-dark" href="<%=request.getContextPath()%>/MenuServlet?a=crearCompra1&idHorario=<%=horarios.getIdHorario()%>&idUsuario=1">
+                                        <strong>Horario <%=r%>: </strong>
+                                        <%=horarios.getT_init()%>
+                                        Duración: <%=horarios.getT_duracion()%>
                                     </a>
                                     <h9 style="font-size:10px"><strong> (stock: <%=horarios.getStock()%>)</strong></h9>
                                     <h9 style="font-size:10px"><strong>----- Precio: S/.<%=horarios.getCosto()%></strong></h9>
@@ -225,6 +173,47 @@
     </div>
 </div>
 <% j++;
+} %>
+<% int s = 1;
+    for (Menu menu : listaMenu) { %>
+<div class="portfolio-modal modal fade" id="portfolioModal<%=s%>" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+            <div class="container" >
+                <div class="row justify-content-center" >
+                    <div class="col-lg-8" style="padding: 0;">
+                        <div class="modal-body" style="padding: 0;">
+                            <!-- Project details-->
+                            <h2 class="text-uppercase" style="font-size: 28px;"><%=menu.getNombre_funcion()%></h2>
+                            <p class="item-intro text-muted"><%=menu.getDirector()%></p>
+                            <img class="img-fluid d-block mx-auto" src="assets/img/roca.png" alt="..." />
+                            <p style="color: black;font-size:14px;"><%=menu.getDescripcion()%></p>
+                            <ul class="list-inline">
+
+                                <li>
+                                    <strong>Categoría:</strong>
+                                    <%=menu.getGenero()%>
+                                </li>
+                                <li>
+                                    <strong>Restricción de edad:</strong>
+                                    <%=menu.getRestriccion()%>
+                                </li >
+
+                            </ul>
+                            <button class="btn btn-warning btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                <i class="fas fa-xmark me-1"></i>
+                                Regresar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% s++;
 } %>
 
 

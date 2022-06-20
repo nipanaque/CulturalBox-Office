@@ -1,5 +1,7 @@
 package com.example.culturalbox.Beans;
 
+import java.sql.Time;
+
 public class Horarios {
     private int idHorario;
     private int vigencia;
@@ -13,6 +15,27 @@ public class Horarios {
     private int duracion;
     private int tickets_vendidos;
     private float recaudacion;
+
+    //
+    private Time t_init;
+    private Time t_duracion;
+
+    public Time getT_init() {
+        return t_init;
+    }
+
+    public void setT_init(Time t_init) {
+        this.t_init = t_init;
+    }
+
+    public Time getT_duracion() {
+        return t_duracion;
+    }
+
+    public void setT_duracion(Time t_duracion) {
+        this.t_duracion = t_duracion;
+    }
+    //
 
     public float getRecaudacion() {
         return recaudacion;
