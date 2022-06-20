@@ -16,12 +16,14 @@ public class HistorialServlet extends HttpServlet {
 
         switch(action){
             case "listar" -> {
-
+                request.setAttribute("funcionesvigentes",historialDao.obtenerfuncionesvigentes());
                 request.setAttribute("listaHistorial",historialDao.obtenerHistorial());
+
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("Historial.jsp");
                 requestDispatcher.forward(request,response);
             }
             case "crear" -> {
+
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("Calificacion.jsp");
                 requestDispatcher.forward(request,response);
             }

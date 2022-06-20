@@ -25,8 +25,37 @@ public class HistorialDao {
                      "AND h.idSede = s.idSede;")) {
             while (rs.next()) {
                 Historial historial = new Historial();
+                historial.setNum_ticket(rs.getInt(1));
                 historial.setNombre_funcion(rs.getString(2));
                 historial.setNombre_sede(rs.getString(3));
+                listaHistorial.add(historial);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("No se pudo realizar la busqueda");
+        }
+        return listaHistorial;
+    }
+    public ArrayList<Historial> obtenerfuncionesvigentes() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+
+        }
+        ArrayList<Historial> listaHistorial = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT f.nombre, s.nombre, c.num_tickets FROM compra c,funcion f,horario h,sede s\n" +
+                     "where c.idHorario = h.idHorario\n" +
+                     "and h.idSede=s.idSede\n" +
+                     "and h.idFuncion=f.idFuncion\n" +
+                     "and estadoPago='1';")) {
+            while (rs.next()) {
+                Historial historial = new Historial();
+                historial.setNombre_funcion(rs.getString(1));
+                historial.setNombre_sede(rs.getString(2));
+                historial.setNum_ticket(rs.getInt(3));
                 listaHistorial.add(historial);
             }
 

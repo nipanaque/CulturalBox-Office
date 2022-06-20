@@ -152,9 +152,6 @@
         function explorar(){
             document.getElementById("f_subir").click()
 
-            var HTML = '<img src="assets/img/camara.png" style="width: 50px;height: 4%;"  class="rounded float-start" alt="..." title="subir imagen"id="m"style ="border-bottom-color: lightcoral"> ';
-
-            document.getElementById("m").innerHTML=HTML;
         }
     </script>
 </html>
