@@ -90,6 +90,28 @@ public class CrearFuncionDao {
 
     }
 
+    public void eliminarFuncion(String id) {
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "DELETE FROM funcion WHERE (idFuncion = ?)";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setInt(1, Integer.parseInt(id));
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void ingresarActores(int idFuncion,int idActor) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

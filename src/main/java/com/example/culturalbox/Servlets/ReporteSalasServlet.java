@@ -1,5 +1,7 @@
 package com.example.culturalbox.Servlets;
 
+import com.example.culturalbox.Beans.Horarios;
+import com.example.culturalbox.Beans.Operadores;
 import com.example.culturalbox.Daos.EstadisticaDao;
 import com.example.culturalbox.Daos.SalaReporteDao;
 import com.example.culturalbox.Daos.SedesDao;
@@ -8,6 +10,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 @WebServlet(name = "ReporteSalasServlet", value = "/ReporteSalasServlet")
 public class ReporteSalasServlet extends HttpServlet {
@@ -22,6 +26,14 @@ public class ReporteSalasServlet extends HttpServlet {
                 request.setAttribute("inicio","vacio");
 
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("ReporteSalas.jsp");
+                requestDispatcher.forward(request,response);
+            }
+            case "descargar"->{
+                String idSede = request.getParameter("idSede");
+                String idSala = request.getParameter("idSala");
+                String dia = request.getParameter("dia");
+                request.setAttribute("reporte_horarios",salas.obtenerReporte(dia,Integer.parseInt(idSede),Integer.parseInt(idSala)));
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("ReporteExcel.jsp");
                 requestDispatcher.forward(request,response);
             }
         }

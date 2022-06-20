@@ -22,7 +22,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand" href="index_operadores.html"><img src="assets/img/pucp_logo.jpeg" alt="..." style="height: 40px;width: 120px;" /></a>
+        <a class="navbar-brand" href="index_operadores.jsp"><img src="assets/img/pucp_logo.jpeg" alt="..." style="height: 40px;width: 120px;" /></a>
 
         <div class="collapse navbar-collapse " id="navbarResponsive">
           <ul class="navbar-nav ms-auto py-4 py-lg-0">
@@ -43,8 +43,6 @@
             </div>
           </ul>
         </div>
-      </div>
-
       </div>
     </nav>
 

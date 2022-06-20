@@ -24,7 +24,7 @@
         <!-- Navegacion-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="index.html"><img src="assets/img/pucp_logo.jpeg" alt="..." style="height: 40px;width: 120px;"/></a>
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/index_operadores.jsp"><img src="assets/img/pucp_logo.jpeg" alt="..." style="height: 40px;width: 120px;"/></a>
                 <div class="collapse navbar-collapse " id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
@@ -35,8 +35,8 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                         <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                        <li><a class="dropdown-item" href="estadisticasgeneral.html">Estadisticas</a></li>
-                                        <li><a class="dropdown-item" href="salas.html">Salas</a></li>
+                                        <li><a class="dropdown-item" href="<%=request.getContextPath()%>/EstadisticaServlet">Estadisticas</a></li>
+                                        <li><a class="dropdown-item" href="<%=request.getContextPath()%>/ReporteSalasServlet">Salas</a></li>
                                         <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
                                     </ul>
                                 </li>
@@ -51,7 +51,7 @@
                 </br>
                 <div class="d-flex my-3">
                     <h2 class="section-heading text-uppercase">Lista de Funciones</h2>
-                    <a href="<%=request.getContextPath()%>/CrearFuncion" class="btn btn-secondary btn-xl ms-auto">Crear Funciones</a>
+                    <a href="<%=request.getContextPath()%>/CrearFuncion" class="btn btn-primary btn-xl ms-auto">Crear Funciones</a>
                 </div>
                 </br>
                 <table class="table">
@@ -70,13 +70,15 @@
                             <td><%=listaFunciones1.getGenero() %>
                             </td>
                             <td><a href="<%=request.getContextPath()%>/ListaFunciones?a=agregaract&id=<%=listaFunciones1.getIdFuncion() %>"
-                                   class="btn btn-primary">Agregar Actores</a></td>
+                                   class="btn btn-success" style="background-color:#002265; border-color:#002265; color:white">Agregar Actores</a></td>
+                            <td><a href="<%=request.getContextPath()%>/ListaFunciones?a=borrar&id=<%=listaFunciones1.getIdFuncion()%>"><button
+                                    type="button" class="btn btn-danger" >X</button> </a></td>
                         </tr>
                         <%
                         } %>
                     </tbody>
                 </table>
-                <a href="<%=request.getContextPath()%>/IndexOpServlet"><button type="button" class="btn btn-secondary">Regresar</button></a>
+                <a href="<%=request.getContextPath()%>/index_operadores.jsp"><button type="button" class="btn btn-secondary">Regresar</button></a>
             </div>
         </section>
 
