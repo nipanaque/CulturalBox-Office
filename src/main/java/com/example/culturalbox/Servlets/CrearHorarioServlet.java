@@ -11,6 +11,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @WebServlet(name = "CrearHorarioServlet", value = "/CrearHorario")
 public class CrearHorarioServlet extends HttpServlet {
@@ -37,9 +38,11 @@ public class CrearHorarioServlet extends HttpServlet {
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         SedesDao sedesDao = new SedesDao();
         HorariosDao horariosDao = new HorariosDao();
+        ArrayList<Horarios> listaHorarios = horariosDao.obtenerHorarios();
 
         switch (action){
             case "guardar" -> {
+                //break;
                 String vigenciaStr = request.getParameter("vigencia");
                 String costoStr = request.getParameter("costo");
                 String dia = request.getParameter("dia");
@@ -49,22 +52,43 @@ public class CrearHorarioServlet extends HttpServlet {
                 String idSedeStr = request.getParameter("sede");
                 String idFuncionStr = request.getParameter("funcion");
 
+                int vigencia = Integer.parseInt(vigenciaStr);
+                float costo = Float.parseFloat(costoStr);
+                int stock = Integer.parseInt(stockStr);
+                int idSala = Integer.parseInt(idSalaStr);
+                int idSede = Integer.parseInt(idSedeStr);
+                int idFuncion = Integer.parseInt(idFuncionStr);
+
+                int i=0;
                 try {
-                    int vigencia = Integer.parseInt(vigenciaStr);
-                    float costo = Float.parseFloat(costoStr);
-                    int stock = Integer.parseInt(stockStr);
-                    int idSala = Integer.parseInt(idSalaStr);
-                    int idSede = Integer.parseInt(idSedeStr);
-                    int idFuncion = Integer.parseInt(idFuncionStr);
-
-                    horariosDao.crearHorario(vigencia, costo, dia, tiempo_inicio, stock, idSala,idSede,idFuncion);
-
-                    response.sendRedirect(request.getContextPath() + "/ListaHorarios");
-
-                } catch (NumberFormatException e) {
-                    System.out.println("error al parsear");
+                    for (Horarios listahorarios : listaHorarios) {
+                        if (listahorarios.getIdSede() == idSede && listahorarios.getIdSala() == idSala &&
+                                Objects.equals(listahorarios.getDia(), dia) &&
+                                Objects.equals(listahorarios.getTiempo_inicio().substring(0, 5), tiempo_inicio)) {
+                            i++;
+                        }
+                    }
+                } catch (Exception e){
+                    System.out.println("Cruce de horarios");
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("/CrearHorario");
                     requestDispatcher.forward(request, response);
+                }
+
+                System.out.println("El valor de i es: " + i);
+
+                if(i==0) {
+                    try {
+                        horariosDao.crearHorario(vigencia, costo, dia, tiempo_inicio, stock, idSala, idSede, idFuncion);
+                        response.sendRedirect(request.getContextPath() + "/ListaHorarios");
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("error al parsear");
+                        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/CrearHorario");
+                        requestDispatcher.forward(request, response);
+                    }
+                }else{
+                    request.setAttribute("cruce","Cruce de horarios");
+                    response.sendRedirect(request.getContextPath() + "/CrearHorario");
                 }
             }
         }
