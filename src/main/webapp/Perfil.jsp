@@ -98,7 +98,7 @@
 
                         <p class="mb-0">Fecha de nacimiento</p>
                         <div class="form-group">
-                            <input name="nacimiento" type="date" class="form-control" id="inputPassword2" value="<%=listaPerfil.get(0).getFecha_nacimiento()%>">
+                            <input name="nacimiento" type="date" class="form-control" id="inputPassword2" value="<%=listaPerfil.get(0).getFecha_nacimiento()%>" max="2022-01-01">
                         </div>
                         </br>
                         <p class="mb-0">Dirección</p>
