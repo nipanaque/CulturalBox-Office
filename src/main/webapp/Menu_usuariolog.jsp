@@ -40,7 +40,7 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="#page-top" ><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;"/></a>
+        <a class="navbar-brand" href="#page-top" ><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;border-radius: 3px;"/></a>
         <div class="collapse navbar-collapse " id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
@@ -57,8 +57,8 @@
                                 DiegoZ@gmail.com
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="<%=request.getContextPath()%>/Perfil.jsp">Perfil</a></li>
-                                <li><a class="dropdown-item" href="historialdeFunciones.html">Historial de Funciones</a></li>
+                                <li><a class="dropdown-item" href="<%=request.getContextPath()%>/PerfilServlet">Perfil</a></li>
+                                <li><a class="dropdown-item" href="<%=request.getContextPath()%>/HistorialServlet">Historial de Funciones</a></li>
                                 <li><a class="dropdown-item" href="usuario_menu.html">Cerrar Sesión</a></li>
                             </ul>
                         </li>
@@ -152,7 +152,7 @@
                                     <a class="btn btn-outline-dark" href="<%=request.getContextPath()%>/MenuServlet?a=crearCompra1&idHorario=<%=horarios.getIdHorario()%>&idUsuario=1">
                                         <strong>Horario <%=r%>: </strong>
                                         <%=horarios.getT_init()%>
-                                        Duración: <%=horarios.getT_duracion()%>
+                                        Duración: <%=horarios.getDuracion()%>
                                     </a>
                                     <h9 style="font-size:10px"><strong> (stock: <%=horarios.getStock()%>)</strong></h9>
                                     <h9 style="font-size:10px"><strong>----- Precio: S/.<%=horarios.getCosto()%></strong></h9>

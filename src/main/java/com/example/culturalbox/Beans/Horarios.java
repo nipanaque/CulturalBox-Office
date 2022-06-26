@@ -18,7 +18,6 @@ public class Horarios {
 
     //
     private Time t_init;
-    private Time t_duracion;
 
     public Time getT_init() {
         return t_init;
@@ -28,13 +27,6 @@ public class Horarios {
         this.t_init = t_init;
     }
 
-    public Time getT_duracion() {
-        return t_duracion;
-    }
-
-    public void setT_duracion(Time t_duracion) {
-        this.t_duracion = t_duracion;
-    }
     //
 
     public float getRecaudacion() {

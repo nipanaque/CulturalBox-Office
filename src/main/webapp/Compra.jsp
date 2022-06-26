@@ -28,7 +28,7 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
     <div class="container-md">
-        <a class="navbar-brand" href="<%=request.getContextPath()%>/MenuServlet"><img src="assets/img/pucp.png" alt="..." style="height: 40px;width: 120px;"></a>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/MenuServlet"><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;border-radius: 3px;"></a>
 
         <div class="collapse navbar-collapse " id="navbarResponsive">
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
@@ -76,7 +76,10 @@
                 <td><%=compra.getT_init()%></td>
                 <td>S/<%=compra.getCosto()%></td>
                 <td>
+                    <label for="num_tickets" class="form-label"></label>
                     <input type="number" value = "1" name="num_tickets" id="num_tickets" min="1" max="10">
+                    <a href="<%=request.getContextPath()%>/MenuServlet?a=borrarCompra&id=<%=compra.getIdCompra()%>"><button class="btn btn-success btn-sm" type="submit">Seleccionar</button></a>
+                    <%=compra.getNu_tickets()%>
                 </td>
                 <td>
                     <a href="<%=request.getContextPath()%>/MenuServlet?a=borrarCompra&id=<%=compra.getIdCompra() %>"><button class="btn btn-danger btn-md" type="submit">Cancelar</button></a>
@@ -146,6 +149,6 @@
         </div>
     </div>
 </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>

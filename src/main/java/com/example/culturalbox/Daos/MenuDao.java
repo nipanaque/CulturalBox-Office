@@ -25,7 +25,7 @@ public class MenuDao {
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("select f.nombre,f.descripcion,f.genero,f.restriccion, concat(d.nombre,d.apellido) as `Director` from funcion f\n" +
+             ResultSet rs = stmt.executeQuery("select distinct(f.nombre),f.descripcion,f.genero,f.restriccion, concat(d.nombre,d.apellido) as `Director` from funcion f\n" +
                      "inner join director d on f.idDirector = d.idDirector\n" +
                      "inner join horario h on f.idFuncion = h.idFuncion\n" +
                      "where h.vigencia = 1\n" +
@@ -70,7 +70,7 @@ public class MenuDao {
                 while (rs.next()) {
                     Horarios horarios = new Horarios();
                     horarios.setT_init(rs.getTime(1));
-                    horarios.setT_duracion(rs.getTime(2));
+                    horarios.setDuracion(rs.getInt(2));
                     horarios.setStock(rs.getInt(3));
                     horarios.setCosto(rs.getInt(4));
                     horarios.setIdHorario(rs.getInt(5));
@@ -94,7 +94,7 @@ public class MenuDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "insert into compra (Qr, idHorario, idUsuario, num_tickets, estadoPago) VALUES (NULL, ?, ?, 0, 0)";
+        String sql = "insert into compra (Qr, idHorario, idUsuario, numtickets, estado) VALUES (NULL, ?, ?, 0, 0)";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -120,7 +120,7 @@ public class MenuDao {
         String sql = "select f.nombre,h.tiempo_inicio, h.costo, c.idCompra from  compra c\n" +
                 "left join horario h on h.idHorario = c.idHorario\n" +
                 "left join funcion f on f.idFuncion = h.idFuncion\n" +
-                "where c.idUsuario = ? and c.estadoPago = 0";
+                "where c.idUsuario = ? and c.estado = 0";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
