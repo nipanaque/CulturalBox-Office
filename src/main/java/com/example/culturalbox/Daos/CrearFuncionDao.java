@@ -3,6 +3,7 @@ package com.example.culturalbox.Daos;
 import com.example.culturalbox.Beans.Actores;
 import com.example.culturalbox.Beans.CrearFuncion;
 import com.example.culturalbox.Beans.Directores;
+import com.example.culturalbox.Beans.Mantenimiento;
 
 import java.io.InputStream;
 import java.sql.*;
@@ -35,6 +36,33 @@ public class CrearFuncionDao {
             throw new RuntimeException(e);
         }
 
+        return listaActores;
+    }
+
+    public ArrayList<CrearFuncion> obtenerNombres_Actores_Horario(String id) {
+        ArrayList<CrearFuncion> listaActores = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String sql = "select concat(nombre,\" \",apellido) from funcion_has_actor fa, actor act\n" +
+                "where fa.idActor=act.idActor and idFuncion = ?;";
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+                while (rs.next()) {
+                    CrearFuncion crearFuncion_actor = new CrearFuncion();
+                    crearFuncion_actor.setNombres_Actores(rs.getString(1));
+                    listaActores.add(crearFuncion_actor);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return listaActores;
     }
 

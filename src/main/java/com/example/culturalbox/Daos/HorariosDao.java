@@ -3,6 +3,7 @@ package com.example.culturalbox.Daos;
 import com.example.culturalbox.Beans.CrearFuncion;
 import com.example.culturalbox.Beans.Horarios;
 import com.example.culturalbox.Beans.Mantenimiento;
+import com.example.culturalbox.Beans.SalaReporte;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -50,11 +51,12 @@ public class HorariosDao {
         ArrayList<Horarios> listaHorarios = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT idHorario, s.nombre, h.idSala ,sal.SalaSede, dia, tiempo_inicio, vigencia, f.nombre\n" +
-                     "                     FROM horario h, sede s, sala sal, funcion f\n" +
-                     "                     where h.idSede=s.idSede and\n" +
-                     "                       h.idSala=sal.idSala and\n" +
-                     "                           h.idFuncion=f.idFuncion;");){
+             ResultSet rs = stmt.executeQuery("SELECT idHorario, s.nombre, h.idSala ,sal.SalaSede, dia, tiempo_inicio, vigencia, f.nombre, s.idSede\n" +
+                     "                                          FROM horario h, sede s, sala sal, funcion f\n" +
+                     "                                          where h.idSede=s.idSede and\n" +
+                     "                                            h.idSala=sal.idSala and\n" +
+                     "                                                h.idFuncion=f.idFuncion\n" +
+                     "                                                order by dia asc, tiempo_inicio asc, s.nombre asc;");){
             while (rs.next()){
                 Horarios horarios= new Horarios();
                 horarios.setIdHorario(rs.getInt(1));
@@ -65,6 +67,7 @@ public class HorariosDao {
                 horarios.setTiempo_inicio(rs.getString(6));
                 horarios.setVigencia(rs.getInt(7));
                 horarios.setNombre_funcion(rs.getString(8));
+                horarios.setIdSede(rs.getInt(9));
                 listaHorarios.add(horarios);
             }
 
@@ -112,6 +115,36 @@ public class HorariosDao {
             }
 
         }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaMantenimiento;
+    }
+
+    public ArrayList<Mantenimiento> obtenerMatenimientoporHorario(String id) {
+        ArrayList<Mantenimiento> listaMantenimiento = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String sql = "select m.nombre, m.apellido\n" +
+                "from horario_has_mantenimiento hm, mantenimiento m \n" +
+                "where hm.idMantenimiento=m.idMantenimiento and hm.idHorario = ?;";
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, id);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+                while (rs.next()) {
+                    Mantenimiento mantenimiento= new Mantenimiento();
+                    mantenimiento.setNombre(rs.getString(1));
+                    mantenimiento.setApellido(rs.getString(2));
+                    listaMantenimiento.add(mantenimiento);
+                }
+            }
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
@@ -258,7 +291,9 @@ public class HorariosDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "select h.idHorario, f.nombre, f.genero ,h.idSala, sal.SalaSede,sal.aforo, s.nombre ,h.dia, h.tiempo_inicio, h.costo FROM horario h, sede s, sala sal, funcion f where h.idSede=s.idSede and h.idSala=sal.idSala and h.idFuncion=f.idFuncion and idHorario = ? ";
+        String sql = "select h.idHorario, f.nombre, f.genero ,h.idSala, sal.SalaSede,sal.aforo, s.nombre, s.idSede ,h.dia, h.tiempo_inicio, h.costo \n" +
+                "FROM horario h, sede s, sala sal, funcion f \n" +
+                "where h.idSede=s.idSede and h.idSala=sal.idSala and h.idFuncion=f.idFuncion and idHorario = ? ";
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
 
@@ -275,9 +310,10 @@ public class HorariosDao {
                     horarios.setSalaSede(rs.getInt(5));
                     horarios.setHorario_aforo(rs.getInt(6));
                     horarios.setNombre_sede(rs.getString(7));
-                    horarios.setDia(rs.getString(8));
-                    horarios.setTiempo_inicio(rs.getString(9));
-                    horarios.setCosto(rs.getFloat(10));
+                    horarios.setIdSede(rs.getInt(8));
+                    horarios.setDia(rs.getString(9));
+                    horarios.setTiempo_inicio(rs.getString(10));
+                    horarios.setCosto(rs.getFloat(11));
                 }
             }
         } catch (SQLException e) {

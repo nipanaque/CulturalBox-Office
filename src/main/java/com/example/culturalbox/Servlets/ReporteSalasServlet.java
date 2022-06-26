@@ -2,6 +2,7 @@ package com.example.culturalbox.Servlets;
 
 import com.example.culturalbox.Beans.Horarios;
 import com.example.culturalbox.Beans.Operadores;
+import com.example.culturalbox.Beans.SalaReporte;
 import com.example.culturalbox.Daos.EstadisticaDao;
 import com.example.culturalbox.Daos.SalaReporteDao;
 import com.example.culturalbox.Daos.SedesDao;
@@ -32,7 +33,8 @@ public class ReporteSalasServlet extends HttpServlet {
                 String idSede = request.getParameter("idSede");
                 String idSala = request.getParameter("idSala");
                 String dia = request.getParameter("dia");
-                request.setAttribute("reporte_horarios",salas.obtenerReporte(dia,Integer.parseInt(idSede),Integer.parseInt(idSala)));
+                ArrayList<Horarios> reporte = salas.obtenerReporte(dia,Integer.parseInt(idSede),Integer.parseInt(idSala));
+                request.setAttribute("reporte_horarios",reporte);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("ReporteExcel.jsp");
                 requestDispatcher.forward(request,response);
             }

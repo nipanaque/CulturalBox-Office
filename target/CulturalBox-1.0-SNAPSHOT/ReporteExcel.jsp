@@ -1,5 +1,5 @@
 <%@ page contentType="application/vnd.ms-excel" %>
-<%@ page import="com.example.culturalbox.Beans.Horarios" %>
+<%@ page import="com.example.culturalbox.Beans.Horarios, java.util.*" %>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Horarios>" scope="request" id="reporte_horarios"/>
 
 <%
@@ -14,15 +14,15 @@
     </head>
     <body>
         <h1>Reporte de Horarios en la Sala</h1>
-        <table>
+        <table border="1">
             <tr>
-                <th>Función</th>
-                <th>Género</th>
-                <th>Duración</th>
+                <th>Funcion</th>
+                <th>Genero</th>
+                <th>Duracion</th>
                 <th>Stock</th>
                 <th>Costo</th>
                 <th>Tickets Vendidos</th>
-                <th>Recaudación (Soles)</th>
+                <th>Recaudacion (Soles)</th>
             </tr>
             <%for(Horarios reporte: reporte_horarios ){%>
             <tr>
@@ -30,7 +30,7 @@
                 <td><%=reporte.getGenero_funcion()%></td>
                 <td><%=reporte.getDuracion()%></td>
                 <td><%=reporte.getStock()%></td>
-                <td><%=reporte.getTickets_vendidos()%></td>
+                <td><%=reporte.getCosto()%></td>
                 <td><%=reporte.getTickets_vendidos()%></td>
                 <td><%=reporte.getRecaudacion()%></td>
             </tr>

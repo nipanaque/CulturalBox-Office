@@ -3,6 +3,7 @@
 <%@ page import="com.example.culturalbox.Beans.Mantenimiento" %>
 <jsp:useBean id="idHorario" scope="request" type="com.example.culturalbox.Beans.Horarios" />
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Mantenimiento>" scope="request" id="listaMantenimiento"/>
+<jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Mantenimiento>" scope="request" id="listaMantenimientoidH"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -49,6 +50,7 @@
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
                 </br>
+                </br>
                 <h2 class="section-heading text-uppercase">Listar y crear Mantenimiento</h2>
 
                 <div class="row align-items-stretch mb-5">
@@ -58,7 +60,6 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Id</th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Apellido</th>
                                     </tr>
@@ -66,7 +67,6 @@
                                 <tbody>
                                     <%for(Mantenimiento listaMantenimiento1: listaMantenimiento){%>
                                     <tr>
-                                        <td><%=listaMantenimiento1.getIdMantenimiento()%></td>
                                         <td><%=listaMantenimiento1.getNombre()%></td>
                                         <td><%=listaMantenimiento1.getApellido()%></td>
                                         <td><input name="idMantenimiento" id="idMantenimiento" multiple  type="checkbox"  value="<%=listaMantenimiento1.getIdMantenimiento()%>" aria-label="..." style="width:30px; height:30px "></td>
@@ -87,14 +87,36 @@
                                 </div>
                             </div>
                         </form>
+                        </br>
+                        <h2 class="section-heading text-uppercase">Lista de Mantenimiento en el horario</h2>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for(Mantenimiento listaMantenimiento1: listaMantenimientoidH){%>
+                                <tr>
+                                    <td><%=listaMantenimiento1.getNombre()%></td>
+                                    <td><%=listaMantenimiento1.getApellido()%></td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
                     </div>
-
-                    <div class="col-md-6">
+                    <%int max=0;
+                    for(Mantenimiento listaMantenimiento1 : listaMantenimiento){
+                        if(listaMantenimiento1.getIdMantenimiento()>max){
+                            max=listaMantenimiento1.getIdMantenimiento();
+                        }
+                    }%>
+                    <div class="col-md-4">
                         <form method="POST" action="<%=request.getContextPath()%>/ListaHorarios?a=crearmant&id=<%=idHorario.getIdHorario()%>">
                             </br>
                             <div class="form-group">
-                                <label for="idMant" class="form-label">ID *</label>
-                                <input class="form-control" placeholder="Ingrese el ID" type="number" min="0" max="50" step="1" name="idMant" id="idMant" required>
+                                <input type="hidden" name="idMant" id="idMant" value="<%=max+1%>" />
                             </div>
                             <div class="form-group">
                                 <label for="Nombre" class="form-label">Nombre *</label>
@@ -108,13 +130,12 @@
                             <div class="row align-items-stretch mb-5">
                                 <div class="col-md-2">
                                     <button type="submit" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Agregar
+                                        Crear
                                     </button>
                                 </div>
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </section>

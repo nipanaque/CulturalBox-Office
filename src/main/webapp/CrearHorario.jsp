@@ -4,6 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Sedes>" scope="request" id="listaSedes"/>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaFunciones"/>
+<jsp:useBean type="java.lang.String" class="java.lang.String" scope="request" id="cruce"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -24,22 +25,25 @@
     </head>
     <body id="page-top">
         <!-- Navegacion-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
+        <nav class=" navbar navbar-expand-lg  navbar-dark bg-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="index_operadores.jsp"><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;border-radius: 3px;"/></a>
-
+                <a class="navbar-brand" href="index_operadores.jsp"><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;border-radius: 3px;" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
                 <div class="collapse navbar-collapse " id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        operador@pucp.edu.pe
+                                        Admin1234
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                         <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                        <li><a class="dropdown-item" href="estadisticasgeneral.html">Estadisticas</a></li>
-                                        <li><a class="dropdown-item" href="salas.html">Salas</a></li>
+                                        <li><a class="dropdown-item" href="<%=request.getContextPath()%>/EstadisticaServlet">Estadisticas</a></li>
+                                        <li><a class="dropdown-item" href="ReporteSalasServlet">Salas</a></li>
                                         <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
                                     </ul>
                                 </li>
@@ -47,12 +51,12 @@
                         </div>
                     </ul>
                 </div>
-
             </div>
         </nav>
         <!-- Cuerpo-->
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
+                </br>
                 </br>
                 <h2 class="section-heading text-uppercase">Crear Horarios</h2>
 
@@ -97,17 +101,17 @@
                         </br>
                         </br>
                         <div class="row align-items-stretch mb-5">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <a href="ListaHorarios" class="btn btn-secondary btn-xl">Regresar</a>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <button type="submit" class="btn btn-primary btn-xl" >
                                     Crear
                                 </button>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-1">
                             </div>
                         </div>
                     </div>
@@ -132,9 +136,10 @@
                         </div>
                     </div>
                 </form>
+                <%if(cruce.equals("Cruce de horarios")){%>
+                <h2>No se puede crear el horario</h2>
+                <%}%>
             </div>
-
-
 
         </section>
 

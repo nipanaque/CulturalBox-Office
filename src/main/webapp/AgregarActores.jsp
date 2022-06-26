@@ -2,6 +2,7 @@
 <%@ page import="com.example.culturalbox.Beans.CrearFuncion" %>
 <jsp:useBean id="idFuncion" scope="request" type="com.example.culturalbox.Beans.CrearFuncion" />
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaActores"/>
+<jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaActoresFuncion"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -56,46 +57,70 @@
 
         <!-- Cuerpo-->
         <section class="page-section bg-light" id="portfolio">
-            <div class="container">
-                <div class="text-center">
-                    </br>
-                    <h2 class="section-heading text-uppercase">ACTORES</h2>
-                    </br>
-                </div>
-            </div>
-
             <!--Actores-->
-            <div>
-                <div class="container">
-                    <form method="POST" action="<%=request.getContextPath()%>/ListaFunciones?a=guardaract">
-                    <div class="row justify-content-evenly">
-                        <%for(CrearFuncion actores: listaActores){%>
-                        <div class="col-5">
-                            <div class="card mb-3" style="max-width: 540px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="assets/img/Directores/19.jpg" style="width:150px; height:200px" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <input type="hidden" name="IdFuncion" id="IdFuncion" value="<%=idFuncion.getIdFuncion()%>" />
-                                            <input class="form-check-input position-absolute end-0 top-0 border m-2"  name="IdActor" id="IdActor" multiple type="checkbox"  value="<%=actores.getId_actores()%>" aria-label="..." style="width:30px; height:30px ">
-                                            <h6 class="card-title"><%=actores.getNombres_Actores()%></h6>
-                                        </div>
-                                    </div>
+            <div class="container">
+                </br>
+                </br>
+
+                <div class="row align-items-stretch mb-5">
+                    <div class="col-md-6">
+                        <h2 class="section-heading text-uppercase">Agregar actores</h2>
+                        <form method="POST" action="<%=request.getContextPath()%>/ListaFunciones?a=guardaract">
+                            </br>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombres</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%for(CrearFuncion actores: listaActores){%>
+                                    <tr>
+                                        <td><%=actores.getNombres_Actores()%></td>
+                                        <td><input name="IdActor" id="IdActor" multiple  type="checkbox"  value="<%=actores.getId_actores()%>" aria-label="..." style="width:30px; height:30px "></td>
+                                        <td><input type="hidden" name="IdFuncion" id="IdFuncion" value="<%=idFuncion.getIdFuncion()%>" /></td>
+                                    </tr>
+                                    <%}%>
+                                </tbody>
+                            </table>
+                            </br>
+                            <div class="row align-items-stretch mb-5">
+                                <div class="col-md-2">
+                                    <a href="ListaFunciones"><button type="button" class="btn btn-secondary ">Regresar</button></a>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Agregar
+                                    </button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <%if(listaActoresFuncion.size()>0){%>
+                        <h2 class="section-heading text-uppercase">Lista actores</h2>
+                        </br>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombres</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for(CrearFuncion actores: listaActoresFuncion){%>
+                                <tr>
+                                    <td><%=actores.getNombres_Actores()%></td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                        <%} else{%>
+                        <h2 class="section-heading text-uppercase">Aún no hay actores en la Función</h2>
                         <%}%>
                     </div>
-                        </br>
-                        </br>
-                        <a href="ListaFunciones"><button type="button" class="btn btn-secondary btn-xl">Regresar</button></a>
-                        <button type="submit" class="btn btn-primary btn-xl" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Agregar
-                        </button>
-                    </form>
                 </div>
+
+
             </div>
 
         </section>

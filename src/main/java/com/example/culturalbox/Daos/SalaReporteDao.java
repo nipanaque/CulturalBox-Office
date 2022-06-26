@@ -20,8 +20,8 @@ public class SalaReporteDao {
             e.printStackTrace();
         }
         String sql = "select sal.idSala , sal.SalaSede, sal.idSede, h.dia \n" +
-                "from sala sal, horario h \n" +
-                "where h.idSala=sal.idSala and h.dia like ? and sal.idSede=? group by sal.SalaSede ";
+                "                from sala sal, horario h\n" +
+                "                where h.idSala=sal.idSala and h.dia like ? and sal.idSede=? group by sal.SalaSede ";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
@@ -66,8 +66,8 @@ public class SalaReporteDao {
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
             pstmt.setString(1,dia);
-            pstmt.setInt(2,idSede);
-            pstmt.setInt(3,idSala);
+            pstmt.setString(2, String.valueOf(idSede));
+            pstmt.setString(3, String.valueOf(idSala));
 
             try(ResultSet rs = pstmt.executeQuery();){
                 while (rs.next()) {

@@ -2,6 +2,7 @@ package com.example.culturalbox.Servlets;
 
 import com.example.culturalbox.Beans.CrearFuncion;
 import com.example.culturalbox.Beans.Horarios;
+import com.example.culturalbox.Beans.Mantenimiento;
 import com.example.culturalbox.Daos.CrearFuncionDao;
 import com.example.culturalbox.Daos.HorariosDao;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @WebServlet(name = "ListaHorariosServlet", value = "/ListaHorarios")
 public class ListaHorariosServlet extends HttpServlet {
@@ -27,9 +29,11 @@ public class ListaHorariosServlet extends HttpServlet {
             case "agregarmant"->{
                 String id = request.getParameter("id");
                 Horarios idHorario = horariosDao.buscarPorId(id);
+                ArrayList<Mantenimiento> listaManteniminetoidH = horariosDao.obtenerMatenimientoporHorario(id);
                 if (idHorario != null) {
                     request.setAttribute("idHorario",idHorario);
                     request.setAttribute("listaMantenimiento",horariosDao.obtenerMantenimiento());
+                    request.setAttribute("listaMantenimientoidH",listaManteniminetoidH);
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("ListaMantenimiento.jsp");
                     requestDispatcher.forward(request, response);
                 }else{
@@ -66,7 +70,7 @@ public class ListaHorariosServlet extends HttpServlet {
                 String idFuncion= request.getParameter("idHorario");
                 String idActor = request.getParameter("idMantenimiento");
                 horarios.horario_has_mantenimiento(Integer.parseInt(idFuncion),Integer.parseInt(idActor));
-                response.sendRedirect(request.getContextPath() + "/ListaHorarios");
+                response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=agregarmant&id="+idFuncion);
             }
             case "crearmant" -> {
                 String id = request.getParameter("id");
@@ -77,9 +81,45 @@ public class ListaHorariosServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=agregarmant&id="+id);
             }
             case "actualizar" -> {
-                Horarios horario = leerParametrosRequest(request);
-                horarios.actualizarHorario(horario);
-                response.sendRedirect(request.getContextPath() + "/ListaHorarios");
+                HorariosDao horariosDao = new HorariosDao();
+                ArrayList<Horarios> listaHorarios = horariosDao.obtenerHorarios();
+                Horarios horario =null;
+
+                String id = request.getParameter("idhora");
+                String dia = request.getParameter("dia");
+                String tiempo_inicio = request.getParameter("tiempo_inicio");
+                String costoStr = request.getParameter("costo");
+                String idSalaStr = request.getParameter("idSala");
+                String idSedeStr = request.getParameter("idSede");
+
+                int i=0;
+                try {
+                    for(Horarios listahorarios: listaHorarios) {
+                        if (listahorarios.getIdSede()==Integer.parseInt(idSedeStr) && listahorarios.getIdSala()==Integer.parseInt(idSalaStr) &&
+                                Objects.equals(listahorarios.getDia(), dia) &&
+                                Objects.equals(listahorarios.getTiempo_inicio().substring(0,5), tiempo_inicio)) {
+                            i++;
+                        }
+                    }
+                }catch (Exception e){
+                    System.out.println("Cruce de horarios");
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/CrearHorario");
+                    requestDispatcher.forward(request, response);
+                }
+                System.out.println("El valor de i es: " + i);
+                if(i==0){
+                    horario = new Horarios();
+                    horario.setIdHorario(Integer.parseInt(id));
+                    horario.setDia(dia);
+                    horario.setTiempo_inicio(tiempo_inicio);
+                    horario.setCosto(Float.parseFloat(costoStr));
+                    horarios.actualizarHorario(horario);
+                    response.sendRedirect(request.getContextPath() + "/ListaHorarios");
+                }else{
+                    request.setAttribute("cruce","Cruce de horarios");
+                    response.sendRedirect(request.getContextPath() + "/ListaHorarios");
+                }
+
             }
         }
     }
@@ -90,11 +130,13 @@ public class ListaHorariosServlet extends HttpServlet {
         String tiempo_inicio = request.getParameter("tiempo_inicio");
         String costoStr = request.getParameter("costo");
 
+
         Horarios horario = new Horarios();
         horario.setIdHorario(Integer.parseInt(id));
         horario.setDia(dia);
         horario.setTiempo_inicio(tiempo_inicio);
         horario.setCosto(Float.parseFloat(costoStr));
         return horario;
+
     }
 }

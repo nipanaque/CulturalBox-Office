@@ -30,6 +30,7 @@ public class ListarFuncionesServlet extends HttpServlet {
                 CrearFuncion idFuncion = crearFuncionDao.buscarPorId(id);
                 request.setAttribute("idFuncion",idFuncion);
                 request.setAttribute("listaActores",crearFuncionDao.obtenerNombres_Actores());
+                request.setAttribute("listaActoresFuncion",crearFuncionDao.obtenerNombres_Actores_Horario(id));
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("AgregarActores.jsp");
                 requestDispatcher.forward(request, response);
             }
@@ -52,7 +53,7 @@ public class ListarFuncionesServlet extends HttpServlet {
                 String idFuncion= request.getParameter("IdFuncion");
                 String idActor = request.getParameter("IdActor");
                 crearFuncionDao.funcion_has_actor(Integer.parseInt(idFuncion),Integer.parseInt(idActor));
-                response.sendRedirect(request.getContextPath() + "/ListaFunciones");
+                response.sendRedirect(request.getContextPath() + "/ListaFunciones?a=agregaract&id="+idFuncion);
           }
         }
     }

@@ -32,21 +32,25 @@
     </head>
     <body id="page-top">
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
+        <nav class=" navbar navbar-expand-lg  navbar-dark bg-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="index_operadores.jsp"><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;border-radius: 3px;"/></a>
-
+                <a class="navbar-brand" href="index_operadores.jsp"><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;border-radius: 3px;" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
                 <div class="collapse navbar-collapse " id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        operador@pucp.edu.pe
+                                        Admin1234
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                         <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                        <li><a class="dropdown-item" href="estadisticasgeneral.html">Estadisticas</a></li>
+                                        <li><a class="dropdown-item" href="<%=request.getContextPath()%>/EstadisticaServlet">Estadisticas</a></li>
+                                        <li><a class="dropdown-item" href="ReporteSalasServlet">Salas</a></li>
                                         <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
                                     </ul>
                                 </li>
@@ -54,7 +58,6 @@
                         </div>
                     </ul>
                 </div>
-
             </div>
         </nav>
 
@@ -62,6 +65,7 @@
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
                 <div class="text-center">
+                    </br>
                     </br>
                     <h2 class="section-heading text-uppercase">Salas disponibles</h2>
                     <form method="post" class="row g-3" action="<%=request.getContextPath()%>/ReporteSalasServlet?a=buscar">
@@ -71,9 +75,6 @@
                         </div>
                         <div class="col-auto">
                             <select name="sede" id="sede" class="form-select">
-                                <% for(Sedes listasedes1: listaSedes) { %>
-                                <option value="<%=listasedes1.getId()%>"><%=listasedes1.getNombre()%></option>
-                                <% } %>
                                 <option value="1">San Miguel</option>
                                 <option value="2">San Borja</option>
                             </select>
@@ -108,7 +109,7 @@
                                 <h2 class="div-3" style="background-color:#DAAB00; border-color:#DAAB00; color:white">Sala <%=listasalas.getSalaSede()%></h2>
                                 <%i++;%>
                                 <div class="col-md-3">
-                                    <div class="text-center"><a class="btn btn-success " href="<%=request.getContextPath()%>/ReporteSalasServlet?a=descargar&idSede=<%=listasalas.getIdSede()%>&idSala=<%=listasalas.getIdSala()%>&dia<%=listasalas.getDia()%>">
+                                    <div class="text-center"><a class="btn btn-success " href="<%=request.getContextPath()%>/ReporteSalasServlet?a=descargar&idSede=<%=listasalas.getIdSede()%>&idSala=<%=listasalas.getIdSala()%>&dia=<%=listasalas.getDia()%>">
                                         Download_S<%=listasalas.getSalaSede()%></a></div>
                                 </div>
                             </div>

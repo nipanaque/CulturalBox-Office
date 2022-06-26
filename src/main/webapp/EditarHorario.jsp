@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Editar Función</title>
+        <title>Editar Horario</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -50,7 +50,7 @@
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
                     </br>
-                    <h2 class="section-heading text-uppercase">Editar Función</h2>
+                    <h2 class="section-heading text-uppercase">Editar Horario</h2>
 
                 <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/ListaHorarios?a=actualizar">
                     <!--Columna 1-->
@@ -61,26 +61,27 @@
                         </div>
                         </br>
                         <div class="form-group">
-                            <!-- Name input-->
                             <label for="genero_funcion" class="form-label">Género *</label>
                             <input class="form-control" id="genero_funcion" type="text" value="<%=idHorario.getGenero_funcion()%>"  disabled>
-                        </div>
-                        </br>
-                        <div class="form-group">
-                            <!-- Name input-->
-                            <label for="idhora" class="form-label">Id del Horario *</label>
-                            <input class="form-control" id="idhora" type="text" value="<%=idHorario.getIdHorario()%>"  disabled>
-                            <input type="hidden" name="idhora" value="<%=idHorario.getIdHorario()%>" />
                         </div>
                         </br>
                         <div class="form-group">
                             <label for="Sede" class="form-label">Sede *</label>
                             <input class="form-control" id="Sede" type="text" value="<%=idHorario.getNombre_sede()%>"  disabled>
                         </div>
+                        <div class="form-group">
+                            <input type="hidden" name="idhora" id="idhora" value="<%=idHorario.getIdHorario()%>" />
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="idSede" id="idSede" value="<%=idHorario.getIdSede()%>" />
+                        </div>
                         </br>
                         <div class="form-group">
-                            <label for="SalaSede" class="form-label">Sala en la Sede *</label>
+                            <label for="SalaSede" class="form-label">Sala *</label>
                             <input class="form-control" id="SalaSede" type="text" value="<%=idHorario.getSalaSede()%>"  disabled>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="idSala" id="idSala" value="<%=idHorario.getIdSala()%>" />
                         </div>
                         </br>
                         </br>
