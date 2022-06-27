@@ -25,7 +25,7 @@
                     </div>
                     <div class="col" style="margin-right: -12px;">
                         <div class="close-container">
-                            <a href="<%=request.getContextPath()%>/MenuServlet" class="close-login">X</a>
+                            <a href="<%=request.getContextPath()%>/MenuSinLoginServlet" class="close-login">X</a>
                         </div>
                     </div>
                 </div>

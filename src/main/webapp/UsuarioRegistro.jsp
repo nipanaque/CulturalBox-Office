@@ -24,7 +24,7 @@
                     </div>
                     <div class="col" style="margin-right: -1%;">
                         <div class="close-container">
-                            <a href="<%=request.getContextPath()%>/MenuServlet" class="close-login" style="width: 10%;height:35px">X</a>
+                            <a href="<%=request.getContextPath()%>/MenuSinLoginServlet" class="close-login" style="width: 10%;height:35px">X</a>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                         <div class="col">
                             <label for="nacimiento" class="form-label">Fecha de Nacimiento: (*)</label>
                             </br>
-                            <input type="date"  name="nacimiento" id="nacimiento" class="form-control" aria-describedby="emailHelp" required>
+                            <input type="date"  name="nacimiento" id="nacimiento" class="form-control" aria-describedby="emailHelp"  max="2022-01-01" required>
                         </div>
                     </div>
                     <div class="row">

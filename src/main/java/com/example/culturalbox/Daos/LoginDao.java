@@ -26,7 +26,7 @@ public class LoginDao {
             try(ResultSet rs = pstmt.executeQuery()){
                 if(rs.next()){
                     usuario = new Usuario();
-                    usuario.setId(rs.getString(1));
+                    usuario.setId(rs.getInt(1));
                     usuario.setCorreo(rs.getString(6));
                     usuario.setRol(rs.getInt(11));
                 }

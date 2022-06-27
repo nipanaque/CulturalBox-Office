@@ -1,5 +1,6 @@
 package com.example.culturalbox.Daos;
 
+import com.example.culturalbox.Beans.CrearFuncion;
 import com.example.culturalbox.Beans.Perfil;
 
 import javax.imageio.ImageIO;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 
 public class PerfilDao {
 
-    public ArrayList<Perfil> obtenerPerfil() {
+    public ArrayList<Perfil> obtenerPerfil(int id) {
         String user = "root";
         String pass = "root";
         String url = "jdbc:mysql://localhost:3306/cultura_box_pucp";
@@ -23,22 +24,26 @@ public class PerfilDao {
             e.printStackTrace();
         }
         ArrayList<Perfil> listaPerfil = new ArrayList<>();
-
-
+        String sql = "SELECT * FROM cultura_box_pucp.usuario where idUsuario= ? ;";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM cultura_box_pucp.usuario where idUsuario=1;");) {
-            while (rs.next()) {
-                Perfil perfil = new Perfil();
-                perfil.setDni(rs.getInt(5));
-                perfil.setCodigo_pucp(rs.getInt(2));
-                perfil.setCorreo_pucp(rs.getString(6));
-                perfil.setFecha_nacimiento(rs.getString(8));
-                perfil.setNumtelefono(rs.getInt(7));
-                perfil.setDireccion(rs.getString(12));
-                perfil.setNombre_completo(rs.getString(3)+" "+rs.getString(4));
-                listaPerfil.add(perfil);
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1,id);
+            try (ResultSet rs = pstmt.executeQuery();) {
+
+                    while (rs.next()) {
+                        Perfil perfil = new Perfil();
+                        perfil.setDni(rs.getInt(5));
+                        perfil.setCodigo_pucp(rs.getInt(2));
+                        perfil.setCorreo_pucp(rs.getString(6));
+                        perfil.setFecha_nacimiento(rs.getString(8));
+                        perfil.setNumtelefono(rs.getInt(7));
+                        perfil.setDireccion(rs.getString(12));
+                        perfil.setNombre_completo(rs.getString(3)+" "+rs.getString(4));
+                        listaPerfil.add(perfil);
+                    }
+
             }
+
 
 
         } catch (SQLException e) {
@@ -47,7 +52,7 @@ public class PerfilDao {
         return listaPerfil;
     }
 
-    public void actualizar(String direccion, String telefono, String nacimiento,InputStream fotografia) {
+    public void actualizar(String direccion, String telefono, String nacimiento,InputStream fotografia,int id) {
         String user = "root";
         String pass = "root";
         String url = "jdbc:mysql://localhost:3306/cultura_box_pucp";
@@ -58,7 +63,7 @@ public class PerfilDao {
             e.printStackTrace();
         }
 
-        String sql = "UPDATE usuario SET direccion=?,telefono=?,nacimiento=?,fotografia=? where idUsuario=1";
+        String sql = "UPDATE usuario SET direccion=?,telefono=?,nacimiento=?,fotografia=? where idUsuario=?";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -67,13 +72,14 @@ public class PerfilDao {
             pstmt.setString(2, telefono);
             pstmt.setString(3, nacimiento);
             pstmt.setBlob(4,fotografia);
+            pstmt.setInt(5,id);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public void actualizar2(String direccion, String telefono, String nacimiento) {
+    public void actualizar2(String direccion, String telefono, String nacimiento,int id) {
         String user = "root";
         String pass = "root";
         String url = "jdbc:mysql://localhost:3306/cultura_box_pucp";
@@ -84,7 +90,7 @@ public class PerfilDao {
             e.printStackTrace();
         }
 
-        String sql = "UPDATE usuario SET direccion=?,telefono=?,nacimiento=? where idUsuario=1";
+        String sql = "UPDATE usuario SET direccion=?,telefono=?,nacimiento=? where idUsuario=?";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -92,6 +98,7 @@ public class PerfilDao {
             pstmt.setString(1, direccion);
             pstmt.setString(2, telefono);
             pstmt.setString(3, nacimiento);
+            pstmt.setInt(4,id);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

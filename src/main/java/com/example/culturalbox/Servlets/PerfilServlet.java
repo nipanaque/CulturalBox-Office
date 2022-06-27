@@ -1,5 +1,6 @@
 package com.example.culturalbox.Servlets;
 
+import com.example.culturalbox.Beans.Usuario;
 import com.example.culturalbox.Daos.PerfilDao;
 
 import javax.servlet.*;
@@ -13,7 +14,10 @@ public class PerfilServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PerfilDao perfilDao = new PerfilDao();
-        request.setAttribute("listaPerfil",perfilDao.obtenerPerfil());
+        Usuario user = (Usuario) request.getSession().getAttribute("usuarioSesion");
+        int id = user.getId();
+        System.out.println(id);
+        request.setAttribute("listaPerfil",perfilDao.obtenerPerfil(id));
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("Perfil.jsp");
         requestDispatcher.forward(request,response);
 
@@ -29,10 +33,12 @@ public class PerfilServlet extends HttpServlet {
         Part fotografiaStr = request.getPart("f_subir");
         InputStream fotografia = fotografiaStr.getInputStream();
         PerfilDao pd = new PerfilDao();
+        Usuario user = (Usuario) request.getSession().getAttribute("usuarioSesion");
+        int id = user.getId();
         if(fotografia.available()==0){
-            pd.actualizar2(direccion,telefono,nacimiento);
+            pd.actualizar2(direccion,telefono,nacimiento,id);
         }else{
-            pd.actualizar(direccion,telefono,nacimiento,fotografia);
+            pd.actualizar(direccion,telefono,nacimiento,fotografia,id);
         }
         response.sendRedirect(request.getContextPath()+"/PerfilServlet");
 

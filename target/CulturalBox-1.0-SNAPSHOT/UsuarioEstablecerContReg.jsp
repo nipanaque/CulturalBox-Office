@@ -26,7 +26,7 @@
                         </div>
                         <div class="col" style="margin-right: -12px;">
                             <div class="close-container">
-                                <a href="usuario_menu.html" class="close-login">X</a>
+                                <a href="<%=request.getContextPath()%>/MenuSinLoginServlet" class="close-login">X</a>
                             </div>
                         </div>
                     </div>
@@ -38,47 +38,28 @@
                     </div>
                     <div class="mb-3" style="margin-top: 2%;">
                         <div class="mb-3" style="margin-top: 5%;">
-                            <label for="contrasenha1" class="form-label">Ingrese contraseña:</label>
-                            <input type="password" class="form-control" id="contrasenha1" name="contrasenha1">
+                            <label for="contrasenha" class="form-label">Ingrese contraseña:</label>
+                            <input type="password" class="form-control" id="contrasenha" name="contrasenha">
                         </div>
                     </div>
                     <div class="mb-3" style="margin-top: 0%;">
-                        <label for="contrasenha" class="form-label">Confirmar contraseña:</label>
-                        <input type="password" class="form-control" id="contrasenha" name="contrasenha">
+                        <label for="contrasenha_confirmada" class="form-label">Confirmar contraseña:</label>
+                        <input type="password" class="form-control" id="contrasenha_confirmada" name="contrasenha_confirmada">
                     </div>
+                    <br>
                     <div class="btn-container">
-                        <a type = "submit" href="#modal1" class="btn btn-ingresar">Confirmar</a>
-                        <div id="modal1" class="modalmask" style="width: 500px;margin-left: 530px;height: 300px;margin-top: 230px;border-radius: 2%;">
-                            <div class="modalbox movedown container-fluid d-flex">
-                                <div class="modal-container">
-                                    <div class="col">
-                                        <div class="row">
-                                            <div class="modal-content-centre">
-                                                <h6><strong>Usuario registrado. Click en continuar para logearte!</strong></h6>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div>
-                                                <div class="btn-container" style="margin-top: 30px;">
-                                                    <input type="hidden" name="codigo" id="codigo" value="<%=segundo_registro.get(0).getCodigo()%>" />
-                                                    <input type="hidden" name="nombre" id="nombre" value="<%=segundo_registro.get(0).getNombre()%>" />
-                                                    <input type="hidden" name="apellido" id="apellido" value="<%=segundo_registro.get(0).getApellido()%>" />
-                                                    <input type="hidden" name="dni" id="dni" value="<%=segundo_registro.get(0).getDni()%>" />
-                                                    <input type="hidden" name="telefono" id="telefono" value="<%=segundo_registro.get(0).getTelefono()%>" />
-                                                    <input type="hidden" name="nacimiento" id="nacimiento" value="<%=segundo_registro.get(0).getNacimiento()%>" />
-                                                    <input type="hidden" name="direccion" id="direccion" value="<%=segundo_registro.get(0).getDireccion()%>" />
-                                                    <input type="hidden" name="correo" id="correo" value="<%=segundo_registro.get(0).getCorreo_pucp()%>" />
-                                                    <button type="submit" class="btn btn-ingresar" style="width: 280px;" >
-                                                        Continuar
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <button type="submit" class="btn btn-ingresar" style="width: 280px;" >
+                            Confirmar
+                        </button>
                     </div>
+                    <input type="hidden" name="codigo" id="codigo" value="<%=segundo_registro.get(0).getCodigo()%>" />
+                    <input type="hidden" name="nombre" id="nombre" value="<%=segundo_registro.get(0).getNombre()%>" />
+                    <input type="hidden" name="apellido" id="apellido" value="<%=segundo_registro.get(0).getApellido()%>" />
+                    <input type="hidden" name="dni" id="dni" value="<%=segundo_registro.get(0).getDni()%>" />
+                    <input type="hidden" name="telefono" id="telefono" value="<%=segundo_registro.get(0).getTelefono()%>" />
+                    <input type="hidden" name="nacimiento" id="nacimiento" value="<%=segundo_registro.get(0).getNacimiento()%>" />
+                    <input type="hidden" name="direccion" id="direccion" value="<%=segundo_registro.get(0).getDireccion()%>" />
+                    <input type="hidden" name="correo" id="correo" value="<%=segundo_registro.get(0).getCorreo_pucp()%>" />
                 </div>
             </form>
             </br>

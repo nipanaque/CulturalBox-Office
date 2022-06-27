@@ -1,7 +1,7 @@
 package com.example.culturalbox.Beans;
 
 public class Usuario {
-    private String id;
+    private int id;
     private String correo;
     private int rol;
 
@@ -13,11 +13,11 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

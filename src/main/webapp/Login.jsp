@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 
+<jsp:useBean id="indicador" scope="session" type="java.lang.String" class="java.lang.String"/>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -32,7 +33,7 @@
             </div>
             <div class="col" style="margin-right: -12px;">
                 <div class="close-container">
-                    <a href="usuario_menu.html" class="close-login">X</a>
+                    <a href="<%=request.getContextPath()%>/MenuSinLoginServlet" class="close-login">X</a>
                 </div>
             </div>
         </div>
@@ -56,18 +57,19 @@
             <button type="submit" class="btn btn-ingresar" >Ingresar</button>
         </div>
 </form>
-        <%if (request.getAttribute("indicador").equals("error")){%>
+        <%if (session.getAttribute("indicador").equals("error")){%>
         </br>
         <div class="text-danger nb-2">
             Error en usuario o contraseña!!!
         </div>
+        <%session.removeAttribute("indicador");%>
         <%}%>
         <div>
             <a href="RestablecerContraseña.html" class="btn-recovery" style="color: rgb(100, 19, 176);" >¿Olvidaste tu contraseña?</a>
         </div>
         <div class="register-details-container">
             <p class="register">¿No tienes una cuenta? Regístrate haciendo click</p>
-            <a href="Registro.html" class="btn-detail-register" style="color: rgb(100, 19, 176);">Aquí</a>
+            <a href="<%=request.getContextPath()%>" class="btn-detail-register" style="color: rgb(100, 19, 176);">Aquí</a>
         </div>
     </div>
 </div>

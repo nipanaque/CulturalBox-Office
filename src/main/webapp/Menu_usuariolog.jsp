@@ -8,6 +8,7 @@
     ArrayList<ArrayList<Horarios>> listaListasHorarios = (ArrayList<ArrayList<Horarios>>) request.getAttribute("listaListasHorarios");
     int contCompras = (int) request.getAttribute("contCompras");
 %>
+<jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +39,7 @@
             <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/MenuServlet?a=listarCompras&idUsuario=1">
+                        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/MenuServlet?a=listarCompras&idUsuario=<%=usuarioSesion.getId()%>">
                             <img src="assets/img/carrito.png" style="width: 90px;margin-right:6px;margin-top:8px;"  class="rounded float-start" alt="...">
                             <span class="badge rounded-pill bg-danger"style="margin-left:-6px;">
                                          <%=contCompras%>
@@ -47,12 +48,13 @@
                         </a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" style="margin-right:12px;"href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                DiegoZ@gmail.com
+                                <%=usuarioSesion.getCorreo()%>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+
                                 <li><a class="dropdown-item" href="<%=request.getContextPath()%>/PerfilServlet">Perfil</a></li>
                                 <li><a class="dropdown-item" href="<%=request.getContextPath()%>/HistorialServlet">Historial de Funciones</a></li>
-                                <li><a class="dropdown-item" href="usuario_menu.html">Cerrar Sesión</a></li>
+                                <li><a class="dropdown-item" href="<%=request.getContextPath()%>/LoginServlet?finish=yes">Cerrar Sesión</a></li>
                             </ul>
                         </li>
                     </ul>

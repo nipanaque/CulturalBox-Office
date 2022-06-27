@@ -68,7 +68,6 @@
             <tbody>
             <% int i = 1;
                 int total = 0;
-                ArrayList<String> idsCompra = new ArrayList<>();
                 for(Compra compra:comprasNopagadas){%>
             <tr>
                 <th scope="row" class="text"><%=i%></th>
@@ -76,18 +75,18 @@
                 <td><%=compra.getT_init()%></td>
                 <td>S/<%=compra.getCosto()%></td>
                 <td>
-                    <label for="num_tickets" class="form-label"></label>
-                    <input type="number" value = "1" name="num_tickets" id="num_tickets" min="1" max="10">
-                    <a href="<%=request.getContextPath()%>/MenuServlet?a=borrarCompra&id=<%=compra.getIdCompra()%>"><button class="btn btn-success btn-sm" type="submit">Seleccionar</button></a>
-                    <%=compra.getNu_tickets()%>
+                    <form method="post" action="<%=request.getContextPath()%>/MenuServlet?a=setNumtickets&id=<%=compra.getIdCompra() %>">
+                        <label for="num_tickets" class="form-label"></label>
+                        <input type="number" value = "<%=compra.getNu_tickets()%>" name="num_tickets" id="num_tickets" min="1" max="10">
+                        <button class="btn btn-success btn-sm" type="submit">Seleccionar</button>
+                    </form>
                 </td>
                 <td>
                     <a href="<%=request.getContextPath()%>/MenuServlet?a=borrarCompra&id=<%=compra.getIdCompra() %>"><button class="btn btn-danger btn-md" type="submit">Cancelar</button></a>
                 </td>
             </tr>
             <%i++;
-                total = total+compra.getCosto();
-                idsCompra.add(compra.getIdCompra());
+                total = total+(compra.getCosto() * compra.getNu_tickets());
             }%>
             </tbody>
             <tfoot>
@@ -141,10 +140,26 @@
                                 </div>
                             </div>
                             <div class="card-footer"><a href="/MenuServlet">
-                                <button type="submit" class="subscribe btn btn-primary btn-block shadow-sm position"> Confirmar Pago </button></a>
+                                <button type="submit" class="subscribe btn btn-primary btn-block shadow-sm position" data-bs-toggle="modal" data-bs-target="#exModal">
+                                    Confirmar Pago </button></a>
                             </div></form>
                     </div> <!-- End -->
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exModal" tabindex="-1" aria-labelledby="exModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <h4>¡La compra fue generada con éxito!
+                    Puede ver sus entradas en su correo y el historial</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning">OK</button>
             </div>
         </div>
     </div>

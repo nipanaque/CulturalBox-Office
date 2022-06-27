@@ -12,20 +12,23 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String indicador = request.getParameter("a")==null ? "correcto" : request.getParameter("a");
         RequestDispatcher requestDispatcher;
-        switch (indicador){
-            case "error":
-               indicador = "error";
-               break;
-            case "correcto":
-                indicador = "correcto";
-                break;
-        }
-        request.setAttribute("indicador",indicador);
-        requestDispatcher = request.getRequestDispatcher("Login.jsp");
-        requestDispatcher.forward(request,response);
+        String logout = request.getParameter("finish");
+        if(logout == null){
+            requestDispatcher = request.getRequestDispatcher("Login.jsp");
+            requestDispatcher.forward(request,response);
+        }else{
+            if(logout.equals("yes")){
+                HttpSession session = request.getSession();
+                session.invalidate();
+                response.sendRedirect(request.getContextPath() + "/MenuSinLoginServlet");
+            }else{
 
+                requestDispatcher = request.getRequestDispatcher("Login.jsp");
+                requestDispatcher.forward(request,response);
+
+            }
+        }
     }
 
     @Override
@@ -34,14 +37,24 @@ public class LoginServlet extends HttpServlet {
         String correo = request.getParameter("correo");
         String pass = request.getParameter("pass");
         Usuario usuario = loginDao.validar(correo, pass);
+        HttpSession session = request.getSession();
 
         if(usuario !=null){
-            HttpSession session = request.getSession();
+
             session.setAttribute("usuarioSesion",usuario);
-            response.sendRedirect(request.getContextPath()+"/MenuServlet");
+            session.setAttribute("rol",usuario.getRol());
+            session.setMaxInactiveInterval(10*60);
+            if(usuario.getRol() == 1){
+                response.sendRedirect(request.getContextPath()+"/MenuServlet");
+            }else if(usuario.getRol() == 2){
+                response.sendRedirect(request.getContextPath()+"/OperadorIndexServlet");
+            }else{
+                response.sendRedirect(request.getContextPath()+"/AdminIndexServlet");
+            }
         }else{
 
-            response.sendRedirect(request.getContextPath()+"/LoginServlet?a=error");
+            session.setAttribute("indicador","error");
+            response.sendRedirect(request.getContextPath()+"/LoginServlet");
         }
 
     }

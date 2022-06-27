@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="invalid1" scope="request" type="java.lang.String" class="java.lang.String" />
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -23,7 +24,7 @@
                     </div>
                     <div class="col" style="margin-right: -1%;">
                         <div class="close-container">
-                            <a href="usuario_menu.html" class="close-login" style="width: 10%;height:35px">X</a>
+                            <a href="<%=request.getContextPath()%>/MenuSinLoginServlet" class="close-login" style="width: 10%;height:35px">X</a>
                         </div>
                     </div>
                 </div>
@@ -33,6 +34,9 @@
                 <div class="login-header">
                     <h3 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;color: rgb(100, 19, 176);">Centro Cultural PUCP</h3>
                     <h2 style="margin-top: 1%;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color: rgb(16, 16, 115);">Registro</h2>
+                    <%if(invalid1.equals("incorrecto")){%>
+                        <h2>Credenciales ya existentes en el sistema!</h2>
+                    <%}%>
                 </div>
                 <div class="container" style="margin-top: 3%;">
                     <div class="row">
@@ -59,7 +63,7 @@
                         <div class="col">
                             <label for="nacimiento" class="form-label">Fecha de Nacimiento: (*)</label>
                             </br>
-                            <input type="date"  name="nacimiento" id="nacimiento" class="form-control" aria-describedby="emailHelp" required>
+                            <input type="date"  name="nacimiento" id="nacimiento" class="form-control" aria-describedby="emailHelp"  max="2022-01-01" required>
                         </div>
                     </div>
                     <div class="row">

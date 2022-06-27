@@ -27,7 +27,7 @@ public class MenuServlet extends HttpServlet {
 
                 }
 
-                System.out.printf(String.valueOf(listaListasHorarios.size()));
+
 
                 //caso usuario logueado
                 int contCompras = menuDao.buscarComprasNopagadas(1).size();
@@ -35,7 +35,14 @@ public class MenuServlet extends HttpServlet {
 
                 request.setAttribute("listaMenu", listaMenu);
                 request.setAttribute("listaListasHorarios", listaListasHorarios);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Menu_usuariolog.jsp");
+                RequestDispatcher requestDispatcher;
+                if(request.getSession().getAttribute("rol").equals(1) ){
+                    requestDispatcher = request.getRequestDispatcher("Menu_usuariolog.jsp");
+                }else if(request.getSession().getAttribute("rol").equals(2)){
+                    requestDispatcher = request.getRequestDispatcher("/OperadorIndexServlet");
+                }else{
+                    requestDispatcher = request.getRequestDispatcher("/AdminIndexServlet");
+                }
                 requestDispatcher.forward(request,response);
             }
             case "verHorarios" -> {
@@ -78,8 +85,7 @@ public class MenuServlet extends HttpServlet {
             case "setNumtickets" -> {
                 String id = request.getParameter("id");
                 int num = Integer.parseInt(request.getParameter("num_tickets"));
-                System.out.printf(id);
-                System.out.printf(String.valueOf(num));
+
                 menuDao.setNuerotickets(id, num);
                 response.sendRedirect(request.getContextPath() + "/MenuServlet?a=listarCompras&idUsuario=1");
             }

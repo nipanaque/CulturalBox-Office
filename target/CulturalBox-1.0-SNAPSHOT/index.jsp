@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -32,16 +34,15 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Admin1234
+                                        <%=usuarioSesion.getCorreo()%>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">Perfil</a></li>
                                         <li><a class="dropdown-item" href="Directores">Directores</a></li>
                                         <li><a class="dropdown-item" href="Actores">Actores</a></li>
                                         <li><a class="dropdown-item" href="Sedes">Sedes</a></li>
                                         <li><a class="dropdown-item" href="Clientes">Clientes</a></li>
                                         <li><a class="dropdown-item" href="operadores">Operadores</a></li>
-                                        <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+                                        <li><a class="dropdown-item" href="<%=request.getContextPath()%>/LoginServlet?finish=yes">Cerrar Sesion</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -58,121 +59,6 @@
                 <a class="btn btn-primary btn-xl text-uppercase" href="#portfolio">Ver Funciones</a>
             </div>
         </header>
-
-        <!-- Portfolio Grid-->
-        <section class="page-section bg-light" id="portfolio">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase" href = "#funciones">FUNCIONES</h2>
-                    <h3 class="section-subheading text-muted">Los espectáculos más esperados</h3>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Funcion 1-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/funcion2.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">EL COMIENZO DEL FIN: GRUPO Y</div>
-                                <button type="button" class="btn btn-light">Stock: 50</button>
-                                <div></div>
-                                <button type="button" class="btn btn-danger" >Añadir al carrito</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 2-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/funcion1.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">COFFE CONCERT: Andrés Cruz</div>
-                                <button type="button" class="btn btn-light">Stock: 100</button>
-                                <div></div>
-                                <button type="button" class="btn btn-danger" >Añadir al carrito</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Funcion 3-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/funcion3.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">TEATRO JOVEN</div>
-                                </br>
-                                <button type="button" class="btn btn-light">Stock: 50</button>
-                                <div></div>
-                                <button type="button" class="btn btn-danger" >Añadir al carrito</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 4-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/funcion5.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">ZEN 20 AÑOS</div>
-                                <button type="button" class="btn btn-light">Stock: 150</button>
-                                <div></div>
-                                <button type="button" class="btn btn-danger" >Añadir al carrito</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-                        <!-- Portfolio item 5-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/funcion4.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">SOUTHWEST</div>
-                                <button type="button" class="btn btn-light">Stock: 50</button>
-                                <div></div>
-                                <button type="button" class="btn btn-danger" >Añadir al carrito</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <!-- Portfolio item 6-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/portfolio/funcion6.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">CORO DE NIÑOS</div>
-                                <button type="button" class="btn btn-light">Stock: 50</button>
-                                <div></div>
-                                <button type="button" class="btn btn-danger" >Añadir al carrito</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- Footer-->
         <footer class="footer py-4">
