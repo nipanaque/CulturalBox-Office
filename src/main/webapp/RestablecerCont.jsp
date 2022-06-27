@@ -22,7 +22,7 @@
             </div>
             <div class="col" style="margin-right: -12px;">
                 <div class="close-container">
-                    <a href="MenuSinLoginServlet" class="close-login">X</a>
+                    <a href="<%=request.getContextPath()%>/MenuSinLoginServlet" class="close-login">X</a>
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@
                 <input type="email" class="form-control" id="InputPassword" aria-describedby="emailHelp">
             </div>
             <div class="btn-container">
-                <a href="EstablecerNuevaCont.jsp" type="submit" class="btn btn-ingresar" style="margin-left:350px;">Continuar</a>
+                <a href="<%=request.getContextPath()%>/RestablecerContrasenhaServlet?a=nuevo" type="submit" class="btn btn-ingresar" style="margin-left:350px;">Continuar</a>
             </div>
         </div>
     </div>

@@ -1,17 +1,15 @@
 package com.example.culturalbox.Servlets;
 
-import com.example.culturalbox.Beans.Registro;
 import com.example.culturalbox.Daos.RegistroDao;
 import com.example.culturalbox.Daos.RestablecerDao;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 @WebServlet(name = "RestablecerServlet", value = "/RestablecerContrasenhaServlet")
 public class RestablecerServlet extends HttpServlet {
@@ -20,8 +18,8 @@ public class RestablecerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         RequestDispatcher view =request.getRequestDispatcher("RestablecerCont.jsp");
         view.forward(request,response);
-        String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
-        RegistroDao registroDao = new RegistroDao();
+        System.out.println("email");
+        RestablecerDao restablecerDao = new RestablecerDao();
 
     }
 
@@ -30,30 +28,31 @@ public class RestablecerServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         RestablecerDao restablecerDao = new RestablecerDao();
+        System.out.println("correo");
 
         String email;
         String contra;
         String recontra;
         switch (action){
-            case "nuevo"->{
+            case "nuevo" ->{
                 email = request.getParameter("InputEmail");
-
+                System.out.println(email);
                 request.setAttribute("primer_registro", restablecerDao.obtenerCorreo(email));
-                RequestDispatcher view =request.getRequestDispatcher("RestablecerCont.jsp");
+                RequestDispatcher view = request.getRequestDispatcher("EstablecerNuevaCont.jsp");
                 view.forward(request,response);
             }
-            case "restablecer"->{
+            case "restablecer" ->{
                 email = request.getParameter("InputEmail");
                 contra = request.getParameter("InputPassword");
-                recontra = request.getParameter("InputPassword");
+                recontra = request.getParameter("ReInputPassword");
 
                 if(contra == recontra){
                     request.setAttribute("primer_registro", restablecerDao.obtenerInfo(email, contra));
-                    RequestDispatcher view =request.getRequestDispatcher("RestablecerCont.jsp");
+                    RequestDispatcher view =request.getRequestDispatcher("EstablecerNuevaCont.jsp");
                     view.forward(request,response);
                 }
             }
-            case "actualizar"->{
+            case "actualizar" ->{
                 email = request.getParameter("InputEmail");
                 contra = request.getParameter("InputPassword");
                 restablecerDao.cambiarcontra(email,contra);

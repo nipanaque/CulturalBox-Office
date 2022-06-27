@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Restablecer>" scope="request" id="primer_registro"/>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,7 +23,7 @@
             </div>
             <div class="col" style="margin-right: -12px;">
                 <div class="close-container">
-                    <a href="MenuSinLoginServlet" class="close-login">X</a>
+                    <a href="<%=request.getContextPath()%>/MenuSinLoginServlet" class="close-login">X</a>
                 </div>
             </div>
         </div>
@@ -46,7 +47,7 @@
             <a type = "submit" href="#modal1" class="btn btn-ingresar">Confirmar</a>
             <div id="modal1" class="modalmask" style="width: 500px;margin-left: 530px;height: 300px;margin-top: 230px;border-radius: 2%;">
                 <div class="modalbox movedown container-fluid d-flex">
-                    <a href=<%=request.getContextPath()%> title="Close" class="close">X</a>
+                    <a href="<%=request.getContextPath()%>/MenuServlet" title="Close" class="close">X</a>
                     <div class="modal-container">
                         <div class="col">
                             <div class="row">
@@ -57,9 +58,14 @@
                             <div class="row">
                                 <div>
                                     <div class="btn-container" style="margin-top: 30px;">
-                                        <a type = "submit" href=<%=request.getContextPath()%> class="btn btn-ingresar" style="font-size: 15px;">Continuar</a>
+                                        <a type = "submit" href="<%=request.getContextPath()%>/MenuServlet" class="btn btn-ingresar" style="font-size: 15px;">Continuar</a>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="mb-3" style="margin-top: 5%;margin-left: -45px;">
+                                <label for="id_validacion" class="form-label">Ingrese el código que se envió a su correo:</label>
+                                <input type="text" class="form-control" id="id_validacion" name="id_validacion" aria-describedby="emailHelp" required>
+                                <input type="hidden" name="codigo" id="codigo" value="<%=primer_registro.get(0).getCorreo_pucp()%>" />
                             </div>
                         </div>
                     </div>
