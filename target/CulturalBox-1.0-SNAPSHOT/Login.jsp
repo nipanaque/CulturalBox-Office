@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.example.culturalbox.Servlets.RestablecerServlet" %><%--
   Created by IntelliJ IDEA.
   User: Luis
   Date: 26/06/2022
@@ -65,7 +65,7 @@
         <%session.removeAttribute("indicador");%>
         <%}%>
         <div>
-            <a href="RestablecerContraseña.html" class="btn-recovery" style="color: rgb(100, 19, 176);" >¿Olvidaste tu contraseña?</a>
+            <a href="<%=request.getContextPath()%>/RestablecerContrasenhaServlet" class="btn-recovery" style="color: rgb(100, 19, 176);" >¿Olvidaste tu contraseña?</a>
         </div>
         <div class="register-details-container">
             <p class="register">¿No tienes una cuenta? Regístrate haciendo click</p>
