@@ -22,7 +22,7 @@
             </div>
             <div class="col" style="margin-right: -12px;">
                 <div class="close-container">
-                    <a href="Menu_usuario.jsp" class="close-login">X</a>
+                    <a href="MenuSinLoginServlet" class="close-login">X</a>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
             <a type = "submit" href="#modal1" class="btn btn-ingresar">Confirmar</a>
             <div id="modal1" class="modalmask" style="width: 500px;margin-left: 530px;height: 300px;margin-top: 230px;border-radius: 2%;">
                 <div class="modalbox movedown container-fluid d-flex">
-                    <a href="Menu_usuariolog.jsp" title="Close" class="close">X</a>
+                    <a href="MenuServlet" title="Close" class="close">X</a>
                     <div class="modal-container">
                         <div class="col">
                             <div class="row">
@@ -57,7 +57,7 @@
                             <div class="row">
                                 <div>
                                     <div class="btn-container" style="margin-top: 30px;">
-                                        <a type = "submit" href="Menu_usuariolog.jsp" class="btn btn-ingresar" style="font-size: 15px;">Continuar</a>
+                                        <a type = "submit" href="MenuServlet" class="btn btn-ingresar" style="font-size: 15px;">Continuar</a>
                                     </div>
                                 </div>
                             </div>
