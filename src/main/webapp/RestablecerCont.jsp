@@ -45,7 +45,13 @@
                         <div class="col">
                             <div class="row">
                                 <div class="modal-content-centre">
+                                    <%String id="";
+                                        String[] nums = {"0","1","2","3","4","5","6","7","8","9"};
+                                        for (int i = 0; i < 11; i++ ) {
+                                            id += nums[(int) Math.round(Math.random() * 9)];
+                                        }%>
                                     <h6><strong>Se ha enviado a un código de seguridad a su correo.</strong></h6>
+                                    <h6><strong><%=id%></strong></h6>
                                 </div>
                             </div>
                             <div class="row">
