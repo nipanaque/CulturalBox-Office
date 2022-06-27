@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.culturalbox.Beans.Registro" %>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Registro>" scope="request" id="primer_registro"/>
+<jsp:useBean id="invalid2" scope="request" type="java.lang.String" class="java.lang.String" />
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -24,7 +25,7 @@
                     </div>
                     <div class="col" style="margin-right: -12px;">
                         <div class="close-container">
-                            <a href="usuario_menu.html" class="close-login">X</a>
+                            <a href="<%=request.getContextPath()%>/MenuServlet" class="close-login">X</a>
                         </div>
                     </div>
                 </div>
@@ -33,10 +34,13 @@
                 <div class="login-header">
                     <h3 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;color: rgb(100, 19, 176);">Centro Cultural PUCP</h3>
                     <h2 style="margin-top: 1%;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color: rgb(16, 16, 115);">Establecer Contraseña</h2>
+                    <%if(invalid2.equals("incorrecto")){%>
+                    <h2>Este correo ya existe en el sistema</h2>
+                    <%}%>
                 </div>
                 <div class="mb-3" style="margin-top: 2%;">
                     <label for="correo" class="form-label">Correo Institucional:</label>
-                    <input type="email" class="form-control" id="correo" name="correo" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" id="correo" name="correo" aria-describedby="emailHelp" required>
                 </div>
                 <div class="btn-container" style="margin-left:-176px">
                     <a type = "submit" href="#modal1" class="btn btn-ingresar" style="width: 200px;margin-left: -155px;">Solicitar Código</a>
@@ -67,7 +71,7 @@
                     </div>
                     <div class="mb-3" style="margin-top: 5%;margin-left: -45px;">
                         <label for="id_validacion" class="form-label">Ingrese el código que se envió a su correo:</label>
-                        <input type="text" class="form-control" id="id_validacion" name="id_validacion" aria-describedby="emailHelp">
+                        <input type="text" class="form-control" id="id_validacion" name="id_validacion" aria-describedby="emailHelp" required>
                         <input type="hidden" name="codigo" id="codigo" value="<%=primer_registro.get(0).getCodigo()%>" />
                         <input type="hidden" name="nombre" id="nombre" value="<%=primer_registro.get(0).getNombre()%>" />
                         <input type="hidden" name="apellido" id="apellido" value="<%=primer_registro.get(0).getApellido()%>" />
