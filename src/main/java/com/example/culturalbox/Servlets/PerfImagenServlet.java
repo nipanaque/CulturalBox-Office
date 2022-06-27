@@ -1,5 +1,6 @@
 package com.example.culturalbox.Servlets;
 
+import com.example.culturalbox.Beans.Usuario;
 import com.example.culturalbox.Daos.PerfilDao;
 
 import javax.servlet.*;
@@ -18,9 +19,11 @@ public class PerfImagenServlet extends HttpServlet {
         String user = "root";
         String pass = "root";
         String url = "jdbc:mysql://localhost:3306/cultura_box_pucp";
+        Usuario usuario  = (Usuario) request.getSession().getAttribute("usuarioSesion");
+        int id = usuario.getId();
         byte [] img = null;
         ServletOutputStream sos = null;
-        String sqlQuery = "select fotografia from usuario where idUsuario=1;";
+        String sqlQuery = "select fotografia from usuario where idUsuario="+ id +";";
         try{
             Connection conn = DriverManager.getConnection(url, user, pass);
             PreparedStatement ps = conn.prepareStatement(sqlQuery);

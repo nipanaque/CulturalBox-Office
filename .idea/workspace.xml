@@ -11,6 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0622dbb5-829b-4607-b259-1da12ca7e212" name="Changes" comment="Agregado JSP">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/culturalbox/Servlets/PerfImagenServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/culturalbox/Servlets/PerfImagenServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/LoginServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/LoginServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/LoginServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/LoginServlet.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +173,7 @@
       <workItem from="1655653970685" duration="2420000" />
       <workItem from="1655670187946" duration="32046000" />
       <workItem from="1656280754344" duration="25486000" />
-      <workItem from="1656345956150" duration="8202000" />
+      <workItem from="1656345956150" duration="9325000" />
     </task>
     <task id="LOCAL-00001" summary="Agregado JSP">
       <created>1654446038255</created>
