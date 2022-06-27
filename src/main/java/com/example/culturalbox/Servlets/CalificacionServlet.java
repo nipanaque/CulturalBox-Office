@@ -45,12 +45,16 @@ public class CalificacionServlet extends HttpServlet {
                 String a1 = request.getParameter("a1");
                 String a2 = request.getParameter("a2");
                 String a3 = request.getParameter("a3");
+                System.out.println(stars);
                 calificacionDao.obtenerPuntuacionDirector(starsDirector,d);
                 calificacionDao.obtenerPuntuacionFuncion(stars,f);
                 calificacionDao.obtenerPuntuacionActor(starsActor1,a1);
                 calificacionDao.obtenerPuntuacionActor(starsActor2,a2);
-                calificacionDao.obtenerPuntuacionActor(starsActor3,a3);
-                response.sendRedirect("/HistorialServlet");
+                if(a3 != null) {
+                        calificacionDao.obtenerPuntuacionActor(starsActor3,a3);
+                }
+
+                response.sendRedirect("/CulturalBox_war_exploded/HistorialServlet");
 
             }
             case "actualizar" ->{
