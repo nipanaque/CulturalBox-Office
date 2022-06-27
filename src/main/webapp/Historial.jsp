@@ -34,7 +34,7 @@
                         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="btncontacto" href="compra.html"
+                                    <a class="btncontacto" href="<%=request.getContextPath()%>/MenuServlet"
                                        style="position: absolute; left: calc(-150px/2 - 40px); top: calc(25px/2 - 10px);">
                                         <img src="assets/img/carrito.png" style="width: 90px"  class="rounded float-start" alt="...">
                                     </a>

@@ -113,7 +113,7 @@ public class MenuServlet extends HttpServlet {
                 //obtener el correo del usuario
                 String correo = menuDao.obtenerCorreo(idUsuario);
                 //enviar entradas por correo
-                menuDao.enviarFactura(correo);
+                //menuDao.enviarFactura(correo);
                 response.sendRedirect(request.getContextPath() + "/MenuServlet");
             }
         }

@@ -4,14 +4,6 @@ import com.example.culturalbox.Beans.Compra;
 import com.example.culturalbox.Beans.Horarios;
 import com.example.culturalbox.Beans.Menu;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -227,7 +219,7 @@ public class MenuDao {
         return correo;
     }
 
-    public void enviarFactura(String correoCliente) {
+    /*public void enviarFactura(String correoCliente) {
         //Turn off Two Factor Authentication
         //Turn off less secure app
         final String sender = "victor.calderon@pucp.edu.pe"; // The sender email
@@ -277,7 +269,7 @@ public class MenuDao {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     public void actualizarEstadocompra (String idCompra) {
         try {
