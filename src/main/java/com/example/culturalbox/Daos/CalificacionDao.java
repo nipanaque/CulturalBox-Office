@@ -55,11 +55,14 @@ public class CalificacionDao {
         String sql = "INSERT INTO `cultura_box_pucp`.`puntaje_funcion` (`puntaje`, `idFuncion`) VALUES (?, ?);";
         try (Connection connection = DriverManager.getConnection(url,user,pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
-
-            pstmt.setInt(1,Integer.parseInt(estrellaf));
+            if(Integer.parseInt(estrellaf)==-1){
+                pstmt.setNull(1,Types.DECIMAL);
+            }else{
+                pstmt.setInt(1,Integer.parseInt(estrellaf));
+            }
             pstmt.setInt(2,Integer.parseInt(f));
 
-            pstmt.executeUpdate(); //Es update porque es para insert, update y delete
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("No se pudo realizar la busqueda");
@@ -74,8 +77,11 @@ public class CalificacionDao {
         String sql = "INSERT INTO `cultura_box_pucp`.`puntaje_director` (`puntaje`, `idDirector`) VALUES (?, ?);";
         try (Connection connection = DriverManager.getConnection(url,user,pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
-
-            pstmt.setInt(1,Integer.parseInt(estrellaf));
+            if(Integer.parseInt(estrellaf)==-1){
+                pstmt.setNull(1,Types.DECIMAL);
+            }else{
+                pstmt.setInt(1,Integer.parseInt(estrellaf));
+            }
             pstmt.setInt(2,Integer.parseInt(d));
 
             pstmt.executeUpdate();
@@ -93,8 +99,11 @@ public class CalificacionDao {
         String sql = "INSERT INTO `cultura_box_pucp`.`puntaje_actor` (`puntaje`, `idActor`) VALUES (?, ?);";
         try (Connection connection = DriverManager.getConnection(url,user,pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
-
-            pstmt.setInt(1,Integer.parseInt(estrellaf));
+            if(Integer.parseInt(estrellaf)==-1){
+                pstmt.setNull(1,Types.DECIMAL);
+            }else{
+                pstmt.setInt(1,Integer.parseInt(estrellaf));
+            }
             pstmt.setInt(2,Integer.parseInt(a));
 
             pstmt.executeUpdate(); //Es update porque es para insert, update y delete
