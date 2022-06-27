@@ -46,6 +46,7 @@
         </nav>
         <section class="page-section bg-light" id="portfolio">
             <div   class="container">
+                </br>
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase"><%=listaCalificacion.get(1).getNombreFuncion()%></h2>
                     <h3 class="section-subheading text-muted"></h3>
@@ -53,7 +54,7 @@
 
                 <div class="row align-items-stretch mb-5">
                     <div class="col order-1">
-                        <img src="assets/img/portfolio/funcion1.jpg" style="width: 400px"  class="rounded float-start" alt="...">
+                        <img class="img-fluid1" src="<%=request.getContextPath()%>/ImgEstadServlet?a=Funciones&id=<%=listaCalificacion.get(0).getPuntajeFuncion()%>" style="width:356px; height:490px" alt="..." />
                     </div>
                     <div class="col order-2">
                         <div class="row">
@@ -82,12 +83,25 @@
                     </div>
                     <div class="col order-3">
                         <div class="row">
-                            <h4>Número de estrellas: </h4>
+                            <h4>Núm estrellas: </h4>
                         </div>
-                        <form method="POST" action="<%=request.getContextPath()%>/CalificacionServlet?a=guardar&f=<%=listaCalificacion.get(0).getPuntajeFuncion()%>&d=<%=listaCalificacion.get(0).getPuntajeDirector()%>&a1=<%=listaCalificacion.get(0).getPuntajeActor()%>&a2=<%=listaCalificacion.get(1).getPuntajeActor()%>&a3=<%=listaCalificacion.get(2).getPuntajeActor()%>">
+                        <% if(i==3){%>
+                        <form method="POST" action="<%=request.getContextPath()%>/CalificacionServlet?a=guardar&f=<%=listaCalificacion.get(0).getPuntajeFuncion()%>&d=<%=listaCalificacion.get(0).getPuntajeDirector()%>&a1=<%=listaCalificacion.get(0).getPuntajeActor()%>&a2=<%=listaCalificacion.get(1).getPuntajeActor()%>">
+                            <%}else if(i==4){%>
+                                <form method="POST" action="<%=request.getContextPath()%>/CalificacionServlet?a=guardar&f=<%=listaCalificacion.get(0).getPuntajeFuncion()%>&d=<%=listaCalificacion.get(0).getPuntajeDirector()%>&a1=<%=listaCalificacion.get(0).getPuntajeActor()%>&a2=<%=listaCalificacion.get(1).getPuntajeActor()%>&a3=<%=listaCalificacion.get(2).getPuntajeActor()%>">
+                                    <%}%>
                             <div class="form-group">
 
-                                <input type="number" class="form-control" name="starsDirector" id="starsDirector" required>
+                                <select class="form-select" name="starsDirector" aria-label="Default select example" required>
+                                    <option selected disabled value="">Calificar</option>
+                                    <option value="-1">---</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+
+                                </select>
                             </div>
                             <br><br>
                             <%  i = 1;
@@ -95,6 +109,7 @@
                             <% if(i==1){%>
                             <select class="form-select" name="starsActor1" aria-label="Default select example" required>
                                 <option selected disabled value="">Calificar</option>
+                                <option value="-1">---</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -106,6 +121,7 @@
                             <%}else if(i==2){%>
                             <select class="form-select" name="starsActor2" aria-label="Default select example" required>
                                 <option selected disabled value="">Calificar</option>
+                                <option value="-1">---</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -117,6 +133,7 @@
                             <%}else if(i==3){%>
                             <select class="form-select" name="starsActor3" aria-label="Default select example" required>
                                 <option selected disabled value="">Calificar</option>
+                                <option value="-1">---</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -128,6 +145,7 @@
                             <%}else if(i==4){%>
                             <select class="form-select" name="starsActor4" aria-label="Default select example" required>
                                 <option selected disabled value="">Calificar</option>
+                                <option value="-1">---</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -139,6 +157,7 @@
                             <%}else if(i==5){%>
                             <select class="form-select" name="starsActor5" aria-label="Default select example" required>
                                 <option selected disabled value="">Calificar</option>
+                                <option value="-1">---</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -152,7 +171,16 @@
                             <br><br><br><br><br>
                             <div class="form-group">
 
-                                <input type="number" class="form-control" name="stars" id="stars" required>
+                                <select class="form-select" name="stars" aria-label="Default select example" required>
+                                    <option selected disabled value="">Calificar</option>
+                                    <option value="-1">---</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+
+                                </select>
                             </div>
                             <br>
                             <a href="<%=request.getContextPath()%>/HistorialServlet" class="btn btn-danger">Regresar</a>

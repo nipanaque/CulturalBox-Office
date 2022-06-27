@@ -22,7 +22,7 @@
             </div>
             <div class="col" style="margin-right: -12px;">
                 <div class="close-container">
-                    <a href="MenuSinLoginServlet" class="close-login">X</a>
+                    <a href="<%=request.getContextPath()%>/MenuSinLoginServlet" class="close-login">X</a>
                 </div>
             </div>
         </div>
@@ -45,7 +45,13 @@
                         <div class="col">
                             <div class="row">
                                 <div class="modal-content-centre">
+                                    <%String id="";
+                                        String[] nums = {"0","1","2","3","4","5","6","7","8","9"};
+                                        for (int i = 0; i < 11; i++ ) {
+                                            id += nums[(int) Math.round(Math.random() * 9)];
+                                        }%>
                                     <h6><strong>Se ha enviado a un código de seguridad a su correo.</strong></h6>
+                                    <h6><strong><%=id%></strong></h6>
                                 </div>
                             </div>
                             <div class="row">
@@ -63,7 +69,7 @@
                 <input type="email" class="form-control" id="InputPassword" aria-describedby="emailHelp">
             </div>
             <div class="btn-container">
-                <a href="EstablecerNuevaCont.jsp" type="submit" class="btn btn-ingresar" style="margin-left:350px;">Continuar</a>
+                <a href="<%=request.getContextPath()%>/RestablecerContrasenhaServlet?a=nuevo" type="submit" class="btn btn-ingresar" style="margin-left:350px;">Continuar</a>
             </div>
         </div>
     </div>

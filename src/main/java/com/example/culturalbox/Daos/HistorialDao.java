@@ -25,9 +25,8 @@ public class HistorialDao {
                 "                     and h.idFuncion=f.idFuncion\n" +
                 "                    and c.estado=1 and c.idUsuario=? and h.vigencia = 0;         ";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
-<<<<<<< HEAD
              PreparedStatement pstmt = conn.prepareStatement(sql);
-          ) {
+        ) {
             pstmt.setInt(1,id);
             try (ResultSet rs = pstmt.executeQuery();) {
 
@@ -39,20 +38,6 @@ public class HistorialDao {
                     listaHistorial.add(historial);
                 }
 
-=======
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(" SELECT f.idFuncion, f.nombre as 'Funcion', s.nombre as 'Sede' FROM compra c,funcion f,horario h,sede s\n" +
-                     "                     where c.idHorario = h.idHorario\n" +
-                     "                     and h.idSede=s.idSede\n" +
-                     "                     and h.idFuncion=f.idFuncion\n" +
-                     "                    and c.estado=1 and c.idUsuario=1 and h.vigencia = 0;")) {
-            while (rs.next()) {
-                Historial historial = new Historial();
-                historial.setNum_ticket(rs.getInt(1));
-                historial.setNombre_funcion(rs.getString(2));
-                historial.setNombre_sede(rs.getString(3));
-                listaHistorial.add(historial);
->>>>>>> 23a647a2481d6510dbac82c32ce730362dceabd8
             }
 
 
@@ -76,18 +61,18 @@ public class HistorialDao {
                 "                    and c.estado=1 and c.idUsuario=? and h.vigencia = 1;";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = conn.prepareStatement(sql);
-           ) {
+        ) {
             pstmt.setInt(1,id);
             try (ResultSet rs = pstmt.executeQuery();) {
 
-                    while (rs.next()) {
-                        Historial historial = new Historial();
-                        historial.setNombre_funcion(rs.getString(1));
-                        historial.setNombre_sede(rs.getString(2));
-                        historial.setNum_ticket(rs.getInt(3));
-                        historial.setIdCompra(rs.getInt(4));
-                        listaHistorial.add(historial);
-                    }
+                while (rs.next()) {
+                    Historial historial = new Historial();
+                    historial.setNombre_funcion(rs.getString(1));
+                    historial.setNombre_sede(rs.getString(2));
+                    historial.setNum_ticket(rs.getInt(3));
+                    historial.setIdCompra(rs.getInt(4));
+                    listaHistorial.add(historial);
+                }
 
             }
 
@@ -120,5 +105,4 @@ public class HistorialDao {
         }
     }
 
-    }
-
+}

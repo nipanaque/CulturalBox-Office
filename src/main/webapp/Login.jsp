@@ -69,7 +69,7 @@
         </div>
         <div class="register-details-container">
             <p class="register">¿No tienes una cuenta? Regístrate haciendo click</p>
-            <a href="<%=request.getContextPath()%>" class="btn-detail-register" style="color: rgb(100, 19, 176);">Aquí</a>
+            <a href="<%=request.getContextPath()%>/RegistroUsuarioServlet" class="btn-detail-register" style="color: rgb(100, 19, 176);">Aquí</a>
         </div>
     </div>
 </div>

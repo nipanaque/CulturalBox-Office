@@ -34,7 +34,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="index.html"><img src="assets/img/pucp_logo1.jpeg" alt="..." /></a>
+                <a class="navbar-brand" href="index_operadores.jsp" ><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;border-radius: 3px;"/></a>
 
                 <div class="collapse navbar-collapse " id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
@@ -46,8 +46,8 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                         <li><a class="dropdown-item" href="#">Perfil</a></li>
-                                        <li><a class="dropdown-item" href="salas.html">Salas</a></li>
-                                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                                        <li><a class="dropdown-item" href="ReporteSalasServlet">Salas</a></li>
+                                        <li><a class="dropdown-item" href="<%=request.getContextPath()%>/MenuSinLoginServlet">Cerrar Sesión</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -57,6 +57,7 @@
 
             </div>
         </nav>
+        </br>
         <hr/>
         <!-- Portfolio Grid-->
         <section class="page-section bg-light" id="portfolio">
@@ -241,6 +242,15 @@
                 </div>
             </div>
         </section>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
 </html>
 
