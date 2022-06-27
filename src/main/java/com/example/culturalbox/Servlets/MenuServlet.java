@@ -1,5 +1,6 @@
 package com.example.culturalbox.Servlets;
 
+import com.example.culturalbox.Beans.Compra;
 import com.example.culturalbox.Beans.Horarios;
 import com.example.culturalbox.Beans.Menu;
 import com.example.culturalbox.Daos.MenuDao;
@@ -27,7 +28,7 @@ public class MenuServlet extends HttpServlet {
 
                 }
 
-
+                System.out.printf(String.valueOf(listaListasHorarios.size()));
 
                 //caso usuario logueado
                 int contCompras = menuDao.buscarComprasNopagadas(1).size();
@@ -35,14 +36,7 @@ public class MenuServlet extends HttpServlet {
 
                 request.setAttribute("listaMenu", listaMenu);
                 request.setAttribute("listaListasHorarios", listaListasHorarios);
-                RequestDispatcher requestDispatcher;
-                if(request.getSession().getAttribute("rol").equals(1) ){
-                    requestDispatcher = request.getRequestDispatcher("Menu_usuariolog.jsp");
-                }else if(request.getSession().getAttribute("rol").equals(2)){
-                    requestDispatcher = request.getRequestDispatcher("/OperadorIndexServlet");
-                }else{
-                    requestDispatcher = request.getRequestDispatcher("/AdminIndexServlet");
-                }
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Menu_usuariolog.jsp");
                 requestDispatcher.forward(request,response);
             }
             case "verHorarios" -> {
@@ -78,6 +72,7 @@ public class MenuServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         MenuDao menuDao = new MenuDao();
 
@@ -85,11 +80,36 @@ public class MenuServlet extends HttpServlet {
             case "setNumtickets" -> {
                 String id = request.getParameter("id");
                 int num = Integer.parseInt(request.getParameter("num_tickets"));
-
+                System.out.printf(id);
+                System.out.printf(String.valueOf(num));
                 menuDao.setNuerotickets(id, num);
                 response.sendRedirect(request.getContextPath() + "/MenuServlet?a=listarCompras&idUsuario=1");
             }
+            case "facturacion" -> {
+                int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+
+                String titular = request.getParameter("titular");
+                String tarjeta = request.getParameter("tarjeta");
+                String mes = request.getParameter("mes");
+                String anho = request.getParameter("anho");
+                String cvv = request.getParameter("cvv");
+
+                //Actualizar el estado de compra
+
+                //compras no pagadas y cambiar el stock
+                ArrayList<Compra> comprasNopagadas = menuDao.buscarComprasNopagadas(idUsuario);
+                for (Compra compra:comprasNopagadas) {
+                    menuDao.actualizarEstadocompra(compra.getIdCompra());
+                    menuDao.updateStockhorario(compra.getIdHorario(), compra.getNu_tickets());
+                }
+
+                //obtener el correo del usuario
+                String correo = menuDao.obtenerCorreo(idUsuario);
+                //enviar entradas por correo
+                menuDao.enviarFactura(correo);
+                response.sendRedirect(request.getContextPath() + "/MenuServlet");
+            }
         }
+
     }
 }
-
