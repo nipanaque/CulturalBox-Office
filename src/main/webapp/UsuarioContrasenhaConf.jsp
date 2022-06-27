@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="modal-content-centre">
                                 <br/>
-                                <h6><strong>Usuario registrado. Click en continuar para terminar con tu registro y logearte!</strong></h6>
+                                <h6><strong>Click en continuar para terminar con tu registro y logearte!</strong></h6>
                             </div>
                         </div>
                         <div class="row">

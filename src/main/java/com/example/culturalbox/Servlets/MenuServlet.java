@@ -3,6 +3,7 @@ package com.example.culturalbox.Servlets;
 import com.example.culturalbox.Beans.Compra;
 import com.example.culturalbox.Beans.Horarios;
 import com.example.culturalbox.Beans.Menu;
+import com.example.culturalbox.Beans.Usuario;
 import com.example.culturalbox.Daos.MenuDao;
 
 import javax.servlet.*;
@@ -31,7 +32,9 @@ public class MenuServlet extends HttpServlet {
                 System.out.printf(String.valueOf(listaListasHorarios.size()));
 
                 //caso usuario logueado
-                int contCompras = menuDao.buscarComprasNopagadas(1).size();
+                Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSesion");
+                int idUsuario = usuario.getId();
+                int contCompras = menuDao.buscarComprasNopagadas(idUsuario).size();
                 request.setAttribute("contCompras",contCompras);
 
                 request.setAttribute("listaMenu", listaMenu);
@@ -48,14 +51,17 @@ public class MenuServlet extends HttpServlet {
                 requestDispatcher.forward(request,response);
             }
             case "crearCompra1" -> {
+                Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSesion");
+                int idUsuario = usuario.getId();
                 int idHorario = Integer.parseInt(request.getParameter("idHorario"));
-                int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+
 
                 menuDao.crearCompra1(idHorario, idUsuario);
                 response.sendRedirect(request.getContextPath() + "/MenuServlet");
             }
             case "listarCompras" -> {
-                int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSesion");
+                int idUsuario = usuario.getId();
                 request.setAttribute("comprasNopagadas", menuDao.buscarComprasNopagadas(idUsuario));
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("Compra.jsp");
                 requestDispatcher.forward(request, response);
@@ -63,7 +69,7 @@ public class MenuServlet extends HttpServlet {
             case "borrarCompra" -> {
                 String id = request.getParameter("id");
                 menuDao.borrarCompraNopagada(id);
-                response.sendRedirect(request.getContextPath() + "/MenuServlet?a=listarCompras&idUsuario=1");
+                response.sendRedirect(request.getContextPath() + "/MenuServlet?a=listarCompras");
             }
         }
 
@@ -83,10 +89,11 @@ public class MenuServlet extends HttpServlet {
                 System.out.printf(id);
                 System.out.printf(String.valueOf(num));
                 menuDao.setNuerotickets(id, num);
-                response.sendRedirect(request.getContextPath() + "/MenuServlet?a=listarCompras&idUsuario=1");
+                response.sendRedirect(request.getContextPath() + "/MenuServlet?a=listarCompras");
             }
             case "facturacion" -> {
-                int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSesion");
+                int idUsuario = usuario.getId();
 
                 String titular = request.getParameter("titular");
                 String tarjeta = request.getParameter("tarjeta");
