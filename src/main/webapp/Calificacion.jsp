@@ -46,6 +46,7 @@
         </nav>
         <section class="page-section bg-light" id="portfolio">
             <div   class="container">
+                </br>
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase"><%=listaCalificacion.get(1).getNombreFuncion()%></h2>
                     <h3 class="section-subheading text-muted"></h3>
@@ -53,7 +54,7 @@
 
                 <div class="row align-items-stretch mb-5">
                     <div class="col order-1">
-                        <img src="assets/img/portfolio/funcion1.jpg" style="width: 400px"  class="rounded float-start" alt="...">
+                        <img class="img-fluid1" src="<%=request.getContextPath()%>/ImgEstadServlet?a=Funciones&id=<%=listaCalificacion.get(0).getPuntajeFuncion()%>" style="width:356px; height:490px" alt="..." />
                     </div>
                     <div class="col order-2">
                         <div class="row">
@@ -82,7 +83,7 @@
                     </div>
                     <div class="col order-3">
                         <div class="row">
-                            <h4>Número de estrellas: </h4>
+                            <h4>Núm estrellas: </h4>
                         </div>
                         <% if(i==3){%>
                         <form method="POST" action="<%=request.getContextPath()%>/CalificacionServlet?a=guardar&f=<%=listaCalificacion.get(0).getPuntajeFuncion()%>&d=<%=listaCalificacion.get(0).getPuntajeDirector()%>&a1=<%=listaCalificacion.get(0).getPuntajeActor()%>&a2=<%=listaCalificacion.get(1).getPuntajeActor()%>">

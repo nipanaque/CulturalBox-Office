@@ -24,7 +24,7 @@ public class HistorialDao {
                      "                     where c.idHorario = h.idHorario\n" +
                      "                     and h.idSede=s.idSede\n" +
                      "                     and h.idFuncion=f.idFuncion\n" +
-                     "                    and c.estado=1 and c.idUsuario=1 and h.vigencia = 1;         ")) {
+                     "                    and c.estado=1 and c.idUsuario=1 and h.vigencia = 0;")) {
             while (rs.next()) {
                 Historial historial = new Historial();
                 historial.setNum_ticket(rs.getInt(1));
