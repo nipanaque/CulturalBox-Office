@@ -27,7 +27,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="usuario_logeado.html"><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;border-radius: 3px;"/></a>
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/MenuServlet"><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;border-radius: 3px;"/></a>
 
                 <div class="collapse navbar-collapse " id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
@@ -38,7 +38,7 @@
                                        style="position: absolute; left: calc(-150px/2 - 40px); top: calc(25px/2 - 10px);">
                                         <img src="assets/img/carrito.png" style="width: 90px"  class="rounded float-start" alt="...">
                                     </a>
-                                    <a href="usuario_logeado.html"><button class="btn btn-secondary btn-sm" type="submit">Volver al menu</button></a>
+                                    <a href="<%=request.getContextPath()%>/MenuServlet"><button class="btn btn-secondary btn-sm" type="submit">Volver al menu</button></a>
                                 </li>
                             </ul>
                         </div>
