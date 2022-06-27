@@ -59,132 +59,154 @@
                 </br>
                 <!-- Page Features-->
 
-                <!-- Page cuadros primera parte -->
                 <div class="row">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-lg-6">
 
-                    <!-- Cuadro 1.1 -->
-                    <div class="col-sm-4">
-                        <div class="card border-success mb-3" style="max-width: 400px;">
-                            <div class="row g-0">
-                                <div class="col-md-5">
-                                    <img src="assets/img/calendar.png" style="width:145px; height:185px" alt="...">
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Fecha y hora</h4>
-                                        <p class = "fs-4"><%=listaEspeci.get(0).getFecha()%></p>
-                                        <p class = "fs-4"><%=listaEspeci.get(0).getHora()%></p>
+                                <!-- Fecha y hora-->
+                                <div class="card border-success mb-3" style="max-width: 400px;">
+                                    <div class="row g-0">
+                                        <div class="col-md-5">
+                                            <img src="assets/img/calendar.png" style="width:145px; height:185px" alt="...">
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Fecha y hora</h4>
+                                                <p class = "fs-4"><%=listaEspeci.get(0).getFecha()%></p>
+                                                <p class = "fs-4"><%=listaEspeci.get(0).getHora()%></p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Cuadro 1.2 -->
-                    <div class="col-sm-4">
-                        <div class="card border-success mb-3" style="max-width: 400px;">
-                            <div class="row g-0">
-                                <div class="col-md-5">
-                                    <img src="assets/img/drama.png" style="width:145px; height:185px" alt="...">
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card-body">
-                                        <h3 class="card-title">Género de la función</h3>
-                                        <p class = "fs-4"><%=listaEspeci.get(0).getGenero()%></p>
+                            </div>
+                            <div class="col-lg-6" >
+
+                                <!-- Genero de la funcion -->
+                                <div class="card border-success mb-3" style="max-width: 400px;">
+                                    <div class="row g-0">
+                                        <div class="col-md-5">
+                                            <img src="assets/img/drama.png" style="width:145px; height:185px" alt="...">
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="card-body">
+                                                <h3 class="card-title">Género de la función</h3>
+                                                <p class = "fs-4"><%=listaEspeci.get(0).getGenero()%></p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Cuadro 1.1 -->
-                    <div class="col-sm-4">
-                        <div class="card border-success mb-3" style="max-width: 400px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="assets/img/califica.png" style="width:128px; height:185px" alt="...">
+                        <div class="row">
+                            <div class="col-lg-6">
+
+                                <!-- Director -->
+                                <div class="card border-success mb-3" style="max-width: 400px;">
+                                    <div class="row g-0">
+                                        <div class="col-md-5">
+                                            <img src="<%=request.getContextPath()%>/ImgEstadServlet?a=Directores&id=<%=listaEspeci.get(0).getId()%>" style="width:145px; height:185px" alt="...">
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Director</h4>
+                                                <p class = "fs-5"> <%=listaEspeci.get(0).getDirector()%> </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-8">
+
+                            </div>
+                            <div class="col-lg-6" >
+
+                                <!-- Asistencia -->
+                                <div class="card border-success mb-3" style="max-width: 400px;">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img src="assets/img/califica.png" style="width:128px; height:185px" alt="...">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Asistencia: <%=listaEspeci.get(0).getAsistencia()%>%</h4>
+                                                </br>
+                                                <h4 class="card-title">Calificación:</h4>
+                                                <% double puntaje = listaEspeci.get(0).getPuntaje();
+                                                    double parteDecimal = puntaje % 1;
+                                                    double parteEntera = puntaje - parteDecimal;
+                                                    for(int i=0;i<parteEntera;i++){ %>
+                                                <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
+                                                <% }
+                                                    if (parteDecimal >= 0.5){ %>
+                                                <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
+                                                <% for(int i=0;i<5-(parteEntera+1);i++){%>
+                                                <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
+                                                <% } %>
+                                                <% }else { %>
+                                                <% for(int i=0;i<5-(parteEntera);i++){%>
+                                                <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
+                                                <% } %>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-lg-6">
+
+                                <!-- Monto -->
+                                <div class="card border-success mb-3" style="max-width: 400px;">
+                                    <div class="row g-0">
+                                        <div class="col-md-5">
+                                            <img src="assets/img/monto.png" style="width:145px; height:185px" alt="...">
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Monto recaudado</h4>
+                                                <p class = "fs-5">Obtenido (S/.): <%=listaEspeci.get(0).getRecaudado()%></p>
+                                                <p class = "fs-5">Máximo (S/.): <%=listaEspeci.get(0).getMaxMonto()%></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6" >
+
+                                <!-- Actores -->
+                                <div class="card border-success mb-3" style="max-width: 400px;">
                                     <div class="card-body">
-                                        <h4 class="card-title">Asistencia: <%=listaEspeci.get(0).getAsistencia()%>%</h4>
-                                        </br>
-                                        <h4 class="card-title">Calificación:</h4>
-                                        <% double puntaje = listaEspeci.get(0).getPuntaje();
-                                            double parteDecimal = puntaje % 1;
-                                            double parteEntera = puntaje - parteDecimal;
-                                            for(int i=0;i<parteEntera;i++){ %>
-                                        <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
-                                        <% }
-                                            if (parteDecimal >= 0.5){ %>
-                                        <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
-                                        <% for(int i=0;i<5-(parteEntera+1);i++){%>
-                                        <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
-                                        <% } %>
-                                        <% }else { %>
-                                        <% for(int i=0;i<5-(parteEntera);i++){%>
-                                        <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
-                                        <% } %>
+                                        <h4 class="card-title">Actores</h4>
+                                        <% for(int i = 1; i<listaEspeci.size();i++){ %>
+                                        <p class="mb-0">- <%=listaEspeci.get(i).getNombre()%></p>
                                         <% } %>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
+
                     </div>
 
+
+                    <div class="col-md-4">
+                        <!-- Banner -->
+                        <div class="card border-success mb-3">
+                            <center> <h4 class="card-title">Banner</h4> </center>
+                            <img src="<%=request.getContextPath()%>/ImgEstadServlet?a=Funciones&id=<%=listaEspeci.get(0).getIdfotoEstadFuncion()%>" style="width:353px; height:560px" alt="...">
+                        </div>
+                    </div>
                 </div>
 
-                </br>
 
-                <!-- Page cuadros segunda parte -->
-                <div class="row">
 
-                    <!-- Cuadro 2.1 -->
-                    <div class="col-sm-4">
-                        <div class="card border-success mb-3" style="max-width: 400px;">
-                            <div class="row g-0">
-                                <div class="col-md-5">
-                                    <img src="<%=request.getContextPath()%>/ImgEstadServlet?a=Directores&id=<%=listaEspeci.get(0).getId()%>" style="width:145px; height:185px" alt="...">
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Director</h4>
-                                        <p class = "fs-5"> <%=listaEspeci.get(0).getDirector()%> </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Cuadro 2.2 -->
-                    <div class="col-sm-4">
-                        <div class="card border-success mb-3" style="max-width: 400px;">
-                            <div class="row g-0">
-                                <div class="col-md-5">
-                                    <img src="assets/img/monto.png" style="width:145px; height:185px" alt="...">
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Monto recaudado</h4>
-                                        <p class = "fs-5">Obtenido (S/.): <%=listaEspeci.get(0).getRecaudado()%></p>
-                                        <p class = "fs-5">Máximo (S/.): <%=listaEspeci.get(0).getMaxMonto()%></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Cuadro 2.3 -->
-                    <div class="col-sm-4">
-                        <div class="card border-success mb-3" style="max-width: 400px;">
-                            <div class="card-body">
-                                <h4 class="card-title">Actores</h4>
-                                <% for(int i = 1; i<listaEspeci.size();i++){ %>
-                                <p class="mb-0">- <%=listaEspeci.get(i).getNombre()%></p>
-                                <% } %>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 </br>
 

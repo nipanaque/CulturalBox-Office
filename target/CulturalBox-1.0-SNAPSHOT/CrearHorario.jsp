@@ -136,11 +136,10 @@
                         </div>
                     </div>
                 </form>
+                <%if(cruce.equals("Cruce de horarios")){%>
+                <h2>No se puede crear el horario</h2>
+                <%}%>
             </div>
-
-            <%if(cruce.equals("Cruce de horarios")){%>
-            <h2>No se puede crear el horario</h2>
-            <%}%>
 
         </section>
 
