@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 
             session.setAttribute("usuarioSesion",usuario);
             session.setAttribute("rol",usuario.getRol());
-            session.setMaxInactiveInterval(10*60);
+            session.setMaxInactiveInterval(60*60);
             if(usuario.getRol() == 1){
                 response.sendRedirect(request.getContextPath()+"/MenuServlet");
             }else if(usuario.getRol() == 2){
