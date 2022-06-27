@@ -25,7 +25,7 @@ public class MenuDao {
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("select distinct(f.nombre),f.descripcion,f.genero,f.restriccion, concat(d.nombre,d.apellido) as `Director` from funcion f\n" +
+             ResultSet rs = stmt.executeQuery("select distinct(f.nombre),f.descripcion,f.genero,f.restriccion, concat(d.nombre,d.apellido) as `Director`, f.idFuncion from funcion f\n" +
                      "inner join director d on f.idDirector = d.idDirector\n" +
                      "inner join horario h on f.idFuncion = h.idFuncion\n" +
                      "where h.vigencia = 1\n" +
@@ -38,6 +38,7 @@ public class MenuDao {
                 menu.setGenero(rs.getString(3));
                 menu.setRestriccion(rs.getString(4));
                 menu.setDirector(rs.getString(5));
+                menu.setIdFuncion(rs.getInt(6));
                 listaMenu.add(menu);
 
             }
@@ -56,9 +57,10 @@ public class MenuDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "select h.tiempo_inicio, f.duracion, h.stock, h.costo, h.idHorario  from funcion f\n" +
+        String sql = "select h.tiempo_inicio, f.duracion, h.stock, h.costo, h.idHorario, s.nombre from funcion f\n" +
                 "left join horario h on f.idFuncion=h.idFuncion\n" +
-                "where f.nombre = ?";
+                "inner join sede s on h.idSede = s.idSede\n" +
+                "where f.nombre = ? AND h.vigencia=1";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -74,6 +76,7 @@ public class MenuDao {
                     horarios.setStock(rs.getInt(3));
                     horarios.setCosto(rs.getInt(4));
                     horarios.setIdHorario(rs.getInt(5));
+                    horarios.setNombre_sede(rs.getString(6));
                     listaHorarios.add(horarios);
 
                 }
@@ -117,7 +120,7 @@ public class MenuDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "select f.nombre,h.tiempo_inicio, h.costo, c.idCompra from  compra c\n" +
+        String sql = "select f.nombre,h.tiempo_inicio, h.costo, c.idCompra, c.numtickets from  compra c\n" +
                 "left join horario h on h.idHorario = c.idHorario\n" +
                 "left join funcion f on f.idFuncion = h.idFuncion\n" +
                 "where c.idUsuario = ? and c.estado = 0";
@@ -135,6 +138,7 @@ public class MenuDao {
                     compra.setT_init(rs.getTime(2));
                     compra.setCosto(rs.getInt(3));
                     compra.setIdCompra(rs.getString(4));
+                    compra.setNu_tickets(rs.getInt(5));
                     comprasNopagadas.add(compra);
                 }
             }
@@ -158,6 +162,27 @@ public class MenuDao {
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
 
             pstmt.setString(1, id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setNuerotickets(java.lang.String id, int num) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "UPDATE compra SET compra.numtickets = ? where compra.idCompra = ?";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setInt(1,num);
+            pstmt.setString(2, id);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

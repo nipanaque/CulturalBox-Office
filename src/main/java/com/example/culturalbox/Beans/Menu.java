@@ -1,12 +1,21 @@
 package com.example.culturalbox.Beans;
 
 public class Menu {
+    private int idFuncion;
     private String nombre_funcion;
     private String genero;
     private String duracion;
     private String restriccion;
     private String descripcion;
     private String director;
+
+    public int getIdFuncion() {
+        return idFuncion;
+    }
+
+    public void setIdFuncion(int idFuncion) {
+        this.idFuncion = idFuncion;
+    }
 
     public String getNombre_funcion() {
         return nombre_funcion;
