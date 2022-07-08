@@ -47,13 +47,27 @@ public class ListarFuncionesServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         CrearFuncionDao crearFuncionDao = new CrearFuncionDao();
+        HttpSession session = request.getSession();
 
         switch (action) {
             case "guardaract" -> {
                 String idFuncion= request.getParameter("IdFuncion");
                 String idActor = request.getParameter("IdActor");
-                crearFuncionDao.funcion_has_actor(Integer.parseInt(idFuncion),Integer.parseInt(idActor));
-                response.sendRedirect(request.getContextPath() + "/ListaFunciones?a=agregaract&id="+idFuncion);
+                ArrayList<CrearFuncion> FuncionHasActor = crearFuncionDao.obtenerFuncionHasActor();
+                int i=0;
+                for(CrearFuncion listaActores: FuncionHasActor){
+                    if(listaActores.getIdFuncion()==Integer.parseInt(idFuncion) && listaActores.getId_actores()==Integer.parseInt(idActor)){
+                        i++;
+                    }
+                }
+                System.out.println(i);
+                if(i==0){
+                    crearFuncionDao.funcion_has_actor(Integer.parseInt(idFuncion),Integer.parseInt(idActor));
+                    response.sendRedirect(request.getContextPath() + "/ListaFunciones?a=agregaract&id="+idFuncion);
+                }else{
+                    session.setAttribute("existe","error");
+                    response.sendRedirect(request.getContextPath() + "/ListaFunciones?a=agregaract&id="+idFuncion);
+                }
           }
         }
     }

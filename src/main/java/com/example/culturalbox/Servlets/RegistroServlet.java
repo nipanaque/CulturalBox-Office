@@ -29,6 +29,7 @@ public class RegistroServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         RegistroDao registroDao = new RegistroDao();
+        HttpSession session = request.getSession();
         ArrayList<Registro> listaUsuarios = registroDao.obtenerUsuarios();
 
         String codigo;
@@ -66,7 +67,7 @@ public class RegistroServlet extends HttpServlet {
                     RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerCont.jsp");
                     view.forward(request,response);
                 }else{
-                    request.setAttribute("invalid1","incorrecto");
+                    session.setAttribute("invalid1","error");
                     response.sendRedirect(request.getContextPath() + "/RegistroUsuarioServlet");
                 }
             }
@@ -94,7 +95,7 @@ public class RegistroServlet extends HttpServlet {
                     view.forward(request,response);
                 }else{
                     request.setAttribute("primer_registro",registroDao.obtenerRegistro(codigo,nombre,apellido,dni,telefono,nacimiento,direccion));
-                    request.setAttribute("invalid2","incorrecto");
+                    session.setAttribute("invalid2","error");
                     RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerCont.jsp");
                     view.forward(request,response);
                 }
@@ -118,7 +119,7 @@ public class RegistroServlet extends HttpServlet {
                     view.forward(request,response);
                 }else{
                     request.setAttribute("segundo_registro",registroDao.obtenerRegistro2(codigo,nombre,apellido,dni,telefono,nacimiento,direccion,correo_pucp));
-                    request.setAttribute("invalid3","incorrecto");
+                    session.setAttribute("invalid3","error");
                     RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerContReg.jsp");
                     view.forward(request,response);
                 }

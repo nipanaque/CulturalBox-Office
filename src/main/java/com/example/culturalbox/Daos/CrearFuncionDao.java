@@ -66,6 +66,30 @@ public class CrearFuncionDao {
         return listaActores;
     }
 
+    public ArrayList<CrearFuncion> obtenerFuncionHasActor() {
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        ArrayList<CrearFuncion> listaActores = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select * from horario_has_mantenimiento;;");){
+            while (rs.next()){
+                CrearFuncion crearFuncion= new CrearFuncion();
+                crearFuncion.setIdFuncion(rs.getInt(1));
+                crearFuncion.setId_actores(rs.getInt(2));
+                listaActores.add(crearFuncion);
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaActores;
+    }
+
     public ArrayList<CrearFuncion> obtenerNombres_Directores(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");

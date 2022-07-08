@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="idHorario" scope="request" type="com.example.culturalbox.Beans.Horarios" />
+<jsp:useBean id="cruce" scope="session" type="java.lang.String" class="java.lang.String"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -51,6 +52,12 @@
             <div class="container">
                     </br>
                     <h2 class="section-heading text-uppercase">Editar Horario</h2>
+                    <%if (session.getAttribute("cruce").equals("error")){%>
+                    <div class="text-danger nb-3">
+                        No se puede editar el horario
+                    </div>
+                    <%session.removeAttribute("cruce");%>
+                    <%}%>
 
                 <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/ListaHorarios?a=actualizar">
                     <!--Columna 1-->

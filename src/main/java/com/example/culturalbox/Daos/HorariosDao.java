@@ -121,6 +121,30 @@ public class HorariosDao {
         return listaMantenimiento;
     }
 
+    public ArrayList<Mantenimiento> obtenerMantenimientoHasHorario() {
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        ArrayList<Mantenimiento> listaMantenimiento = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("select * from horario_has_mantenimiento;;");){
+            while (rs.next()){
+                Mantenimiento mantenimiento= new Mantenimiento();
+                mantenimiento.setIdhorario(rs.getInt(1));
+                mantenimiento.setIdMantenimiento(rs.getInt(2));
+                listaMantenimiento.add(mantenimiento);
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaMantenimiento;
+    }
+
     public ArrayList<Mantenimiento> obtenerMatenimientoporHorario(String id) {
         ArrayList<Mantenimiento> listaMantenimiento = new ArrayList<>();
         try {

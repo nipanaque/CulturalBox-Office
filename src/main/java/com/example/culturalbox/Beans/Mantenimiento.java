@@ -2,8 +2,17 @@ package com.example.culturalbox.Beans;
 
 public class Mantenimiento {
     private int idMantenimiento;
+    private int idhorario;
     private String nombre;
     private String apellido;
+
+    public int getIdhorario() {
+        return idhorario;
+    }
+
+    public void setIdhorario(int idhorario) {
+        this.idhorario = idhorario;
+    }
 
     public int getIdMantenimiento() {
         return idMantenimiento;

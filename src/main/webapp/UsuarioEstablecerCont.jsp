@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.culturalbox.Beans.Registro" %>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Registro>" scope="request" id="primer_registro"/>
-<jsp:useBean id="invalid2" scope="request" type="java.lang.String" class="java.lang.String" />
+<jsp:useBean id="invalid2" scope="session" type="java.lang.String" class="java.lang.String"/>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -34,8 +34,12 @@
                 <div class="login-header">
                     <h3 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;color: rgb(100, 19, 176);">Centro Cultural PUCP</h3>
                     <h2 style="margin-top: 1%;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color: rgb(16, 16, 115);">Establecer Contraseña</h2>
-                    <%if(invalid2.equals("incorrecto")){%>
-                    <h2>Este correo ya existe en el sistema</h2>
+                    <%if (session.getAttribute("invalid2").equals("error")){%>
+                    </br>
+                    <div class="text-danger nb-2">
+                        Credenciales ya existentes en el sistema!
+                    </div>
+                    <%session.removeAttribute("invalid2");%>
                     <%}%>
                 </div>
                 <div class="mb-3" style="margin-top: 2%;">

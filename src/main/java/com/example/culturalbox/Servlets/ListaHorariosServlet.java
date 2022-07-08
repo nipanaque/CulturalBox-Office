@@ -64,26 +64,51 @@ public class ListaHorariosServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         HorariosDao horarios = new HorariosDao();
+        HttpSession session = request.getSession();
 
         switch (action){
             case "guardarmant" ->{
-                String idFuncion= request.getParameter("idHorario");
-                String idActor = request.getParameter("idMantenimiento");
-                horarios.horario_has_mantenimiento(Integer.parseInt(idFuncion),Integer.parseInt(idActor));
-                response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=agregarmant&id="+idFuncion);
+                String idHorario= request.getParameter("idHorario");
+                String idmant = request.getParameter("idMantenimiento");
+                ArrayList<Mantenimiento> mantenimiento_has_horario = horarios.obtenerMantenimientoHasHorario();
+                int i=0;
+                for(Mantenimiento listaMant: mantenimiento_has_horario){
+                    if(listaMant.getIdMantenimiento()==Integer.parseInt(idmant) && listaMant.getIdhorario()==Integer.parseInt(idHorario)){
+                        i++;
+                    }
+                }
+                if(i==0){
+                    horarios.horario_has_mantenimiento(Integer.parseInt(idHorario),Integer.parseInt(idmant));
+                    response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=agregarmant&id="+idHorario);
+                }else{
+                    session.setAttribute("existe","error");
+                    response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=agregarmant&id="+idHorario);
+                }
             }
             case "crearmant" -> {
                 String id = request.getParameter("id");
                 String idMant = request.getParameter("idMant");
                 String Nombre = request.getParameter("Nombre");
                 String Apellido = request.getParameter("Apellido");
-                horarios.crear_mant(Integer.parseInt(idMant),Nombre,Apellido);
-                response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=agregarmant&id="+id);
+                ArrayList<Mantenimiento> listaMant = horarios.obtenerMantenimiento();
+                int i=0;
+                for(Mantenimiento listaMantenimiento: listaMant){
+                    if(Objects.equals(listaMantenimiento.getNombre(), Nombre) && Objects.equals(listaMantenimiento.getApellido(), Apellido)){
+                        i++;
+                    }
+                }
+                if(i==0){
+                    horarios.crear_mant(Integer.parseInt(idMant),Nombre,Apellido);
+                    response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=agregarmant&id="+id);
+                }else{
+                    session.setAttribute("existe1","error1");
+                    response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=agregarmant&id="+id);
+                }
             }
             case "actualizar" -> {
                 HorariosDao horariosDao = new HorariosDao();
                 ArrayList<Horarios> listaHorarios = horariosDao.obtenerHorarios();
-                Horarios horario =null;
+                Horarios horario = null;
 
                 String id = request.getParameter("idhora");
                 String dia = request.getParameter("dia");
@@ -116,8 +141,8 @@ public class ListaHorariosServlet extends HttpServlet {
                     horarios.actualizarHorario(horario);
                     response.sendRedirect(request.getContextPath() + "/ListaHorarios");
                 }else{
-                    request.setAttribute("cruce","Cruce de horarios");
-                    response.sendRedirect(request.getContextPath() + "/ListaHorarios");
+                    session.setAttribute("cruce","error");
+                    response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=editar&id="+id);
                 }
 
             }

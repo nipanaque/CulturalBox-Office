@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.culturalbox.Beans.Registro" %>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Registro>" scope="request" id="segundo_registro"/>
+<jsp:useBean id="invalid3" scope="session" type="java.lang.String" class="java.lang.String"/>
 <html>
     <!DOCTYPE html>
     <html lang="en">
@@ -35,6 +36,13 @@
                     <div class="login-header">
                         <h3 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;color: rgb(100, 19, 176);">Centro Cultural PUCP</h3>
                         <h2 style="margin-top: 1%;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color: rgb(16, 16, 115);">Establecer Contraseña</h2>
+                        <%if (session.getAttribute("invalid3").equals("error")){%>
+                        </br>
+                        <div class="text-danger nb-2">
+                            Contraseñas no coinciden!
+                        </div>
+                        <%session.removeAttribute("invalid3");%>
+                        <%}%>
                     </div>
                     <div class="mb-3" style="margin-top: 2%;">
                         <div class="mb-3" style="margin-top: 5%;">

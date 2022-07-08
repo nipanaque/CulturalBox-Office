@@ -39,6 +39,7 @@ public class CrearHorarioServlet extends HttpServlet {
         SedesDao sedesDao = new SedesDao();
         HorariosDao horariosDao = new HorariosDao();
         ArrayList<Horarios> listaHorarios = horariosDao.obtenerHorarios();
+        HttpSession session = request.getSession();
 
         switch (action){
             case "guardar" -> {
@@ -103,7 +104,7 @@ public class CrearHorarioServlet extends HttpServlet {
                         requestDispatcher.forward(request, response);
                     }
                 }else{
-                    request.setAttribute("cruce","Cruce de horarios");
+                    session.setAttribute("cruce","error");
                     response.sendRedirect(request.getContextPath() + "/CrearHorario");
                 }
             }

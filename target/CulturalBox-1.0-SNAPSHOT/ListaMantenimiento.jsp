@@ -4,6 +4,8 @@
 <jsp:useBean id="idHorario" scope="request" type="com.example.culturalbox.Beans.Horarios" />
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Mantenimiento>" scope="request" id="listaMantenimiento"/>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Mantenimiento>" scope="request" id="listaMantenimientoidH"/>
+<jsp:useBean id="existe" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="existe1" scope="session" type="java.lang.String" class="java.lang.String"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -54,6 +56,12 @@
                 </br>
                 </br>
                 <h2 class="section-heading text-uppercase">Listar y crear Mantenimiento</h2>
+                <%if (session.getAttribute("existe").equals("error")){%>
+                <div class="text-danger nb-3">
+                    Ya existe este personal en el horario.
+                </div>
+                <%session.removeAttribute("existe");%>
+                <%}%>
 
                 <div class="row align-items-stretch mb-5">
                     <div class="col-md-6">
@@ -137,6 +145,12 @@
                                 </div>
                             </div>
                         </form>
+                        <%if (session.getAttribute("existe1").equals("error1")){%>
+                        <div class="text-danger nb-3">
+                            Ya existe el personal puesto.
+                        </div>
+                        <%session.removeAttribute("existe1");%>
+                        <%}%>
                     </div>
                 </div>
             </div>

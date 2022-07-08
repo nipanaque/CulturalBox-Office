@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Sedes>" scope="request" id="listaSedes"/>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaFunciones"/>
-<jsp:useBean type="java.lang.String" class="java.lang.String" scope="request" id="cruce"/>
+<jsp:useBean id="cruce" scope="session" type="java.lang.String" class="java.lang.String"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -57,6 +57,12 @@
                 </br>
                 </br>
                 <h2 class="section-heading text-uppercase">Crear Horarios</h2>
+                <%if (session.getAttribute("cruce").equals("error")){%>
+                <div class="text-danger nb-3">
+                    No se puede crear el horario
+                </div>
+                <%session.removeAttribute("cruce");%>
+                <%}%>
 
                 <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/CrearHorario?a=guardar">
                     <!--Columna 1-->
@@ -86,7 +92,7 @@
                             <label for="sala" class="form-label">Salas *</label>
                             <select class="form-select" name="sala" id="sala" required>
                                 <option disabled>Seleccione las salas</option>
-                                <%while(i<=5){%>
+                                <%while(i<5){%>
                                 <option><%=i++%></option>
                                 <%}%>
                             </select>
@@ -94,7 +100,7 @@
                         </br>
                         <div class="form-group">
                             <label for="stock" class="form-label">Stock *</label>
-                            <input class="form-control" placeholder="Ingrese el stock" type="number" min="0" max="25" step="1" name="stock" id="stock" required>
+                            <input class="form-control" placeholder="Ingrese el stock" type="number" min="0" max="15" step="1" name="stock" id="stock" required>
                         </div>
                         </br>
                         </br>
@@ -121,7 +127,7 @@
                         </br>
                         <div class="form-group">
                             <label for="tiempo_inicio" class="form-label">Hora de la función *</label>
-                            <input type="time" class="form-control" min="15:00" max="21:00" step="1800" name="tiempo_inicio" id="tiempo_inicio" required >
+                            <input type="time" class="form-control" min="13:00" max="21:00" step="1800" name="tiempo_inicio" id="tiempo_inicio" required >
                         </div>
                         </br>
                         <div class="form-group">
@@ -134,9 +140,6 @@
                         </div>
                     </div>
                 </form>
-                <%if(cruce.equals("Cruce de horarios")){%>
-                <h2>No se puede crear el horario</h2>
-                <%}%>
             </div>
 
         </section>
