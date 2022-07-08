@@ -2,6 +2,7 @@
 <%@ page import="com.example.culturalbox.Beans.Registro" %>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Registro>" scope="request" id="primer_registro"/>
 <jsp:useBean id="invalid2" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="invalid_correo" scope="session" type="java.lang.String" class="java.lang.String"/>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -41,54 +42,33 @@
                     </div>
                     <%session.removeAttribute("invalid2");%>
                     <%}%>
+                    <%if (session.getAttribute("invalid_correo").equals("error")){%>
+                    </br>
+                    <div class="text-danger nb-2">
+                        Los correos puestos no coinciden
+                    </div>
+                    <%session.removeAttribute("invalid_correo");%>
+                    <%}%>
                 </div>
-                <div class="mb-3" style="margin-top: 2%;">
+                <div class="mb-3" style="margin-top: 2%;" >
                     <label for="correo" class="form-label">Correo Institucional:</label>
                     <input type="email" class="form-control" id="correo" name="correo" aria-describedby="emailHelp" required>
+                    <br/>
+                    <label for="correo" class="form-label">Confirmar correo:</label>
+                    <input type="email" class="form-control" id="correo1" name="correo1" aria-describedby="emailHelp" required>
+
+                    <input type="hidden" name="codigo" id="codigo" value="<%=primer_registro.get(0).getCodigo()%>" />
+                    <input type="hidden" name="nombre" id="nombre" value="<%=primer_registro.get(0).getNombre()%>" />
+                    <input type="hidden" name="apellido" id="apellido" value="<%=primer_registro.get(0).getApellido()%>" />
+                    <input type="hidden" name="dni" id="dni" value="<%=primer_registro.get(0).getDni()%>" />
+                    <input type="hidden" name="telefono" id="telefono" value="<%=primer_registro.get(0).getTelefono()%>" />
+                    <input type="hidden" name="nacimiento" id="nacimiento" value="<%=primer_registro.get(0).getNacimiento()%>" />
+                    <input type="hidden" name="direccion" id="direccion" value="<%=primer_registro.get(0).getDireccion()%>" />
                 </div>
                 <div class="btn-container" style="margin-left:-176px">
-                    <a type = "submit" href="#modal1" class="btn btn-ingresar" style="width: 200px;margin-left: -155px;">Solicitar Código</a>
-                    <div id="modal1" class="modalmask" style="width: 500px;margin-left: 530px;height: 300px;margin-top: 230px;border-radius: 2%;">
-                        <div class="modalbox movedown container-fluid d-flex">
-                            <a href="#close" title="Close" class="close">X</a>
-                            <div class="modal-container">
-                                <div class="col">
-                                    <%String id="";
-                                        String[] nums = {"0","1","2","3","4","5","6","7","8","9"};
-                                        for (int i = 0; i < 11; i++ ) {
-                                            id += nums[(int) Math.round(Math.random() * 9)];
-                                        }%>
-                                    <div class="row">
-                                        <div class="modal-content-centre">
-                                            <h6><strong><%=id%></strong></h6>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="btn-container" style="margin-top: 30px;">
-                                            <a type = "submit" href="#close" class="btn btn-ingresar" style="font-size: 15px;">Continuar</a>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3" style="margin-top: 5%;margin-left: -45px;">
-                        <label for="id_validacion" class="form-label">Ingrese el código que se envió a su correo:</label>
-                        <input type="text" class="form-control" id="id_validacion" name="id_validacion" aria-describedby="emailHelp" required>
-                        <input type="hidden" name="codigo" id="codigo" value="<%=primer_registro.get(0).getCodigo()%>" />
-                        <input type="hidden" name="nombre" id="nombre" value="<%=primer_registro.get(0).getNombre()%>" />
-                        <input type="hidden" name="apellido" id="apellido" value="<%=primer_registro.get(0).getApellido()%>" />
-                        <input type="hidden" name="dni" id="dni" value="<%=primer_registro.get(0).getDni()%>" />
-                        <input type="hidden" name="telefono" id="telefono" value="<%=primer_registro.get(0).getTelefono()%>" />
-                        <input type="hidden" name="nacimiento" id="nacimiento" value="<%=primer_registro.get(0).getNacimiento()%>" />
-                        <input type="hidden" name="direccion" id="direccion" value="<%=primer_registro.get(0).getDireccion()%>" />
-                    </div>
-                    <div class="btn-container">
-                        <button type="submit" class="btn btn-ingresar" style="width: 280px;" >
-                            Continuar
-                        </button>
-                    </div>
+                    <button type="submit" class="btn btn-ingresar" style="width: 280px;" >
+                        Solicitar Código
+                    </button>
                 </div>
             </div>
         </form>

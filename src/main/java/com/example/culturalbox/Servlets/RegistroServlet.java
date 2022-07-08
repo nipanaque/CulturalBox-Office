@@ -37,6 +37,7 @@ public class RegistroServlet extends HttpServlet {
         String apellido;
         String dni;
         String correo_pucp;
+        String correo_pucp1;
         String telefono;
         String nacimiento;
         String contrasenha;
@@ -80,23 +81,66 @@ public class RegistroServlet extends HttpServlet {
                 nacimiento = request.getParameter("nacimiento");
                 direccion = request.getParameter("direccion");
                 correo_pucp = request.getParameter("correo");
+                correo_pucp1 = request.getParameter("correo1");
 
                 System.out.println(codigo+" "+nombre+" "+apellido+" "+dni+" "+telefono+" "+nacimiento+" "+direccion+" "+correo_pucp);
-
                 int i=0;
-                for(Registro listausuarios: listaUsuarios){
-                    if(Objects.equals(listausuarios.getCorreo_pucp(), correo_pucp)){
-                        i++;
+                if(Objects.equals(correo_pucp1, correo_pucp)){
+                    for(Registro listausuarios: listaUsuarios){
+                        if(Objects.equals(listausuarios.getCorreo_pucp(), correo_pucp)){
+                            i++;
+                        }
                     }
+                }else{
+                    i=2;
                 }
                 if(i==0){
+                    String id="";
+                    String[] nums = {"0","1","2","3","4","5","6","7","8","9"};
+                    for (int j = 0; j < 11; j++ ) {
+                        id += nums[(int) Math.round(Math.random() * 9)];
+                    }
+                    registroDao.enviarCodigo(correo_pucp,id);
                     request.setAttribute("segundo_registro",registroDao.obtenerRegistro2(codigo,nombre,apellido,dni,telefono,nacimiento,direccion,correo_pucp));
-                    RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerContReg.jsp");
+                    request.setAttribute("id",id);
+                    RequestDispatcher view =request.getRequestDispatcher("UsuarioCorreoVal.jsp");
                     view.forward(request,response);
-                }else{
+                }else if(i==1){
                     request.setAttribute("primer_registro",registroDao.obtenerRegistro(codigo,nombre,apellido,dni,telefono,nacimiento,direccion));
                     session.setAttribute("invalid2","error");
                     RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerCont.jsp");
+                    view.forward(request,response);
+                }else{
+                    request.setAttribute("primer_registro",registroDao.obtenerRegistro(codigo,nombre,apellido,dni,telefono,nacimiento,direccion));
+                    session.setAttribute("invalid_correo","error");
+                    RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerCont.jsp");
+                    view.forward(request,response);
+                }
+            }
+            case "codigo_validacion" ->{
+                String codigo_pucp = request.getParameter("codigo");
+                nombre = request.getParameter("nombre");
+                apellido = request.getParameter("apellido");
+                dni = request.getParameter("dni");
+                telefono = request.getParameter("telefono");
+                nacimiento = request.getParameter("nacimiento");
+                direccion = request.getParameter("direccion");
+                correo_pucp = request.getParameter("correo");
+                String id = request.getParameter("id");
+                String id_conf = request.getParameter("id_validacion");
+                int i=0;
+                if(Objects.equals(id, id_conf)){
+                    i=1;
+                }
+                if(i==1){
+                    request.setAttribute("segundo_registro",registroDao.obtenerRegistro2(codigo_pucp,nombre,apellido,dni,telefono,nacimiento,direccion,correo_pucp));
+                    RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerContReg.jsp");
+                    view.forward(request,response);
+                }else{
+                    request.setAttribute("segundo_registro",registroDao.obtenerRegistro2(codigo_pucp,nombre,apellido,dni,telefono,nacimiento,direccion,correo_pucp));
+                    request.setAttribute("id",id);
+                    session.setAttribute("invalid_id","error");
+                    RequestDispatcher view =request.getRequestDispatcher("UsuarioCorreoVal.jsp");
                     view.forward(request,response);
                 }
             }

@@ -3,6 +3,7 @@
 <jsp:useBean id="idFuncion" scope="request" type="com.example.culturalbox.Beans.CrearFuncion" />
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaActores"/>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaActoresFuncion"/>
+<jsp:useBean id="existe" scope="session" type="java.lang.String" class="java.lang.String"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -61,6 +62,7 @@
                 <div class="row align-items-stretch mb-5">
                     <div class="col-md-6">
                         <h2 class="section-heading text-uppercase">Agregar actores</h2>
+
                         <form method="POST" action="<%=request.getContextPath()%>/ListaFunciones?a=guardaract">
                             </br>
                             <table class="table table-hover">
@@ -112,6 +114,12 @@
                         </table>
                         <%} else{%>
                         <h2 class="section-heading text-uppercase">Aún no hay actores en la Función</h2>
+                        <%}%>
+                        <%if (session.getAttribute("existe").equals("error")){%>
+                        <div class="text-danger nb-3">
+                            Ya existe el actor en la función.
+                        </div>
+                        <%session.removeAttribute("existe");%>
                         <%}%>
                     </div>
                 </div>

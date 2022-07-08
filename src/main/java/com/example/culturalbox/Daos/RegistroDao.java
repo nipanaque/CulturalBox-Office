@@ -5,10 +5,19 @@ import com.example.culturalbox.Beans.Mantenimiento;
 import com.example.culturalbox.Beans.Registro;
 import com.mysql.cj.protocol.a.authentication.Sha256PasswordPlugin;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class RegistroDao {
 
@@ -126,5 +135,48 @@ public class RegistroDao {
         listaRegistro.add(registro);
 
         return listaRegistro;
+    }
+
+    public void enviarCodigo(String correoCliente, String codigo) {
+        //Turn off Two Factor Authentication
+        //Turn off less secure app
+        final String sender = "victor.calderon@pucp.edu.pe"; // The sender email
+        final String urpass = "Frodo2009"; //keep it secure
+        Properties set = new Properties();
+        //Set values to the property
+        set.put("mail.smtp.starttls.enable", "true");
+        set.put("mail.smtp.auth", "true");
+        set.put("mail.smtp.host", "smtp.gmail.com");
+        set.put("mail.smtp.port", "587");
+        set.put("mail.smtp.ssl.trust","*");
+        Session session = Session.getInstance(set,new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(sender, urpass);
+            }});
+
+        try {
+            //email extends Java's Message Class, check out javax.mail.Message class to read more
+            Message email = new MimeMessage(session);
+            email.setFrom(new InternetAddress("victor.calderon@pucp.edu.pe")); //sender email address here
+            email.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(correoCliente)); //Receiver email address here
+            email.setSubject("Código de validación Cultural-Box-Office PUCP"); //Email Subject and message
+
+            // creating first MimeBodyPart object
+            BodyPart messageBodyPart1 = new MimeBodyPart();
+            messageBodyPart1.setText("Este es su código de verificación"+" "+codigo);
+
+            // creating MultiPart object
+            Multipart multipartObject = new MimeMultipart();
+            multipartObject.addBodyPart(messageBodyPart1);
+
+            // set body of the email.
+            email.setContent(multipartObject);
+
+            Transport.send(email);
+            System.out.println("Your email has successfully been sent!");
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
