@@ -2,6 +2,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaHistorial" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Historial>" />
 <jsp:useBean id="funcionesvigentes" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Historial>" />
+<%@ page import="com.example.culturalbox.Beans.Menu" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.culturalbox.Beans.Horarios" %>
+<%
+    ArrayList<Menu> listaMenu =  (ArrayList<Menu>) request.getAttribute("listaMenu");
+    ArrayList<ArrayList<Horarios>> listaListasHorarios = (ArrayList<ArrayList<Horarios>>) request.getAttribute("listaListasHorarios");
+    int contCompras = (int) request.getAttribute("contCompras");
+%>
+<jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -33,11 +43,15 @@
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                             <ul class="navbar-nav">
+                                <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/MenuServlet?a=listarCompras&idUsuario=<%=usuarioSesion.getId()%>">
+                                    <img src="assets/img/carrito.png" style="width: 90px;margin-right:6px;margin-top:8px;"  class="rounded float-start" alt="...">
+                                    <span class="badge rounded-pill bg-danger"style="margin-left:-6px;">
+                                         <%=contCompras%>
+                                         <span class="visually-hidden">unread messages</span>
+                                         </span>
+                                </a></li>
                                 <li class="nav-item dropdown">
-                                    <a class="btncontacto" href="compra.html"
-                                       style="position: absolute; left: calc(-150px/2 - 40px); top: calc(25px/2 - 10px);">
-                                        <img src="assets/img/carrito.png" style="width: 90px"  class="rounded float-start" alt="...">
-                                    </a>
+
                                     <a href="<%=request.getContextPath()%>/MenuServlet"><button class="btn btn-secondary btn-sm" type="submit">Volver al menu</button></a>
                                 </li>
                             </ul>

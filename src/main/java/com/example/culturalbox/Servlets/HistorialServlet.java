@@ -2,6 +2,7 @@ package com.example.culturalbox.Servlets;
 
 import com.example.culturalbox.Beans.Usuario;
 import com.example.culturalbox.Daos.HistorialDao;
+import com.example.culturalbox.Daos.MenuDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -18,9 +19,11 @@ public class HistorialServlet extends HttpServlet {
         int id = user.getId();
         switch(action){
             case "listar" -> {
+                MenuDao menuDao = new MenuDao();
                 request.setAttribute("funcionesvigentes",historialDao.obtenerfuncionesvigentes(id));
                 request.setAttribute("listaHistorial",historialDao.obtenerHistorial(id));
-
+                int contCompras = menuDao.buscarComprasNopagadas(1).size();
+                request.setAttribute("contCompras",contCompras);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("Historial.jsp");
                 requestDispatcher.forward(request,response);
             }
