@@ -240,6 +240,7 @@ public class MenuDao {
         set.put("mail.smtp.auth", "true");
         set.put("mail.smtp.host", "smtp.gmail.com");
         set.put("mail.smtp.port", "587");
+        set.put("mail.smtp.ssl.trust","*");
         Session session = Session.getInstance(set,new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(sender, urpass);
@@ -248,7 +249,7 @@ public class MenuDao {
         try {
             //email extends Java's Message Class, check out javax.mail.Message class to read more
             Message email = new MimeMessage(session);
-            email.setFrom(new InternetAddress("victor.calderon@pucp.edu.pel")); //sender email address here
+            email.setFrom(new InternetAddress("victor.calderon@pucp.edu.pe")); //sender email address here
             email.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(correoCliente)); //Receiver email address here
             email.setSubject("Entradas Cultural Box-Office PUCP"); //Email Subject and message
@@ -261,7 +262,7 @@ public class MenuDao {
             //Archivo Adjunto
             // creating second MimeBodyPart object
             BodyPart messageBodyPart2 = new MimeBodyPart();
-            String filename = "C:\\Users\\HP\\Documents\\22-1\\INGENIERIA_WEB_TELECOM\\PROYECTO\\CulturalBox-Office\\src\\main\\java\\com\\example\\culturalbox\\Daos\\qr.png";
+            String filename = "C:\\Users\\Lenovo\\IdeaProjects\\CulturalBox-Office_final\\src\\main\\java\\com\\example\\culturalbox\\Daos\\qr.jpg";
             DataSource source = new FileDataSource(filename);
             messageBodyPart2.setDataHandler(new DataHandler(source));
             messageBodyPart2.setFileName(filename);
