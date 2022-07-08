@@ -52,6 +52,22 @@ public class CrearHorarioServlet extends HttpServlet {
                 String idSedeStr = request.getParameter("sede");
                 String idFuncionStr = request.getParameter("funcion");
 
+                if(idSedeStr.equals("1")){
+                    switch (idSalaStr) {
+                        case "1" -> idSalaStr = String.valueOf(1);
+                        case "2" -> idSalaStr = String.valueOf(2);
+                        case "3" -> idSalaStr = String.valueOf(5);
+                        case "4" -> idSalaStr = String.valueOf(6);
+                    }
+                }else{
+                    switch (idSalaStr){
+                        case "1" -> idSalaStr = String.valueOf(3);
+                        case "2" -> idSalaStr = String.valueOf(4);
+                        case "3" -> idSalaStr = String.valueOf(7);
+                        case "4" -> idSalaStr = String.valueOf(8);
+                    }
+                }
+
                 int vigencia = Integer.parseInt(vigenciaStr);
                 float costo = Float.parseFloat(costoStr);
                 int stock = Integer.parseInt(stockStr);

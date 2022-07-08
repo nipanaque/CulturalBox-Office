@@ -51,7 +51,14 @@
                                          </span>
                                 </a></li>
                                 <li class="nav-item dropdown">
+<<<<<<< HEAD
 
+=======
+                                    <a class="btncontacto" href="<%=request.getContextPath()%>/MenuServlet"
+                                       style="position: absolute; left: calc(-150px/2 - 40px); top: calc(25px/2 - 10px);">
+                                        <img src="assets/img/carrito.png" style="width: 90px"  class="rounded float-start" alt="...">
+                                    </a>
+>>>>>>> 8cec9c016db8e3900cbb40fae6006086293e03b6
                                     <a href="<%=request.getContextPath()%>/MenuServlet"><button class="btn btn-secondary btn-sm" type="submit">Volver al menu</button></a>
                                 </li>
                             </ul>

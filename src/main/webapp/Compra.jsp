@@ -112,7 +112,7 @@
                 <div class="tab-content">
                     <!-- credit card info-->
                     <div id="credit-card" class="tab-pane fade show active pt-3">
-                        <form method="POST" action="<%=request.getContextPath()%>/MenuServlet?a=crearCompra2">
+                        <form method="POST" action="<%=request.getContextPath()%>/MenuServlet?a=facturacion&idUsuario=1">
                             <div class="form-group">
                                 <label for="titular"><h6>Titular de la tarjeta</h6></label>
                                 <input type="text" name="titular" id="titular" placeholder="Nombre" required="" class="form-control ">
@@ -127,6 +127,7 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label for="mes"><span class="hidden-xs"><h6>Fecha de Expiración</h6></span></label>
+                                        <label for="anho"></label>
                                         <div class="input-group">
                                             <input type="number" placeholder="MM" name="mes" id="mes" class="form-control" required="" min="1" max="12">
                                             <input type="number" placeholder="YY" name="anho" id="anho" class="form-control" min="2022" max="2040" required="">
@@ -140,7 +141,7 @@
                                 </div>
                             </div>
                             <div class="card-footer"><a href="/MenuServlet">
-                                <button type="submit" class="subscribe btn btn-primary btn-block shadow-sm position" data-bs-toggle="modal" data-bs-target="#exModal">
+                                <button type="submit" class="subscribe btn btn-primary btn-block shadow-sm position">
                                     Confirmar Pago </button></a>
                             </div></form>
                     </div> <!-- End -->

@@ -103,7 +103,12 @@
                         </br>
                         </br>
                         </br>
+                        <%if(sede.getId().equals("1")){%>
+                        <img src="assets/img/Sede1.jpg" class="rounded float-end" width="640" height="450" alt="...">
+                        <%}else{%>
                         <img src="assets/img/Sede2.jpg" class="rounded float-end" width="640" height="450" alt="...">
+                        <%}%>
+
                     </div>
                 </div>
 

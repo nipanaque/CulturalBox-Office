@@ -8,6 +8,17 @@ public class Compra {
     private Time t_init;
     private String idCompra;
     private int nu_tickets;
+    //
+    private int idHorario;
+
+    public int getIdHorario() {
+        return idHorario;
+    }
+
+    public void setIdHorario(int idHorario) {
+        this.idHorario = idHorario;
+    }
+    //
 
     public Time getT_init() {
         return t_init;

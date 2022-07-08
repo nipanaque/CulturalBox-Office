@@ -57,7 +57,7 @@ public class RegistroServlet extends HttpServlet {
                 int i=0;
                 for(Registro listausuarios: listaUsuarios){
                     if(Objects.equals(listausuarios.getCodigo(), codigo) || Objects.equals(listausuarios.getDni(), dni)
-                        || Objects.equals(listausuarios.getTelefono(), telefono)){
+                            || Objects.equals(listausuarios.getTelefono(), telefono)){
                         i++;
                     }
                 }
@@ -93,8 +93,10 @@ public class RegistroServlet extends HttpServlet {
                     RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerContReg.jsp");
                     view.forward(request,response);
                 }else{
+                    request.setAttribute("primer_registro",registroDao.obtenerRegistro(codigo,nombre,apellido,dni,telefono,nacimiento,direccion));
                     request.setAttribute("invalid2","incorrecto");
-                    response.sendRedirect(request.getContextPath() + "/RegistroUsuarioServlet");
+                    RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerCont.jsp");
+                    view.forward(request,response);
                 }
             }
             case "validacion" ->{
@@ -115,8 +117,10 @@ public class RegistroServlet extends HttpServlet {
                     RequestDispatcher view =request.getRequestDispatcher("UsuarioContrasenhaConf.jsp");
                     view.forward(request,response);
                 }else{
+                    request.setAttribute("segundo_registro",registroDao.obtenerRegistro2(codigo,nombre,apellido,dni,telefono,nacimiento,direccion,correo_pucp));
                     request.setAttribute("invalid3","incorrecto");
-                    response.sendRedirect(request.getContextPath() + "/RegistroUsuarioServlet");
+                    RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerContReg.jsp");
+                    view.forward(request,response);
                 }
             }
             case "validacion_final" ->{

@@ -69,9 +69,12 @@
             <div class="col-4">
                 <div class="container">
                     <img src="assets/img/usuario.png" class="card-img-top" alt="..." style="width:250px; height:250px">
-                </div>
-                <div >
-                    <button type="button" class="btn btn-secondary">Subir foto</button>
+                    <a  href="javascript:explorar();" >
+                        <div class="form-group">
+                            <button type="button" class="btn btn-secondary">Subir foto</button>
+                            <input type="file" name="f_subir" id="f_subir" style="display:none;" >
+                        </div>
+                    </a>
                 </div>
             </div>
             <!--Columna 2-->
@@ -145,6 +148,12 @@
         }, false);
     });
 
+</script>
+<script>
+    function explorar(){
+        document.getElementById("f_subir").click()
+
+    }
 </script>
 
 </body>
