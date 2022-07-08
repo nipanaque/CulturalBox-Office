@@ -114,7 +114,7 @@
                 <div class="tab-content">
                     <!-- credit card info-->
                     <div id="credit-card" class="tab-pane fade show active pt-3">
-                        <form method="POST" action="<%=request.getContextPath()%>/MenuServlet?a=facturacion&idUsuario=<%=usuarioSesion.getId()%>">
+                        <form method="POST" action="<%=request.getContextPath()%>/MenuServlet?a=facturacion">
                             <div class="form-group">
                                 <label for="titular"><h6>Titular de la tarjeta</h6></label>
                                 <input type="text" name="titular" id="titular" placeholder="Nombre" required="" class="form-control ">
