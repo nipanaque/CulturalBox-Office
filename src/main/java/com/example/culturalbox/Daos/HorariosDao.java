@@ -1,12 +1,18 @@
 package com.example.culturalbox.Daos;
 
-import com.example.culturalbox.Beans.CrearFuncion;
-import com.example.culturalbox.Beans.Horarios;
-import com.example.culturalbox.Beans.Mantenimiento;
-import com.example.culturalbox.Beans.SalaReporte;
+import com.example.culturalbox.Beans.*;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class HorariosDao {
 
@@ -345,6 +351,90 @@ public class HorariosDao {
         }
 
         return horarios;
+    }
+
+    public ArrayList<Usuario> buscarUsuariosCorreo(String idHorario){
+        ArrayList<Usuario> listaUsuario = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String sql = "select distinct(c.idUsuario), u.correo_pucp\n" +
+                "from compra c, usuario u \n" +
+                "where c.idUsuario=u.idUsuario and \n" +
+                "      idHorario=?;";
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, idHorario);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+                while (rs.next()) {
+                    Usuario usuario= new Usuario();
+                    usuario.setId(rs.getInt(1));
+                    usuario.setCorreo(rs.getString(2));
+                    listaUsuario.add(usuario);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaUsuario;
+    }
+
+    public void enviarCorreo(ArrayList<Usuario> listaUsuario, String nombre_pelicula, String tiempo_inicio, String dia){
+        //Turn off Two Factor Authentication
+        //Turn off less secure app
+        final String sender = "victor.calderon@pucp.edu.pe"; // The sender email
+        final String urpass = "Frodo2009"; //keep it secure
+        Properties set = new Properties();
+        //Set values to the property
+        set.put("mail.smtp.starttls.enable", "true");
+        set.put("mail.smtp.auth", "true");
+        set.put("mail.smtp.host", "smtp.gmail.com");
+        set.put("mail.smtp.port", "587");
+        set.put("mail.smtp.ssl.trust","*");
+        Session session = Session.getInstance(set,new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(sender, urpass);
+            }});
+        try {
+            //email extends Java's Message Class, check out javax.mail.Message class to read more
+            for(Usuario listausuario: listaUsuario){
+                Message email = new MimeMessage(session);
+                email.setFrom(new InternetAddress("victor.calderon@pucp.edu.pe")); //sender email address here
+                email.setRecipients(Message.RecipientType.TO,
+                        InternetAddress.parse(listausuario.getCorreo())); //Receiver email address here
+                email.setSubject("Actualización de horario Cultural Box-Office PUCP"); //Email Subject and message
+
+                // creating first MimeBodyPart object
+                BodyPart messageBodyPart1 = new MimeBodyPart();
+                messageBodyPart1.setText("Atención, sus entradas para"+" "+nombre_pelicula+" han cambiado para el"+" "+dia+" a las"+" "+tiempo_inicio+" horas. Por favor revisar su historial de funciones para más detalles. Se adjunta también su nuevo código QR para ingresar.");
+
+                //Archivo Adjunto
+                // creating second MimeBodyPart object
+                BodyPart messageBodyPart2 = new MimeBodyPart();
+                String filename = "C:\\Users\\Lenovo\\IdeaProjects\\CulturalBox-Office_final\\src\\main\\java\\com\\example\\culturalbox\\Daos\\qr.jpg";
+                DataSource source = new FileDataSource(filename);
+                messageBodyPart2.setDataHandler(new DataHandler(source));
+                messageBodyPart2.setFileName(filename);
+
+                // creating MultiPart object
+                Multipart multipartObject = new MimeMultipart();
+                multipartObject.addBodyPart(messageBodyPart1);
+                multipartObject.addBodyPart(messageBodyPart2);
+
+                // set body of the email.
+                email.setContent(multipartObject);
+
+                Transport.send(email);
+                System.out.println("Your email has successfully been sent!");
+            }
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

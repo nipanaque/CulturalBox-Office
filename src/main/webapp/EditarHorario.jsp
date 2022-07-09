@@ -65,6 +65,7 @@
                         <div class="form-group">
                             <label for="nombre_funcion" class="form-label">Nombre Función *</label>
                             <input class="form-control" id="nombre_funcion" type="text" value="<%=idHorario.getNombre_funcion()%>"  disabled>
+                            <input type="hidden" name="nombre_funcion1" id="nombre_funcion1" value="<%=idHorario.getNombre_funcion()%>" />
                         </div>
                         </br>
                         <div class="form-group">
