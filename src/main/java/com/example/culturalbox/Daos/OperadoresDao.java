@@ -2,6 +2,7 @@ package com.example.culturalbox.Daos;
 
 import com.example.culturalbox.Beans.Operadores;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -52,7 +53,33 @@ public class OperadoresDao {
             pstmt.setString(3, correo_pucp);
             pstmt.setString(4, contrasenha);
             pstmt.executeUpdate();
-            System.out.println("aquie estoy");
+            System.out.print("aquie estoy");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void crearOperadorFoto(String nombre, String apellido,String correo_pucp, String contrasenha, InputStream foto){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "INSERT INTO usuario (nombre,apellido,correo_pucp,contrasenha,idRoles,fotografia) VALUES (?,?,?,?,?,?)";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, nombre);
+            pstmt.setString(2, apellido);
+            pstmt.setString(3, correo_pucp);
+            pstmt.setString(4, contrasenha);
+            pstmt.setInt(5, 2);
+            pstmt.setBlob(6,foto);
+            pstmt.executeUpdate();
+            System.out.print("aquie estoy");
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

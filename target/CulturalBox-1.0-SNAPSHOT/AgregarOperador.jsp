@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.Objects" %>
+<jsp:useBean id="invalid1" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="invalid2" scope="session" type="java.lang.String" class="java.lang.String"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,51 +62,63 @@
             </br>
             <h2 class="section-heading text-uppercase">Agregar Operador</h2>
             <h3 class="section-subheading text-muted">Por favor rellenar todos los campos para agregar a un Operador</h3>
+            <%if (session.getAttribute("invalid1").equals("error")){%>
+            <div class="text-danger nb-2">
+                El correo ya existe en el sistema.
+            </div>
+            <%session.removeAttribute("invalid1");%>
+            <%}%>
+            <%if (session.getAttribute("invalid2").equals("error")){%>
+            <div class="text-danger nb-2">
+                Contraseñas no coinciden!
+            </div>
+            <%session.removeAttribute("invalid2");%>
+            <%}%>
         </div>
     </div>
 
-    <form class="row g-3 needs-validation" novalidate action="<%=request.getContextPath()%>/operadores?a=agregar" method="POST">
+    <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/operadores?a=agregar" enctype="multipart/form-data">
         <div class="row justify-content-center">
             <!--Columna 1-->
             <div class="col-4">
                 </br>
-                </br>
-                </br>
+
                 <div class="container">
                     <img src="assets/img/usuario.png" class="card-img-top" alt="..." style="width:250px; height:250px">
                 </div>
+
                 <div >
-                    <button type="button" class="btn btn-secondary">Subir foto</button>
+                    <input type="file" class="btn btn-primary" name="foto" style="background-color:grey; border-color:grey" id="foto" required>
                 </div>
             </div>
             <!--Columna 2-->
             <div class="col-4">
                 <div class="mb-3">
                     </br>
-                    <label for="validationCustom01" class="form-label">Nombre *</label>
-                    <input type="text" class="form-control" id="validationCustom01" name="nombre" required>
+                    <label for="nombre" class="form-label">Nombre *</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
                 </div>
                 <div class="mb-3">
-                    <label for="validationCustom02" class="form-label">Apellido *</label>
-                    <input type="text" class="form-control" id="validationCustom02" name="apellido"  required>
+                    <label for="apellido" class="form-label">Apellido *</label>
+                    <input type="text" class="form-control" id="apellido" name="apellido"  required>
                 </div>
                 <div class="mb-3">
-                    <label for="validationCustom01" class="form-label">Correo *</label>
-                    <input type="text" class="form-control" id="validationCustom03" name="correo"  required>
+                    <label for="correo" class="form-label">Correo *</label>
+                    <input type="text" class="form-control" id="correo" name="correo"  required>
                 </div>
                 <div class="mb-3">
-                    <label for="validationCustom01" class="form-label">Contraseña *</label>
-                    <input type="password" class="form-control" id="validationCustom04" name="contrasenha" required>
+                    <label for="contrasenha" class="form-label">Contraseña *</label>
+                    <input type="password" class="form-control" id="contrasenha" name="contrasenha" required>
                 </div>
                 <div class="mb-3">
-                    <label for="validationCustom01" class="form-label">Confirmar contraseña *</label>
-                    <input type="password" class="form-control" id="validationCustom05"  required>
+                    <label for="contrasenha1" class="form-label">Confirmar contraseña *</label>
+                    <input type="password" class="form-control" id="contrasenha1" name="contrasenha1"  required>
                 </div>
             </div>
             <!-- Boton-->
             <div class="text-center">
                 </br>
-                <a href="operadores.jsp" class="btn btn-primary">Regresar</a>
+                <a href="<%=request.getContextPath()%>/operadores" class="btn btn-primary">Regresar</a>
                 <button type="submit" class="btn btn-secondary" >
                     Agregar
                 </button>

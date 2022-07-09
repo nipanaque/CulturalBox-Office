@@ -1,10 +1,21 @@
 package com.example.culturalbox.Beans;
 
+import java.io.InputStream;
+
 public class Operadores {
     private String id;
     private String nombre;
     private String apellido;
     private String correo;
+    private InputStream foto;
+
+    public InputStream getFoto() {
+        return foto;
+    }
+
+    public void setFoto(InputStream foto) {
+        this.foto = foto;
+    }
 
     public Operadores(String nombre, String apellido, String correo, String id) {
         this.nombre = nombre;
