@@ -36,7 +36,7 @@ public class MenuDao {
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("select distinct(f.nombre),f.descripcion,f.genero,f.restriccion, concat(d.nombre, ' ',d.apellido) as `Director` from funcion f\n" +
+             ResultSet rs = stmt.executeQuery("select distinct(f.nombre),f.descripcion,f.genero,f.restriccion, concat(d.nombre, ' ',d.apellido) as `Director`, f.idFuncion from funcion f\n" +
                      "inner join director d on f.idDirector = d.idDirector\n" +
                      "inner join horario h on f.idFuncion = h.idFuncion\n" +
                      "where h.vigencia = 1\n" +
@@ -49,6 +49,7 @@ public class MenuDao {
                 menu.setGenero(rs.getString(3));
                 menu.setRestriccion(rs.getString(4));
                 menu.setDirector(rs.getString(5));
+                menu.setIdFuncion(rs.getInt(6));
                 listaMenu.add(menu);
 
             }
