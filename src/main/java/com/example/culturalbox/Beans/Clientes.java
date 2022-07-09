@@ -1,10 +1,19 @@
 package com.example.culturalbox.Beans;
 
 public class Clientes {
+    private int id;
     private String nombre;
     private String funcion;
     private String sede;
     private int sala;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getSala() {
         return sala;
