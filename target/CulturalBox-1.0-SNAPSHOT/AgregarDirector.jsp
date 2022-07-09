@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<jsp:useBean id="invalid1" scope="session" type="java.lang.String" class="java.lang.String"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,13 +57,18 @@
 <section class="page-section bg-light" id="portfolio">
     <div class="container">
         <div class="text-center">
-            </br>
             <h2 class="section-heading text-uppercase">Agregar Director</h2>
             <h3 class="section-subheading text-muted">Por favor rellenar todos los campos para agregar un Director</h3>
+            <%if (session.getAttribute("invalid1").equals("error")){%>
+            <div class="text-danger nb-2">
+                Este director ya existe.
+            </div>
+            <%session.removeAttribute("invalid1");%>
+            <%}%>
         </div>
     </div>
 
-    <form class="row g-3 needs-validation" novalidate action="<%=request.getContextPath()%>/Directores?a=agregar" method="POST">
+    <form class="row g-3 needs-validation" novalidate action="<%=request.getContextPath()%>/Directores?a=agregar" method="POST" enctype="multipart/form-data">
         <div class="row justify-content-center">
             <!--Columna 1-->
             <div class="col-4">
@@ -71,7 +76,10 @@
                     <img src="assets/img/usuario.png" class="card-img-top" alt="..." style="width:250px; height:250px">
                 </div>
                 <div >
-                    <button type="button" class="btn btn-secondary">Subir foto</button>
+                    <label for="foto" class="form-label">Foto *</label>
+                </div>
+                <div >
+                    <input type="file" class="btn btn-primary" name="foto" style="background-color:grey; border-color:grey" id="foto" required>
                 </div>
             </div>
             <!--Columna 2-->
@@ -145,6 +153,12 @@
         }, false);
     });
 
+</script>
+<script>
+    function explorar(){
+        document.getElementById("f_subir").click()
+
+    }
 </script>
 
 </body>

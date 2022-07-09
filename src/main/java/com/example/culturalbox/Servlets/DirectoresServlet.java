@@ -1,12 +1,19 @@
 package com.example.culturalbox.Servlets;
 
+import com.example.culturalbox.Beans.Actores;
+import com.example.culturalbox.Beans.Directores;
 import com.example.culturalbox.Daos.DirectoresDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Objects;
 
+@MultipartConfig
 @WebServlet(name = "Directores", value = "/Directores")
 public class DirectoresServlet extends HttpServlet {
     @Override
@@ -30,17 +37,33 @@ public class DirectoresServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         DirectoresDao directoresDao = new DirectoresDao();
+        HttpSession session = request.getSession();
 
         switch (action) {
             case "agregar" -> {
                 String nombre = request.getParameter("nombreA").toLowerCase();
                 String apellido = request.getParameter("apellidoA").toLowerCase();
+                Part fotoStr = request.getPart("foto");
+                InputStream foto = fotoStr.getInputStream();
 
                 String nombreFormato = primeraMayus(nombre);
                 String apellidoFormato = primeraMayus(apellido);
 
-                directoresDao.crearDirector(nombreFormato, apellidoFormato);
-                response.sendRedirect(request.getContextPath() + "/Directores");
+                ArrayList<Directores> listaDirectores = directoresDao.obtenerNombreDirectores();
+                int i=0;
+                for(Directores listadirectores: listaDirectores){
+                    if (Objects.equals(listadirectores.getNombre(), nombreFormato) && Objects.equals(listadirectores.getApellido(), apellidoFormato)) {
+                        i++;
+                    }
+                }
+                if(i==0){
+                    directoresDao.crearDirector(nombreFormato, apellidoFormato,foto);
+                    response.sendRedirect(request.getContextPath() + "/Directores");
+                }else{
+                    session.setAttribute("invalid1","error");
+                    RequestDispatcher view =request.getRequestDispatcher("AgregarDirector.jsp");
+                    view.forward(request,response);
+                }
             }
 
             case "borrar" -> {

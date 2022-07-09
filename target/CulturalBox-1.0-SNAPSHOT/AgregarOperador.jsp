@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.Objects" %>
 <jsp:useBean id="invalid1" scope="session" type="java.lang.String" class="java.lang.String"/>
 <jsp:useBean id="invalid2" scope="session" type="java.lang.String" class="java.lang.String"/>
 
@@ -82,13 +81,14 @@
             <!--Columna 1-->
             <div class="col-4">
                 </br>
-
                 <div class="container">
                     <img src="assets/img/usuario.png" class="card-img-top" alt="..." style="width:250px; height:250px">
                 </div>
-
                 <div >
-                    <input type="file" class="btn btn-primary" name="foto" style="background-color:grey; border-color:grey" id="foto" required>
+                    <label for="foto" class="form-label">Foto *</label>
+                </div>
+                <div >
+                    <input type="file" class="btn btn-primary" name="foto" style="background-color:grey; border-color:grey" id="foto" >
                 </div>
             </div>
             <!--Columna 2-->
@@ -158,7 +158,6 @@
 <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-
 <script>
     var forms = document.querySelectorAll('.needs-validation');
 
