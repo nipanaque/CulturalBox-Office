@@ -88,7 +88,7 @@
                     <label for="foto" class="form-label">Foto *</label>
                 </div>
                 <div >
-                    <input type="file" class="btn btn-primary" name="foto" style="background-color:grey; border-color:grey" id="foto" >
+                    <input type="file" class="btn btn-primary" name="foto" style="background-color:grey; border-color:grey" id="foto" required >
                 </div>
             </div>
             <!--Columna 2-->

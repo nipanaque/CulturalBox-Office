@@ -17,11 +17,14 @@ public class LoginServlet extends HttpServlet {
         if(logout == null){
             requestDispatcher = request.getRequestDispatcher("Login.jsp");
             requestDispatcher.forward(request,response);
+
         }else{
             if(logout.equals("yes")){
+
                 HttpSession session = request.getSession();
                 session.invalidate();
                 response.sendRedirect(request.getContextPath() + "/MenuSinLoginServlet");
+
             }else{
 
                 requestDispatcher = request.getRequestDispatcher("Login.jsp");

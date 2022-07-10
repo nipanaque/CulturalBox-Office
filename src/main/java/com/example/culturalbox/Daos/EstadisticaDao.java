@@ -389,7 +389,7 @@ public class EstadisticaDao {
         String sql = "select f.nombre from funcion f\n" +
                 "    inner join funcion_has_actor fh on (f.idFuncion = fh.idFuncion)\n" +
                 "    inner join actor a on (fh.idActor = a.idActor)\n" +
-                "where lower(a.nombre) like ? and lower(a.apellido) like ?";
+                "where lower(a.nombre) like ? and lower(a.apellido) like ? group by a.idActor";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
@@ -448,7 +448,7 @@ public class EstadisticaDao {
         }
 
         String sql = "select f.nombre as 'Funciones dirigidas' from director d, funcion f\n" +
-                "where d.idDirector = f.idDirector and lower(d.nombre) like ? and lower(d.apellido) like ?;";
+                "where d.idDirector = f.idDirector and lower(d.nombre) like ? and lower(d.apellido) like ? group by d.idDirector;";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
 

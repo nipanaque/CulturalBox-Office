@@ -11,13 +11,8 @@ public class OperadorIndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher;
 
-        if(request.getSession().getAttribute("rol").equals(1) ){
-            requestDispatcher = request.getRequestDispatcher("/MenuServlet");
-        }else if(request.getSession().getAttribute("rol").equals(2)){
             requestDispatcher = request.getRequestDispatcher("index_operadores.jsp");
-        }else{
-            requestDispatcher = request.getRequestDispatcher("/AdminIndexServlet");
-        }
+
         requestDispatcher.forward(request,response);
     }
 

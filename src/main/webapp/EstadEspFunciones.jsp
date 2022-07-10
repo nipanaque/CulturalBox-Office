@@ -103,8 +103,11 @@
                     </div>
                 </div>
 
-                <%if(respuesta.equals("noExiste")){%>
-                <h6>No se encontró resultados</h6>
+                <%if(session.getAttribute("msg") != null){%>
+                <div>
+                    <div class="alert alert-danger" role="alert"><%=session.getAttribute("msg")%></div>
+                </div>
+                <%session.removeAttribute("msg");%>
                 <%}%>
 
                 <div class="row align-items-stretch mb-5">

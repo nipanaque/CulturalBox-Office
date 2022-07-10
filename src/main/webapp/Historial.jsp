@@ -43,7 +43,7 @@
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                             <ul class="navbar-nav">
-                                <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/MenuServlet?a=listarCompras&idUsuario=<%=usuarioSesion.getId()%>">
+                                <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/MenuServlet?a=listarCompras">
                                     <img src="assets/img/carrito.png" style="width: 90px;margin-right:6px;margin-top:8px;"  class="rounded float-start" alt="...">
                                     <span class="badge rounded-pill bg-danger"style="margin-left:-6px;">
                                          <%=contCompras%>
@@ -51,14 +51,8 @@
                                          </span>
                                 </a></li>
                                 <li class="nav-item dropdown">
-<<<<<<< HEAD
 
-=======
-                                    <a class="btncontacto" href="<%=request.getContextPath()%>/MenuServlet"
-                                       style="position: absolute; left: calc(-150px/2 - 40px); top: calc(25px/2 - 10px);">
-                                        <img src="assets/img/carrito.png" style="width: 90px"  class="rounded float-start" alt="...">
-                                    </a>
->>>>>>> 8cec9c016db8e3900cbb40fae6006086293e03b6
+
                                     <a href="<%=request.getContextPath()%>/MenuServlet"><button class="btn btn-secondary btn-sm" type="submit">Volver al menu</button></a>
                                 </li>
                             </ul>

@@ -67,7 +67,7 @@ public class OperadoresDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "INSERT INTO usuario (nombre,apellido,correo_pucp,contrasenha,idRoles,fotografia) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO usuario (nombre,apellido,correo_pucp,contrasenha,idRoles,fotografia) VALUES (?,?,?,sha2(?,256),?,?)";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {

@@ -39,7 +39,6 @@
                                 Admin1234
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Perfil</a></li>
                                 <li><a class="dropdown-item" href="Actores">Actores</a></li>
                                 <li><a class="dropdown-item" href="Sedes">Sedes</a></li>
                                 <li><a class="dropdown-item" href="Clientes">Clientes</a></li>
@@ -80,7 +79,7 @@
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="assets/img/Directores/13.jpg" style="width:150px; height:200px" class="img-fluid rounded-start" alt="...">
+                                <img class="img-fluid1" src="<%=request.getContextPath()%>/ImgEstadServlet?a=Directores&id=<%=director.getId()%>" style="width:150px; height:200px" class="img-fluid rounded-start" alt="..." />
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -120,7 +119,7 @@
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="assets/img/Directores/14.jpg" style="width:180px; height:200px" class="img-fluid rounded-start" alt="...">
+                                <img class="img-fluid1" src="<%=request.getContextPath()%>/ImgEstadServlet?a=Directores&id=<%=director.getId()%>" style="width:150px; height:200px" class="img-fluid rounded-start" alt="..." />
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">

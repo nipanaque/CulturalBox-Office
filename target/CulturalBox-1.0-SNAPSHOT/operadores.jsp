@@ -69,7 +69,7 @@
                 <!-- Portfolio item 1-->
                 <div class="card flex-md-row mb-4 box-shadow h-md-250">
                     <input class="form-check-input position-absolute end-0 top-0 border m-2"   type="checkbox" id="checkboxNoLabel" name="operador<%=x%>" value="<%=operadores1.getId()%>" value="" aria-label="..." style="width:30px; height:30px ">
-                    <img class="card-img-left" src="assets/img/portfolio/user.png">
+                    <img class="img-fluid1" src="<%=request.getContextPath()%>/ImgEstadServlet?a=Usuarios&id=<%=operadores1.getId()%>" style="width:150px; height:200px" class="img-fluid rounded-start" alt="..." />
                     <div class="card-body">
                         <h5><a><%=operadores1.getNombre()%></a></h5>
                         <h5><a><%=operadores1.getApellido()%></a></h5>
