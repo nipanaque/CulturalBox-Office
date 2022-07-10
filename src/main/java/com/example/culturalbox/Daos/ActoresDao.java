@@ -2,6 +2,7 @@ package com.example.culturalbox.Daos;
 
 import com.example.culturalbox.Beans.Actores;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -58,21 +59,47 @@ public class ActoresDao {
         return listaActores;
     }
 
+    public ArrayList<Actores> obtenerNombreActores(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        ArrayList<Actores> listaActores = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM actor;");){
+            while (rs.next()){
+                Actores actor = new Actores();
+                actor.setId(rs.getString(1));
+                actor.setNombre(rs.getString(2));
+                actor.setApellido(rs.getString(3));
+                listaActores.add(actor);
+            }
 
-    public void crearActor(String nombre, String apellido){
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaActores;
+    }
+
+
+    public void crearActor(String nombre, String apellido, InputStream foto){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
-        String sql = "INSERT INTO actor (nombre,apellido,fotografia) VALUES (?,?,NULL)";
+        String sql = "INSERT INTO actor (nombre,apellido,fotografia) VALUES (?,?,?)";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
 
             pstmt.setString(1, nombre);
             pstmt.setString(2, apellido);
+            pstmt.setBlob(3, foto);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

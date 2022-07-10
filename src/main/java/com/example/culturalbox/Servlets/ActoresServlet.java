@@ -1,15 +1,20 @@
 package com.example.culturalbox.Servlets;
 
+import com.example.culturalbox.Beans.Actores;
 import com.example.culturalbox.Beans.Aforo;
 import com.example.culturalbox.Daos.ActoresDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import javax.servlet.annotation.MultipartConfig;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 
+@MultipartConfig
 @WebServlet(name = "Actores", value = "/Actores")
 public class ActoresServlet extends HttpServlet {
     @Override
@@ -36,17 +41,35 @@ public class ActoresServlet extends HttpServlet {
 
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         ActoresDao actoresDao = new ActoresDao();
+        HttpSession session = request.getSession();
 
         switch (action) {
             case "agregar" -> {
                 String nombre = request.getParameter("nombreA").toLowerCase();
                 String apellido = request.getParameter("apellidoA").toLowerCase();
+                Part fotoStr = request.getPart("foto");
 
                 String nombreFormato = primeraMayus(nombre);
                 String apellidoFormato = primeraMayus(apellido);
+                InputStream foto = fotoStr.getInputStream();
+                System.out.print(nombreFormato+" "+apellidoFormato);
 
-                actoresDao.crearActor(nombreFormato, apellidoFormato);
-                response.sendRedirect(request.getContextPath() + "/Actores");
+                ArrayList<Actores> listaActores = actoresDao.obtenerNombreActores();
+                int i=0;
+                for(Actores listaactores: listaActores){
+                    if (Objects.equals(listaactores.getNombre(), nombreFormato) && Objects.equals(listaactores.getApellido(), apellidoFormato)) {
+                        i++;
+                    }
+                }
+
+                if(i==0){
+                    actoresDao.crearActor(nombreFormato, apellidoFormato,foto);
+                    response.sendRedirect(request.getContextPath() + "/Actores");
+                }else{
+                    session.setAttribute("invalid1","error");
+                    RequestDispatcher view =request.getRequestDispatcher("AgregarActor.jsp");
+                    view.forward(request,response);
+                }
             }
 
             case "borrar" -> {

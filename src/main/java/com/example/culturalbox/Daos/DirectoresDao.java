@@ -1,7 +1,9 @@
 package com.example.culturalbox.Daos;
 
+import com.example.culturalbox.Beans.Actores;
 import com.example.culturalbox.Beans.Directores;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -53,20 +55,46 @@ public class DirectoresDao {
         return listaDirectores;
     }
 
-    public void crearDirector(String nombre, String apellido){
+    public ArrayList<Directores> obtenerNombreDirectores(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        ArrayList<Directores> listaDirectores = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM director;");){
+            while (rs.next()){
+                Directores director = new Directores();
+                director.setId(rs.getString(1));
+                director.setNombre(rs.getString(2));
+                director.setApellido(rs.getString(3));
+                listaDirectores.add(director);
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaDirectores;
+    }
+
+    public void crearDirector(String nombre, String apellido, InputStream foto){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
-        String sql = "INSERT INTO director (nombre,apellido,fotografia) VALUES (?,?,NULL)";
+        String sql = "INSERT INTO director (nombre,apellido,fotografia) VALUES (?,?,?)";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
 
             pstmt.setString(1, nombre);
             pstmt.setString(2, apellido);
+            pstmt.setBlob(3,foto);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

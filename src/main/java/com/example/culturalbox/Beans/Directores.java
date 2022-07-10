@@ -5,8 +5,17 @@ import java.util.ArrayList;
 public class Directores {
     private String id;
     private String nombre;
+    private String apellido;
     private int puntaje;
     private ArrayList<String> obras = new ArrayList<>();
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
     public String getNombre() {
         return nombre;
