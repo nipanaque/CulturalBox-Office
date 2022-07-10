@@ -37,11 +37,10 @@
                   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                     <li><a class="dropdown-item" href="<%=request.getContextPath()%>/EstadisticaServlet">Estadisticas</a></li>
                     <li><a class="dropdown-item" href="ReporteSalasServlet">Salas</a></li>
-<<<<<<< HEAD
+
                     <li><a class="dropdown-item" href="<%=request.getContextPath()%>/LoginServlet?finish=yes">Cerrar Sesión</a></li>
-=======
-                    <li><a class="dropdown-item" href="<%=request.getContextPath()%>/MenuSinLoginServlet">Cerrar Sesión</a></li>
->>>>>>> 23a647a2481d6510dbac82c32ce730362dceabd8
+
+
                   </ul>
                 </li>
               </ul>

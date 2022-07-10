@@ -10,13 +10,9 @@ public class AdminIndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher;
-        if(request.getSession().getAttribute("rol").equals(1) ){
-            requestDispatcher = request.getRequestDispatcher("/MenuServlet");
-        }else if(request.getSession().getAttribute("rol").equals(2)){
-            requestDispatcher = request.getRequestDispatcher("/OperadorIndexServlet");
-        }else{
+
             requestDispatcher = request.getRequestDispatcher("index.jsp");
-        }
+
         requestDispatcher.forward(request,response);
     }
 

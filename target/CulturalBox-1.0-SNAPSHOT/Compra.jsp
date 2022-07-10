@@ -10,6 +10,8 @@
 <%
     ArrayList<Compra> comprasNopagadas =  (ArrayList<Compra>) request.getAttribute("comprasNopagadas");
 %>
+<jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -112,7 +114,7 @@
                 <div class="tab-content">
                     <!-- credit card info-->
                     <div id="credit-card" class="tab-pane fade show active pt-3">
-                        <form method="POST" action="<%=request.getContextPath()%>/MenuServlet?a=facturacion&idUsuario=1">
+                        <form method="POST" action="<%=request.getContextPath()%>/MenuServlet?a=facturacion">
                             <div class="form-group">
                                 <label for="titular"><h6>Titular de la tarjeta</h6></label>
                                 <input type="text" name="titular" id="titular" placeholder="Nombre" required="" class="form-control ">
