@@ -221,10 +221,14 @@
                         </div>
                     </div>
                 </div>
+                <%}%>
 
-                <%}else if ((director.isEmpty() || actor.isEmpty()) && (tipo.equals("Actor") || tipo.equals("Director"))){%>
-                <h5>No se encontró resultados</h5>
-                <%}else{%>
+
+                <%if(session.getAttribute("msg") != null){%>
+                <div>
+                    <div class="alert alert-danger" role="alert"><%=session.getAttribute("msg")%></div>
+                </div>
+                <%session.removeAttribute("msg");%>
                 <%}%>
 
 

@@ -82,6 +82,27 @@ public class ImgEstadServlet extends HttpServlet {
                     e.printStackTrace();
                 }//Falta el finally para cerrar apropiadamente (preguntar)
             }
+            case "Usuarios" -> {
+                String id = request.getParameter("id");
+                byte [] img4 = null;
+                ServletOutputStream sos = null;
+                String sql = "select fotografia from usuario where idUsuario = ?;";
+
+                try (Connection conn = DriverManager.getConnection(url, user, pass);
+                     PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+                    pstmt.setString(1,id);
+                    try(ResultSet rs = pstmt.executeQuery();){
+                        if(rs.next()){
+                            img4 = rs.getBytes(1);
+                        }
+                        sos = response.getOutputStream();
+                        sos.write(img4);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }//Falta el finally para cerrar apropiadamente (preguntar)
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ package com.example.culturalbox.Servlets;
 import com.example.culturalbox.Beans.CrearFuncion;
 import com.example.culturalbox.Beans.Horarios;
 import com.example.culturalbox.Beans.Mantenimiento;
+import com.example.culturalbox.Beans.Usuario;
 import com.example.culturalbox.Daos.CrearFuncionDao;
 import com.example.culturalbox.Daos.HorariosDao;
 
@@ -110,6 +111,7 @@ public class ListaHorariosServlet extends HttpServlet {
                 ArrayList<Horarios> listaHorarios = horariosDao.obtenerHorarios();
                 Horarios horario = null;
 
+                String nombre_funcion = request.getParameter("nombre_funcion1");
                 String id = request.getParameter("idhora");
                 String dia = request.getParameter("dia");
                 String tiempo_inicio = request.getParameter("tiempo_inicio");
@@ -138,6 +140,8 @@ public class ListaHorariosServlet extends HttpServlet {
                     horario.setDia(dia);
                     horario.setTiempo_inicio(tiempo_inicio);
                     horario.setCosto(Float.parseFloat(costoStr));
+                    ArrayList<Usuario> listaUsuario = horarios.buscarUsuariosCorreo(id);
+                    horarios.enviarCorreo(listaUsuario,nombre_funcion,tiempo_inicio,dia);
                     horarios.actualizarHorario(horario);
                     response.sendRedirect(request.getContextPath() + "/ListaHorarios");
                 }else{

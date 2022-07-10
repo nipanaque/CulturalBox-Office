@@ -27,7 +27,7 @@ public class ClientesDao {
             ResultSet rs = stmt.executeQuery("SELECT CONCAT(u.nombre,' ',u.apellido) AS 'Cliente',\n" +
                     "       f.nombre AS 'Función',\n" +
                     "       se.nombre AS 'Sede',\n" +
-                    "       h.idSala AS 'Sala'\n" +
+                    "       h.idSala AS 'Sala', u.idUsuario\n" +
                     "FROM funcion f, horario h, sede se, usuario u, compra c\n" +
                     "WHERE se.idSede = h.idSede\n" +
                     "  AND f.idFuncion = h.idFuncion\n" +
@@ -42,6 +42,7 @@ public class ClientesDao {
                 clientes.setFuncion(rs.getString(2));
                 clientes.setSede(rs.getString(3));
                 clientes.setSala(rs.getInt(4));
+                clientes.setId(rs.getInt(5));
                 listaClientes.add(clientes);
             }
 

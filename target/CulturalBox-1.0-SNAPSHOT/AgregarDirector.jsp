@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<jsp:useBean id="invalid1" scope="session" type="java.lang.String" class="java.lang.String"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,24 +57,38 @@
 <section class="page-section bg-light" id="portfolio">
     <div class="container">
         <div class="text-center">
-            </br>
             <h2 class="section-heading text-uppercase">Agregar Director</h2>
             <h3 class="section-subheading text-muted">Por favor rellenar todos los campos para agregar un Director</h3>
+            <%if (session.getAttribute("invalid1").equals("error")){%>
+            <div class="text-danger nb-2">
+                Este director ya existe.
+            </div>
+            <%session.removeAttribute("invalid1");%>
+            <%}%>
         </div>
     </div>
 
-    <form class="row g-3 needs-validation" novalidate action="<%=request.getContextPath()%>/Directores?a=agregar" method="POST">
+    <form class="row g-3 needs-validation" novalidate action="<%=request.getContextPath()%>/Directores?a=agregar" method="POST" enctype="multipart/form-data">
         <div class="row justify-content-center">
             <!--Columna 1-->
             <div class="col-4">
                 <div class="container">
                     <img src="assets/img/usuario.png" class="card-img-top" alt="..." style="width:250px; height:250px">
+<<<<<<< HEAD
                     <a  href="javascript:explorar();" >
                         <div class="form-group">
                             <button type="button" class="btn btn-secondary">Subir foto</button>
                             <input type="file" name="f_subir" id="f_subir" style="display:none;" >
                         </div>
                     </a>
+=======
+                </div>
+                <div >
+                    <label for="foto" class="form-label">Foto *</label>
+                </div>
+                <div >
+                    <input type="file" class="btn btn-primary" name="foto" style="background-color:grey; border-color:grey" id="foto" required>
+>>>>>>> 0e7a2db686c3eaf31a7358ec70170e6dd8e912fa
                 </div>
             </div>
             <!--Columna 2-->

@@ -24,6 +24,12 @@ public class RegistroServlet extends HttpServlet {
 
     }
 
+    public String primeraMayus(String nombre) {
+        char[] arr = nombre.toCharArray();
+        arr[0] = Character.toUpperCase(arr[0]);
+        return new String(arr);
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -44,6 +50,7 @@ public class RegistroServlet extends HttpServlet {
         String contrasenha_confirmada;
         String direccion;
 
+
         switch (action){
             case "p_validacion" ->{
                 codigo = request.getParameter("codigo");
@@ -54,7 +61,10 @@ public class RegistroServlet extends HttpServlet {
                 nacimiento = request.getParameter("nacimiento");
                 direccion = request.getParameter("direccion");
 
-                System.out.println(codigo+" "+nombre+" "+apellido+" "+dni+" "+telefono+" "+nacimiento+" "+direccion);
+                String nombreFormato = primeraMayus(nombre);
+                String apellidoFormato = primeraMayus(apellido);
+
+                System.out.println(codigo+" "+nombreFormato+" "+apellidoFormato+" "+dni+" "+telefono+" "+nacimiento+" "+direccion);
 
                 int i=0;
                 for(Registro listausuarios: listaUsuarios){
@@ -64,7 +74,7 @@ public class RegistroServlet extends HttpServlet {
                     }
                 }
                 if(i==0){
-                    request.setAttribute("primer_registro",registroDao.obtenerRegistro(codigo,nombre,apellido,dni,telefono,nacimiento,direccion));
+                    request.setAttribute("primer_registro",registroDao.obtenerRegistro(codigo,nombreFormato,apellidoFormato,dni,telefono,nacimiento,direccion));
                     RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerCont.jsp");
                     view.forward(request,response);
                 }else{
