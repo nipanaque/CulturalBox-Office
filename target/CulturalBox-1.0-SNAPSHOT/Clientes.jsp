@@ -106,7 +106,7 @@
             <div class="col-lg-4 col-sm-6 mb-4">
                 <!-- Portfolio item 1-->
                 <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <img class="card-img-left" src="assets/img/user.png">
+                    <img class="img-fluid1" src="<%=request.getContextPath()%>/ImgEstadServlet?a=Usuarios&id=<%=clientes.getId()%>" style="width:150px; height:200px" class="img-fluid rounded-start" alt="..." />
                     <div class="card-body d-flex flex-column align-items-start">
                         <h6 ><a><%=clientes.getNombre()%></a></h6>
                         <p3 class="card-text mb-auto">Función: <%=clientes.getFuncion()%></p3>

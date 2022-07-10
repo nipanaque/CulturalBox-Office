@@ -79,7 +79,7 @@
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="assets/img/Directores/13.jpg" style="width:150px; height:200px" class="img-fluid rounded-start" alt="...">
+                                <img class="img-fluid1" src="<%=request.getContextPath()%>/ImgEstadServlet?a=Directores&id=<%=director.getId()%>" style="width:150px; height:200px" class="img-fluid rounded-start" alt="..." />
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -119,7 +119,7 @@
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="assets/img/Directores/14.jpg" style="width:180px; height:200px" class="img-fluid rounded-start" alt="...">
+                                <img class="img-fluid1" src="<%=request.getContextPath()%>/ImgEstadServlet?a=Directores&id=<%=director.getId()%>" style="width:150px; height:200px" class="img-fluid rounded-start" alt="..." />
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">

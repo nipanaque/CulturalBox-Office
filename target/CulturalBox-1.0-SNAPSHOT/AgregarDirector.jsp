@@ -74,21 +74,12 @@
             <div class="col-4">
                 <div class="container">
                     <img src="assets/img/usuario.png" class="card-img-top" alt="..." style="width:250px; height:250px">
-<<<<<<< HEAD
-                    <a  href="javascript:explorar();" >
-                        <div class="form-group">
-                            <button type="button" class="btn btn-secondary">Subir foto</button>
-                            <input type="file" name="f_subir" id="f_subir" style="display:none;" >
-                        </div>
-                    </a>
-=======
                 </div>
                 <div >
                     <label for="foto" class="form-label">Foto *</label>
                 </div>
                 <div >
                     <input type="file" class="btn btn-primary" name="foto" style="background-color:grey; border-color:grey" id="foto" required>
->>>>>>> 0e7a2db686c3eaf31a7358ec70170e6dd8e912fa
                 </div>
             </div>
             <!--Columna 2-->
