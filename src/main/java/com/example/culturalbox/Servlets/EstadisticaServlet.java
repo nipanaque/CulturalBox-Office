@@ -44,8 +44,15 @@ public class EstadisticaServlet extends HttpServlet {
                 request.setAttribute("fecha",fecha);
                 request.setAttribute("listaEstadistica",estad.buscarPorFecha(fecha));  //Aqui se filtra
 
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadGeneral.jsp");
-                requestDispatcher.forward(request,response);
+                //El 1 indica que hay compras, porque puede darse el caso de una funcion publicada pero nadie ha comprado boletos, lo cual
+                //significa que no hay calificaciones y funciones mejor y menos vistas estaran nulas.
+                if(estad.buscarPorFecha(fecha).get(1).getNombre() == null){
+                    request.getSession().setAttribute("msg","No se encontraron resultados"+" para "+fecha);
+                    response.sendRedirect(request.getContextPath() + "/EstadGeneral.jsp");
+                }else {
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadGeneral.jsp");
+                    requestDispatcher.forward(request,response);
+                }
             }
             case "buscarEspeciFun" -> {
                 String genero = request.getParameter("genero");
@@ -58,24 +65,53 @@ public class EstadisticaServlet extends HttpServlet {
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadFuncion.jsp");
                     requestDispatcher.forward(request,response);
                 }else{
-                    request.setAttribute("respuesta","noExiste");
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadEspFunciones.jsp");
-                    requestDispatcher.forward(request,response);
+                    request.getSession().setAttribute("msg","No se encontró resultados");
+                    response.sendRedirect(request.getContextPath() + "/EstadEspFunciones.jsp");
                 }
             }
             case "buscarAcDir" -> {
                 String tipo = request.getParameter("tipo");
                 String nombre = request.getParameter("nombre");
                 String[] name = nombre.split(" ");
-                if (tipo.equals("Actor")){
-                    request.setAttribute("actor",estad.buscarActorTwo(name[0],name[1]));
-                }else{
-                    request.setAttribute("director",estad.buscarDirectorTwo(name[0],name[1]));
-                }
-                request.setAttribute("tipo",tipo);
 
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("BuscarActorDirector.jsp");
-                requestDispatcher.forward(request,response);
+                if(name.length == 1){
+                    request.getSession().setAttribute("msg","Información incompleta, se requiere nombre y apellido");
+                    response.sendRedirect(request.getContextPath() + "/BuscarActorDirector.jsp");
+                }else if (name.length == 2){
+                    if (tipo.equals("Actor")){
+                        request.setAttribute("actor",estad.buscarActorTwo(name[0],name[1]));
+
+                        if(estad.buscarActorTwo(name[0],name[1]).size() >= 3){  //Repetidos
+                            request.getSession().setAttribute("msg","Hay mas de 1 resultado con lo ingresado, por favor sea más específico");
+                            response.sendRedirect(request.getContextPath() + "/BuscarActorDirector.jsp");
+                        }else if(estad.buscarActorTwo(name[0],name[1]).get(0).getNombre() == null){   //No encontrado
+                            request.getSession().setAttribute("msg","No se encontró resultados");
+                            response.sendRedirect(request.getContextPath() + "/BuscarActorDirector.jsp");
+                        }else{  //Si encontrado
+                            request.setAttribute("tipo",tipo);
+
+                            RequestDispatcher requestDispatcher = request.getRequestDispatcher("BuscarActorDirector.jsp");
+                            requestDispatcher.forward(request,response);
+                        }
+                    }else{
+                        request.setAttribute("director",estad.buscarDirectorTwo(name[0],name[1]));
+                        if(estad.buscarDirectorTwo(name[0],name[1]).size() >= 3){  //Repetidos
+                            request.getSession().setAttribute("msg","Hay mas de 1 resultado con lo ingresado, por favor sea más específico");
+                            response.sendRedirect(request.getContextPath() + "/BuscarActorDirector.jsp");
+                        }else if(estad.buscarDirectorTwo(name[0],name[1]).get(0).getNombre() == null){
+                            request.getSession().setAttribute("msg","No se encontró resultados");
+                            response.sendRedirect(request.getContextPath() + "/BuscarActorDirector.jsp");
+                        }else{
+                            request.setAttribute("tipo",tipo);
+
+                            RequestDispatcher requestDispatcher = request.getRequestDispatcher("BuscarActorDirector.jsp");
+                            requestDispatcher.forward(request,response);
+                        }
+                    }
+                }else{
+                    request.getSession().setAttribute("msg","Se requiere 1 nombre y 1 apellido");
+                    response.sendRedirect(request.getContextPath() + "/BuscarActorDirector.jsp");
+                }
             }
         }
     }

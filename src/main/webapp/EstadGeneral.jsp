@@ -30,7 +30,6 @@
                 height: 210px;
                 justify-content: center;
                 width: 100px;
-
                 background: #ffff99;
                 color: #333;
             }
@@ -86,11 +85,9 @@
                 </form>
 
 
-                </br>
-
                 <% if(inicio.equals("vacio")){ %>
                 <h5>Seleccione mes y año para el cual desea estadísticas generales, o busque de forma específica funciones, actores o directores con las opciones de abajo</h5>
-                <% }else if (listaEstadistica.get(0).getNombre() != null){ %>
+                <% }else if (listaEstadistica.size() == 6 && listaEstadistica.get(1).getNombre() != null){ %>
                 <!-- Page cuadros primera parte -->
                 <div class="row">
                     <h5>La fecha escogida fue: <%=fecha%></h5>
@@ -106,12 +103,12 @@
                                         <h4 class="card-title">Función mejor calificada</h4>
                                         <p class = "fs-5"> <%=listaEstadistica.get(0).getNombre()%> </p>
                                         <% double puntaje = listaEstadistica.get(0).getPuntaje();
-                                           double parteDecimal = puntaje % 1;
-                                           double parteEntera = puntaje - parteDecimal;
-                                           for(int i=0;i<parteEntera;i++){ %>
+                                            double parteDecimal = puntaje % 1;
+                                            double parteEntera = puntaje - parteDecimal;
+                                            for(int i=0;i<parteEntera;i++){ %>
                                         <img src="assets/img/star-fill.svg"  style="width:20px; height:20px" />
                                         <% }
-                                           if (parteDecimal >= 0.5){ %>
+                                            if (parteDecimal >= 0.5){ %>
                                         <img src="assets/img/star-half.svg"  style="width:20px; height:20px" />
                                         <% for(int i=0;i<5-(parteEntera+1);i++){%>
                                         <img src="assets/img/star-empty.svg"  style="width:20px; height:20px" />
@@ -252,10 +249,16 @@
                     </div>
 
                 </div>
-                <% }else { %>
-                <h5>La fecha escogida fue: <%=fecha%></h5>
-                <h5>No se encontró resultados</h5>
-                <% } %>
+                <% }else{%>
+                    <h5>Seleccione mes y año para el cual desea estadísticas generales, o busque de forma específica funciones, actores o directores con las opciones de abajo</h5>
+                <% }%>
+
+                <%if(session.getAttribute("msg") != null){%>
+                <div>
+                    <div class="alert alert-danger" role="alert"><%=session.getAttribute("msg")%></div>
+                </div>
+                <%session.removeAttribute("msg");%>
+                <%}%>
 
                 </br>
 
