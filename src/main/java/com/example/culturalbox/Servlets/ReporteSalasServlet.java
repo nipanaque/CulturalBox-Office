@@ -21,6 +21,7 @@ public class ReporteSalasServlet extends HttpServlet {
         String action = request.getParameter("a") == null? "inicio" : request.getParameter("a");
         SalaReporteDao salas = new SalaReporteDao();
         SedesDao sedesDao = new SedesDao();
+        HttpSession session = request.getSession();
         switch (action){
             case "inicio" -> {
                 request.setAttribute("listaSedes",sedesDao.obtenerSedes());
