@@ -4,6 +4,8 @@
 <%@ page import="com.example.culturalbox.Beans.CrearFuncion" %>
 <jsp:useBean id="listaSedes" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Sedes>" />
 <jsp:useBean id="listaFunciones" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" />
+<jsp:useBean id="nombreSede" scope="request" type="java.lang.String"/>
+<jsp:useBean id="nombreFuncion" scope="request" type="java.lang.String"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
@@ -85,11 +87,11 @@
             </div>
             <div class="col-md-auto">
                 <div class="text-left">
-                    <h5>funcion:</h5>
+                    <h5>Funcion:</h5>
                 </div>
             </div>
             <div class="col-md-auto">
-                <select class="form-select" aria-label="Default select example" name="funcion">
+                <select class="form-select" aria-label="Default select example" name="funcion" id="funcion">
                     <option selected value="0" >----</option>
                     <%for (CrearFuncion funcion : listaFunciones){%>
                     <option value="<%=funcion.getIdFuncion()%>"><%=funcion.getNombre()%></option>
@@ -99,6 +101,25 @@
                 <button type="submit" class="btn btn-warning col-md-auto">Filtrar</button>
             </div>
         </div>
+        <%if(nombreSede.equals("null")){%>
+            <%if(nombreFuncion.equals("null")){%>
+                <div>
+                    <h6>Mostrando todos los clientes</h6>
+                </div>
+            <%}else{%>
+                <div>
+                    <h6>Mostrando clientes por funcion (<%=nombreFuncion%>)</h6>
+                </div>
+            <%}%>
+        <%}else if(nombreFuncion.equals("null")){%>
+                <div>
+                    <h6>Mostrando clientes por sede (<%=nombreSede%>)</h6>
+                </div>
+        <%}else{%>
+                <div>
+                    <h6>Mostrando clientes por sede y funcion (<%=nombreSede%> || <%=nombreFuncion%>)</h6>
+                </div>
+        <%}%>
         </form>
         </br>
         <div class="row">
@@ -108,10 +129,7 @@
                 <div class="card flex-md-row mb-4 box-shadow h-md-250">
                     <img class="img-fluid1" src="<%=request.getContextPath()%>/ImgEstadServlet?a=Usuarios&id=<%=clientes.getId()%>" style="width:150px; height:200px" class="img-fluid rounded-start" alt="..." />
                     <div class="card-body d-flex flex-column align-items-start">
-                        <h6 ><a><%=clientes.getNombre()%></a></h6>
-                        <p3 class="card-text mb-auto">Función: <%=clientes.getFuncion()%></p3>
-                        <p3 class="card-text mb-auto">Sede: <%=clientes.getSede()%></p3>
-                        <p3 class="card-text mb-auto">Sala: <%=clientes.getSala()%></p3>
+                        <h6><a><%=clientes.getNombre()%></a></h6>
                     </div>
                 </div>
             </div>

@@ -25,14 +25,15 @@ public class ClientesDao {
             Connection connection = DriverManager.getConnection(url, user, pass);
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT CONCAT(u.nombre,' ',u.apellido) AS 'Cliente',\n" +
-                    "       f.nombre AS 'Función',\n" +
-                    "       se.nombre AS 'Sede',\n" +
-                    "       h.idSala AS 'Sala', u.idUsuario\n" +
+                    "f.nombre AS 'Función',\n" +
+                    "se.nombre AS 'Sede',\n" +
+                    "h.idSala AS 'Sala', u.idUsuario\n" +
                     "FROM funcion f, horario h, sede se, usuario u, compra c\n" +
                     "WHERE se.idSede = h.idSede\n" +
-                    "  AND f.idFuncion = h.idFuncion\n" +
-                    "  AND u.idUsuario = c.idUsuario\n" +
-                    "  AND c.idHorario = h.idHorario\n" +
+                    "AND f.idFuncion = h.idFuncion\n" +
+                    "AND u.idUsuario = c.idUsuario\n" +
+                    "AND c.idHorario = h.idHorario\n" +
+                    "GROUP BY u.idUsuario\n" +
                     "ORDER BY c.idCompra;");
 
 
@@ -67,16 +68,17 @@ public class ClientesDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             String sql = "SELECT CONCAT(u.nombre,' ',u.apellido) AS 'Cliente',\n" +
-                    "                           f.nombre AS 'Función', \n" +
-                    "                           se.nombre AS 'Sede', \n" +
-                    "                           h.idSala AS 'Sala' \n" +
-                    "                    FROM funcion f, horario h, sede se, usuario u, compra c\n" +
-                    "\t\t\t\t\tWHERE se.idSede = h.idSede\n" +
-                    "                      AND f.idFuncion = h.idFuncion \n" +
-                    "                      AND u.idUsuario = c.idUsuario \n" +
-                    "                      AND c.idHorario = h.idHorario \n" +
-                    "                      and f.idFuncion = ? \n" +
-                    "                    ORDER BY c.idCompra;";
+                    "f.nombre AS 'Función',\n" +
+                    "se.nombre AS 'Sede',\n" +
+                    "h.idSala AS 'Sala', u.idUsuario\n" +
+                    "FROM funcion f, horario h, sede se, usuario u, compra c\n" +
+                    "WHERE se.idSede = h.idSede\n" +
+                    "AND f.idFuncion = h.idFuncion\n" +
+                    "AND u.idUsuario = c.idUsuario\n" +
+                    "AND c.idHorario = h.idHorario\n" +
+                    "AND f.idFuncion = ?\n" +
+                    "GROUP BY u.idUsuario\n" +
+                    "ORDER BY c.idCompra;";
 
             try (Connection connection = DriverManager.getConnection(url, user, pass);
                  PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -85,7 +87,7 @@ public class ClientesDao {
 
                 try (ResultSet rs = pstmt.executeQuery();) {
 
-                    if (rs.next()) {
+                    while (rs.next()) {
                         Clientes clientes = new Clientes();
                         clientes.setNombre(rs.getString(1));
                         clientes.setFuncion(rs.getString(2));
@@ -122,16 +124,17 @@ public class ClientesDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             String sql = "SELECT CONCAT(u.nombre,' ',u.apellido) AS 'Cliente',\n" +
-                    "                           f.nombre AS 'Función', \n" +
-                    "                           se.nombre AS 'Sede', \n" +
-                    "                           h.idSala AS 'Sala' \n" +
-                    "                    FROM funcion f, horario h, sede se, usuario u, compra c\n" +
-                    "\t\t\t\t\tWHERE se.idSede = h.idSede\n" +
-                    "                      AND f.idFuncion = h.idFuncion \n" +
-                    "                      AND u.idUsuario = c.idUsuario \n" +
-                    "                      AND c.idHorario = h.idHorario \n" +
-                    "                      and se.idSede = ? \n" +
-                    "                    ORDER BY c.idCompra;";
+                    "f.nombre AS 'Función',\n" +
+                    "se.nombre AS 'Sede',\n" +
+                    "h.idSala AS 'Sala', u.idUsuario\n" +
+                    "FROM funcion f, horario h, sede se, usuario u, compra c\n" +
+                    "WHERE se.idSede = h.idSede\n" +
+                    "AND f.idFuncion = h.idFuncion\n" +
+                    "AND u.idUsuario = c.idUsuario\n" +
+                    "AND c.idHorario = h.idHorario\n" +
+                    "AND se.idSede = ?\n" +
+                    "GROUP BY u.idUsuario\n" +
+                    "ORDER BY c.idCompra;";
 
             try (Connection connection = DriverManager.getConnection(url, user, pass);
                  PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -140,7 +143,7 @@ public class ClientesDao {
 
                 try (ResultSet rs = pstmt.executeQuery();) {
 
-                    if (rs.next()) {
+                    while (rs.next()) {
                         Clientes clientes = new Clientes();
                         clientes.setNombre(rs.getString(1));
                         clientes.setFuncion(rs.getString(2));
@@ -177,16 +180,18 @@ public class ClientesDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             String sql = "SELECT CONCAT(u.nombre,' ',u.apellido) AS 'Cliente',\n" +
-                    "                           f.nombre AS 'Función', \n" +
-                    "                           se.nombre AS 'Sede', \n" +
-                    "                           h.idSala AS 'Sala' \n" +
-                    "                    FROM funcion f, horario h, sede se, usuario u, compra c\n" +
-                    "\t\t\t\t\tWHERE se.idSede = h.idSede\n" +
-                    "                      AND f.idFuncion = h.idFuncion \n" +
-                    "                      AND u.idUsuario = c.idUsuario \n" +
-                    "                      AND c.idHorario = h.idHorario \n" +
-                    "                      and f.idFuncion = ? and se.idSede = ?" +
-                    "                    ORDER BY c.idCompra;";
+                    "f.nombre AS 'Función',\n" +
+                    "se.nombre AS 'Sede',\n" +
+                    "h.idSala AS 'Sala', u.idUsuario\n" +
+                    "FROM funcion f, horario h, sede se, usuario u, compra c\n" +
+                    "WHERE se.idSede = h.idSede\n" +
+                    "AND f.idFuncion = h.idFuncion\n" +
+                    "AND u.idUsuario = c.idUsuario\n" +
+                    "AND c.idHorario = h.idHorario\n" +
+                    "AND f.idFuncion = ?\n" +
+                    "AND se.idSede = ?\n" +
+                    "GROUP BY u.idUsuario\n" +
+                    "ORDER BY c.idCompra;";
 
             try (Connection connection = DriverManager.getConnection(url, user, pass);
                  PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -196,7 +201,7 @@ public class ClientesDao {
 
                 try (ResultSet rs = pstmt.executeQuery();) {
 
-                    if (rs.next()) {
+                    while (rs.next()) {
                         Clientes clientes = new Clientes();
                         clientes.setNombre(rs.getString(1));
                         clientes.setFuncion(rs.getString(2));
@@ -219,5 +224,83 @@ public class ClientesDao {
         }
 
         return listaClientes;
+    }
+    public String nombreSede(String idSede) {
+
+        String sede = null;
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/cultura_box_pucp";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            String sql = "SELECT nombre FROM sede WHERE idSede = ?";
+
+            try (Connection connection = DriverManager.getConnection(url, user, pass);
+                 PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+                pstmt.setString(1, idSede);
+
+                try (ResultSet rs = pstmt.executeQuery();) {
+
+                    if (rs.next()) {
+                        sede = (rs.getString(1));
+                    }
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("conexion NO exitosa!!!!!!!!!!!!!!!!!!!!!!!");
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return sede;
+    }
+    public String NombreFuncion(String idFuncion) {
+
+        String funcion = null;
+
+        String user = "root";
+        String pass = "root";
+        String url = "jdbc:mysql://localhost:3306/cultura_box_pucp";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            String sql = "SELECT nombre FROM funcion WHERE idFuncion = ?";
+
+            try (Connection connection = DriverManager.getConnection(url, user, pass);
+                 PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+                pstmt.setString(1, idFuncion);
+
+                try (ResultSet rs = pstmt.executeQuery();) {
+
+                    if (rs.next()) {
+                        funcion = (rs.getString(1));
+                    }
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("conexion NO exitosa!!!!!!!!!!!!!!!!!!!!!!!");
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return funcion;
     }
 }

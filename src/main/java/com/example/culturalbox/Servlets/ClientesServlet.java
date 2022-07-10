@@ -14,8 +14,9 @@ public class ClientesServlet extends HttpServlet {
     @Override
         protected void doGet (HttpServletRequest request, HttpServletResponse response) throws
         ServletException, IOException {
-
             String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
+            request.setAttribute("nombreSede","null");
+            request.setAttribute("nombreFuncion","null");
             ClientesDao clientesDao = new ClientesDao();
             SedesDao sedesDao = new SedesDao();
             CrearFuncionDao funcionDao = new CrearFuncionDao();
@@ -47,10 +48,21 @@ public class ClientesServlet extends HttpServlet {
                 String sede = request.getParameter("sede");
                 String funcion = request.getParameter("funcion");
                 if (sede.equals("0")) {
+                    request.setAttribute("nombreSede","null");
+                    request.setAttribute("nombreFuncion", clientesDao.NombreFuncion(funcion));
                     request.setAttribute("listaClientes", clientesDao.filtraClientesFuncion(funcion));
+                    if (funcion.equals("0")){
+                        request.setAttribute("nombreSede","null");
+                        request.setAttribute("nombreFuncion","null");
+                        request.setAttribute("listaClientes", clientesDao.listarClientes());
+                    }
                 } else if(funcion.equals("0")){
+                    request.setAttribute("nombreSede",clientesDao.nombreSede(sede));
+                    request.setAttribute("nombreFuncion","null");
                     request.setAttribute("listaClientes", clientesDao.filtraClientesSede(sede));
                 }else{
+                    request.setAttribute("nombreSede",clientesDao.nombreSede(sede));
+                    request.setAttribute("nombreFuncion", clientesDao.NombreFuncion(funcion));
                     request.setAttribute("listaClientes", clientesDao.filtraClientesAmbos(funcion,sede));
                 }
                 request.setAttribute("listaSedes", sedesDao.obtenerSedes());
@@ -58,7 +70,6 @@ public class ClientesServlet extends HttpServlet {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("Clientes.jsp");
                 requestDispatcher.forward(request, response);
             }
-            }
         }
-
+    }
 }
