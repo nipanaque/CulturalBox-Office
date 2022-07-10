@@ -51,71 +51,40 @@ public class OperadoresServlet extends HttpServlet {
                 String contrasenha = request.getParameter("contrasenha").toLowerCase();
                 String contrasenha1 = request.getParameter("contrasenha1").toLowerCase();
                 Part fotoStr = request.getPart("foto");
-                if(fotoStr==null){
-                    String nombreFormato = primeraMayus(nombre);
-                    String apellidoFormato = primeraMayus(apellido);
 
-                    System.out.print(nombreFormato+" "+apellidoFormato+" "+correo_pucp+" "+contrasenha1+" "+contrasenha1+" "+fotoStr);
+                InputStream foto = fotoStr.getInputStream();
 
-                    ArrayList<Operadores> listaOperadores = operadoresDao.obtenerOperadores();
-                    int i=0;
-                    int j=0;
-                    if(contrasenha1.equals(contrasenha)){
-                        j=1;
+                String nombreFormato = primeraMayus(nombre);
+                String apellidoFormato = primeraMayus(apellido);
+
+                System.out.print(nombreFormato+" "+apellidoFormato+" "+correo_pucp+" "+contrasenha1+" "+contrasenha1+" "+fotoStr);
+
+                ArrayList<Operadores> listaOperadores = operadoresDao.obtenerOperadores();
+                int i=0;
+                int j=0;
+                if(contrasenha1.equals(contrasenha)){
+                    j=1;
+                }
+                for(Operadores listaoperadores: listaOperadores){
+                    if(Objects.equals(listaoperadores.getCorreo(), correo_pucp)){
+                        i++;
                     }
-                    for(Operadores listaoperadores: listaOperadores){
-                        if(Objects.equals(listaoperadores.getCorreo(), correo_pucp)){
-                            i++;
-                        }
-                    }
-                    if(j==1){
-                        if(i==0){
-                            operadoresDao.crearOperador(nombreFormato, apellidoFormato, correo_pucp, contrasenha);
-                            response.sendRedirect(request.getContextPath() + "/operadores");
-                        }else{
-                            session.setAttribute("invalid1","error");
-                            RequestDispatcher view =request.getRequestDispatcher("AgregarOperador.jsp");
-                            view.forward(request,response);
-                        }
+                }
+                if(j==1){
+                    if(i==0){
+                        operadoresDao.crearOperadorFoto(nombreFormato, apellidoFormato, correo_pucp, contrasenha,foto);
+                        response.sendRedirect(request.getContextPath() + "/operadores");
                     }else{
-                        session.setAttribute("invalid2","error");
+                        session.setAttribute("invalid1","error");
                         RequestDispatcher view =request.getRequestDispatcher("AgregarOperador.jsp");
                         view.forward(request,response);
                     }
                 }else{
-                    InputStream foto = fotoStr.getInputStream();
-
-                    String nombreFormato = primeraMayus(nombre);
-                    String apellidoFormato = primeraMayus(apellido);
-
-                    System.out.print(nombreFormato+" "+apellidoFormato+" "+correo_pucp+" "+contrasenha1+" "+contrasenha1+" "+fotoStr);
-
-                    ArrayList<Operadores> listaOperadores = operadoresDao.obtenerOperadores();
-                    int i=0;
-                    int j=0;
-                    if(contrasenha1.equals(contrasenha)){
-                        j=1;
-                    }
-                    for(Operadores listaoperadores: listaOperadores){
-                        if(Objects.equals(listaoperadores.getCorreo(), correo_pucp)){
-                            i++;
-                        }
-                    }
-                    if(j==1){
-                        if(i==0){
-                            operadoresDao.crearOperadorFoto(nombreFormato, apellidoFormato, correo_pucp, contrasenha,foto);
-                            response.sendRedirect(request.getContextPath() + "/operadores");
-                        }else{
-                            session.setAttribute("invalid1","error");
-                            RequestDispatcher view =request.getRequestDispatcher("AgregarOperador.jsp");
-                            view.forward(request,response);
-                        }
-                    }else{
-                        session.setAttribute("invalid2","error");
-                        RequestDispatcher view =request.getRequestDispatcher("AgregarOperador.jsp");
-                        view.forward(request,response);
-                    }
+                    session.setAttribute("invalid2","error");
+                    RequestDispatcher view =request.getRequestDispatcher("AgregarOperador.jsp");
+                    view.forward(request,response);
                 }
+
 
             }
 
