@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaActores" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Actores>" />
 <%int contador=0;%>
+<jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +26,7 @@
 <!-- Navegacion-->
 <nav class=" navbar navbar-expand-lg  navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="#page-top"><img src="assets/img/pucp_logo1.jpeg" alt="..." /></a>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/AdminIndexServlet" ><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;border-radius: 3px;"/></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars ms-1"></i>
@@ -36,15 +37,14 @@
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Admin1234
+                                <%=usuarioSesion.getCorreo()%>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Perfil</a></li>
                                 <li><a class="dropdown-item" href="Directores">Directores</a></li>
                                 <li><a class="dropdown-item" href="Sedes">Sedes</a></li>
                                 <li><a class="dropdown-item" href="Clientes">Clientes</a></li>
                                 <li><a class="dropdown-item" href="operadores">Operadores</a></li>
-                                <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+                                <li><a class="dropdown-item" href="<%=request.getContextPath()%>/LoginServlet?finish=yes">Cerrar Sesion</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -60,6 +60,7 @@
     <div class="container">
         <div class="text-center">
             </br>
+            <br>
             <h2 class="section-heading text-uppercase">ACTORES</h2>
             </br>
         </div>
@@ -169,7 +170,7 @@
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Eliminar
         </button>
-        <a href="AgregarActor.jsp"><button type="button" class="btn btn-secondary">Agregar</button></a>
+        <a href="AgregarActor.jsp"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar</button></a>
     </div>
 
     <!-- Modal -->

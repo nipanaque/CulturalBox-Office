@@ -2,6 +2,7 @@
 <%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaFunciones"/>
+<jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -32,13 +33,12 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        operador@pucp.edu.pe
+                                        <%=usuarioSesion.getCorreo()%>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">Perfil</a></li>
                                         <li><a class="dropdown-item" href="<%=request.getContextPath()%>/EstadisticaServlet">Estadisticas</a></li>
                                         <li><a class="dropdown-item" href="ReporteSalasServlet">Salas</a></li>
-                                        <li><a class="dropdown-item" href="<%=request.getContextPath()%>/MenuSinLoginServlet">Cerrar Sesión</a></li>
+                                        <li><a class="dropdown-item" href="<%=request.getContextPath()%>/LoginServlet?finish=yes">Cerrar Sesión</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -80,7 +80,7 @@
                         } %>
                     </tbody>
                 </table>
-                <a href="<%=request.getContextPath()%>/index_operadores.jsp"><button type="button" class="btn btn-secondary">Regresar</button></a>
+                <a href="<%=request.getContextPath()%>/OperadorIndexServlet"><button type="button" class="btn btn-secondary">Regresar</button></a>
             </div>
         </section>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
