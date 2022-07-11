@@ -49,6 +49,7 @@ public class CrearHorarioServlet extends HttpServlet {
                 String dia = request.getParameter("dia");
                 String tiempo_inicio = request.getParameter("tiempo_inicio");
                 String stockStr = request.getParameter("stock");
+                String entradDispnStr = stockStr;
                 String idSalaStr = request.getParameter("sala");
                 String idSedeStr = request.getParameter("sede");
                 String idFuncionStr = request.getParameter("funcion");
@@ -72,6 +73,7 @@ public class CrearHorarioServlet extends HttpServlet {
                 int vigencia = Integer.parseInt(vigenciaStr);
                 float costo = Float.parseFloat(costoStr);
                 int stock = Integer.parseInt(stockStr);
+                int entradDispn = Integer.parseInt(entradDispnStr);
                 int idSala = Integer.parseInt(idSalaStr);
                 int idSede = Integer.parseInt(idSedeStr);
                 int idFuncion = Integer.parseInt(idFuncionStr);
@@ -95,7 +97,7 @@ public class CrearHorarioServlet extends HttpServlet {
 
                 if(i==0) {
                     try {
-                        horariosDao.crearHorario(vigencia, costo, dia, tiempo_inicio, stock, idSala, idSede, idFuncion);
+                        horariosDao.crearHorario(vigencia, costo, dia, tiempo_inicio, stock, idSala, idSede, idFuncion, entradDispn);
                         response.sendRedirect(request.getContextPath() + "/ListaHorarios");
 
                     } catch (NumberFormatException e) {

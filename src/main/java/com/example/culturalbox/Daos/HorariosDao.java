@@ -20,7 +20,7 @@ public class HorariosDao {
     private static String pass = "root";
     private static String url = "jdbc:mysql://localhost:3306/cultura_box_pucp";
 
-    public void crearHorario(int vigencia,float costo,String dia,String tiempo_inicio,int stock,int idSala, int idSede, int idFuncion) {
+    public void crearHorario(int vigencia,float costo,String dia,String tiempo_inicio,int stock,int idSala, int idSede, int idFuncion, int entradDispon) {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -28,7 +28,7 @@ public class HorariosDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "insert into horario (vigencia,costo,dia,tiempo_inicio,stock,idSala,idSede,idFuncion)  VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "insert into horario (vigencia,costo,dia,tiempo_inicio,stock,idSala,idSede,idFuncion, entradasDispn)  VALUES (?,?,?,?,?,?,?,?,?)";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -41,6 +41,7 @@ public class HorariosDao {
             pstmt.setInt(6, idSala);
             pstmt.setInt(7, idSede);
             pstmt.setInt(8, idFuncion);
+            pstmt.setInt(9, entradDispon);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

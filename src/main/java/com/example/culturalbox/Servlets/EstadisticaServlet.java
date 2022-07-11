@@ -62,7 +62,7 @@ public class EstadisticaServlet extends HttpServlet {
 
                 if(estad.estadEspeciTwo(genero,nomFuncion,fecha,hora).get(0).getNombre() != null){
 
-                    if(nomFuncion.length() > 3){
+                    if(nomFuncion.length() >= 3){
                         request.setAttribute("listaEspeci",estad.estadEspeciTwo(genero,nomFuncion,fecha,hora));
                         RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadFuncion.jsp");
                         requestDispatcher.forward(request,response);
