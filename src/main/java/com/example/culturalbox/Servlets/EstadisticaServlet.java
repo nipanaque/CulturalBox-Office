@@ -61,9 +61,17 @@ public class EstadisticaServlet extends HttpServlet {
                 String hora = request.getParameter("hora");
 
                 if(estad.estadEspeciTwo(genero,nomFuncion,fecha,hora).get(0).getNombre() != null){
-                    request.setAttribute("listaEspeci",estad.estadEspeciTwo(genero,nomFuncion,fecha,hora));
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadFuncion.jsp");
-                    requestDispatcher.forward(request,response);
+
+                    if(nomFuncion.length() > 3){
+                        request.setAttribute("listaEspeci",estad.estadEspeciTwo(genero,nomFuncion,fecha,hora));
+                        RequestDispatcher requestDispatcher = request.getRequestDispatcher("EstadFuncion.jsp");
+                        requestDispatcher.forward(request,response);
+                    }else{
+                        request.getSession().setAttribute("msg","Por favor sea más específico en el nombre");
+                        response.sendRedirect(request.getContextPath() + "/EstadEspFunciones.jsp");
+                    }
+
+
                 }else{
                     request.getSession().setAttribute("msg","No se encontró resultados");
                     response.sendRedirect(request.getContextPath() + "/EstadEspFunciones.jsp");

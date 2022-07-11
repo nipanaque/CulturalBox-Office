@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class EstadisticaDao {
@@ -265,6 +266,17 @@ public class EstadisticaDao {
     public Estadistica estadEspeciOne(String genero, String nomFuncion, String fecha, String hora) {
         Estadistica estadistica = new Estadistica();
 
+        //Calculando stock total por sede y sala (4 salas por sede)
+        int s11 = stockPorSedeSala(genero,nomFuncion,fecha,hora,1,1);
+        int s12 = stockPorSedeSala(genero,nomFuncion,fecha,hora,1,2);
+        int s13 = stockPorSedeSala(genero,nomFuncion,fecha,hora,1,3);
+        int s14 = stockPorSedeSala(genero,nomFuncion,fecha,hora,1,4);
+        int s21 = stockPorSedeSala(genero,nomFuncion,fecha,hora,2,1);
+        int s22 = stockPorSedeSala(genero,nomFuncion,fecha,hora,2,2);
+        int s23 = stockPorSedeSala(genero,nomFuncion,fecha,hora,2,3);
+        int s24 = stockPorSedeSala(genero,nomFuncion,fecha,hora,2,4);
+        int stockTotal = s11 + s12 + s13 + s14 + s21 + s22 + s23 + s24;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -272,7 +284,7 @@ public class EstadisticaDao {
         }
 
         String sql = "select f.nombre, dia, tiempo_inicio, genero, round(sum(puntaje)/count(puntaje),1) as `punt_prom`,\n" +
-                "\tround((count(h.idhorario)/stock)*100,2) as `asistencia %`, count(u.idUsuario)*costo as `monto recaudado S/`,\n" +
+                "\tsum(numtickets)/1.0000000 as `asistencia %`, sum(numtickets)*costo as `monto recaudado S/`,\n" +
                 "    stock*costo as `max monto S/`, concat(d.nombre,' ',d.apellido) as `director`, d.idDirector, f.idFuncion\n" +
                 "from usuario u\n" +
                 "\tinner join compra c on (u.idUsuario = c.idUsuario)\n" +
@@ -281,7 +293,7 @@ public class EstadisticaDao {
                 "    inner join puntaje_funcion pf on (f.idFuncion = pf.idFuncion)\n" +
                 "    inner join director d on (f.idDirector = d.idDirector)\n" +
                 "where dia = ? and lower(genero) = ? and lower(f.nombre) like ?\n" +
-                "\tand tiempo_inicio = ?;";
+                "\tand tiempo_inicio = ? and vigencia = 0;";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
@@ -296,7 +308,14 @@ public class EstadisticaDao {
                 estadistica.setHora(rs.getString(3));
                 estadistica.setGenero(rs.getString(4));
                 estadistica.setPuntaje(rs.getDouble(5));
-                estadistica.setAsistencia(rs.getDouble(6));
+
+                double asistencia = (rs.getDouble(6)/stockTotal)*100;
+                System.out.println(stockTotal);
+                System.out.println(rs.getDouble(6));
+                double asistenciaPorcentaje = Math.round(asistencia*100.0)/100.0;
+                System.out.println(asistenciaPorcentaje);
+                estadistica.setAsistencia(asistenciaPorcentaje);
+
                 estadistica.setRecaudado(rs.getDouble(7));
                 estadistica.setMaxMonto(rs.getDouble(8));
                 estadistica.setDirector(rs.getString(9));
@@ -321,14 +340,22 @@ public class EstadisticaDao {
         listaEspeci.add(estadEspeciOne(genero,nomFuncion,fecha,hora));
 
         String sql = "select concat(a.nombre,' ',a.apellido) as `actores`\n" +
-                "from funcion f\n" +
+                "from usuario u\n" +
+                "\tinner join compra c on (u.idUsuario = c.idUsuario)\n" +
+                "    inner join horario h on (c.idHorario = h.idHorario)\n" +
+                "    inner join funcion f on (h.idFuncion = f.idFuncion)\n" +
                 "    inner join funcion_has_actor fh on (f.idFuncion = fh.idFuncion)\n" +
                 "    inner join actor a on (fh.idActor = a.idActor)\n" +
-                " where lower(f.nombre) like ?";
+                "where dia = ? and lower(genero) = ? and lower(f.nombre) like ?\n" +
+                "\tand tiempo_inicio = ?\n" +
+                "group by `actores`;";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
-            pstmt.setString(1,"%" + nomFuncion + "%");
+            pstmt.setString(1,fecha);
+            pstmt.setString(2,genero);
+            pstmt.setString(3,"%" + nomFuncion + "%");
+            pstmt.setString(4,hora + ":00");
             try(ResultSet rs = pstmt.executeQuery();){
                 while (rs.next()){
                     Estadistica estadistica = new Estadistica();
@@ -337,9 +364,48 @@ public class EstadisticaDao {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("No se pudo realizar la busqueda");
+            System.out.println("No se pudo encontrar actores :'(");
         }
         return listaEspeci;
+    }
+
+    public int stockPorSedeSala(String genero, String nomFuncion, String fecha, String hora, int sede, int sala) {
+        int stock = 0;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sql = "select stock as `stock por sede y sala`\n" +
+                "from usuario u\n" +
+                "\tinner join compra c on (u.idUsuario = c.idUsuario)\n" +
+                "    inner join horario h on (c.idHorario = h.idHorario)\n" +
+                "    inner join funcion f on (h.idFuncion = f.idFuncion)\n" +
+                "    inner join puntaje_funcion pf on (f.idFuncion = pf.idFuncion)\n" +
+                "    inner join director d on (f.idDirector = d.idDirector)\n" +
+                "    inner join sala sa on (h.idSala = sa.idSala)\n" +
+                "where dia = ? and lower(genero) = ? and lower(f.nombre) like ?\n" +
+                "\tand tiempo_inicio = ? and h.idSede = ? and SalaSede = ?\n" +
+                "group by stock;";
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setString(1,fecha);
+            pstmt.setString(2,genero);
+            pstmt.setString(3,"%" + nomFuncion + "%");
+            pstmt.setString(4,hora + ":00");
+            pstmt.setInt(5,sede);
+            pstmt.setInt(6,sala);
+            try(ResultSet rs = pstmt.executeQuery();){
+                rs.next();
+                stock = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("No se pudo realizar la busqueda");
+        }
+        return stock;
     }
 
 
