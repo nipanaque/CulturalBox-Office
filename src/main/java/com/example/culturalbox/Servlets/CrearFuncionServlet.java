@@ -69,8 +69,11 @@ public class CrearFuncionServlet extends HttpServlet {
                 boolean a1 = nombre.contains(" ");
                 boolean a2 = nombre.contains("0") || nombre.contains("1") || nombre.contains("2") || nombre.contains("3") || nombre.contains("4") || nombre.contains("5")
                         || nombre.contains("6") || nombre.contains("7") || nombre.contains("8") || nombre.contains("9");
+                boolean a3 = descripcion.contains(" ");
+                boolean a4 = descripcion.contains("0") || descripcion.contains("1") || descripcion.contains("2") || descripcion.contains("3") || descripcion.contains("4") || descripcion.contains("5")
+                        || descripcion.contains("6") || descripcion.contains("7") || descripcion.contains("8") || descripcion.contains("9");
 
-                if((!a1)&&(!a2)){
+                if((!a1)&&(!a2)&&(!a3)&&(!a4)){
                     if(i==0){
                         try {
                             int duracion = Integer.parseInt(duracionStr);
