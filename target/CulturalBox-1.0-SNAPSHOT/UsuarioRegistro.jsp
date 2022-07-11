@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="invalid1" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="indicador2" scope="session" type="java.lang.String" class="java.lang.String"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -41,6 +42,13 @@
                     </div>
                     <%session.removeAttribute("invalid1");%>
                     <%}%>
+                    <%if (session.getAttribute("indicador2").equals("error")){%>
+                    </br>
+                    <div class="text-danger nb-2">
+                        Datos invalidos.
+                    </div>
+                    <%session.removeAttribute("indicador2");%>
+                    <%}%>
                 </div>
                 <div class="container" style="margin-top: 3%;">
                     <div class="row">
@@ -67,7 +75,7 @@
                         <div class="col">
                             <label for="nacimiento" class="form-label">Fecha de Nacimiento: (*)</label>
                             </br>
-                            <input type="date"  name="nacimiento" id="nacimiento" class="form-control" aria-describedby="emailHelp"  max="2022-01-01" required>
+                            <input type="date"  name="nacimiento" id="nacimiento" class="form-control" aria-describedby="emailHelp"  max="2022-01-01" min="1910-01-01" required>
                         </div>
                     </div>
                     <div class="row">

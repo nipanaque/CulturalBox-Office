@@ -4,6 +4,8 @@
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaActores"/>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaDirectores"/>
 <jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
+<jsp:useBean id="invalid1" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="invalid2" scope="session" type="java.lang.String" class="java.lang.String"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -52,12 +54,12 @@
         <!-- Cuerpo-->
         <section class="page-section bg-light" id="portfolio">
             <div class="container">
-                    </br>
                 </br>
-                    <h2 class="section-heading text-uppercase">Crear Función</h2>
+                </br>
+                <h2 class="section-heading text-uppercase">Crear Función</h2>
 
 
-                    <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/CrearFuncion?a=guardar" enctype="multipart/form-data">
+                <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/CrearFuncion?a=guardar" enctype="multipart/form-data">
                     <!--Columna 1-->
                     <div class="col-md-6">
                         <div class="form-group">
@@ -129,8 +131,24 @@
                             <label for="banner" class="form-label">Banner *</label>
                             <input type="file" class="btn btn-primary" name="banner" style="background-color:grey; border-color:grey" id="banner" required>
                         </div>
+                        <div class="form-group">
+                            </br>
+                            </br>
+                            <%if (session.getAttribute("invalid1").equals("error")){%>
+                            <div class="text-danger nb-2">
+                                Datos invalidos.
+                            </div>
+                            <%session.removeAttribute("invalid1");%>
+                            <%}%>
+                            <%if (session.getAttribute("invalid2").equals("error")){%>
+                            <div class="text-danger nb-2">
+                                Esta función ya existe.
+                            </div>
+                            <%session.removeAttribute("invalid2");%>
+                            <%}%>
+                        </div>
                     </div>
-                    </form>
+                </form>
             </div>
 
 

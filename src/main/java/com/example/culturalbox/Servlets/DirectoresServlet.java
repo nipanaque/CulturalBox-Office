@@ -46,24 +46,39 @@ public class DirectoresServlet extends HttpServlet {
                 Part fotoStr = request.getPart("foto");
                 InputStream foto = fotoStr.getInputStream();
 
-                String nombreFormato = primeraMayus(nombre);
-                String apellidoFormato = primeraMayus(apellido);
+                boolean a1 = nombre.contains(" ");
+                boolean a2 = apellido.contains(" ");
+                boolean a3 = nombre.contains("0") || nombre.contains("1") || nombre.contains("2") || nombre.contains("3") || nombre.contains("4") || nombre.contains("5")
+                        || nombre.contains("6") || nombre.contains("7") || nombre.contains("8") || nombre.contains("9");
+                boolean a4 = apellido.contains("0") || apellido.contains("1") || apellido.contains("2") || apellido.contains("3") || apellido.contains("4") || apellido.contains("5")
+                        || apellido.contains("6") || apellido.contains("7") || apellido.contains("8") || apellido.contains("9");
 
-                ArrayList<Directores> listaDirectores = directoresDao.obtenerNombreDirectores();
-                int i=0;
-                for(Directores listadirectores: listaDirectores){
-                    if (Objects.equals(listadirectores.getNombre(), nombreFormato) && Objects.equals(listadirectores.getApellido(), apellidoFormato)) {
-                        i++;
+                if((!a1)&&(!a2)&&(!a3)&&(!a4)){
+                    String nombreFormato = primeraMayus(nombre);
+                    String apellidoFormato = primeraMayus(apellido);
+
+                    ArrayList<Directores> listaDirectores = directoresDao.obtenerNombreDirectores();
+                    int i=0;
+                    for(Directores listadirectores: listaDirectores){
+                        if (Objects.equals(listadirectores.getNombre(), nombreFormato) && Objects.equals(listadirectores.getApellido(), apellidoFormato)) {
+                            i++;
+                        }
                     }
-                }
-                if(i==0){
-                    directoresDao.crearDirector(nombreFormato, apellidoFormato,foto);
-                    response.sendRedirect(request.getContextPath() + "/Directores");
+                    if(i==0){
+                        directoresDao.crearDirector(nombreFormato, apellidoFormato,foto);
+                        response.sendRedirect(request.getContextPath() + "/Directores");
+                    }else{
+                        session.setAttribute("invalid1","error");
+                        RequestDispatcher view =request.getRequestDispatcher("AgregarDirector.jsp");
+                        view.forward(request,response);
+                    }
                 }else{
-                    session.setAttribute("invalid1","error");
+                    session.setAttribute("invalid2","error");
                     RequestDispatcher view =request.getRequestDispatcher("AgregarDirector.jsp");
                     view.forward(request,response);
                 }
+
+
             }
 
             case "borrar" -> {

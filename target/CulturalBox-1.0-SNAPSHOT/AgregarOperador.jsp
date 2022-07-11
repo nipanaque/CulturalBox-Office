@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="invalid1" scope="session" type="java.lang.String" class="java.lang.String"/>
 <jsp:useBean id="invalid2" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="indicador2" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="invalid3" scope="session" type="java.lang.String" class="java.lang.String"/>
 <jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
 
 <!DOCTYPE html>
@@ -74,6 +76,18 @@
                 Contraseñas no coinciden!
             </div>
             <%session.removeAttribute("invalid2");%>
+            <%}%>
+            <%if (session.getAttribute("indicador2").equals("error")){%>
+            <div class="text-danger nb-2">
+                Datos invalidos.
+            </div>
+            <%session.removeAttribute("indicador2");%>
+            <%}%>
+            <%if (session.getAttribute("invalid3").equals("error")){%>
+            <div class="text-danger nb-2">
+                Correo institucional no valido.
+            </div>
+            <%session.removeAttribute("invalid3");%>
             <%}%>
         </div>
     </div>
