@@ -3,6 +3,7 @@
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Registro>" scope="request" id="primer_registro"/>
 <jsp:useBean id="invalid2" scope="session" type="java.lang.String" class="java.lang.String"/>
 <jsp:useBean id="invalid_correo" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="invalid_correo1" scope="session" type="java.lang.String" class="java.lang.String"/>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -45,9 +46,16 @@
                     <%if (session.getAttribute("invalid_correo").equals("error")){%>
                     </br>
                     <div class="text-danger nb-2">
-                        Los correos puestos no coinciden
+                        Los correos puestos no coinciden.
                     </div>
                     <%session.removeAttribute("invalid_correo");%>
+                    <%}%>
+                    <%if (session.getAttribute("invalid_correo1").equals("error")){%>
+                    </br>
+                    <div class="text-danger nb-2">
+                        Correo institucional no valido.
+                    </div>
+                    <%session.removeAttribute("invalid_correo1");%>
                     <%}%>
                 </div>
                 <div class="mb-3" style="margin-top: 2%;" >

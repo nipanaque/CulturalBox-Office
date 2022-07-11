@@ -46,6 +46,7 @@ public class CrearFuncionServlet extends HttpServlet {
 
         String action = request.getParameter("a") == null ? "listar" : request.getParameter("a");
         CrearFuncionDao crearFuncionDao = new CrearFuncionDao();
+        HttpSession session = request.getSession();
 
         switch (action){
             case "guardar" -> {
@@ -57,19 +58,45 @@ public class CrearFuncionServlet extends HttpServlet {
                 String intDirectorStr = request.getParameter("director_funcion");
                 Part bannerStr = request.getPart("banner");
 
-                try {
-                    int duracion = Integer.parseInt(duracionStr);
-                    int idDirector = Integer.parseInt(intDirectorStr);
-                    InputStream banner = bannerStr.getInputStream();
+                ArrayList<CrearFuncion> crearFuncions = crearFuncionDao.obtenerFunciones();
+                int i=0;
+                for(CrearFuncion funcion: crearFuncions){
+                    if(funcion.getNombre().equals(nombre)){
+                        i++;
+                    }
+                }
 
-                    crearFuncionDao.crearFuncion(nombre, genero, duracion, restriccion, descripcion, idDirector,banner);
+                boolean a1 = nombre.contains(" ");
+                boolean a2 = nombre.contains("0") || nombre.contains("1") || nombre.contains("2") || nombre.contains("3") || nombre.contains("4") || nombre.contains("5")
+                        || nombre.contains("6") || nombre.contains("7") || nombre.contains("8") || nombre.contains("9");
+                boolean a3 = descripcion.contains(" ");
+                boolean a4 = descripcion.contains("0") || descripcion.contains("1") || descripcion.contains("2") || descripcion.contains("3") || descripcion.contains("4") || descripcion.contains("5")
+                        || descripcion.contains("6") || descripcion.contains("7") || descripcion.contains("8") || descripcion.contains("9");
 
-                    response.sendRedirect(request.getContextPath() + "/ListaFunciones");
+                if((!a1)&&(!a2)&&(!a3)&&(!a4)){
+                    if(i==0){
+                        try {
+                            int duracion = Integer.parseInt(duracionStr);
+                            int idDirector = Integer.parseInt(intDirectorStr);
+                            InputStream banner = bannerStr.getInputStream();
 
-                } catch (NumberFormatException e) {
-                    System.out.println("error al parsear");
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/CrearFuncion");
-                    requestDispatcher.forward(request, response);
+                            crearFuncionDao.crearFuncion(nombre, genero, duracion, restriccion, descripcion, idDirector,banner);
+
+                            response.sendRedirect(request.getContextPath() + "/ListaFunciones");
+
+                        } catch (NumberFormatException e) {
+                            System.out.println("error al parsear");
+                            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/CrearFuncion");
+                            requestDispatcher.forward(request, response);
+                        }
+                    }else{
+                        request.getSession().setAttribute("invalid2","error");
+                        response.sendRedirect(request.getContextPath()+"/CrearFuncion");
+                    }
+
+                }else{
+                    request.getSession().setAttribute("invalid1","error");
+                    response.sendRedirect(request.getContextPath()+"/CrearFuncion");
                 }
             }
         }

@@ -6,6 +6,7 @@
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Mantenimiento>" scope="request" id="listaMantenimientoidH"/>
 <jsp:useBean id="existe" scope="session" type="java.lang.String" class="java.lang.String"/>
 <jsp:useBean id="existe1" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="error1" scope="session" type="java.lang.String" class="java.lang.String"/>
 <jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -150,6 +151,12 @@
                             Ya existe el personal puesto.
                         </div>
                         <%session.removeAttribute("existe1");%>
+                        <%}%>
+                        <%if (session.getAttribute("error2").equals("error2")){%>
+                        <div class="text-danger nb-3">
+                            Dato inválido.
+                        </div>
+                        <%session.removeAttribute("error2");%>
                         <%}%>
                     </div>
                 </div>

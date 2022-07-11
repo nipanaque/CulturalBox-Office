@@ -61,26 +61,40 @@ public class RegistroServlet extends HttpServlet {
                 nacimiento = request.getParameter("nacimiento");
                 direccion = request.getParameter("direccion");
 
-                String nombreFormato = primeraMayus(nombre);
-                String apellidoFormato = primeraMayus(apellido);
+                boolean a1 = nombre.contains(" ");
+                boolean a2 = apellido.contains(" ");
+                boolean a3 = nombre.contains("0") || nombre.contains("1") || nombre.contains("2") || nombre.contains("3") || nombre.contains("4") || nombre.contains("5")
+                        || nombre.contains("6") || nombre.contains("7") || nombre.contains("8") || nombre.contains("9");
+                boolean a4 = apellido.contains("0") || apellido.contains("1") || apellido.contains("2") || apellido.contains("3") || apellido.contains("4") || apellido.contains("5")
+                        || apellido.contains("6") || apellido.contains("7") || apellido.contains("8") || apellido.contains("9");
 
-                System.out.println(codigo+" "+nombreFormato+" "+apellidoFormato+" "+dni+" "+telefono+" "+nacimiento+" "+direccion);
+                if((!a1)&&(!a2)&&(!a3)&&(!a4)){
+                    String nombreFormato = primeraMayus(nombre);
+                    String apellidoFormato = primeraMayus(apellido);
 
-                int i=0;
-                for(Registro listausuarios: listaUsuarios){
-                    if(Objects.equals(listausuarios.getCodigo(), codigo) || Objects.equals(listausuarios.getDni(), dni)
-                            || Objects.equals(listausuarios.getTelefono(), telefono)){
-                        i++;
+                    System.out.println(codigo+" "+nombreFormato+" "+apellidoFormato+" "+dni+" "+telefono+" "+nacimiento+" "+direccion);
+
+                    int i=0;
+                    for(Registro listausuarios: listaUsuarios){
+                        if(Objects.equals(listausuarios.getCodigo(), codigo) || Objects.equals(listausuarios.getDni(), dni)
+                                || Objects.equals(listausuarios.getTelefono(), telefono)){
+                            i++;
+                        }
                     }
-                }
-                if(i==0){
-                    request.setAttribute("primer_registro",registroDao.obtenerRegistro(codigo,nombreFormato,apellidoFormato,dni,telefono,nacimiento,direccion));
-                    RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerCont.jsp");
-                    view.forward(request,response);
+                    if(i==0){
+                        request.setAttribute("primer_registro",registroDao.obtenerRegistro(codigo,nombreFormato,apellidoFormato,dni,telefono,nacimiento,direccion));
+                        RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerCont.jsp");
+                        view.forward(request,response);
+                    }else{
+                        session.setAttribute("invalid1","error");
+                        response.sendRedirect(request.getContextPath() + "/RegistroUsuarioServlet");
+                    }
                 }else{
-                    session.setAttribute("invalid1","error");
-                    response.sendRedirect(request.getContextPath() + "/RegistroUsuarioServlet");
+                    request.getSession().setAttribute("indicador2","error");
+                    response.sendRedirect(request.getContextPath()+"/RegistroUsuarioServlet");
                 }
+
+
             }
             case "s_validacion" ->{
                 codigo = request.getParameter("codigo");
@@ -94,38 +108,49 @@ public class RegistroServlet extends HttpServlet {
                 correo_pucp1 = request.getParameter("correo1");
 
                 System.out.println(codigo+" "+nombre+" "+apellido+" "+dni+" "+telefono+" "+nacimiento+" "+direccion+" "+correo_pucp);
-                int i=0;
-                if(Objects.equals(correo_pucp1, correo_pucp)){
-                    for(Registro listausuarios: listaUsuarios){
-                        if(Objects.equals(listausuarios.getCorreo_pucp(), correo_pucp)){
-                            i++;
+                boolean a1 = correo_pucp.contains("@pucp.edu.pe");
+
+                if(a1){
+                    int i=0;
+                    if(Objects.equals(correo_pucp1, correo_pucp)){
+                        for(Registro listausuarios: listaUsuarios){
+                            if(Objects.equals(listausuarios.getCorreo_pucp(), correo_pucp)){
+                                i++;
+                            }
                         }
+                    }else{
+                        i=2;
+                    }
+                    if(i==0){
+                        String id="";
+                        String[] nums = {"0","1","2","3","4","5","6","7","8","9"};
+                        for (int j = 0; j < 11; j++ ) {
+                            id += nums[(int) Math.round(Math.random() * 9)];
+                        }
+                        registroDao.enviarCodigo(correo_pucp,id);
+                        request.setAttribute("segundo_registro",registroDao.obtenerRegistro2(codigo,nombre,apellido,dni,telefono,nacimiento,direccion,correo_pucp));
+                        request.setAttribute("id",id);
+                        RequestDispatcher view =request.getRequestDispatcher("UsuarioCorreoVal.jsp");
+                        view.forward(request,response);
+                    }else if(i==1){
+                        request.setAttribute("primer_registro",registroDao.obtenerRegistro(codigo,nombre,apellido,dni,telefono,nacimiento,direccion));
+                        session.setAttribute("invalid2","error");
+                        RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerCont.jsp");
+                        view.forward(request,response);
+                    }else{
+                        request.setAttribute("primer_registro",registroDao.obtenerRegistro(codigo,nombre,apellido,dni,telefono,nacimiento,direccion));
+                        session.setAttribute("invalid_correo","error");
+                        RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerCont.jsp");
+                        view.forward(request,response);
                     }
                 }else{
-                    i=2;
-                }
-                if(i==0){
-                    String id="";
-                    String[] nums = {"0","1","2","3","4","5","6","7","8","9"};
-                    for (int j = 0; j < 11; j++ ) {
-                        id += nums[(int) Math.round(Math.random() * 9)];
-                    }
-                    registroDao.enviarCodigo(correo_pucp,id);
-                    request.setAttribute("segundo_registro",registroDao.obtenerRegistro2(codigo,nombre,apellido,dni,telefono,nacimiento,direccion,correo_pucp));
-                    request.setAttribute("id",id);
-                    RequestDispatcher view =request.getRequestDispatcher("UsuarioCorreoVal.jsp");
-                    view.forward(request,response);
-                }else if(i==1){
                     request.setAttribute("primer_registro",registroDao.obtenerRegistro(codigo,nombre,apellido,dni,telefono,nacimiento,direccion));
-                    session.setAttribute("invalid2","error");
-                    RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerCont.jsp");
-                    view.forward(request,response);
-                }else{
-                    request.setAttribute("primer_registro",registroDao.obtenerRegistro(codigo,nombre,apellido,dni,telefono,nacimiento,direccion));
-                    session.setAttribute("invalid_correo","error");
+                    session.setAttribute("invalid_correo1","error");
                     RequestDispatcher view =request.getRequestDispatcher("UsuarioEstablecerCont.jsp");
                     view.forward(request,response);
                 }
+
+
             }
             case "codigo_validacion" ->{
                 String codigo_pucp = request.getParameter("codigo");

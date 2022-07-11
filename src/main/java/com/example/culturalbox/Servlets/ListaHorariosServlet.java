@@ -91,18 +91,31 @@ public class ListaHorariosServlet extends HttpServlet {
                 String idMant = request.getParameter("idMant");
                 String Nombre = request.getParameter("Nombre");
                 String Apellido = request.getParameter("Apellido");
-                ArrayList<Mantenimiento> listaMant = horarios.obtenerMantenimiento();
-                int i=0;
-                for(Mantenimiento listaMantenimiento: listaMant){
-                    if(Objects.equals(listaMantenimiento.getNombre(), Nombre) && Objects.equals(listaMantenimiento.getApellido(), Apellido)){
-                        i++;
+
+                boolean a1 = Nombre.contains(" ");
+                boolean a2 = Apellido.contains(" ");
+                boolean a3 = Nombre.contains("0") || Nombre.contains("1") || Nombre.contains("2") || Nombre.contains("3") || Nombre.contains("4") || Nombre.contains("5")
+                        || Nombre.contains("6") || Nombre.contains("7") || Nombre.contains("8") || Nombre.contains("9");
+                boolean a4 = Apellido.contains("0") || Apellido.contains("1") || Apellido.contains("2") || Apellido.contains("3") || Apellido.contains("4") || Apellido.contains("5")
+                        || Apellido.contains("6") || Apellido.contains("7") || Apellido.contains("8") || Apellido.contains("9");
+
+                if((!a1)&&(!a2)&&(!a3)&&(!a4)){
+                    ArrayList<Mantenimiento> listaMant = horarios.obtenerMantenimiento();
+                    int i=0;
+                    for(Mantenimiento listaMantenimiento: listaMant){
+                        if(Objects.equals(listaMantenimiento.getNombre(), Nombre) && Objects.equals(listaMantenimiento.getApellido(), Apellido)){
+                            i++;
+                        }
                     }
-                }
-                if(i==0){
-                    horarios.crear_mant(Integer.parseInt(idMant),Nombre,Apellido);
-                    response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=agregarmant&id="+id);
+                    if(i==0){
+                        horarios.crear_mant(Integer.parseInt(idMant),Nombre,Apellido);
+                        response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=agregarmant&id="+id);
+                    }else{
+                        session.setAttribute("existe1","error1");
+                        response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=agregarmant&id="+id);
+                    }
                 }else{
-                    session.setAttribute("existe1","error1");
+                    session.setAttribute("error2","error2");
                     response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=agregarmant&id="+id);
                 }
             }

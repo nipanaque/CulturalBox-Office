@@ -6,6 +6,8 @@
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Mantenimiento>" scope="request" id="listaMantenimientoidH"/>
 <jsp:useBean id="existe" scope="session" type="java.lang.String" class="java.lang.String"/>
 <jsp:useBean id="existe1" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="error1" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -35,13 +37,12 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        operador@pucp.edu.pe
+                                        <%=usuarioSesion.getCorreo()%>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">Perfil</a></li>
                                         <li><a class="dropdown-item" href="<%=request.getContextPath()%>/EstadisticaServlet">Estadisticas</a></li>
                                         <li><a class="dropdown-item" href="ReporteSalasServlet">Salas</a></li>
-                                        <li><a class="dropdown-item" href="<%=request.getContextPath()%>/MenuSinLoginServlet">Cerrar Sesión</a></li>
+                                        <li><a class="dropdown-item" href="<%=request.getContextPath()%>/LoginServlet?finish=yes">Cerrar Sesión</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -150,6 +151,12 @@
                             Ya existe el personal puesto.
                         </div>
                         <%session.removeAttribute("existe1");%>
+                        <%}%>
+                        <%if (session.getAttribute("error2").equals("error2")){%>
+                        <div class="text-danger nb-3">
+                            Dato inválido.
+                        </div>
+                        <%session.removeAttribute("error2");%>
                         <%}%>
                     </div>
                 </div>

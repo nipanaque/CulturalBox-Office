@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="invalid1" scope="session" type="java.lang.String" class="java.lang.String"/>
 <jsp:useBean id="invalid2" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="indicador2" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="invalid3" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +27,7 @@
 <!-- Navegacion-->
 <nav class=" navbar navbar-expand-lg  navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="#page-top"><img src="assets/img/pucp_logo1.jpeg" alt="..." /></a>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/AdminIndexServlet" ><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;border-radius: 3px;"/></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars ms-1"></i>
@@ -35,16 +38,16 @@
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Admin1234
+                                <%=usuarioSesion.getCorreo()%>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Perfil</a></li>
+
                                 <li><a class="dropdown-item" href="Actores">Actores</a></li>
                                 <li><a class="dropdown-item" href="Directores">Directores</a></li>
                                 <li><a class="dropdown-item" href="Sedes">Sedes</a></li>
                                 <li><a class="dropdown-item" href="Clientes">Clientes</a></li>
                                 <li><a class="dropdown-item" href="operadores">Operadores</a></li>
-                                <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+                                <li><a class="dropdown-item" href="<%=request.getContextPath()%>/LoginServlet?finish=yes">Cerrar Sesion</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -59,6 +62,7 @@
     <div class="container">
         <div class="text-center">
             </br>
+            <br>
             <h2 class="section-heading text-uppercase">Agregar Operador</h2>
             <h3 class="section-subheading text-muted">Por favor rellenar todos los campos para agregar a un Operador</h3>
             <%if (session.getAttribute("invalid1").equals("error")){%>
@@ -72,6 +76,18 @@
                 Contraseñas no coinciden!
             </div>
             <%session.removeAttribute("invalid2");%>
+            <%}%>
+            <%if (session.getAttribute("indicador2").equals("error")){%>
+            <div class="text-danger nb-2">
+                Datos invalidos.
+            </div>
+            <%session.removeAttribute("indicador2");%>
+            <%}%>
+            <%if (session.getAttribute("invalid3").equals("error")){%>
+            <div class="text-danger nb-2">
+                Correo institucional no valido.
+            </div>
+            <%session.removeAttribute("invalid3");%>
             <%}%>
         </div>
     </div>
@@ -118,8 +134,8 @@
             <!-- Boton-->
             <div class="text-center">
                 </br>
-                <a href="<%=request.getContextPath()%>/operadores" class="btn btn-primary">Regresar</a>
-                <button type="submit" class="btn btn-secondary" >
+                <a href="<%=request.getContextPath()%>/operadores" class="btn btn-secondary">Regresar</a>
+                <button type="submit" class="btn btn-primary" >
                     Agregar
                 </button>
             </div>

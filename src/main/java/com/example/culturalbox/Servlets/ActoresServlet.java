@@ -48,28 +48,43 @@ public class ActoresServlet extends HttpServlet {
                 String nombre = request.getParameter("nombreA").toLowerCase();
                 String apellido = request.getParameter("apellidoA").toLowerCase();
                 Part fotoStr = request.getPart("foto");
-
-                String nombreFormato = primeraMayus(nombre);
-                String apellidoFormato = primeraMayus(apellido);
                 InputStream foto = fotoStr.getInputStream();
-                System.out.print(nombreFormato+" "+apellidoFormato);
 
-                ArrayList<Actores> listaActores = actoresDao.obtenerNombreActores();
-                int i=0;
-                for(Actores listaactores: listaActores){
-                    if (Objects.equals(listaactores.getNombre(), nombreFormato) && Objects.equals(listaactores.getApellido(), apellidoFormato)) {
-                        i++;
+                boolean a1 = nombre.contains(" ");
+                boolean a2 = apellido.contains(" ");
+                boolean a3 = nombre.contains("0") || nombre.contains("1") || nombre.contains("2") || nombre.contains("3") || nombre.contains("4") || nombre.contains("5")
+                        || nombre.contains("6") || nombre.contains("7") || nombre.contains("8") || nombre.contains("9");
+                boolean a4 = apellido.contains("0") || apellido.contains("1") || apellido.contains("2") || apellido.contains("3") || apellido.contains("4") || apellido.contains("5")
+                        || apellido.contains("6") || apellido.contains("7") || apellido.contains("8") || apellido.contains("9");
+
+                if((!a1)&&(!a2)&&(!a3)&&(!a4)){
+                    String nombreFormato = primeraMayus(nombre);
+                    String apellidoFormato = primeraMayus(apellido);
+                    System.out.print(nombreFormato+" "+apellidoFormato);
+
+                    ArrayList<Actores> listaActores = actoresDao.obtenerNombreActores();
+                    int i=0;
+                    for(Actores listaactores: listaActores){
+                        if (Objects.equals(listaactores.getNombre(), nombreFormato) && Objects.equals(listaactores.getApellido(), apellidoFormato)) {
+                            i++;
+                        }
                     }
-                }
 
-                if(i==0){
-                    actoresDao.crearActor(nombreFormato, apellidoFormato,foto);
-                    response.sendRedirect(request.getContextPath() + "/Actores");
+                    if(i==0){
+                        actoresDao.crearActor(nombreFormato, apellidoFormato,foto);
+                        response.sendRedirect(request.getContextPath() + "/Actores");
+                    }else{
+                        session.setAttribute("invalid1","error");
+                        RequestDispatcher view =request.getRequestDispatcher("AgregarActor.jsp");
+                        view.forward(request,response);
+                    }
                 }else{
-                    session.setAttribute("invalid1","error");
+                    session.setAttribute("invalid2","error");
                     RequestDispatcher view =request.getRequestDispatcher("AgregarActor.jsp");
                     view.forward(request,response);
                 }
+
+
             }
 
             case "borrar" -> {
@@ -93,4 +108,4 @@ public class ActoresServlet extends HttpServlet {
         return new String(arr);
     }
 
-    }
+}
