@@ -113,12 +113,27 @@
 
     </section>
     <!-- Footer-->
+    <footer class="footer py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-lg-start">Copyright &copy; Cultural Box-Office 2022</div>
+                <div class="col-lg-4 my-3 my-lg-0">
+                    <a class="btn btn-dark btn-social mx-2" href="https://twitter.com/CCULTURALPUCP" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://facebook.com/ccpucp/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/ccpucp/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a class="link-dark text-decoration-none">Av. Camino Real 1075, San Isidro 15073</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Portfolio Modals-->
 
     <!-- Portfolio item 1 modal popup-->
     <% int j = 1;
-        for (ArrayList<Horarios> listaHorarios:listaListasHorarios) { %>
+        for (ArrayList<Horarios> listaHorarios:listaListasHorarios) {%>
     <center><div class="portfolio-modal modal fade" id="Modal<%=j%>" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" style="width: 60%">
             <div class="modal-content" >
@@ -130,8 +145,9 @@
                                 <!-- Project details-->
                                 <h2 class="text-uppercase" style="font-size: 28px;">Seleccionar Horario</h2>
                                 <ul class="list-inline" style="margin-left:auto;">
+
                                     <% int r = 1;
-                                        for (Horarios horarios : listaHorarios) { %>
+                                        for (Horarios horarios : listaHorarios) { if(horarios.getStock() > 0){%>
                                     <li style="margin-top:4%;">
                                         <a class="btn btn-outline-dark" href="<%=request.getContextPath()%>/MenuServlet?a=crearCompra1&idHorario=<%=horarios.getIdHorario()%>&idUsuario=1">
                                             <strong>Horario <%=r%>: </strong>
@@ -142,8 +158,9 @@
                                         <h7 style="font-size:15px"><strong> (stock: <%=horarios.getStock()%>)</strong></h7>
                                         <h7 style="font-size:15px"><strong>----- Precio: S/.<%=horarios.getCosto()%></strong></h7>
                                     </li>
-                                    <% r++;
+                                    <%} r++;
                                     } %>
+
                                 </ul>
 
                                 <button class="btn btn-warning btn-xl text-uppercase" data-bs-dismiss="modal" type="button">

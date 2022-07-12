@@ -87,13 +87,13 @@
         <!-- Right -->
         <div>
             <span class="me-3">Siguenos en:</span>
-            <a href="" class="me-4 text-reset">
+            <a href="https://www.instagram.com/ccpucp/" class="me-4 text-reset">
                 <i class="bi bi-instagram"></i>
             </a>
-            <a href="#facebook" class="me-4 text-reset">
+            <a href="https://facebook.com/ccpucp/" class="me-4 text-reset">
                 <i class="bi bi-facebook"></i>
             </a>
-            <a href="" class="me-4 text-reset">
+            <a href="https://twitter.com/CCULTURALPUCP" class="me-4 text-reset">
                 <i class="bi bi-twitter"></i>
             </a>
         </div>

@@ -96,10 +96,7 @@
                                         <td colspan="2" scope="col"><%= historial.getNum_ticket()%></td>
 
                                         <td>
-                                            <form method="POST" action="<%=request.getContextPath()%>/HistorialServlet?a=cancelar">
-                                            <input style="display: none" name="idCompra" value="<%=historial.getIdCompra()%>">
-                                            <button class="btn btn-dark btn-md" type="submit">Cancelar</button>
-                                            </form>
+                                            <button type="button" data-bs-toggle="modal" data-bs-target="#Modal<%=i%>" class="btn btn-danger">Cancelar</button>
                                         </td>
                                     </tr>
                                     <% i++;}%>
@@ -142,6 +139,31 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal -->
+            <%int j = 1;
+                for(Historial historial2 : funcionesvigentes){ %>
+            <div class="modal fade" id="Modal<%=j%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <center><h5 class="modal-title" id="exampleModalLabel">Advertencia</h5></center>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <center>¿Esta seguro de cancelar su función? No habrá reembolso alguno y además la acción es irreversible</center>
+                            <br>
+                            <form method="POST" action="<%=request.getContextPath()%>/HistorialServlet?a=cancelar">
+                                <input style="display: none" name="idCompra" value="<%=historial2.getIdCompra()%>">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-danger">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%j++;}%>
         </section>
 
 
@@ -150,13 +172,12 @@
                 <div class="row align-items-center">
                     <div class="col-lg-4 text-lg-start">Copyright &copy; Cultural Box-Office 2022</div>
                     <div class="col-lg-4 my-3 my-lg-0">
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://twitter.com/CCULTURALPUCP" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://facebook.com/ccpucp/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.instagram.com/ccpucp/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                     <div class="col-lg-4 text-lg-end">
-                        <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
-                        <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+                        <a class="link-dark text-decoration-none">Av. Camino Real 1075, San Isidro 15073</a>
                     </div>
                 </div>
             </div>
