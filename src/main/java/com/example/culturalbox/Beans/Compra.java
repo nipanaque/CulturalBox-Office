@@ -8,6 +8,7 @@ public class Compra {
     private Time t_init;
     private String idCompra;
     private int nu_tickets;
+    private int cruce;
     //
     private int idHorario;
 
@@ -58,5 +59,13 @@ public class Compra {
 
     public void setCosto(int costo) {
         this.costo = costo;
+    }
+
+    public int getCruce() {
+        return cruce;
+    }
+
+    public void setCruce(int cruce) {
+        this.cruce = cruce;
     }
 }

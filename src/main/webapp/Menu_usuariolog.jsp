@@ -152,8 +152,8 @@
                                         <a class="btn btn-outline-dark" href="<%=request.getContextPath()%>/MenuServlet?a=crearCompra1&idHorario=<%=horarios.getIdHorario()%>&idUsuario=1">
                                             <strong>Horario <%=r%>: </strong>
                                             <%=horarios.getT_init()%>
-                                            Duración: <%=horarios.getDuracion()%>
-                                            Sede: <%=horarios.getNombre_sede()%>
+                                            <strong> Duración: </strong> <%=horarios.getDuracion()%>
+                                            <strong>Sede: </strong> <%=horarios.getNombre_sede()%>
                                         </a>
                                         <h7 style="font-size:15px"><strong> (stock: <%=horarios.getStock()%>)</strong></h7>
                                         <h7 style="font-size:15px"><strong>----- Precio: S/.<%=horarios.getCosto()%></strong></h7>
