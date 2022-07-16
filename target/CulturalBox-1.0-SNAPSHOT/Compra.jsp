@@ -71,6 +71,7 @@
             <tbody>
             <% int i = 1;
                 int total = 0;
+                int valCruce=0;
                 for(Compra compra:comprasNopagadas){%>
             <tr>
                 <th scope="row" class="text"><%=i%></th>
@@ -90,13 +91,19 @@
             </tr>
             <%i++;
                 total = total+(compra.getCosto() * compra.getNu_tickets());
+                if(compra.getCruce() == 1){
+                    valCruce=1;}
             }%>
             </tbody>
             <tfoot>
             <tr><td colspan="2"></td>
                 <td><h4>TOTAL: </h4></td>
                 <td><h4>S/<%=total%></h4></td>
+                <%if(valCruce == 1){%>
+                <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#validacion">Existe Cruce</button></td>
+                <%}else{%>
                 <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">IR A PAGAR</button></td>
+                <%}%>
             </tr></tfoot>
         </table>
     </div>
@@ -168,6 +175,23 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="validacion" tabindex="-1" aria-labelledby="validacion" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <h4>Tiene funciones que se cruza</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button>
+                <button type="button" class="subscribe btn btn-primary btn-block shadow-sm position" data-bs-toggle="modal" data-bs-target="#exampleModal">Continuar de todos modos</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>
