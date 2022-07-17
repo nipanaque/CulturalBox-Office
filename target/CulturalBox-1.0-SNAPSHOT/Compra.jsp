@@ -61,7 +61,7 @@
             <%
                 if (msj == null) {
             %>
-            <caption>Seleccione la cantidad de tickets que desea por cada función</caption>
+            <caption>Seleccione la cantidad de tickets que desea por cada función para continuar la compra</caption>
             <%}
                 else {
             %>
@@ -81,6 +81,7 @@
             <tbody>
             <% int i = 1;
                 int total = 0;
+                int verific = 0;
                 int valCruce=0;
                 for(Compra compra:comprasNopagadas){%>
             <tr>
@@ -103,16 +104,23 @@
                 total = total+(compra.getCosto() * compra.getNu_tickets());
                 if(compra.getCruce() == 1){
                     valCruce=1;}
+
+                //verifico q todas las compras tengan tickets
+                if (compra.getNu_tickets() != 0){
+                    verific = verific +1;
+                }
             }%>
             </tbody>
             <tfoot>
             <tr><td colspan="2"></td>
                 <td><h4>TOTAL: </h4></td>
                 <td><h4>S/<%=total%></h4></td>
+                <%if(total != 0 && verific== comprasNopagadas.size()){%>
                 <%if(valCruce == 1){%>
-                <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#validacion">Existe Cruce</button></td>
+                <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#validacion">IR A PAGAR</button></td>
                 <%}else{%>
                 <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">IR A PAGAR</button></td>
+                <%}%>
                 <%}%>
             </tr></tfoot>
         </table>
@@ -191,7 +199,7 @@
         <div class="modal-content">
 
             <div class="modal-body">
-                <h4>Tiene funciones que se cruza</h4>
+                <h4>Tiene funciones que se cruzan</h4>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button>

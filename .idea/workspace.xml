@@ -9,32 +9,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0622dbb5-829b-4607-b259-1da12ca7e212" name="Changes" comment="Update ClienteServlet">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_11_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_11_4.xml" afterDir="false" />
+    <list default="true" id="0622dbb5-829b-4607-b259-1da12ca7e212" name="Changes" comment="Validacion stock y detalles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/culturalbox/Daos/MenuDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/culturalbox/Daos/MenuDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/culturalbox/Servlets/MenuServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/culturalbox/Servlets/MenuServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/Compra.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Compra.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Menu_usuario.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Menu_usuario.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/Menu_usuariolog.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Menu_usuariolog.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Compra.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Compra.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Menu_usuario.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Menu_usuario.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/CrearHorario.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/CrearHorario.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/EditarHorario.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/EditarHorario.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/EstablecerNuevaCont.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/EstablecerNuevaCont.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Menu_usuariolog.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Menu_usuariolog.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/HorariosDao$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/HorariosDao$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/HorariosDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/HorariosDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/MenuDao$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/MenuDao$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/MenuDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/MenuDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/CrearHorarioServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/CrearHorarioServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/ListaHorariosServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/ListaHorariosServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/HorariosDao$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/HorariosDao$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/HorariosDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/HorariosDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/MenuDao$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/MenuDao$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/MenuDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/MenuDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/CrearHorarioServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/CrearHorarioServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/ListaHorariosServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/ListaHorariosServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/MenuServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/MenuServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Beans/Horarios.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Beans/Horarios.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/CrearFuncionDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/CrearFuncionDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/RestablecerDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/RestablecerDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/MenuServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/MenuServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/RestablecerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/RestablecerServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Beans/Horarios.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Beans/Horarios.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/CrearFuncionDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/CrearFuncionDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/RestablecerDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/RestablecerDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/RestablecerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/RestablecerServlet.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +201,7 @@
       <workItem from="1657229467973" duration="5380000" />
       <workItem from="1657402222924" duration="16916000" />
       <workItem from="1657503785041" duration="5034000" />
-      <workItem from="1658081437634" duration="9192000" />
+      <workItem from="1658081437634" duration="11854000" />
     </task>
     <task id="LOCAL-00001" summary="Agregado JSP">
       <created>1654446038255</created>
@@ -226,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656371015915</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Validacion stock y detalles">
+      <created>1658094758586</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1658094758586</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,6 +244,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Agregado JSP" />
     <MESSAGE value="Compra terminada" />
-    <option name="LAST_COMMIT_MESSAGE" value="Compra terminada" />
+    <MESSAGE value="Validacion stock y detalles" />
+    <option name="LAST_COMMIT_MESSAGE" value="Validacion stock y detalles" />
   </component>
 </project>
