@@ -11,56 +11,30 @@
   <component name="ChangeListManager">
     <list default="true" id="0622dbb5-829b-4607-b259-1da12ca7e212" name="Changes" comment="Update ClienteServlet">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_28.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_28.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_11_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_11_4.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/culturalbox/Daos/MenuDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/culturalbox/Daos/MenuDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/culturalbox/Daos/RestablecerDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/culturalbox/Daos/RestablecerDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/culturalbox/Servlets/MenuServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/culturalbox/Servlets/MenuServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/culturalbox/Servlets/RestablecerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/culturalbox/Servlets/RestablecerServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/EstablecerNuevaCont.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/EstablecerNuevaCont.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/RestablecerCont.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/RestablecerCont.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/BuscarActorDirector.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/BuscarActorDirector.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Calificacion.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Calificacion.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Compra.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Compra.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Menu_usuario.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Menu_usuario.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/Menu_usuariolog.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/Menu_usuariolog.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Compra.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Compra.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/EstadEspFunciones.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/EstadEspFunciones.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/EstadFuncion.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/EstadFuncion.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/EstadGeneral.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/EstadGeneral.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Historial.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Historial.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Login.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Menu_usuario.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Menu_usuario.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Menu_usuariolog.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Menu_usuariolog.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Perfil.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/Perfil.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/RestablecerCont.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/RestablecerCont.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Beans/Compra.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Beans/Compra.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/EstadisticaDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/EstadisticaDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/HorariosDao$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/HorariosDao$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/HorariosDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/HorariosDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/MenuDao$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/MenuDao$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/MenuDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Daos/MenuDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/ActoresServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/ActoresServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/CrearFuncionServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/CrearFuncionServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/CrearHorarioServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/CrearHorarioServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/DirectoresServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/DirectoresServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/EstadisticaServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/EstadisticaServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/ListaHorariosServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/ListaHorariosServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/OperadoresServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/OperadoresServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/RegistroServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/CulturalBox-1.0-SNAPSHOT/WEB-INF/classes/com/example/culturalbox/Servlets/RegistroServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Beans/Compra.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Beans/Compra.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/EstadisticaDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/EstadisticaDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/HorariosDao$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/HorariosDao$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/HorariosDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/HorariosDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/MenuDao$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/MenuDao$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/MenuDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Daos/MenuDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/ActoresServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/ActoresServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/CrearFuncionServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/CrearFuncionServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/CrearHorarioServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/CrearHorarioServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/DirectoresServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/DirectoresServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/EstadisticaServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/EstadisticaServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/ListaHorariosServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/ListaHorariosServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/MenuServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/MenuServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/OperadoresServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/OperadoresServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/RegistroServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/culturalbox/Servlets/RegistroServlet.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +97,7 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Tomcat 9.0.64" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.64" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+    <configuration name="Tomcat 9.0.63" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.63" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="CulturalBox:war exploded">
@@ -133,7 +107,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="6dc4d23f-c863-46eb-8d6d-b9ae75d506ff" />
+        <option name="BASE_DIRECTORY_NAME" value="b05305d5-2528-4d08-9aa8-9823729a3836" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -141,7 +115,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="50299" />
+        <option name="DEBUG_PORT" value="59736" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -236,6 +210,7 @@
       <workItem from="1657229467973" duration="5380000" />
       <workItem from="1657402222924" duration="16916000" />
       <workItem from="1657503785041" duration="5034000" />
+      <workItem from="1658081437634" duration="9192000" />
     </task>
     <task id="LOCAL-00001" summary="Agregado JSP">
       <created>1654446038255</created>

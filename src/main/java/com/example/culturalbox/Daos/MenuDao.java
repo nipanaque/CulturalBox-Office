@@ -69,7 +69,7 @@ public class MenuDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "select h.tiempo_inicio, f.duracion, h.stock, h.costo, h.idHorario, s.nombre from funcion f\n" +
+        String sql = "select h.tiempo_inicio, f.duracion, h.stock, h.costo, h.idHorario, s.nombre, h.dia from funcion f\n" +
                 "left join horario h on f.idFuncion=h.idFuncion\n" +
                 "inner join sede s on h.idSede = s.idSede\n" +
                 "where f.nombre = ? AND h.vigencia=1";
@@ -89,6 +89,7 @@ public class MenuDao {
                     horarios.setCosto(rs.getInt(4));
                     horarios.setIdHorario(rs.getInt(5));
                     horarios.setNombre_sede(rs.getString(6));
+                    horarios.setDia(rs.getString(7));
                     listaHorarios.add(horarios);
 
                 }
@@ -328,6 +329,36 @@ public class MenuDao {
         }
 
     }
+    public int obtenerStockhorario(int idHorario) {
+        int stock = 0;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "select h.stock from horario h where idHorario = ?";
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setInt(1, idHorario);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+
+               if (rs.next()) {
+                    stock = rs.getInt(1);
+
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return stock;
+
+    }
 
     public int ValidaCruce(String idCompra,int usuario){
 
@@ -359,7 +390,7 @@ public class MenuDao {
         return val;
     }
 
-
+/*
     public ArrayList<Compra> obtenerFuncionesCruazadas(String idCompra,int usuario){
 
         String sql2 = "select c.idCompra,f.nombre,h.tiempo_inicio + 0 as tiempo_inicio, date_add(h.tiempo_inicio, interval f.duracion minute) + 0 as tiempo_fin, h.dia, c.estado from  compra c\n" +
@@ -394,5 +425,5 @@ public class MenuDao {
         }
         return listaCruzados ;
     }
-
+*/
 }

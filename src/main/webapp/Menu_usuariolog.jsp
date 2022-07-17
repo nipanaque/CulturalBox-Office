@@ -150,13 +150,13 @@
                                         for (Horarios horarios : listaHorarios) { if(horarios.getStock() > 0){%>
                                     <li style="margin-top:4%;">
                                         <a class="btn btn-outline-dark" href="<%=request.getContextPath()%>/MenuServlet?a=crearCompra1&idHorario=<%=horarios.getIdHorario()%>&idUsuario=1">
-                                            <strong>Horario <%=r%>: </strong>
-                                            <%=horarios.getT_init()%>
-                                            <strong> Duración: </strong> <%=horarios.getDuracion()%>
-                                            <strong>Sede: </strong> <%=horarios.getNombre_sede()%>
+                                            <strong>Dia: </strong> <%=horarios.getDia()%>
+                                            <strong>Hora: </strong><%=horarios.getT_init()%> |
+                                             <%=horarios.getDuracion()%> min
                                         </a>
+                                        <h7 style="font-size:15px"><strong> <%=horarios.getNombre_sede()%> </strong></h7>
                                         <h7 style="font-size:15px"><strong> (stock: <%=horarios.getStock()%>)</strong></h7>
-                                        <h7 style="font-size:15px"><strong>----- Precio: S/.<%=horarios.getCosto()%></strong></h7>
+                                        <h7 style="font-size:15px"><strong>---- S/.<%=horarios.getCosto()%></strong></h7>
                                     </li>
                                     <%} r++;
                                     } %>

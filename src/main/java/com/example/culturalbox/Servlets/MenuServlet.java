@@ -11,6 +11,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @WebServlet(name = "MenuServlet", value = "/MenuServlet")
 public class MenuServlet extends HttpServlet {
@@ -66,6 +67,15 @@ public class MenuServlet extends HttpServlet {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("Compra.jsp");
                 requestDispatcher.forward(request, response);
             }
+            case "erlistarCompras" -> {
+                Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSesion");
+                int idUsuario = usuario.getId();
+                String error = "Esta seleccionando más tickets de los que hay en Stock";
+                request.setAttribute("comprasNopagadas", menuDao.buscarComprasNopagadas(idUsuario));
+                request.setAttribute("msj", error);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("Compra.jsp");
+                requestDispatcher.forward(request, response);
+            }
             case "borrarCompra" -> {
                 String id = request.getParameter("id");
                 menuDao.borrarCompraNopagada(id);
@@ -86,11 +96,30 @@ public class MenuServlet extends HttpServlet {
             case "setNumtickets" -> {
                 String id = request.getParameter("id");
                 int num = Integer.parseInt(request.getParameter("num_tickets"));
-                System.out.printf(id);
-                System.out.printf(String.valueOf(num));
-                menuDao.setNuerotickets(id, num);
-                response.sendRedirect(request.getContextPath() + "/MenuServlet?a=listarCompras");
+
+                //obtengo el stock del horario de tal compra
+                Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSesion");
+                int idUsuario = usuario.getId();
+                ArrayList<Compra> comprasNopagadas = menuDao.buscarComprasNopagadas(idUsuario);
+
+                for (Compra compra:comprasNopagadas) {
+                    if (Objects.equals(compra.getIdCompra(), id)){
+                        //busco el stock segun el id horario
+                        int stock = menuDao.obtenerStockhorario(compra.getIdHorario());
+
+                        //ahora, se setea si el num es menor o igual q el stock
+                        if (num <= stock) {
+                            menuDao.setNuerotickets(id, num);
+                            response.sendRedirect(request.getContextPath() + "/MenuServlet?a=listarCompras");
+                        }
+                        else {
+                            response.sendRedirect(request.getContextPath() + "/MenuServlet?a=erlistarCompras");
+                        }
+
+                    }
+                }
             }
+
             case "facturacion" -> {
                 Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSesion");
                 int idUsuario = usuario.getId();

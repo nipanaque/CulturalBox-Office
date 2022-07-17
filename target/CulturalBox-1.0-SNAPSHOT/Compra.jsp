@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     ArrayList<Compra> comprasNopagadas =  (ArrayList<Compra>) request.getAttribute("comprasNopagadas");
+    String msj = (String) request.getAttribute("msj");
 %>
 <jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
 
@@ -57,7 +58,16 @@
         </div>
 
         <table class="table caption-top">
+            <%
+                if (msj == null) {
+            %>
             <caption>Seleccione la cantidad de tickets que desea por cada función</caption>
+            <%}
+                else {
+            %>
+            <div class="alert alert-danger" role="alert"><%=msj%></div>
+            <%}%>
+
             <thead>
             <tr>
                 <th scope="col" class="text">#</th>
