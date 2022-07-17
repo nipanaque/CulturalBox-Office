@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="idHorario" scope="request" type="com.example.culturalbox.Beans.Horarios" />
 <jsp:useBean id="cruce" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="costo" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -31,13 +33,12 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        operador@pucp.edu.pe
+                                        <%=usuarioSesion.getCorreo()%>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">Perfil</a></li>
                                         <li><a class="dropdown-item" href="<%=request.getContextPath()%>/EstadisticaServlet">Estadisticas</a></li>
                                         <li><a class="dropdown-item" href="ReporteSalasServlet">Salas</a></li>
-                                        <li><a class="dropdown-item" href="<%=request.getContextPath()%>/MenuSinLoginServlet">Cerrar Sesión</a></li>
+                                        <li><a class="dropdown-item" href="<%=request.getContextPath()%>/LoginServlet?finish=yes">Cerrar Sesión</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -57,6 +58,12 @@
                         No se puede editar el horario
                     </div>
                     <%session.removeAttribute("cruce");%>
+                    <%}%>
+                    <%if (session.getAttribute("costo").equals("error")){%>
+                    <div class="text-danger nb-3">
+                        No se puede editar el horario
+                    </div>
+                    <%session.removeAttribute("costo");%>
                     <%}%>
 
                 <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/ListaHorarios?a=actualizar">

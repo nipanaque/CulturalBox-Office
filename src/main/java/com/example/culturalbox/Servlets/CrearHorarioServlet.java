@@ -53,6 +53,7 @@ public class CrearHorarioServlet extends HttpServlet {
                 String idSalaStr = request.getParameter("sala");
                 String idSedeStr = request.getParameter("sede");
                 String idFuncionStr = request.getParameter("funcion");
+                Horarios horarioDuracion = horariosDao.duracionFuncion(idFuncionStr);
 
                 if(idSedeStr.equals("1")){
                     switch (idSalaStr) {
@@ -77,8 +78,12 @@ public class CrearHorarioServlet extends HttpServlet {
                 int idSala = Integer.parseInt(idSalaStr);
                 int idSede = Integer.parseInt(idSedeStr);
                 int idFuncion = Integer.parseInt(idFuncionStr);
+                int validacion = horariosDao.ValidaCruce(idSede,idSala,dia,tiempo_inicio,horarioDuracion.getDuracion_funcion());
+                ArrayList<Horarios> AforoSalas = horariosDao.obtenerAforoSalas();
 
                 int i=0;
+                int j=0;
+                int k=0;
                 try {
                     for (Horarios listahorarios : listaHorarios) {
                         if (listahorarios.getIdSede() == idSede && listahorarios.getIdSala() == idSala &&
@@ -86,6 +91,19 @@ public class CrearHorarioServlet extends HttpServlet {
                                 Objects.equals(listahorarios.getTiempo_inicio().substring(0, 5), tiempo_inicio)) {
                             i++;
                         }
+                    }
+                    for(Horarios listaAforoSalas: AforoSalas){
+                        if(listaAforoSalas.getIdSala()==idSala){
+                            if(stock>listaAforoSalas.getAforo_sala()){
+                                k++;
+                            }
+                        }
+                    }
+                    if(validacion==1){
+                        i++;
+                    }
+                    if(costo>20){
+                        j=1;
                     }
                 } catch (Exception e){
                     System.out.println("Cruce de horarios");
@@ -95,7 +113,7 @@ public class CrearHorarioServlet extends HttpServlet {
 
                 System.out.println("El valor de i es: " + i);
 
-                if(i==0) {
+                if(i==0 && j==0 && k==0) {
                     try {
                         horariosDao.crearHorario(vigencia, costo, dia, tiempo_inicio, stock, idSala, idSede, idFuncion, entradDispn);
                         response.sendRedirect(request.getContextPath() + "/ListaHorarios");
@@ -105,8 +123,14 @@ public class CrearHorarioServlet extends HttpServlet {
                         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/CrearHorario");
                         requestDispatcher.forward(request, response);
                     }
-                }else{
+                }else if(i>0){
                     session.setAttribute("cruce","error");
+                    response.sendRedirect(request.getContextPath() + "/CrearHorario");
+                }else if(j>0){
+                    session.setAttribute("costo","error");
+                    response.sendRedirect(request.getContextPath() + "/CrearHorario");
+                }else if(k>0){
+                    session.setAttribute("aforo","error");
                     response.sendRedirect(request.getContextPath() + "/CrearHorario");
                 }
             }

@@ -58,12 +58,12 @@ public class HorariosDao {
         ArrayList<Horarios> listaHorarios = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT idHorario, s.nombre, h.idSala ,sal.SalaSede, dia, tiempo_inicio, vigencia, f.nombre, s.idSede\n" +
-                     "                                          FROM horario h, sede s, sala sal, funcion f\n" +
-                     "                                          where h.idSede=s.idSede and\n" +
-                     "                                            h.idSala=sal.idSala and\n" +
-                     "                                                h.idFuncion=f.idFuncion\n" +
-                     "                                                order by dia asc, tiempo_inicio asc, s.nombre asc;");){
+             ResultSet rs = stmt.executeQuery("SELECT idHorario, s.nombre, h.idSala ,sal.SalaSede, dia, tiempo_inicio, vigencia, f.nombre,f.idFuncion, s.idSede\n" +
+                     "FROM horario h, sede s, sala sal, funcion f\n" +
+                     "where h.idSede=s.idSede and\n" +
+                     "h.idSala=sal.idSala and\n" +
+                     "h.idFuncion=f.idFuncion\n" +
+                     "order by dia asc, tiempo_inicio asc, s.nombre asc;");){
             while (rs.next()){
                 Horarios horarios= new Horarios();
                 horarios.setIdHorario(rs.getInt(1));
@@ -74,7 +74,8 @@ public class HorariosDao {
                 horarios.setTiempo_inicio(rs.getString(6));
                 horarios.setVigencia(rs.getInt(7));
                 horarios.setNombre_funcion(rs.getString(8));
-                horarios.setIdSede(rs.getInt(9));
+                horarios.setIdFuncion(rs.getInt(9));
+                horarios.setIdSede(rs.getInt(10));
                 listaHorarios.add(horarios);
             }
 
@@ -436,6 +437,121 @@ public class HorariosDao {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Horarios duracionFuncion(String id_funcion) {
+        Horarios horarios = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "SELECT * FROM funcion where idFuncion=?";
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, id_funcion);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+
+                if (rs.next()) {
+                    horarios = new Horarios();
+                    horarios.setDuracion_funcion(rs.getInt(4));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return horarios;
+    }
+
+    public Horarios duracionFuncion1(String nombre_funcion) {
+        Horarios horarios = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "SELECT * FROM funcion where nombre=?;";
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, nombre_funcion);
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+
+                if (rs.next()) {
+                    horarios = new Horarios();
+                    horarios.setDuracion_funcion(rs.getInt(4));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return horarios;
+    }
+
+    public int ValidaCruce(int idsede, int idsala, String dia, String tiempo_inicio, int duracion_funcion){
+
+        String sql2 = "select h.idHorario ,f.nombre, h.tiempo_inicio + 0 as tiempo_inicio, date_add(h.tiempo_inicio, interval f.duracion minute) + 0 as tiempo_fin, h.idSede, h.idSala, h.dia\n" +
+                "from funcion f, horario h\n" +
+                "where f.idFuncion = h.idFuncion \n" +
+                "and idSede=? and idSala=? and dia = ? \n" +
+                "and (h.tiempo_inicio between (select time(?) + 0) and (date_add(time(?), interval ? minute))\n" +
+                "or (date_add(h.tiempo_inicio, interval f.duracion minute) + 0) between (select time(?) + 0) and (date_add(time(?), interval ? minute)));";
+
+        int val = 0;
+
+        try (Connection connection2 = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt2 = connection2.prepareStatement(sql2);) {
+
+            pstmt2.setInt(1,idsede);
+            pstmt2.setInt(2,idsala);
+            pstmt2.setString(3,dia);
+            pstmt2.setString(4,tiempo_inicio);
+            pstmt2.setString(5,tiempo_inicio);
+            pstmt2.setInt(6,duracion_funcion);
+            pstmt2.setString(7,tiempo_inicio);
+            pstmt2.setString(8,tiempo_inicio);
+            pstmt2.setInt(9,duracion_funcion);
+
+            try (ResultSet rs2 = pstmt2.executeQuery();) {
+                while(rs2.next()) {
+                    val = 1;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return val;
+    }
+
+    public ArrayList<Horarios> obtenerAforoSalas(){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        ArrayList<Horarios> listaHorarios = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(url, user, pass);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM sala;");){
+            while (rs.next()){
+                Horarios horarios= new Horarios();
+                horarios.setIdSala(rs.getInt(1));
+                horarios.setAforo_sala(rs.getInt(3));
+                listaHorarios.add(horarios);
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaHorarios;
     }
 
 }

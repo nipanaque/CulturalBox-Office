@@ -132,7 +132,11 @@ public class ListaHorariosServlet extends HttpServlet {
                 String idSalaStr = request.getParameter("idSala");
                 String idSedeStr = request.getParameter("idSede");
 
+                Horarios horarios1 = horariosDao.duracionFuncion1(nombre_funcion);
+                int validacion = horariosDao.ValidaCruce(Integer.parseInt(idSedeStr),Integer.parseInt(idSalaStr),dia,tiempo_inicio,horarios1.getDuracion_funcion());
+
                 int i=0;
+                int j=0;
                 try {
                     for(Horarios listahorarios: listaHorarios) {
                         if (listahorarios.getIdSede()==Integer.parseInt(idSedeStr) && listahorarios.getIdSala()==Integer.parseInt(idSalaStr) &&
@@ -140,6 +144,12 @@ public class ListaHorariosServlet extends HttpServlet {
                                 Objects.equals(listahorarios.getTiempo_inicio().substring(0,5), tiempo_inicio)) {
                             i++;
                         }
+                    }
+                    if(validacion==1){
+                        i++;
+                    }
+                    if(Integer.parseInt(costoStr)>20){
+                        j=1;
                     }
                 }catch (Exception e){
                     System.out.println("Cruce de horarios");
@@ -157,9 +167,12 @@ public class ListaHorariosServlet extends HttpServlet {
                     horarios.enviarCorreo(listaUsuario,nombre_funcion,tiempo_inicio,dia);
                     horarios.actualizarHorario(horario);
                     response.sendRedirect(request.getContextPath() + "/ListaHorarios");
-                }else{
+                }else if(i>0){
                     session.setAttribute("cruce","error");
                     response.sendRedirect(request.getContextPath() + "/ListaHorarios?a=editar&id="+id);
+                }else if(j>0){
+                    session.setAttribute("costo","error");
+                    response.sendRedirect(request.getContextPath() + "/CrearHorario");
                 }
 
             }

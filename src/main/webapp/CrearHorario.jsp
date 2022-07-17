@@ -5,6 +5,8 @@
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Sedes>" scope="request" id="listaSedes"/>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaFunciones"/>
 <jsp:useBean id="cruce" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="costo" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="aforo" scope="session" type="java.lang.String" class="java.lang.String"/>
 <jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,6 +64,18 @@
                     No se puede crear el horario
                 </div>
                 <%session.removeAttribute("cruce");%>
+                <%}%>
+                <%if (session.getAttribute("costo").equals("error")){%>
+                <div class="text-danger nb-3">
+                    El costo por ticket ha excedido lo esperado.
+                </div>
+                <%session.removeAttribute("costo");%>
+                <%}%>
+                <%if (session.getAttribute("aforo").equals("error")){%>
+                <div class="text-danger nb-3">
+                    El stock ha excedido el aforo predeterminado.
+                </div>
+                <%session.removeAttribute("aforo");%>
                 <%}%>
 
                 <form class="row g-3 needs-validation" method="POST" action="<%=request.getContextPath()%>/CrearHorario?a=guardar">
@@ -122,7 +136,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="dia" class="form-label">Fecha de la función *</label>
-                            <input type="date" class="form-control" name="dia" id="dia" required>
+                            <input type="date" class="form-control" name="dia" id="dia" max="2022-12-31" min="2022-07-18" required>
                         </div>
                         </br>
                         <div class="form-group">

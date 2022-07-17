@@ -15,6 +15,43 @@ public class Horarios {
     private int duracion;
     private int tickets_vendidos;
     private float recaudacion;
+    private String horario_fin;
+    private String tiempo_inicio_int;
+    private int duracion_funcion;
+    private int aforo_sala;
+
+
+    public int getAforo_sala() {
+        return aforo_sala;
+    }
+
+    public void setAforo_sala(int aforo_sala) {
+        this.aforo_sala = aforo_sala;
+    }
+
+    public int getDuracion_funcion() {
+        return duracion_funcion;
+    }
+
+    public void setDuracion_funcion(int duracion_funcion) {
+        this.duracion_funcion = duracion_funcion;
+    }
+
+    public String getTiempo_inicio_int() {
+        return tiempo_inicio_int;
+    }
+
+    public void setTiempo_inicio_int(String tiempo_inicio_int) {
+        this.tiempo_inicio_int = tiempo_inicio_int;
+    }
+
+    public String getHorario_fin() {
+        return horario_fin;
+    }
+
+    public void setHorario_fin(String horario_fin) {
+        this.horario_fin = horario_fin;
+    }
 
     //
     private Time t_init;
