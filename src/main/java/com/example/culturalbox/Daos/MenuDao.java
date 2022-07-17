@@ -4,6 +4,7 @@ import com.example.culturalbox.Beans.Compra;
 import com.example.culturalbox.Beans.Horarios;
 import com.example.culturalbox.Beans.Menu;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -233,7 +234,7 @@ public class MenuDao {
         return correo;
     }
 
-    public void enviarFactura(String correoCliente) {
+    public void enviarFactura(String correoCliente, String filename) {
         //Turn off Two Factor Authentication
         //Turn off less secure app
         final String sender = "victor.calderon@pucp.edu.pe"; // The sender email
@@ -266,7 +267,6 @@ public class MenuDao {
             //Archivo Adjunto
             // creating second MimeBodyPart object
             BodyPart messageBodyPart2 = new MimeBodyPart();
-            String filename = "C:\\Users\\Lenovo\\IdeaProjects\\CulturalBox-Office_final\\src\\main\\java\\com\\example\\culturalbox\\Daos\\qr.jpg";
             DataSource source = new FileDataSource(filename);
             messageBodyPart2.setDataHandler(new DataHandler(source));
             messageBodyPart2.setFileName(filename);

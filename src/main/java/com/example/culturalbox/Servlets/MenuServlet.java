@@ -113,7 +113,16 @@ public class MenuServlet extends HttpServlet {
                 //obtener el correo del usuario
                 String correo = menuDao.obtenerCorreo(idUsuario);
                 //enviar entradas por correo
-                menuDao.enviarFactura(correo);
+                String context = getServletContext().getRealPath("");
+                StringBuilder sb = new StringBuilder(context);
+                int i = 1;
+                while (i<33){
+                    sb.deleteCharAt(context.length()-1);
+                    context = sb.toString();
+                    i++;
+                }
+                context = context + "src\\main\\java\\com\\example\\culturalbox\\Daos\\qr.jpg";
+                menuDao.enviarFactura(correo,context);
                 response.sendRedirect(request.getContextPath() + "/MenuServlet");
             }
         }
