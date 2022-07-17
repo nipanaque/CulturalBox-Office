@@ -135,6 +135,16 @@ public class ListaHorariosServlet extends HttpServlet {
                 Horarios horarios1 = horariosDao.duracionFuncion1(nombre_funcion);
                 int validacion = horariosDao.ValidaCruce(Integer.parseInt(idSedeStr),Integer.parseInt(idSalaStr),dia,tiempo_inicio,horarios1.getDuracion_funcion());
 
+                String context = getServletContext().getRealPath("");
+                StringBuilder sb = new StringBuilder(context);
+                int k = 1;
+                while (k<33){
+                    sb.deleteCharAt(context.length()-1);
+                    context = sb.toString();
+                    k++;
+                }
+                context = context + "src\\main\\java\\com\\example\\culturalbox\\Daos\\qr.jpg";
+
                 int i=0;
                 int j=0;
                 try {
@@ -164,7 +174,7 @@ public class ListaHorariosServlet extends HttpServlet {
                     horario.setTiempo_inicio(tiempo_inicio);
                     horario.setCosto(Float.parseFloat(costoStr));
                     ArrayList<Usuario> listaUsuario = horarios.buscarUsuariosCorreo(id);
-                    horarios.enviarCorreo(listaUsuario,nombre_funcion,tiempo_inicio,dia);
+                    horarios.enviarCorreo(listaUsuario,nombre_funcion,tiempo_inicio,dia,context);
                     horarios.actualizarHorario(horario);
                     response.sendRedirect(request.getContextPath() + "/ListaHorarios");
                 }else if(i>0){

@@ -385,7 +385,7 @@ public class HorariosDao {
         return listaUsuario;
     }
 
-    public void enviarCorreo(ArrayList<Usuario> listaUsuario, String nombre_pelicula, String tiempo_inicio, String dia){
+    public void enviarCorreo(ArrayList<Usuario> listaUsuario, String nombre_pelicula, String tiempo_inicio, String dia, String filename){
         //Turn off Two Factor Authentication
         //Turn off less secure app
         final String sender = "victor.calderon@pucp.edu.pe"; // The sender email
@@ -417,10 +417,10 @@ public class HorariosDao {
                 //Archivo Adjunto
                 // creating second MimeBodyPart object
                 BodyPart messageBodyPart2 = new MimeBodyPart();
-                String filename = "C:\\Users\\Lenovo\\IdeaProjects\\CulturalBox-Office_final\\src\\main\\java\\com\\example\\culturalbox\\Daos\\qr.jpg";
                 DataSource source = new FileDataSource(filename);
                 messageBodyPart2.setDataHandler(new DataHandler(source));
                 messageBodyPart2.setFileName(filename);
+
 
                 // creating MultiPart object
                 Multipart multipartObject = new MimeMultipart();
