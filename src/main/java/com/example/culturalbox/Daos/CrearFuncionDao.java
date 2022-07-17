@@ -75,7 +75,7 @@ public class CrearFuncionDao {
         ArrayList<CrearFuncion> listaActores = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("select * from horario_has_mantenimiento;;");){
+             ResultSet rs = stmt.executeQuery("SELECT * FROM funcion_has_actor;");){
             while (rs.next()){
                 CrearFuncion crearFuncion= new CrearFuncion();
                 crearFuncion.setIdFuncion(rs.getInt(1));
