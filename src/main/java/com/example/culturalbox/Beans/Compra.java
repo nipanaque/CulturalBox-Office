@@ -9,6 +9,9 @@ public class Compra {
     private String idCompra;
     private int nu_tickets;
     private int cruce;
+    private String tiempoInicio;
+    private String dia;
+    private int valido;
     //
     private int idHorario;
 
@@ -67,5 +70,29 @@ public class Compra {
 
     public void setCruce(int cruce) {
         this.cruce = cruce;
+    }
+
+    public String getTiempoInicio() {
+        return tiempoInicio;
+    }
+
+    public void setTiempoInicio(String tiempoInicio) {
+        this.tiempoInicio = tiempoInicio;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public int getValido() {
+        return valido;
+    }
+
+    public void setValido(int valido) {
+        this.valido = valido;
     }
 }

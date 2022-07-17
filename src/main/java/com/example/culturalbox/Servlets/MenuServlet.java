@@ -64,6 +64,7 @@ public class MenuServlet extends HttpServlet {
                 Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSesion");
                 int idUsuario = usuario.getId();
                 request.setAttribute("comprasNopagadas", menuDao.buscarComprasNopagadas(idUsuario));
+                request.setAttribute("funcionesCruzadas", menuDao.buscarFuncionesCruzadas(idUsuario));
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("Compra.jsp");
                 requestDispatcher.forward(request, response);
             }

@@ -10,6 +10,7 @@
 <%
     ArrayList<Compra> comprasNopagadas =  (ArrayList<Compra>) request.getAttribute("comprasNopagadas");
     String msj = (String) request.getAttribute("msj");
+    ArrayList<Compra> funcionesCruzadas =  (ArrayList<Compra>) request.getAttribute("funcionesCruzadas");
 %>
 <jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
 
@@ -110,7 +111,7 @@
                 <td><h4>TOTAL: </h4></td>
                 <td><h4>S/<%=total%></h4></td>
                 <%if(valCruce == 1){%>
-                <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#validacion">Existe Cruce</button></td>
+                <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#validacion">IR A PAGAR</button></td>
                 <%}else{%>
                 <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">IR A PAGAR</button></td>
                 <%}%>
@@ -191,7 +192,14 @@
         <div class="modal-content">
 
             <div class="modal-body">
-                <h4>Tiene funciones que se cruza</h4>
+                <h4>Tiene funciones cruzadas</h4>
+            </div>
+            <div class="modal-body">
+                <p1><b>Las funciones a pagar se cruzan con: </b></p1><br>
+                <%for (Compra compra : funcionesCruzadas){%>
+                <p3><%=compra.getNombre_funcion()%> <%=compra.getTiempoInicio()%> <%=compra.getDia()%> <%if(compra.getValido()== 1){%> (Ya comprada) <%}else{%> (En el carrito) <%}%> </p3>
+                <br>
+                <%}%>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Regresar</button>
