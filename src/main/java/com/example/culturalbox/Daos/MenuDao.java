@@ -148,9 +148,12 @@ public class MenuDao {
                     compra.setNombre_funcion(rs.getString(1));
                     compra.setT_init(rs.getTime(2));
                     compra.setCosto(rs.getInt(3));
+                    String idCompra  = rs.getString(4);
                     compra.setIdCompra(rs.getString(4));
                     compra.setNu_tickets(rs.getInt(5));
                     compra.setIdHorario(rs.getInt(6));
+                    int validacion = ValidaCruce(idCompra, idUsuario);
+                    compra.setCruce(validacion);
                     comprasNopagadas.add(compra);
                 }
             }
@@ -325,4 +328,71 @@ public class MenuDao {
         }
 
     }
+
+    public int ValidaCruce(String idCompra,int usuario){
+
+        String sql2 = "select c.idCompra,f.nombre,h.tiempo_inicio + 0 as tiempo_inicio, date_add(h.tiempo_inicio, interval f.duracion minute) + 0 as tiempo_fin, h.dia, c.estado from  compra c\n" +
+                "                left join horario h on h.idHorario = c.idHorario\n" +
+                "                left join funcion f on f.idFuncion = h.idFuncion\n" +
+                "                where c.idUsuario = ? and h.tiempo_inicio between (SELECT h.tiempo_inicio + 0 FROM horario h, compra c where c.idHorario = h.idHorario and c.idCompra = ?) and (SELECT date_add(h.tiempo_inicio, interval f.duracion minute) + 0  FROM horario h, funcion f, compra c where h.idFuncion = f.idFuncion and c.idHorario = h.idHorario and c.idCompra = ?) and h.dia = (SELECT h.dia FROM horario h, compra c where h.idHorario = c.idHorario and c.idCompra = ? )  and idCompra != ?; ";
+
+        int val = 0;
+
+        try (Connection connection2 = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt2 = connection2.prepareStatement(sql2);) {
+
+            pstmt2.setInt(1,usuario);
+            pstmt2.setString(2,idCompra);
+            pstmt2.setString(3,idCompra);
+            pstmt2.setString(4,idCompra);
+            pstmt2.setString(5,idCompra);
+
+            try (ResultSet rs2 = pstmt2.executeQuery();) {
+                while(rs2.next()) {
+                    val = 1;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return val;
+    }
+
+
+    public ArrayList<Compra> obtenerFuncionesCruazadas(String idCompra,int usuario){
+
+        String sql2 = "select c.idCompra,f.nombre,h.tiempo_inicio + 0 as tiempo_inicio, date_add(h.tiempo_inicio, interval f.duracion minute) + 0 as tiempo_fin, h.dia, c.estado from  compra c\n" +
+                "                left join horario h on h.idHorario = c.idHorario\n" +
+                "                left join funcion f on f.idFuncion = h.idFuncion\n" +
+                "                where c.idUsuario = ? and h.tiempo_inicio between (SELECT h.tiempo_inicio + 0 FROM horario h, compra c where c.idHorario = h.idHorario and c.idCompra = ?) and (SELECT date_add(h.tiempo_inicio, interval f.duracion minute) + 0  FROM horario h, funcion f, compra c where h.idFuncion = f.idFuncion and c.idHorario = h.idHorario and c.idCompra = ?) and h.dia = (SELECT h.dia FROM horario h, compra c where h.idHorario = c.idHorario and c.idCompra = ? )  and idCompra != ?; ";
+
+        ArrayList<Compra> listaCruzados = new ArrayList<>();
+
+        try (Connection connection2 = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt2 = connection2.prepareStatement(sql2);) {
+
+            pstmt2.setInt(1,usuario);
+            pstmt2.setString(2,idCompra);
+            pstmt2.setString(3,idCompra);
+            pstmt2.setString(4,idCompra);
+            pstmt2.setString(5,idCompra);
+
+            try (ResultSet rs2 = pstmt2.executeQuery();) {
+                while(rs2.next()) {
+                    Compra compra = new Compra();
+                    compra.setNombre_funcion(rs2.getString(2));
+                    compra.setTiempoInicio(rs2.getInt(3));
+                    compra.setDia(rs2.getString(4));
+                    compra.setValido(rs2.getInt(5));
+                    listaCruzados.add(compra);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaCruzados ;
+    }
+
 }
