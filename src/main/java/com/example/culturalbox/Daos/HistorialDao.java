@@ -54,7 +54,7 @@ public class HistorialDao {
 
         }
         ArrayList<Historial> listaHistorial = new ArrayList<>();
-        String sql = "SELECT f.nombre, s.nombre, c.numtickets,c.idCompra FROM compra c,funcion f,horario h,sede s\n" +
+        String sql = "SELECT f.nombre, s.nombre, c.numtickets,c.idCompra, concat(date_format( h.dia, '%d-%m-%y'),' ',h.tiempo_inicio) FROM compra c,funcion f,horario h,sede s\n" +
                 "                     where c.idHorario = h.idHorario\n" +
                 "                     and h.idSede=s.idSede\n" +
                 "                     and h.idFuncion=f.idFuncion\n" +
@@ -71,6 +71,7 @@ public class HistorialDao {
                     historial.setNombre_sede(rs.getString(2));
                     historial.setNum_ticket(rs.getInt(3));
                     historial.setIdCompra(rs.getInt(4));
+                    historial.setFechaHora(rs.getString(5));
                     listaHistorial.add(historial);
                 }
 
