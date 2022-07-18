@@ -44,13 +44,7 @@
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                             <ul class="navbar-nav">
-                                <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/MenuServlet?a=listarCompras">
-                                    <img src="assets/img/carrito.png" style="width: 90px;margin-right:6px;margin-top:8px;"  class="rounded float-start" alt="...">
-                                    <span class="badge rounded-pill bg-danger"style="margin-left:-6px;">
-                                         <%=contCompras%>
-                                         <span class="visually-hidden">unread messages</span>
-                                         </span>
-                                </a></li>
+
                                 <li class="nav-item dropdown">
 
 

@@ -14,7 +14,7 @@ public class ActoresDao {
 
     public ArrayList<Actores> obtenerActores(){
 
-        String sql="SELECT A.idActor, F.nombre FROM actor A LEFT JOIN funcion_has_actor B ON A.idActor = B.idActor LEFT JOIN funcion F ON B.idFuncion = F.idFuncion where A.idActor = ?";
+        String sql="SELECT A.idActor, F.nombre FROM actor A LEFT JOIN funcion_has_actor B ON A.idActor = B.idActor LEFT JOIN funcion F ON B.idFuncion = F.idFuncion where A.idActor = ? limit 2";
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");

@@ -14,7 +14,7 @@ public class DirectoresDao {
     private static String url = "jdbc:mysql://localhost:3306/cultura_box_pucp";
 
     public ArrayList<Directores> obtenerDirectores(){
-        String sql="SELECT A.idDirector, B.nombre FROM director A LEFT JOIN funcion B ON A.idDirector = B.idDirector where A.idDirector =?";
+        String sql="SELECT A.idDirector, B.nombre FROM director A LEFT JOIN funcion B ON A.idDirector = B.idDirector where A.idDirector =? limit 2";
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e){
