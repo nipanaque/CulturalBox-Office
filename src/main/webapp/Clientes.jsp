@@ -101,7 +101,7 @@
             </div>
                 <button type="submit" class="btn btn-warning col-md-auto">Filtrar</button>
             </div>
-        </div>
+
         <%if(nombreSede.equals("null")){%>
             <%if(nombreFuncion.equals("null")){%>
                 <div style="margin-left: 2%;">
