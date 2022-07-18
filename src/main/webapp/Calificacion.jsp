@@ -204,7 +204,7 @@
                         </table>
                         <br>
                                 <a href="<%=request.getContextPath()%>/HistorialServlet" class="btn btn-secondary">Regresar</a>
-                                <button  type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Guardar</button>
                             </form>
                     </div>
                 </div>
@@ -236,6 +236,19 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <h4>¿Seguro de continuar? Solamente se puede calificar una única vez</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button  type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
     <script>
 
