@@ -115,7 +115,7 @@
                         </br>
                         <div class="form-group">
                             <label for="stock" class="form-label">Stock *</label>
-                            <input class="form-control" placeholder="Ingrese el stock" type="number" min="0" max="15" step="1" name="stock" id="stock" required>
+                            <input class="form-control" placeholder="Ingrese el stock" type="number" min="0" max="30" step="1" name="stock" id="stock" required>
                         </div>
                         </br>
                         </br>
