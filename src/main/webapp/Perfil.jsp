@@ -68,13 +68,7 @@
                         </a>
                     </div>
                 </div>
-                <%if (session.getAttribute("invalid1").equals("error")){%>
-                </br>
-                <div class="text-danger nb-2">
-                    Datos invalidos.
-                </div>
-                <%session.removeAttribute("invalid1");%>
-                <%}%>
+
                 </div>
                 <br>
                 <br>
@@ -121,7 +115,13 @@
 
                     </div>
 
-
+                <%if (session.getAttribute("invalid1").equals("error")){%>
+                </br>
+                <div class="text-danger nb-2">
+                    Datos invalidos.
+                </div>
+                <%session.removeAttribute("invalid1");%>
+                <%}%>
                 <div style="text-align: center;margin-top: 1%;">
                     <button class ="btn btn-primary btn-l" type="submit">Actualizar mis datos</button>
                 </div>
