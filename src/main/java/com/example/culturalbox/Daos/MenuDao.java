@@ -430,6 +430,39 @@ public class MenuDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        String sql3 = "select c.idCompra,f.nombre,h.tiempo_inicio as tiempo_inicio, date_add(h.tiempo_inicio, interval f.duracion minute) + 0 as tiempo_fin, date_format( h.dia, '%d-%m-%y'), c.estado from  compra c\n" +
+                "                                left join horario h on h.idHorario = c.idHorario\n" +
+                "                                left join funcion f on f.idFuncion = h.idFuncion\n" +
+                "                                where c.idUsuario = ? \n" +
+                "                                and ((SELECT date_add(h.tiempo_inicio, interval f.duracion minute) + 0  \n" +
+                "                                FROM horario h, funcion f, compra c \n" +
+                "                                where h.idFuncion = f.idFuncion and c.idHorario = h.idHorario and c.idCompra = ?))  between (SELECT h.tiempo_inicio + 0 FROM horario h, compra c where c.idHorario = h.idHorario and c.idCompra = ?) and (SELECT date_add(h.tiempo_inicio, interval f.duracion minute) + 0  \n" +
+                "                                FROM horario h, funcion f, compra c \n" +
+                "                                where h.idFuncion = f.idFuncion and c.idHorario = h.idHorario and c.idCompra = ?) and h.dia = (SELECT h.dia FROM horario h, compra c where h.idHorario = c.idHorario and c.idCompra = ? )  and idCompra != ? and H.idHorario != ?";
+
+        try (Connection connection3 = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt3 = connection3.prepareStatement(sql3);) {
+
+            pstmt3.setInt(1,usuario);
+            pstmt3.setString(2,idCompra);
+            pstmt3.setString(3,idCompra);
+            pstmt3.setString(4,idCompra);
+            pstmt3.setString(5,idCompra);
+            pstmt3.setString(6,idCompra);
+            pstmt3.setInt(7,idHorario);
+
+
+
+            try (ResultSet rs2 = pstmt3.executeQuery();) {
+                while(rs2.next()) {
+                    val = 1;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return val;
     }
 
@@ -466,6 +499,45 @@ public class MenuDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
+        String sql3="select c.idCompra,f.nombre,h.tiempo_inicio as tiempo_inicio, date_add(h.tiempo_inicio, interval f.duracion minute) + 0 as tiempo_fin, date_format( h.dia, '%d-%m-%y'), c.estado from  compra c\n" +
+                "                                left join horario h on h.idHorario = c.idHorario\n" +
+                "                                left join funcion f on f.idFuncion = h.idFuncion\n" +
+                "                                where c.idUsuario = ? \n" +
+                "                                and ((SELECT date_add(h.tiempo_inicio, interval f.duracion minute) + 0  \n" +
+                "                                FROM horario h, funcion f, compra c \n" +
+                "                                where h.idFuncion = f.idFuncion and c.idHorario = h.idHorario and c.idCompra = ?))  between (SELECT h.tiempo_inicio + 0 FROM horario h, compra c where c.idHorario = h.idHorario and c.idCompra = ?) and (SELECT date_add(h.tiempo_inicio, interval f.duracion minute) + 0  \n" +
+                "                                FROM horario h, funcion f, compra c \n" +
+                "                                where h.idFuncion = f.idFuncion and c.idHorario = h.idHorario and c.idCompra = ?) and h.dia = (SELECT h.dia FROM horario h, compra c where h.idHorario = c.idHorario and c.idCompra = ? )  and idCompra != ? and H.idHorario != ?";
+
+        try (Connection connection3 = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt3 = connection3.prepareStatement(sql3);) {
+
+            pstmt3.setInt(1,usuario);
+            pstmt3.setString(2,idCompra);
+            pstmt3.setString(3,idCompra);
+            pstmt3.setString(4,idCompra);
+            pstmt3.setString(5,idCompra);
+            pstmt3.setString(6,idCompra);
+            pstmt3.setInt(7,idHorario);
+
+            try (ResultSet rs3 = pstmt3.executeQuery();) {
+                while(rs3.next()) {
+                    Compra compra = new Compra();
+                    compra.setNombre_funcion(rs3.getString(2));
+                    compra.setTiempoInicio(rs3.getString(3));
+                    compra.setDia(rs3.getString(5));
+                    compra.setValido(rs3.getInt(6));
+                    listaCruzados.add(compra);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
         return listaCruzados ;
     }
 
