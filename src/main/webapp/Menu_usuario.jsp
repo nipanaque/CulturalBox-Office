@@ -130,8 +130,8 @@
                                 <ul class="list-inline" style="margin-left:auto;">
                                     <% int r = 1;
                                         for (Horarios horarios : listaHorarios) { if(horarios.getStock() > 0){%>
-                                    <li style="margin-top:4%;">
-                                        <a class="btn btn-outline-dark" href="<%=request.getContextPath()%>/MenuServlet?a=crearCompra1&idHorario=<%=horarios.getIdHorario()%>&idUsuario=1">
+                                    <li style="margin-top:4%;" >
+                                        <a class="btn btn-outline-dark" href="<%=request.getContextPath()%>/LoginServlet">
                                             <strong>Dia: </strong> <%=horarios.getDia()%>
                                             <strong>Hora: </strong><%=horarios.getT_init()%> |
                                             <%=horarios.getDuracion()%> min
