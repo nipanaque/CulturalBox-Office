@@ -7,6 +7,7 @@
 <jsp:useBean id="existe" scope="session" type="java.lang.String" class="java.lang.String"/>
 <jsp:useBean id="existe1" scope="session" type="java.lang.String" class="java.lang.String"/>
 <jsp:useBean id="error1" scope="session" type="java.lang.String" class="java.lang.String"/>
+<jsp:useBean id="error2" scope="session" type="java.lang.String" class="java.lang.String"/>
 <jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,6 +58,7 @@
                 </br>
                 </br>
                 <h2 class="section-heading text-uppercase">Listar y crear Mantenimiento</h2>
+                <h6 class="section-heading">*Seleccionar una a la vez</h6>
                 <%if (session.getAttribute("existe").equals("error")){%>
                 <div class="text-danger nb-3">
                     Ya existe este personal en el horario.
