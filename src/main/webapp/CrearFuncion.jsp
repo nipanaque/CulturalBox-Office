@@ -77,7 +77,7 @@
                                 <option>Suspenso</option>
                                 <option>Comedia</option>
                                 <option>Drama</option>
-                                <option>Romantica</option>
+                                <option>Acción</option>
                             </select>
                         </div>
                         </br>

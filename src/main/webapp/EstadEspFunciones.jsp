@@ -70,6 +70,7 @@
                                                     <option value="Suspenso">Suspenso</option>
                                                     <option value="Comedia">Comedia</option>
                                                     <option value="Drama">Drama</option>
+                                                    <option value="Accion">Acción</option>
                                                 </select>
                                             </div>
                                             </br>
