@@ -135,7 +135,7 @@ public class SedesDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "UPDATE sala set aforo=? where idSala=? and idSede=?";
+        String sql = "UPDATE sala set aforo=? where SalaSede=? and idSede=?";
 
         for(int i=0; i<listaAforos.size(); i++) {
             try (Connection connection = DriverManager.getConnection(url, user, pass);
