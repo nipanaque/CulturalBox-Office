@@ -37,7 +37,9 @@ public class PerfilServlet extends HttpServlet {
         Usuario user = (Usuario) request.getSession().getAttribute("usuarioSesion");
         int id = user.getId();
         boolean a1 = direccion.equals("");
-        boolean a2 = direccion.substring(0).equals(" ");
+        char [] ch = direccion.toCharArray();
+        boolean a2 = ch[0]==' ';
+
 
         if(fotografia.available()==0){
             if(!a1 && !a2){

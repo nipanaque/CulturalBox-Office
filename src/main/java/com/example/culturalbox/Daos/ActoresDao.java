@@ -1,6 +1,7 @@
 package com.example.culturalbox.Daos;
 
 import com.example.culturalbox.Beans.Actores;
+import com.example.culturalbox.Beans.Valor;
 
 import java.io.InputStream;
 import java.sql.*;
@@ -107,45 +108,41 @@ public class ActoresDao {
         }
     }
 
-    public void borrarActor(String actorId){
+    public Valor borrarActor(String actorId){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
-        String sql3 = "SELECT * FROM puntaje_director";
+        Valor valor = new Valor();
 
+        String sql3 = "SELECT * FROM funcion_has_actor where idActor = ?";
+        int val = 0;
         try (Connection connection3 = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt3= connection3.prepareStatement(sql3);) {
 
             pstmt3.setString(1, actorId);
 
+            try (ResultSet rs3 = pstmt3.executeQuery();) {
+                if(rs3.next()){
+                    val = 1;
+                    valor.setValor(val);
+                }
+            }
+            if(val==0){
+                String sql2 = "Delete From actor where idActor =?";
+                valor.setValor(val);
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+                try (Connection connection2 = DriverManager.getConnection(url, user, pass);
+                     PreparedStatement pstmt2 = connection2.prepareStatement(sql2);) {
 
+                    pstmt2.setString(1, actorId);
+                    pstmt2.executeUpdate();
+                }
+            }
 
-        String sql2 = "Delete From puntaje_actor where idActor =?";
-
-        try (Connection connection2 = DriverManager.getConnection(url, user, pass);
-             PreparedStatement pstmt2 = connection2.prepareStatement(sql2);) {
-
-            pstmt2.setString(1, actorId);
-            pstmt2.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        String sql = "DELETE FROM actor WHERE idActor = ?";
-
-        try (Connection connection = DriverManager.getConnection(url, user, pass);
-             PreparedStatement pstmt = connection.prepareStatement(sql);) {
-
-            pstmt.setString(1, actorId);
-            pstmt.executeUpdate();
+            return valor;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

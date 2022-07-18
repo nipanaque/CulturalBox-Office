@@ -3,7 +3,7 @@
 <jsp:useBean id="listaActores" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Actores>" />
 <%int contador=0;%>
 <jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
-
+<jsp:useBean id="msg1" scope="session" type="java.lang.String" class="java.lang.String"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,6 +63,10 @@
             <br>
             <h2 class="section-heading text-uppercase">ACTORES</h2>
             </br>
+            <% if (msg1.equals("No puede borrar Actores con obras actuales")) {%>
+            <div class="alert alert-danger" role="alert"> <%=msg1%>
+            </div>
+            <%}request.getSession().removeAttribute("msg1");%>
         </div>
     </div>
 

@@ -2,6 +2,7 @@ package com.example.culturalbox.Servlets;
 
 import com.example.culturalbox.Beans.Actores;
 import com.example.culturalbox.Beans.Aforo;
+import com.example.culturalbox.Beans.Valor;
 import com.example.culturalbox.Daos.ActoresDao;
 
 import javax.servlet.*;
@@ -90,10 +91,20 @@ public class ActoresServlet extends HttpServlet {
             case "borrar" -> {
                 String cantActoresStr = request.getParameter("cantActores");
                 int cantActoresint = Integer.parseInt(cantActoresStr);
-                for(int i =1;i <= cantActoresint; i++){
-                    String parametro = "actor"+i;
-                    String aStr = request.getParameter(parametro);
-                    actoresDao.borrarActor(aStr);
+                Valor valor = new Valor();
+                try{
+                    for(int i =1;i <= cantActoresint; i++){
+                        String parametro = "actor"+i;
+                        String aStr = request.getParameter(parametro);
+                        valor=actoresDao.borrarActor(aStr);
+                    }
+                    if(valor.getValor()==1){
+                        System.out.println("borrar");
+                        request.getSession().setAttribute("msg1", "No puede borrar Actores con obras actuales");
+                    }
+                }catch (java.lang.RuntimeException e){
+                    System.out.println("borrar");
+                    request.getSession().setAttribute("msg1", "No puede borrar Actores con obras actuales");
                 }
                 response.sendRedirect(request.getContextPath() + "/Actores");
             }

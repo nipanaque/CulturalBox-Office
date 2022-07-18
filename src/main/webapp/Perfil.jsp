@@ -66,15 +66,15 @@
                                 <input type="file" name="f_subir" id="f_subir" style="display:none;" >
                             </div>
                         </a>
-                        <%if (session.getAttribute("invalid1").equals("error")){%>
-                        </br>
-                        <div class="text-danger nb-2">
-                            Datos invalidos.
-                        </div>
-                        <%session.removeAttribute("invalid1");%>
-                        <%}%>
                     </div>
                 </div>
+                <%if (session.getAttribute("invalid1").equals("error")){%>
+                </br>
+                <div class="text-danger nb-2">
+                    Datos invalidos.
+                </div>
+                <%session.removeAttribute("invalid1");%>
+                <%}%>
                 </div>
                 <br>
                 <br>
