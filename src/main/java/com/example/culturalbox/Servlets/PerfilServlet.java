@@ -31,6 +31,7 @@ public class PerfilServlet extends HttpServlet {
         String nacimiento = (String) request.getParameter("nacimiento");
         String telefono =  (String)request.getParameter("telefono");
         Part fotografiaStr = request.getPart("f_subir");
+        HttpSession session = request.getSession();
         InputStream fotografia = fotografiaStr.getInputStream();
         PerfilDao pd = new PerfilDao();
         Usuario user = (Usuario) request.getSession().getAttribute("usuarioSesion");
@@ -40,7 +41,13 @@ public class PerfilServlet extends HttpServlet {
         }else{
             pd.actualizar(direccion,telefono,nacimiento,fotografia,id);
         }
-        response.sendRedirect(request.getContextPath()+"/PerfilServlet");
+        boolean a1 = direccion.equals("");
+        if(!a1){
+            response.sendRedirect(request.getContextPath()+"/PerfilServlet");
+        }else{
+            session.setAttribute("invalid1","error");
+            response.sendRedirect(request.getContextPath()+"/PerfilServlet");
+        }
 
     }
 }
