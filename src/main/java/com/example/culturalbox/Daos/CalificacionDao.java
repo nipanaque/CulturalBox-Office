@@ -133,5 +133,101 @@ public class CalificacionDao {
         }
 
     }
+    public ArrayList<Calificacion> obtenerCalificacionFuncion(String idf) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Calificacion> listaCalificacionFuncion = new ArrayList<>();
+        String sql = "SELECT f.idFuncion,  f.nombre, truncate(avg(p.puntaje),0) as PuntajeTotal FROM funcion f, puntaje_funcion p\n" +
+                "where f.idFuncion = p.idFuncion\n" +
+                "and f.idFuncion = ?;";
+        try (Connection connection = DriverManager.getConnection(url,user,pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setInt(1,Integer.parseInt(idf));
+            try(ResultSet rs = pstmt.executeQuery();){
+                while (rs.next()) {
+                    Calificacion calificacion = new Calificacion();
+                    calificacion.setIdFuncion(rs.getInt(1));
+                    calificacion.setNombreFuncion(rs.getString(2));
+                    calificacion.setPuntajeFuncion(rs.getInt(3));
+
+                    listaCalificacionFuncion.add(calificacion);
+                }
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println("No se pudo realizar la busqueda");
+        }
+        return listaCalificacionFuncion;
+    }
+    public ArrayList<Calificacion> obtenerCalificacionDirector(String idf) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Calificacion> listaCalificacionDirector = new ArrayList<>();
+        String sql = "SELECT f.idFuncion,  f.nombre, truncate(avg(p.puntaje),0) as PuntajeTotal FROM funcion f, puntaje_director p, director d\n" +
+                "where p.idDirector = f.idDirector\n" +
+                "and f.idFuncion = ?;";
+        try (Connection connection = DriverManager.getConnection(url,user,pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setInt(1,Integer.parseInt(idf));
+            try(ResultSet rs = pstmt.executeQuery();){
+                while (rs.next()) {
+                    Calificacion calificacion = new Calificacion();
+
+                    calificacion.setIdDirector(rs.getInt(1));
+                    calificacion.setNombreDirector(rs.getString(2));
+                    calificacion.setPuntajeDirector(rs.getInt(3));
+
+
+                    listaCalificacionDirector.add(calificacion);
+                }
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println("No se pudo realizar la busqueda");
+        }
+        return listaCalificacionDirector;
+    }
+    public ArrayList<Calificacion> obtenerCalificacionActor(String idf) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        ArrayList<Calificacion> listaCalificacionActor = new ArrayList<>();
+        String sql = "SELECT fa.idActor,  CONCAT(a.nombre,' ',a.apellido) AS 'Actor', truncate(avg(p.puntaje),0) as PuntajeTotal FROM funcion f, funcion_has_actor fa, actor a, puntaje_actor p\n" +
+                "where f.idFuncion = fa.idFuncion\n" +
+                "AND fa.idActor = a.idActor\n" +
+                "and f.idFuncion = ?\n" +
+                "group by fa.idActor;";
+        try (Connection connection = DriverManager.getConnection(url,user,pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setInt(1,Integer.parseInt(idf));
+            try(ResultSet rs = pstmt.executeQuery();){
+                while (rs.next()) {
+                    int idActor = rs.getInt(1);
+                    String nombreActor = rs.getString(2);
+                    int puntaje = rs.getInt(3);
+
+                    listaCalificacionActor.add(new Calificacion(idActor, nombreActor,puntaje));
+                }
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println("No se pudo realizar la busqueda");
+        }
+        return listaCalificacionActor;
+    }
 
 }
