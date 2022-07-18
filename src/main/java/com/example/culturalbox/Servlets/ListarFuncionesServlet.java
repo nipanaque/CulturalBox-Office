@@ -36,8 +36,21 @@ public class ListarFuncionesServlet extends HttpServlet {
             }
             case "borrar" -> {
                 String id = request.getParameter("id");
-                crearFuncionDao.eliminarFuncion(id);
-                response.sendRedirect(request.getContextPath() + "/ListaFunciones");
+                ArrayList<CrearFuncion> FuncionHasActor = crearFuncionDao.obtenerFuncionHasActor();
+                HttpSession session = request.getSession();
+                int i=0;
+                for(CrearFuncion listaActores: FuncionHasActor){
+                    if(listaActores.getIdFuncion()==Integer.parseInt(id)){
+                        i++;
+                    }
+                }
+                if(i==0){
+                    crearFuncionDao.eliminarFuncion(id);
+                    response.sendRedirect(request.getContextPath() + "/ListaFunciones");
+                }else{
+                    session.setAttribute("existe","error");
+                    response.sendRedirect(request.getContextPath() + "/ListaFunciones");
+                }
             }
         }
     }

@@ -58,7 +58,7 @@
                     <thead>
                         <tr>
                             <th>Sede</th>
-                            <th>Sala Sede</th>
+                            <th>Sala</th>
                             <th>Día</th>
                             <th>Hora inicio</th>
                             <th>Película</th>

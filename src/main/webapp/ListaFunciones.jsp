@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaFunciones"/>
 <jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
+<jsp:useBean id="existe" scope="session" type="java.lang.String" class="java.lang.String"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -55,6 +56,12 @@
                     <h2 class="section-heading text-uppercase">Lista de Funciones</h2>
                     <a href="<%=request.getContextPath()%>/CrearFuncion" class="btn btn-primary btn-xl ms-auto">Crear Funciones</a>
                 </div>
+                <%if (session.getAttribute("existe").equals("error")){%>
+                <div class="text-danger nb-3">
+                    Ya existen data en esta función. Revisar por favor.
+                </div>
+                <%session.removeAttribute("existe");%>
+                <%}%>
                 </br>
                 <table class="table">
                     <thead>
