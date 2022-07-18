@@ -62,7 +62,6 @@
                 <div class="row align-items-stretch mb-5">
                     <div class="col-md-6">
                         <h2 class="section-heading text-uppercase">Agregar actores</h2>
-
                         <form method="POST" action="<%=request.getContextPath()%>/ListaFunciones?a=guardaract">
                             </br>
                             <table class="table table-hover">
@@ -112,8 +111,10 @@
                                 <%}%>
                             </tbody>
                         </table>
+                        <h6 class="section-heading">*Seleccionar una a la vez</h6>
                         <%} else{%>
                         <h2 class="section-heading text-uppercase">Aún no hay actores en la Función</h2>
+                        <h6 class="section-heading">*Seleccionar una a la vez</h6>
                         <%}%>
                         <%if (session.getAttribute("existe").equals("error")){%>
                         <div class="text-danger nb-3">
