@@ -111,12 +111,13 @@ public class MenuDao {
             throw new RuntimeException(e);
         }
 
-        String sql0 = "SELECT * FROM compra where idUsuario = 34 and estado = 0 and idHorario = ?";
+        String sql0 = "SELECT * FROM compra where idUsuario = ? and estado = 0 and idHorario = ?";
 
         try (Connection connection0 = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt0 = connection0.prepareStatement(sql0);) {
 
-            pstmt0.setInt(1, idHorario);
+            pstmt0.setInt(1, idUsuario);
+            pstmt0.setInt(2, idHorario);
 
             try (ResultSet rs = pstmt0.executeQuery();){
                 if(rs.next()){
@@ -291,9 +292,14 @@ public class MenuDao {
             email.setSubject("Entradas Cultural Box-Office PUCP"); //Email Subject and message
 
             // creating first MimeBodyPart object
+            String id="";
+            String[] nums = {"0","1","2","3","4","5","6","7","8","9"};
+            for (int j = 0; j < 11; j++ ) {
+                id += nums[(int) Math.round(Math.random() * 9)];
+            }
             BodyPart messageBodyPart1 = new MimeBodyPart();
-            messageBodyPart1.setText("¡Felicitaciones! La compra de sus entradas en la web de Cultural Office PUCP ha sido exitosa. Utilice el código QR adjunto a este" +
-                    "email para ingresar a la sala el día de su función. Además, puede ver sus entradas en historial a través de nuestra web. Muchas gracias y disfrute su función. ");
+            messageBodyPart1.setText("¡Felicitaciones! La compra de sus entradas en la web de Cultural Office PUCP ha sido exitosa. Utilice el código QR o el código aleatorio adjunto a este " +
+                    "email para ingresar a la sala el día de su función. Además, puede ver sus entradas en historial a través de nuestra web. Muchas gracias y disfrute su función.\n"+"Su código es: "+id);
 
             //Archivo Adjunto
             // creating second MimeBodyPart object
