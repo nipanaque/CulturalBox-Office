@@ -5,6 +5,7 @@ public class Historial {
     private String nombre_sede;
     private int num_ticket;
     private int idCompra;
+    private int calificado;
 
     public int getIdCompra() {
         return idCompra;
@@ -47,5 +48,13 @@ public class Historial {
 
     public void setNum_ticket(int num_ticket) {
         this.num_ticket = num_ticket;
+    }
+
+    public int getCalificado() {
+        return calificado;
+    }
+
+    public void setCalificado(int calificado) {
+        this.calificado = calificado;
     }
 }

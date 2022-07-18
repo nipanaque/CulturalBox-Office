@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaHistorial" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Historial>" />
 <jsp:useBean id="funcionesvigentes" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Historial>" />
+<jsp:useBean id="calificado" scope="request" type="java.lang.String" class="java.lang.String"/>
 <%@ page import="com.example.culturalbox.Beans.Menu" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.culturalbox.Beans.Horarios" %>
@@ -126,9 +127,20 @@
                                         <td><%= i%></td>
                                         <td><%= historial1.getNombre_funcion()%></td>
                                         <td><%= historial1.getNombre_sede()%></td>
+
+                                        <%if(historial1.getCalificado()== 0){ %>
                                         <td>
-                                            <a  href="<%=request.getContextPath()%>/CalificacionServlet?a=crear&idf=<%=historial1.getNum_ticket()%>"><button class="btn btn-dark btn-md" type="submit">Calificar</button></a>
+                                            <a  href="<%=request.getContextPath()%>/CalificacionServlet?a=crear&idf=<%=historial1.getNum_ticket()%>&idcompra=<%=historial1.getIdCompra()%>"><button class="btn btn-dark btn-md" type="submit">Calificar</button></a>
+
                                         </td>
+                                        <% }else {%>
+                                        <td>
+                                            <a  href="<%=request.getContextPath()%>/CalificacionServlet?a=ver&idf=<%=historial1.getNum_ticket()%>"><button class="btn btn-dark btn-md" type="submit">Ver</button></a>
+
+                                        </td>
+                                        <% }%>
+
+
                                     </tr>
                                     <% i++;}%>
                                 </tbody>

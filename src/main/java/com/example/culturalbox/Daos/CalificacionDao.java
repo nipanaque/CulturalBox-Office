@@ -112,5 +112,26 @@ public class CalificacionDao {
             System.out.println("No se pudo realizar la busqueda");
         }
     }
+    public void cambiarCalificado(int idcompra, int idUsuario){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        String sql = "UPDATE compra set calificado=1 where idCompra=? and idUsuario=?";
+        try (Connection connection = DriverManager.getConnection(url,user,pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+                pstmt.setInt(1,idcompra);
+
+                pstmt.setInt(2,idUsuario);
+
+            pstmt.executeUpdate(); //Es update porque es para insert, update y delete
+
+        } catch (SQLException e) {
+            System.out.println("No se pudo realizar la busqueda");
+        }
+
+    }
 
 }

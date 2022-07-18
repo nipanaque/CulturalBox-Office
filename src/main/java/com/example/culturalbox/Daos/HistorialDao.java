@@ -19,11 +19,12 @@ public class HistorialDao {
 
         }
         ArrayList<Historial> listaHistorial = new ArrayList<>();
-        String sql = " SELECT f.idFuncion, f.nombre as 'Funcion', s.nombre as 'Sede' FROM compra c,funcion f,horario h,sede s\n" +
-                "                     where c.idHorario = h.idHorario\n" +
-                "                     and h.idSede=s.idSede\n" +
-                "                     and h.idFuncion=f.idFuncion\n" +
-                "                    and c.estado=1 and c.idUsuario=? and h.vigencia = 0;         ";
+        String sql = " SELECT f.idFuncion, f.nombre as 'Funcion', s.nombre as 'Sede', c.calificado, c.idCompra FROM compra c,funcion f,horario h,sede s\n" +
+                "where c.idHorario = h.idHorario\n" +
+                "and h.idSede=s.idSede\n" +
+                "and h.idFuncion=f.idFuncion\n" +
+                "and c.estado=1 and c.idUsuario=? and h.vigencia = 0 \n" +
+                "group by f.nombre";
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = conn.prepareStatement(sql);
         ) {
@@ -35,6 +36,8 @@ public class HistorialDao {
                     historial.setNum_ticket(rs.getInt(1));
                     historial.setNombre_funcion(rs.getString(2));
                     historial.setNombre_sede(rs.getString(3));
+                    historial.setCalificado(rs.getInt(4));
+                    historial.setIdCompra(rs.getInt(5));
                     listaHistorial.add(historial);
                 }
 
