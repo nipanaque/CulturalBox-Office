@@ -24,6 +24,7 @@ public class CalificacionServlet extends HttpServlet {
             case "crear" -> {
                 String idf = request.getParameter("idf");
                 String idcompra = request.getParameter("idcompra");
+                request.setAttribute("idcompra",idcompra);
                 request.setAttribute("listaCalificacion",calificacionDao.obtenerCalificacion(idf));
                 RequestDispatcher view =request.getRequestDispatcher("Calificacion.jsp");
                 view.forward(request,response);
@@ -40,11 +41,7 @@ public class CalificacionServlet extends HttpServlet {
                 request.setAttribute("listaCalificacionFuncion",listaPelicula);
                 request.setAttribute("listaCalificacionDirector",listaDirectores);
                 request.setAttribute("listaCalificacionActor",listaActores);
-                System.out.print(calificacionDao.obtenerCalificacionActor(idf).get(0).getPuntaje());
-                System.out.print("nombre: "+ calificacionDao.obtenerCalificacionActor(idf).get(0).getNombreActor());
-                System.out.print("nombre: "+ calificacionDao.obtenerCalificacionActor(idf).get(1).getNombreActor());
-                System.out.print("nombre: "+ calificacionDao.obtenerCalificacionActor(idf).get(2).getNombreActor());
-                System.out.print(calificacionDao.obtenerCalificacionActor(idf).get(1).getPuntaje());
+
                 RequestDispatcher view =request.getRequestDispatcher("Calificacion_ver.jsp");
                 view.forward(request,response);
 

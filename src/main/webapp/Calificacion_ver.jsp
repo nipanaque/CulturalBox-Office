@@ -31,14 +31,14 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="<%=request.getContextPath()%>/MenuServlet"><img src="assets/img/pucp.png" alt="..." style="height: 40px;width: 120px;"/></a>
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/MenuServlet"><img src="assets/img/pucp.png" alt="..." style="height: 65px;width: 170px;border-radius: 3px;"/></a>
 
                 <div class="collapse navbar-collapse " id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a href="<%=request.getContextPath()%>/MenuServlet"><button class="btn btn-dark btn-sm" type="submit">Volver al menú</button></a>
+                                    <a href="<%=request.getContextPath()%>/MenuServlet"><button class="btn btn-secondary btn-sm" type="submit">Volver al menu</button></a>
                                 </li>
                             </ul>
                         </div>
@@ -137,7 +137,7 @@
                                             </tbody>
                                         </table>
                                         <br>
-                                        <a href="<%=request.getContextPath()%>/HistorialServlet" class="btn btn-danger">Regresar</a>
+                                        <a href="<%=request.getContextPath()%>/HistorialServlet" class="btn btn-secondary">Regresar</a>
 
                     </div>
                 </div>
