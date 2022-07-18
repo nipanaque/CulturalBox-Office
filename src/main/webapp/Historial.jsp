@@ -81,7 +81,8 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Funcion</th>
-                                        <th colspan="2" scope="col">Sede</th>
+                                        <th colspan="2" scope="col">Fecha y Hora</th>
+                                        <th scope="col">Sede</th>
                                         <th colspan="2" scope="col">Nº tickets</th>
                                         <th scope="col"></th>
                                     </tr>
@@ -93,6 +94,7 @@
 
                                         <td scope="row"><%= i%></td>
                                         <td colspan="2"><%= historial.getNombre_funcion()%></td>
+                                        <td><%= historial.getFechaHora()%></td>
                                         <td><%= historial.getNombre_sede()%></td>
                                         <td colspan="2" scope="col"><%= historial.getNum_ticket()%></td>
 

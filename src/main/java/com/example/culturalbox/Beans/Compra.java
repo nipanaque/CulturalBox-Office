@@ -12,6 +12,7 @@ public class Compra {
     private String tiempoInicio;
     private String dia;
     private int valido;
+    private String sede;
     //
     private int idHorario;
 
@@ -94,5 +95,13 @@ public class Compra {
 
     public void setValido(int valido) {
         this.valido = valido;
+    }
+
+    public String getSede() {
+        return sede;
+    }
+
+    public void setSede(String sede) {
+        this.sede = sede;
     }
 }

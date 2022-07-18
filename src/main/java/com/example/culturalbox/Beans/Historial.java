@@ -6,6 +6,15 @@ public class Historial {
     private int num_ticket;
     private int idCompra;
     private int calificado;
+    private String fechaHora;
+
+    public String getFechaHora() {
+        return fechaHora;
+    }
+
+    public void setFechaHora(String fechaHora) {
+        this.fechaHora = fechaHora;
+    }
 
     public int getIdCompra() {
         return idCompra;

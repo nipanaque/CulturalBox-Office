@@ -74,6 +74,8 @@
                 <th scope="col" class="text">#</th>
                 <th scope="col">Función</th>
                 <th scope="col">Horario</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Sede</th>
                 <th scope="col">Precio Unitario</th>
                 <th scope="col">N° tickets</th>
                 <th scope="col"></th>
@@ -89,6 +91,8 @@
                 <th scope="row" class="text"><%=i%></th>
                 <td><%=compra.getNombre_funcion()%></td>
                 <td><%=compra.getT_init()%></td>
+                <td><%=compra.getDia()%></td>
+                <td><%=compra.getSede()%></td>
                 <td>S/<%=compra.getCosto()%></td>
                 <td>
                     <form method="post" action="<%=request.getContextPath()%>/MenuServlet?a=setNumtickets&id=<%=compra.getIdCompra() %>">

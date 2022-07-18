@@ -3,6 +3,7 @@
 <%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="listaPerfil" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Perfil>" />
+<jsp:useBean id="invalid1" scope="session" type="java.lang.String" class="java.lang.String"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -65,6 +66,13 @@
                                 <input type="file" name="f_subir" id="f_subir" style="display:none;" >
                             </div>
                         </a>
+                        <%if (session.getAttribute("invalid1").equals("error")){%>
+                        </br>
+                        <div class="text-danger nb-2">
+                            Datos invalidos.
+                        </div>
+                        <%session.removeAttribute("invalid1");%>
+                        <%}%>
                     </div>
                 </div>
                 </div>
@@ -103,12 +111,12 @@
                         </br>
                         <p class="mb-0">Dirección</p>
                         <div class="form-group">
-                            <input name ="direccion" class="form-control" type="text" value="<%=listaPerfil.get(0).getDireccion()%>" >
+                            <input name ="direccion" class="form-control" type="text" value="<%=listaPerfil.get(0).getDireccion()%>" required>
                         </div>
                         <br>
                         <p class="mb-0">Número de teléfono</p>
                         <div class="form-group">
-                            <input maxlength="9" minlength="9" pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]"name="telefono" class="form-control" type="tel"value="<%=listaPerfil.get(0).getNumtelefono()%>" >
+                            <input maxlength="9" minlength="9" pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]" name="telefono" class="form-control" type="tel" required value="<%=listaPerfil.get(0).getNumtelefono()%>" >
                         </div>
 
                     </div>
