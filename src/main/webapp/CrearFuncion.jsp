@@ -73,11 +73,11 @@
                             <label for="genero_funcion" class="form-label">Género *</label>
                             <select class="form-select" name="genero_funcion" id="genero_funcion" required>
                                 <option disabled>Seleccionar género</option>
-                                <option>Terror</option>
-                                <option>Suspenso</option>
-                                <option>Comedia</option>
-                                <option>Drama</option>
-                                <option>Acción</option>
+                                <option value="Terror">Terror</option>
+                                <option value="Suspenso">Suspenso</option>
+                                <option value="Comedia">Comedia</option>
+                                <option value="Drama">Drama</option>
+                                <option value="Accion">Acción</option>
                             </select>
                         </div>
                         </br>
