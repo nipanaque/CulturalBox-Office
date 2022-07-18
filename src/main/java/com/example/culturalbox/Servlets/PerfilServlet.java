@@ -36,18 +36,25 @@ public class PerfilServlet extends HttpServlet {
         PerfilDao pd = new PerfilDao();
         Usuario user = (Usuario) request.getSession().getAttribute("usuarioSesion");
         int id = user.getId();
-        if(fotografia.available()==0){
-            pd.actualizar2(direccion,telefono,nacimiento,id);
-        }else{
-            pd.actualizar(direccion,telefono,nacimiento,fotografia,id);
-        }
         boolean a1 = direccion.equals("");
-        if(!a1){
-            response.sendRedirect(request.getContextPath()+"/PerfilServlet");
-        }else{
-            session.setAttribute("invalid1","error");
-            response.sendRedirect(request.getContextPath()+"/PerfilServlet");
-        }
+        boolean a2 = direccion.substring(0).equals(" ");
 
+        if(fotografia.available()==0){
+            if(!a1 && !a2){
+                pd.actualizar2(direccion,telefono,nacimiento,id);
+                response.sendRedirect(request.getContextPath()+"/PerfilServlet");
+            }else{
+                session.setAttribute("invalid1","error");
+                response.sendRedirect(request.getContextPath()+"/PerfilServlet");
+            }
+        }else{
+            if(!a1 && !a2){
+                pd.actualizar(direccion,telefono,nacimiento,fotografia,id);
+                response.sendRedirect(request.getContextPath()+"/PerfilServlet");
+            }else{
+                session.setAttribute("invalid1","error");
+                response.sendRedirect(request.getContextPath()+"/PerfilServlet");
+            }
+        }
     }
 }

@@ -244,6 +244,7 @@
                         <h4>¿Seguro de continuar? Solamente se puede calificar una única vez</h4>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button  type="submit" form="myform" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
