@@ -1,6 +1,7 @@
 <%@ page import="com.example.culturalbox.Beans.Sedes" %>
 <%@ page import="com.example.culturalbox.Beans.CrearFuncion" %>
 <%@ page import="java.util.Objects" %>
+<%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.Sedes>" scope="request" id="listaSedes"/>
 <jsp:useBean type="java.util.ArrayList<com.example.culturalbox.Beans.CrearFuncion>" scope="request" id="listaFunciones"/>
@@ -61,7 +62,7 @@
                 <h2 class="section-heading text-uppercase">Crear Horarios</h2>
                 <%if (session.getAttribute("cruce").equals("error")){%>
                 <div class="text-danger nb-3">
-                    No se puede crear el horario
+                    Existe cruce de horario.
                 </div>
                 <%session.removeAttribute("cruce");%>
                 <%}%>
@@ -135,8 +136,13 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
+                            <%LocalDate todaysDate = LocalDate.now();
+                                LocalDate tommorrosDate = todaysDate.plusDays(1);
+                                String tomorrowToStr = tommorrosDate.toString();
+                                String todayToStr = todaysDate.toString();
+                            %>
                             <label for="dia" class="form-label">Fecha de la función *</label>
-                            <input type="date" class="form-control" name="dia" id="dia" max="2022-12-31" min="2022-07-18" required>
+                            <input type="date" class="form-control" name="dia" id="dia" max="2022-12-31" min="<%=tomorrowToStr%>" required>
                         </div>
                         </br>
                         <div class="form-group">

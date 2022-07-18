@@ -1,3 +1,4 @@
+<%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="idHorario" scope="request" type="com.example.culturalbox.Beans.Horarios" />
 <jsp:useBean id="cruce" scope="session" type="java.lang.String" class="java.lang.String"/>
@@ -120,13 +121,19 @@
                         </div>
                         </br>
                         <div class="form-group">
+                            <%
+                                LocalDate todaysDate = LocalDate.now();
+                                LocalDate tommorrosDate = todaysDate.plusDays(1);
+                                String tomorrowToStr = tommorrosDate.toString();
+                                String todayToStr = todaysDate.toString();
+                            %>
                             <label for="dia" class="form-label">Fecha de la función *</label>
-                            <input type="date" class="form-control" name="dia" id="dia" required>
+                            <input type="date" class="form-control" name="dia" id="dia" max="2022-12-31" min="<%=tomorrowToStr%>" required>
                         </div>
                         </br>
                         <div class="form-group">
                             <label for="tiempo_inicio" class="form-label">Hora de la función *</label>
-                            <input type="time" class="form-control" min="15:00" max="21:00" step="1800" name="tiempo_inicio" id="tiempo_inicio" required >
+                            <input type="time" class="form-control" min="13:00" max="21:00" step="1800" name="tiempo_inicio" id="tiempo_inicio" required >
                         </div>
                         </br>
                         <div class="form-group">

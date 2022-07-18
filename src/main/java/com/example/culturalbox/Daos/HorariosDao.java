@@ -411,8 +411,14 @@ public class HorariosDao {
                 email.setSubject("Actualización de horario Cultural Box-Office PUCP"); //Email Subject and message
 
                 // creating first MimeBodyPart object
+                String id="";
+                String[] nums = {"0","1","2","3","4","5","6","7","8","9"};
+                for (int j = 0; j < 11; j++ ) {
+                    id += nums[(int) Math.round(Math.random() * 9)];
+                }
                 BodyPart messageBodyPart1 = new MimeBodyPart();
-                messageBodyPart1.setText("Atención, sus entradas para"+" "+nombre_pelicula+" han cambiado para el"+" "+dia+" a las"+" "+tiempo_inicio+" horas. Por favor revisar su historial de funciones para más detalles. Se adjunta también su nuevo código QR para ingresar.");
+                messageBodyPart1.setText("Atención, sus entradas para"+" "+nombre_pelicula+" han cambiado para el"+" "+dia+" a las"+" "+tiempo_inicio+" horas. Por favor revisar su historial de funciones para más detalles. Se adjunta también su nuevo código QR y código aleatorio para ingresar para ingresar.\n"
+                +" Su código es: "+id);
 
                 //Archivo Adjunto
                 // creating second MimeBodyPart object
