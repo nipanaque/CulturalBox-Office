@@ -58,11 +58,12 @@ public class MenuDao {
             throw new RuntimeException(e);
         }
 
-        return listaMenu;}
+        return listaMenu;
+    }
 
     public java.util.ArrayList<com.example.culturalbox.Beans.Horarios> listarHorarios(java.lang.String nombre_funcion) {
 
-        ArrayList<Horarios> listaHorarios= new ArrayList<>();
+        ArrayList<Horarios> listaHorarios = new ArrayList<>();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -150,11 +151,12 @@ public class MenuDao {
                     compra.setNombre_funcion(rs.getString(1));
                     compra.setT_init(rs.getTime(2));
                     compra.setCosto(rs.getInt(3));
-                    String idCompra  = rs.getString(4);
+                    String idCompra = rs.getString(4);
                     compra.setIdCompra(rs.getString(4));
                     compra.setNu_tickets(rs.getInt(5));
+                    int idHorario = rs.getInt(6);
                     compra.setIdHorario(rs.getInt(6));
-                    int validacion = ValidaCruce(idCompra, idUsuario);
+                    int validacion = ValidaCruce(idCompra, idUsuario, idHorario);
                     compra.setCruce(validacion);
                     comprasNopagadas.add(compra);
                 }
@@ -198,7 +200,7 @@ public class MenuDao {
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
 
-            pstmt.setInt(1,num);
+            pstmt.setInt(1, num);
             pstmt.setString(2, id);
             pstmt.executeUpdate();
 
@@ -246,11 +248,12 @@ public class MenuDao {
         set.put("mail.smtp.auth", "true");
         set.put("mail.smtp.host", "smtp.gmail.com");
         set.put("mail.smtp.port", "587");
-        set.put("mail.smtp.ssl.trust","*");
-        Session session = Session.getInstance(set,new javax.mail.Authenticator() {
+        set.put("mail.smtp.ssl.trust", "*");
+        Session session = Session.getInstance(set, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(sender, urpass);
-            }});
+            }
+        });
 
         try {
             //email extends Java's Message Class, check out javax.mail.Message class to read more
@@ -287,7 +290,7 @@ public class MenuDao {
         }
     }
 
-    public void actualizarEstadocompra (String idCompra) {
+    public void actualizarEstadocompra(String idCompra) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -308,7 +311,7 @@ public class MenuDao {
 
     }
 
-    public void updateStockhorario (int idHorario, int numtickets) {
+    public void updateStockhorario(int idHorario, int numtickets) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -329,6 +332,7 @@ public class MenuDao {
         }
 
     }
+
     public int obtenerStockhorario(int idHorario) {
         int stock = 0;
         try {
@@ -346,7 +350,7 @@ public class MenuDao {
 
             try (ResultSet rs = pstmt.executeQuery();) {
 
-               if (rs.next()) {
+                if (rs.next()) {
                     stock = rs.getInt(1);
 
                 }
@@ -360,12 +364,12 @@ public class MenuDao {
 
     }
 
-    public int ValidaCruce(String idCompra,int usuario){
+    public int ValidaCruce(String idCompra,int usuario, int idHorario){
 
         String sql2 = "select c.idCompra,f.nombre,h.tiempo_inicio + 0 as tiempo_inicio, date_add(h.tiempo_inicio, interval f.duracion minute) + 0 as tiempo_fin, h.dia, c.estado from  compra c\n" +
                 "                left join horario h on h.idHorario = c.idHorario\n" +
                 "                left join funcion f on f.idFuncion = h.idFuncion\n" +
-                "                where c.idUsuario = ? and h.tiempo_inicio between (SELECT h.tiempo_inicio + 0 FROM horario h, compra c where c.idHorario = h.idHorario and c.idCompra = ?) and (SELECT date_add(h.tiempo_inicio, interval f.duracion minute) + 0  FROM horario h, funcion f, compra c where h.idFuncion = f.idFuncion and c.idHorario = h.idHorario and c.idCompra = ?) and h.dia = (SELECT h.dia FROM horario h, compra c where h.idHorario = c.idHorario and c.idCompra = ? )  and idCompra != ?; ";
+                "                where c.idUsuario = ? and h.tiempo_inicio between (SELECT h.tiempo_inicio + 0 FROM horario h, compra c where c.idHorario = h.idHorario and c.idCompra = ?) and (SELECT date_add(h.tiempo_inicio, interval f.duracion minute) + 0  FROM horario h, funcion f, compra c where h.idFuncion = f.idFuncion and c.idHorario = h.idHorario and c.idCompra = ?) and h.dia = (SELECT h.dia FROM horario h, compra c where h.idHorario = c.idHorario and c.idCompra = ? )  and idCompra != ? and H.idHorario != ?; ";
 
         int val = 0;
 
@@ -377,6 +381,9 @@ public class MenuDao {
             pstmt2.setString(3,idCompra);
             pstmt2.setString(4,idCompra);
             pstmt2.setString(5,idCompra);
+            pstmt2.setInt(6,idHorario);
+
+
 
             try (ResultSet rs2 = pstmt2.executeQuery();) {
                 while(rs2.next()) {
@@ -390,13 +397,12 @@ public class MenuDao {
         return val;
     }
 
-/*
-    public ArrayList<Compra> obtenerFuncionesCruazadas(String idCompra,int usuario){
+    public ArrayList<Compra> obtenerFuncionesCruzadas(String idCompra,int usuario, int idHorario){
 
-        String sql2 = "select c.idCompra,f.nombre,h.tiempo_inicio + 0 as tiempo_inicio, date_add(h.tiempo_inicio, interval f.duracion minute) + 0 as tiempo_fin, h.dia, c.estado from  compra c\n" +
+        String sql2 = "select c.idCompra,f.nombre,h.tiempo_inicio as tiempo_inicio, date_add(h.tiempo_inicio, interval f.duracion minute) + 0 as tiempo_fin, h.dia, c.estado from  compra c\n" +
                 "                left join horario h on h.idHorario = c.idHorario\n" +
                 "                left join funcion f on f.idFuncion = h.idFuncion\n" +
-                "                where c.idUsuario = ? and h.tiempo_inicio between (SELECT h.tiempo_inicio + 0 FROM horario h, compra c where c.idHorario = h.idHorario and c.idCompra = ?) and (SELECT date_add(h.tiempo_inicio, interval f.duracion minute) + 0  FROM horario h, funcion f, compra c where h.idFuncion = f.idFuncion and c.idHorario = h.idHorario and c.idCompra = ?) and h.dia = (SELECT h.dia FROM horario h, compra c where h.idHorario = c.idHorario and c.idCompra = ? )  and idCompra != ?; ";
+                "                where c.idUsuario = ? and h.tiempo_inicio between (SELECT h.tiempo_inicio + 0 FROM horario h, compra c where c.idHorario = h.idHorario and c.idCompra = ?) and (SELECT date_add(h.tiempo_inicio, interval f.duracion minute) + 0  FROM horario h, funcion f, compra c where h.idFuncion = f.idFuncion and c.idHorario = h.idHorario and c.idCompra = ?) and h.dia = (SELECT h.dia FROM horario h, compra c where h.idHorario = c.idHorario and c.idCompra = ? )  and idCompra != ? and H.idHorario != ?; ";
 
         ArrayList<Compra> listaCruzados = new ArrayList<>();
 
@@ -408,14 +414,15 @@ public class MenuDao {
             pstmt2.setString(3,idCompra);
             pstmt2.setString(4,idCompra);
             pstmt2.setString(5,idCompra);
+            pstmt2.setInt(6,idHorario);
 
             try (ResultSet rs2 = pstmt2.executeQuery();) {
                 while(rs2.next()) {
                     Compra compra = new Compra();
                     compra.setNombre_funcion(rs2.getString(2));
-                    compra.setTiempoInicio(rs2.getInt(3));
-                    compra.setDia(rs2.getString(4));
-                    compra.setValido(rs2.getInt(5));
+                    compra.setTiempoInicio(rs2.getString(3));
+                    compra.setDia(rs2.getString(5));
+                    compra.setValido(rs2.getInt(6));
                     listaCruzados.add(compra);
                 }
             }
@@ -425,5 +432,44 @@ public class MenuDao {
         }
         return listaCruzados ;
     }
-*/
+
+    public java.util.ArrayList<com.example.culturalbox.Beans.Compra> buscarFuncionesCruzadas(int idUsuario) {
+        ArrayList<Compra> comprasCruzadas = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String sql = "select f.nombre,h.tiempo_inicio, h.costo, c.idCompra, c.numtickets, h.idHorario from  compra c\n" +
+                "left join horario h on h.idHorario = c.idHorario\n" +
+                "left join funcion f on f.idFuncion = h.idFuncion\n" +
+                "where c.idUsuario = ? and c.estado = 0";
+
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+            pstmt.setString(1, String.valueOf(idUsuario));
+
+            try (ResultSet rs = pstmt.executeQuery();) {
+
+                while (rs.next()) {
+                    ArrayList<Compra> cruceIndiv = new ArrayList<>();
+                    String idCompra  = rs.getString(4);
+                    int idHorario = rs.getInt(6);
+                    cruceIndiv = obtenerFuncionesCruzadas(idCompra, idUsuario,idHorario);
+                    for (Compra compra : cruceIndiv){
+                        comprasCruzadas.add(compra);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return comprasCruzadas;
+    }
+
 }
