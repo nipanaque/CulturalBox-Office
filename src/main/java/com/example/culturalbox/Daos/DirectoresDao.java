@@ -109,17 +109,46 @@ public class DirectoresDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "DELETE FROM director WHERE idDirector = ?";
 
-        try (Connection connection = DriverManager.getConnection(url, user, pass);
-             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+        String sql3 = "select * FROM funcion where idDirector = ?";
+        int val = 0;
+        try (Connection connection3 = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt3 = connection3.prepareStatement(sql3);) {
 
-            pstmt.setString(1, directorId);
-            pstmt.executeUpdate();
+            pstmt3.setString(1, directorId);
+
+            try (ResultSet rs3 = pstmt3.executeQuery();) {
+                if(rs3.next()){
+                   val = 1;
+                }
+            }
+
+        if(val == 1){
+            String sql2 = "Delete From puntaje_director where idDirector =?";
+
+            try (Connection connection2 = DriverManager.getConnection(url, user, pass);
+                 PreparedStatement pstmt2 = connection2.prepareStatement(sql2);) {
+
+                pstmt2.setString(1, directorId);
+                pstmt2.executeUpdate();
+
+            }
+        }
+
+            String sql = "DELETE FROM director WHERE idDirector = ?";
+
+            try (Connection connection = DriverManager.getConnection(url, user, pass);
+                 PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+                pstmt.setString(1, directorId);
+                pstmt.executeUpdate();
+
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
     }
 
 }

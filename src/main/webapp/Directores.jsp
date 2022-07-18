@@ -3,7 +3,7 @@
 <jsp:useBean id="listaDirectores" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Directores>" />
 <%int contador=0;%>
 <jsp:useBean id="usuarioSesion" scope="session" type="com.example.culturalbox.Beans.Usuario" class="com.example.culturalbox.Beans.Usuario"/>
-
+<jsp:useBean id="msg" scope="session" type="java.lang.String" class="java.lang.String"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,6 +64,10 @@
             <br>
             <h2 class="section-heading text-uppercase"> DIRECTORES</h2>
             </br>
+            <% if (msg.equals("No puede borrar Directores con obras actuales")) {%>
+            <div class="alert alert-danger" role="alert"> <%=msg%>
+            </div>
+            <%}request.getSession().removeAttribute("msg");%>
         </div>
     </div>
     <!--Directores-->
@@ -171,6 +175,9 @@
         </button>
         <a href="AgregarDirector.jsp"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar</button></a>
     </div>
+
+
+
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

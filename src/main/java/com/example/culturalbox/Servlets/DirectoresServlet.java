@@ -84,10 +84,14 @@ public class DirectoresServlet extends HttpServlet {
             case "borrar" -> {
                 String cantDirectoresStr = request.getParameter("cantDirectores");
                 int cantDirectoresint = Integer.parseInt(cantDirectoresStr);
+
+                try{
                 for(int i =1;i <= cantDirectoresint; i++){
                     String parametro = "director"+i;
                     String aStr = request.getParameter(parametro);
                     directoresDao.borrarDirector(aStr);
+                }}catch (java.lang.RuntimeException e){
+                    request.getSession().setAttribute("msg", "No puede borrar Directores con obras actuales");
                 }
                 response.sendRedirect(request.getContextPath() + "/Directores");
             }

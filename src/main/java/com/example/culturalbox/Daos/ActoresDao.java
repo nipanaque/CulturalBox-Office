@@ -114,6 +114,31 @@ public class ActoresDao {
             throw new RuntimeException(e);
         }
 
+        String sql3 = "SELECT * FROM puntaje_director";
+
+        try (Connection connection3 = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt3= connection3.prepareStatement(sql3);) {
+
+            pstmt3.setString(1, actorId);
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        String sql2 = "Delete From puntaje_actor where idActor =?";
+
+        try (Connection connection2 = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt2 = connection2.prepareStatement(sql2);) {
+
+            pstmt2.setString(1, actorId);
+            pstmt2.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         String sql = "DELETE FROM actor WHERE idActor = ?";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
