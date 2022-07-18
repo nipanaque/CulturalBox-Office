@@ -93,6 +93,7 @@ public class ClientesDao {
                         clientes.setFuncion(rs.getString(2));
                         clientes.setSede(rs.getString(3));
                         clientes.setSala(rs.getInt(4));
+                        clientes.setId(rs.getInt(5));
                         listaClientes.add(clientes);
                     }
 
@@ -149,6 +150,7 @@ public class ClientesDao {
                         clientes.setFuncion(rs.getString(2));
                         clientes.setSede(rs.getString(3));
                         clientes.setSala(rs.getInt(4));
+                        clientes.setId(rs.getInt(5));
                         listaClientes.add(clientes);
                     }
 
@@ -207,6 +209,7 @@ public class ClientesDao {
                         clientes.setFuncion(rs.getString(2));
                         clientes.setSede(rs.getString(3));
                         clientes.setSala(rs.getInt(4));
+                        clientes.setId(rs.getInt(5));
                         listaClientes.add(clientes);
                     }
 
