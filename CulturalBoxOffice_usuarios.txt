@@ -1,0 +1,14 @@
+Cliente: 
+usuario: a20190050@pucp.edu.pe
+contraseña: 123
+
+usuario: a20192258@pucp.edu.pe
+contraseña: 3366
+
+Operador:
+usuario: a20180252@pucp.edu.pe
+contraseña: 123456
+
+Administrador:
+usuario: a20186098@pucp.edu.pe
+contraseña: 1234abc
