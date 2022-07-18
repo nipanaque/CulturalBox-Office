@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <input type="hidden" name="SedeId" value="<%=sede.getId()%>" />
-                                    <input type="number" id="AforoSede" class="form-control" aria-describedby="passwordHelpInline" name="AforoSede" value="<%=sede.getAforo()%>">
+                                    <input type="number" id="AforoSede" class="form-control" aria-describedby="passwordHelpInline" name="AforoSede" value="<%=sede.getAforo()%>" min="150">
                                     <input type="hidden" name="CantidadSalas" value="<%=listaAforos.size()%>" />
                                 </div>
                                 </br>
@@ -123,8 +123,8 @@
 
                     <div class="text-center">
                         <br>
-                        <a href=<%=request.getContextPath()%>/Sedes?s=ver&id=<%=sede.getId()%>" class="btn btn-primary">Regresar</a>
-                        <button type="submit" class="btn btn-secondary">Actualizar</button>
+                        <a href=<%=request.getContextPath()%>/Sedes?s=ver&id=<%=sede.getId()%>" class="btn btn-secondary">Regresar</a>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
                 </br>
