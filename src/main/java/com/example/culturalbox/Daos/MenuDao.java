@@ -70,7 +70,7 @@ public class MenuDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "select h.tiempo_inicio, f.duracion, h.stock, h.costo, h.idHorario, s.nombre, h.dia from funcion f\n" +
+        String sql = "select h.tiempo_inicio, f.duracion, h.stock, h.costo, h.idHorario, s.nombre, date_format( h.dia, '%d-%m-%y') from funcion f\n" +
                 "left join horario h on f.idFuncion=h.idFuncion\n" +
                 "inner join sede s on h.idSede = s.idSede\n" +
                 "where f.nombre = ? AND h.vigencia=1";
@@ -111,18 +111,45 @@ public class MenuDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "insert into compra (Qr, idHorario, idUsuario, numtickets, estado) VALUES (NULL, ?, ?, 0, 0)";
+        String sql0 = "SELECT * FROM compra where idUsuario = 34 and estado = 0 and idHorario = ?";
 
-        try (Connection connection = DriverManager.getConnection(url, user, pass);
-             PreparedStatement pstmt = connection.prepareStatement(sql);) {
+        try (Connection connection0 = DriverManager.getConnection(url, user, pass);
+             PreparedStatement pstmt0 = connection0.prepareStatement(sql0);) {
 
-            pstmt.setInt(1, idHorario);
-            pstmt.setInt(2, idUsuario);
-            pstmt.executeUpdate();
+            pstmt0.setInt(1, idHorario);
+
+            try (ResultSet rs = pstmt0.executeQuery();){
+                if(rs.next()){
+                    int idCompra = rs.getInt(1);
+                    int numTicket = rs.getInt(6);
+                    int nNuevoNumT = numTicket + 1;
+                    String sql = "update compra set numtickets = ? where idCompra = ?";
+
+                    try (Connection connection = DriverManager.getConnection(url, user, pass);
+                         PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+                        pstmt.setInt(1, nNuevoNumT);
+                        pstmt.setInt(2, idCompra);
+                        pstmt.executeUpdate();
+
+                    }
+                }else{
+                    String sql = "insert into compra (Qr, idHorario, idUsuario, numtickets, estado) VALUES (NULL, ?, ?, 1, 0)";
+
+                    try (Connection connection = DriverManager.getConnection(url, user, pass);
+                         PreparedStatement pstmt = connection.prepareStatement(sql);) {
+
+                        pstmt.setInt(1, idHorario);
+                        pstmt.setInt(2, idUsuario);
+                        pstmt.executeUpdate();
+
+                    }
+                }
+            }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        throw new RuntimeException(e);
+    }
     }
 
     public java.util.ArrayList<com.example.culturalbox.Beans.Compra> buscarComprasNopagadas(int idUsuario) {
@@ -399,7 +426,7 @@ public class MenuDao {
 
     public ArrayList<Compra> obtenerFuncionesCruzadas(String idCompra,int usuario, int idHorario){
 
-        String sql2 = "select c.idCompra,f.nombre,h.tiempo_inicio as tiempo_inicio, date_add(h.tiempo_inicio, interval f.duracion minute) + 0 as tiempo_fin, h.dia, c.estado from  compra c\n" +
+        String sql2 = "select c.idCompra,f.nombre,h.tiempo_inicio as tiempo_inicio, date_add(h.tiempo_inicio, interval f.duracion minute) + 0 as tiempo_fin, date_format( h.dia, '%d-%m-%y'), c.estado from  compra c\n" +
                 "                left join horario h on h.idHorario = c.idHorario\n" +
                 "                left join funcion f on f.idFuncion = h.idFuncion\n" +
                 "                where c.idUsuario = ? and h.tiempo_inicio between (SELECT h.tiempo_inicio + 0 FROM horario h, compra c where c.idHorario = h.idHorario and c.idCompra = ?) and (SELECT date_add(h.tiempo_inicio, interval f.duracion minute) + 0  FROM horario h, funcion f, compra c where h.idFuncion = f.idFuncion and c.idHorario = h.idHorario and c.idCompra = ?) and h.dia = (SELECT h.dia FROM horario h, compra c where h.idHorario = c.idHorario and c.idCompra = ? )  and idCompra != ? and H.idHorario != ?; ";
