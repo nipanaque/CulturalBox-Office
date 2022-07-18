@@ -52,15 +52,16 @@ public class SalaReporteDao {
             e.printStackTrace();
         }
         String sql = "select costo, stock, f.nombre as 'Nombre Película', \n" +
-                "f.genero, f.duracion, count(c.idHorario) as 'Tickets vendidos', \n" +
-                "count(c.idHorario)*costo as 'recaudación (soles)'\n" +
-                "from horario h, funcion f, compra c \n" +
-                "where h.idFuncion = f.idFuncion\n" +
-                "\t  and c.idHorario = h.idHorario\n" +
-                "\t  and h.dia = ? \n" +
-                "      and idSede = ? \n" +
-                "      and h.idSala = ? \n" +
-                "group by h.idHorario";
+                "                f.genero, f.duracion, count(c.idHorario) as 'Tickets vendidos',\n" +
+                "                count(c.idHorario)*costo as 'recaudación (soles)'\n" +
+                "                from horario h, funcion f, compra c \n" +
+                "                where h.idFuncion = f.idFuncion\n" +
+                "                 and c.idHorario = h.idHorario\n" +
+                "                  and h.dia = ? \n" +
+                "                and idSede = ? \n" +
+                "                and h.idSala = ? \n" +
+                "                and c.estado=1\n" +
+                "                group by h.idHorario";
 
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
