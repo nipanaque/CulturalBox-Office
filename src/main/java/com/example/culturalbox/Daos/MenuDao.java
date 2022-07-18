@@ -162,10 +162,11 @@ public class MenuDao {
             throw new RuntimeException(e);
         }
 
-        String sql = "select f.nombre,h.tiempo_inicio, h.costo, c.idCompra, c.numtickets, h.idHorario from  compra c\n" +
-                "left join horario h on h.idHorario = c.idHorario\n" +
-                "left join funcion f on f.idFuncion = h.idFuncion\n" +
-                "where c.idUsuario = ? and c.estado = 0";
+        String sql = "select f.nombre,h.tiempo_inicio, h.costo, c.idCompra, c.numtickets, h.idHorario, date_format( h.dia, '%d-%m-%y'), s.nombre from  compra c\n" +
+                "                left join horario h on h.idHorario = c.idHorario \n" +
+                "                left join funcion f on f.idFuncion = h.idFuncion \n" +
+                "                left join sede s on s.idSede = h.idSede\n" +
+                "                where c.idUsuario = ? and c.estado = 0";
 
         try (Connection connection = DriverManager.getConnection(url, user, pass);
              PreparedStatement pstmt = connection.prepareStatement(sql);) {
@@ -184,6 +185,8 @@ public class MenuDao {
                     compra.setNu_tickets(rs.getInt(5));
                     int idHorario = rs.getInt(6);
                     compra.setIdHorario(rs.getInt(6));
+                    compra.setDia(rs.getString(7));
+                    compra.setSede(rs.getString(8));
                     int validacion = ValidaCruce(idCompra, idUsuario, idHorario);
                     compra.setCruce(validacion);
                     comprasNopagadas.add(compra);
