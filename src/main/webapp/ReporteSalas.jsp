@@ -1,5 +1,6 @@
 <%@ page import="com.example.culturalbox.Beans.SalaReporte" %>
 <%@ page import="com.example.culturalbox.Beans.Sedes" %>
+<%@ page import="java.time.LocalDate" %>
 <jsp:useBean id="listaSedes" scope="request" type="java.util.ArrayList<com.example.culturalbox.Beans.Sedes>" class="java.util.ArrayList" />
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="inicio" scope="request" type="java.lang.String" class="java.lang.String" />
@@ -68,7 +69,13 @@
                     <form method="post" class="row g-3" action="<%=request.getContextPath()%>/ReporteSalasServlet?a=buscar">
                         <div class="col-auto">
                             <label for="fecha" class="visually-hidden">Password</label>
-                            <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Ingrese fecha">
+                            <%
+                                LocalDate todaysDate = LocalDate.now();
+                                LocalDate tommorrosDate = todaysDate.plusDays(1);
+                                String tomorrowToStr = tommorrosDate.toString();
+                                String todayToStr = todaysDate.toString();
+                            %>
+                            <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Ingrese fecha" max="<%=todayToStr%>">
                         </div>
                         <div class="col-auto">
                             <select name="sede" id="sede" class="form-select">
