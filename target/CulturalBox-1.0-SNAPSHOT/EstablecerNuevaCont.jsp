@@ -60,13 +60,13 @@
         </div>
         <div class="mb-3" style="margin-top: 2%;" >
             <label for="verificador" class="form-label">Código enviado:</label>
-            <input input type="number" class="form-control" id="verificador" name="verificador" aria-describedby="emailHelp" required>
+            <input type="text" pattern="[0-9]+" class="form-control" id="verificador" name="verificador" aria-describedby="emailHelp" required>
             <br/>
             <label for="pass" class="form-label">Ingrese la nueva contraseña:</label>
-            <input type="text" class="form-control" id="pass" name="pass" aria-describedby="emailHelp" required>
+            <input type="password" class="form-control" id="pass" name="pass" aria-describedby="emailHelp" required>
             <br/>
             <label for="pass2" class="form-label">Repita la nueva contraseña:</label>
-            <input type="text" class="form-control" id="pass2" name="pass2" aria-describedby="emailHelp" required>
+            <input type="password" class="form-control" id="pass2" name="pass2" aria-describedby="emailHelp" required>
             <input type="hidden" name="correo" id="correo" value="<%=email%>" />
             <input type="hidden" name="codigo" id="codigo" value="<%=id%>" />
         </div>
@@ -79,6 +79,31 @@
 </form>
 </br>
 </br>
+<footer class="text-center text-lg-start bg-light" style="margin-top:60px;">
+    <section class="d-flex justify-content-center justify-content-lg-between p-3 border-bottom"
+    >
+        <!-- Left -->
+        <div class="me-5 d-none d-lg-block">
+            <span>Copyright © 2022 Cultural Box-Office PUCP</span>
+        </div>
+        <!-- Left -->
+
+        <!-- Right -->
+        <div>
+            <span class="me-3">Siguenos en:</span>
+            <a href="" class="me-4 text-reset">
+                <i class="bi bi-instagram"></i>
+            </a>
+            <a href="#facebook" class="me-4 text-reset">
+                <i class="bi bi-facebook"></i>
+            </a>
+            <a href="" class="me-4 text-reset">
+                <i class="bi bi-twitter"></i>
+            </a>
+        </div>
+        <!-- Right -->
+    </section>
+</footer>
 </body>
 
 </html>
