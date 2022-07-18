@@ -101,7 +101,7 @@
                                     for (Aforo aforo : listaAforos) { %>
                                 <tr>
                                     <td><%= i%></td>
-                                    <td><input type="number" id="AforoSala<%=i%>" name="AforoSala<%=i%>" class="form-control" aria-describedby="passwordHelpInline" value=<%= aforo.getAforos()%> ></td>
+                                    <td><input type="number" id="AforoSala<%=i%>" name="AforoSala<%=i%>" class="form-control" aria-describedby="passwordHelpInline" value=<%= aforo.getAforos()%> max="15"></td>
                                 </tr>
                                 <% i++;}%>
                                 </tbody>
